@@ -42,10 +42,7 @@
     info: page === 'info',
   };
   if (!$('.dock')) {
-    const back = document.createElement('div');
-    back.className = 'dock-back';
-    back.setAttribute('aria-hidden', 'true');
-
+    const KEY = 'af-menu-open';
     const dock = document.createElement('nav');
     dock.className = 'dock sq';
     dock.setAttribute('aria-label', 'Primary');
@@ -60,7 +57,7 @@
         <a href="/info.html"${here.info ? ' aria-current="page"' : ''}>Info</a>
         <a href="mailto:fanelliandrea@outlook.com">Contact</a>
       </div>`;
-    document.body.append(back, dock);
+    document.body.append(dock);
 
     const toggle = dock.querySelector('.dock-toggle');
     const links = dock.querySelector('.dock-links');
@@ -74,26 +71,34 @@
       void links.offsetWidth;
       return w;
     };
-    const setOpen = open => {
-      if (open) links.style.width = `${measure()}px`;
-      else links.style.width = '0px';
+    const setOpen = (open, instant) => {
       dock.classList.toggle('is-open', open);
-      back.classList.toggle('is-on', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      try { sessionStorage.setItem(KEY, open ? '1' : '0'); } catch {}
+      if (instant) links.style.transition = 'none';
+      if (open) {
+        if (instant) {
+          links.style.width = 'auto';
+          links.style.width = `${Math.ceil(links.getBoundingClientRect().width)}px`;
+        } else {
+          links.style.width = `${measure()}px`;
+        }
+      } else {
+        links.style.width = '0px';
+      }
+      if (instant) {
+        void links.offsetWidth;
+        links.style.transition = '';
+      }
     };
     toggle.addEventListener('click', e => {
       e.stopPropagation();
       setOpen(!dock.classList.contains('is-open'));
     });
-    back.addEventListener('pointerdown', () => setOpen(false));
-    addEventListener('keydown', e => {
-      if (e.key === 'Escape') setOpen(false);
-    });
-    links.addEventListener('click', e => {
-      if (e.target.closest('a')) setOpen(false);
-    });
-    addEventListener('pageshow', () => setOpen(false));
+    try {
+      if (sessionStorage.getItem(KEY) === '1') setOpen(true, true);
+    } catch {}
   }
 
   const stills = $('#stills');

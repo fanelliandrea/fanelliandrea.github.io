@@ -54,18 +54,10 @@ html.js body[data-page="home"]:not(.lit) .wisp{opacity:0}
 
 main,.dock,.veil{position:relative;z-index:1}
 .dock{z-index:41}.veil{z-index:50}
-.dock-back{z-index:40}
 
 .sq{border-radius:var(--r);overflow:hidden}
 
 .veil{display:none}
-.dock-back{
-  position:fixed;inset:0;
-  background:transparent;
-  opacity:0;pointer-events:none;
-  transition:opacity var(--dur) var(--ease);
-}
-.dock-back.is-on{opacity:1;pointer-events:auto}
 
 .dock{
   position:fixed;left:50%;bottom:1.15rem;translate:-50% 0;z-index:41;

@@ -4,7 +4,7 @@
 
   const KEY = 'af-yt';
   const OPEN_KEY = 'af-player-open';
-  const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk', 'QhZnEagfjTQ', 'xMV6l2y67rk', '26setwoKtUI'];
+  const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk', 'QhZnEagfjTQ', 'xMV6l2y67rk'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -47,7 +47,7 @@
       <button class="player-btn is-play" type="button" data-act="play" aria-label="Play">${icon.play}</button>
       <button class="player-btn" type="button" data-act="next" aria-label="Next">${icon.next}</button>
     </div>
-    <button class="player-btn is-toggle" type="button" data-act="toggle" aria-label="Close player">${icon.close}</button>`;
+    <button class="player-btn is-toggle" type="button" data-act="toggle" aria-label="Open player">${icon.note}</button>`;
   document.body.append(player);
 
   const host = document.createElement('div');
@@ -72,13 +72,10 @@
   let ids = FALLBACK_IDS.slice();
   let order = mix(ids);
   let idx = 0;
-  if (saved.playing && saved.videoId && ids.includes(saved.videoId)) {
-    const at = order.indexOf(saved.videoId);
-    if (at >= 0) idx = at;
-  }
-  let pending = saved.playing ? 'play' : null;
-  let resumeAt = saved.time > 1 ? saved.time : 0;
+  let pending = null;
+  let resumeAt = 0;
   let expected = order[idx] || ids[0];
+  let apiReady = false;
 
   const setOpen = open => {
     player.classList.toggle('is-open', open);
@@ -86,8 +83,8 @@
     toggle.setAttribute('aria-label', open ? 'Close player' : 'Open player');
     try { sessionStorage.setItem(OPEN_KEY, open ? '1' : '0'); } catch {}
   };
-  try { setOpen(sessionStorage.getItem(OPEN_KEY) !== '0'); }
-  catch { setOpen(true); }
+  try { setOpen(sessionStorage.getItem(OPEN_KEY) === '1'); }
+  catch { setOpen(false); }
 
   const parseMeta = raw => {
     const text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
@@ -274,8 +271,7 @@
   };
 
   const boot = () => {
-    if (!window.YT?.Player) return;
-    go(pending === 'play', resumeAt);
+    apiReady = !!(window.YT && YT.Player);
   };
 
   player.addEventListener('click', e => {
@@ -288,7 +284,11 @@
       else playNow();
     } else if (act === 'next') skip(1);
     else if (act === 'prev') skip(-1);
-    else if (act === 'toggle') setOpen(!player.classList.contains('is-open'));
+    else if (act === 'toggle') {
+      const open = !player.classList.contains('is-open');
+      if (!open) pauseNow();
+      setOpen(open);
+    }
   });
 
   addEventListener('pagehide', () => snapshot());
@@ -301,11 +301,14 @@
       tracks = d.tracks || {};
       const nextIds = Object.keys(tracks);
       if (!nextIds.length) return;
+      const same = nextIds.length === ids.length && nextIds.every(id => ids.includes(id));
       ids = nextIds;
-      const current = order[idx];
-      order = mix(ids);
-      idx = Math.max(0, order.indexOf(current));
-      if (idx < 0) idx = 0;
+      if (!same) {
+        const current = order[idx];
+        order = mix(ids);
+        idx = Math.max(0, order.indexOf(current));
+        if (idx < 0) idx = 0;
+      }
       show(order[idx]);
     })
     .catch(() => show(order[idx] || ids[0]));

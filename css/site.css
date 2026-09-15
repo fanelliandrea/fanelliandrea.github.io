@@ -367,7 +367,7 @@ html.js .stills .still.in{opacity:1;transform:none}
   .card-3d .card-name{opacity:1}
   .hud-avail{display:none}
   .hud{padding:.75rem 1rem}
-  .voice-line{max-width:100%;font-size:1.05rem;overflow-wrap:break-word}
+  .voice-line{max-width:100%;font-size:.98rem;line-height:1.35;overflow-wrap:break-word}
   .widget-ideas{margin-bottom:3.2rem}
   .widget-voice{overflow:visible}
   .notes{grid-template-columns:1fr}

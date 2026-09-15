@@ -155,11 +155,11 @@ body[data-page="work"][data-slug]:not(.arrived) .dock{opacity:0}
 .player-btn.is-on{background:var(--tile)}
 .player-btn:active{transform:scale(.97)}
 .player-host{
-  position:fixed;width:1px;height:1px;overflow:hidden;
-  clip-path:inset(50%);opacity:0;pointer-events:none;
-  bottom:0;right:0;z-index:-1;
+  position:fixed;left:-199px;bottom:0;z-index:0;
+  width:200px;height:200px;overflow:hidden;
+  pointer-events:none;
 }
-.player-host iframe{width:1px!important;height:1px!important;border:0}
+.player-host iframe{width:200px!important;height:200px!important;border:0}
 
 /* Landing — Skyspace / just arrived */
 .land{
@@ -339,8 +339,12 @@ html.js .stills .still.in{opacity:1;transform:none}
   .dock-toggle,.dock a{padding:0 .55rem;height:2rem;font-size:12px}
   .dock-toggle{width:2rem;padding:0}
   .dock-links{gap:.22rem}
-  .player{right:.85rem;bottom:4.35rem;padding:.32rem;gap:.16rem}
+  .player{right:.85rem;bottom:4.35rem;padding:.32rem;gap:.16rem;max-width:calc(100vw - 1.7rem)}
   .player-btn{width:2rem;height:2rem}
+  .player-cover{width:2rem;height:2rem}
+  .player-meta{max-width:6.2rem}
+  .player-title{font-size:11px}
+  .player-artist{font-size:10px}
   .gather{
     grid-template-columns:1fr 1fr;
     grid-template-rows:none;

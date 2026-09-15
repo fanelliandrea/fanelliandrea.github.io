@@ -1,9 +1,9 @@
-/* Bottom-right audio. Playlist via hidden YouTube IFrame API. */
+/* Bottom-right audio. Hidden YouTube host, playlist driven in-page. */
 (() => {
   if (document.querySelector('.player')) return;
 
-  const LIST = 'PLI_JRzyhoEfc';
   const KEY = 'af-yt';
+  const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -19,6 +19,14 @@
     const next = { ...load(), ...patch };
     try { sessionStorage.setItem(KEY, JSON.stringify(next)); } catch {}
     return next;
+  };
+  const mix = arr => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   };
 
   const player = document.createElement('aside');
@@ -49,15 +57,28 @@
   const coverEl = player.querySelector('.player-cover');
   const titleEl = player.querySelector('.player-title');
   const artistEl = player.querySelector('.player-artist');
+
   const saved = load();
   let yt = null;
+  let ready = false;
   let tracks = {};
+  let ids = FALLBACK_IDS.slice();
   let shuffleOn = saved.shuffle !== false;
+  let order = shuffleOn ? mix(ids) : ids.slice();
+  let idx = Math.max(0, order.indexOf(saved.videoId));
+  if (saved.videoId && idx < 0) {
+    order = shuffleOn ? mix(ids) : ids.slice();
+    idx = 0;
+  }
+  let fails = 0;
+  let pending = saved.playing ? 'play' : null;
+  let resumeAt = saved.time > 1 ? saved.time : 0;
+
   shuffleBtn.classList.toggle('is-on', shuffleOn);
   shuffleBtn.setAttribute('aria-pressed', String(shuffleOn));
 
   const parseMeta = raw => {
-    let text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
+    const text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
     for (const sep of [' - ', ' – ', ' | ']) {
       if (!text.includes(sep)) continue;
       const [artist, title] = text.split(sep).map(s => s.trim());
@@ -89,46 +110,32 @@
           cover: hit.album?.cover_medium || hit.album?.cover_small || ''
         };
         tracks[id] = meta;
-        paint(meta);
+        if (order[idx] === id) paint(meta);
       })
       .catch(() => {});
   };
 
   const show = (id, rawTitle) => {
-    if (!id && !rawTitle) return;
     if (id && tracks[id]) { paint(tracks[id]); return; }
     const parsed = parseMeta(rawTitle);
-    const meta = {
+    paint({
       artist: parsed.artist,
       title: parsed.title,
       cover: id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : ''
-    };
-    paint(meta);
+    });
     if (id) lookupDeezer(id, parsed);
   };
 
-  const current = () => {
-    let id = '', title = '';
-    try {
-      const data = yt?.getVideoData?.() || {};
-      id = data.video_id || '';
-      title = data.title || '';
-    } catch {}
-    if (!id) id = load().videoId || Object.keys(tracks)[0] || '';
-    if (!title && tracks[id]) title = `${tracks[id].artist} - ${tracks[id].title}`;
-    show(id, title);
-  };
-
   const snapshot = extra => {
-    if (!yt || typeof yt.getPlayerState !== 'function') return save(extra || {});
-    let videoId = '';
-    try { videoId = yt.getVideoData()?.video_id || ''; } catch {}
+    const id = order[idx] || '';
+    let time = resumeAt;
+    try { if (yt?.getCurrentTime) time = yt.getCurrentTime() || time; } catch {}
     return save({
-      playing: yt.getPlayerState() === 1,
+      playing: player.classList.contains('is-playing'),
       shuffle: shuffleOn,
-      index: yt.getPlaylistIndex?.() ?? 0,
-      time: yt.getCurrentTime?.() || 0,
-      videoId,
+      index: idx,
+      time,
+      videoId: id,
       ...(extra || {})
     });
   };
@@ -139,43 +146,58 @@
     player.classList.toggle('is-playing', on);
   };
 
-  const restore = () => {
-    if (!yt) return;
-    try { yt.setLoop(true); } catch {}
-    try { yt.setShuffle(shuffleOn); } catch {}
-    const s = load();
-    const list = yt.getPlaylist?.() || [];
-    let i = 0;
-    if (s.videoId && list.length) {
-      const found = list.indexOf(s.videoId);
-      if (found >= 0) i = found;
-    } else if (Number.isInteger(s.index) && s.index >= 0) {
-      i = s.index;
-    }
-    const t = s.time > 1 ? s.time : 0;
+  const cue = (autoplay, start) => {
+    const id = order[idx] || ids[0];
+    if (!id) return;
+    show(id);
+    snapshot({ videoId: id, playing: !!autoplay });
+    if (!yt || typeof yt.cueVideoById !== 'function') return;
+    const t = start || 0;
     try {
-      yt.mute();
-      if (list.length) yt.playVideoAt(i);
-      if (t) yt.seekTo(t, true);
-      if (s.playing) {
-        yt.unMute();
-        yt.playVideo();
-      } else {
-        yt.pauseVideo();
-        yt.unMute();
-      }
-    } catch { try { yt.unMute(); } catch {} }
-    current();
+      if (autoplay) yt.loadVideoById({ videoId: id, startSeconds: t });
+      else yt.cueVideoById({ videoId: id, startSeconds: t });
+    } catch {
+      try { yt.loadVideoById(id); } catch {}
+    }
+  };
+
+  const playNow = () => {
+    pending = 'play';
+    setPlaying(true);
+    if (!ready || !yt) return;
+    const state = yt.getPlayerState?.();
+    try { yt.unMute(); yt.setVolume(100); } catch {}
+    if (state === 1) return;
+    if (state === 2) { yt.playVideo(); return; }
+    cue(true, resumeAt);
+  };
+
+  const pauseNow = () => {
+    pending = null;
+    setPlaying(false);
+    try { resumeAt = yt?.getCurrentTime?.() || resumeAt; } catch {}
+    try { yt?.pauseVideo?.(); } catch {}
+    snapshot({ playing: false });
+  };
+
+  const skip = dir => {
+    if (!order.length) return;
+    idx = (idx + dir + order.length) % order.length;
+    resumeAt = 0;
+    pending = 'play';
+    setPlaying(true);
+    cue(true, 0);
   };
 
   const boot = () => {
     if (yt || !window.YT?.Player) return;
+    const startId = order[idx] || ids[0];
     yt = new YT.Player('yt-audio', {
-      width: 1,
-      height: 1,
+      width: 200,
+      height: 200,
+      videoId: startId,
+      host: 'https://www.youtube.com',
       playerVars: {
-        listType: 'playlist',
-        list: LIST,
         autoplay: 0,
         controls: 0,
         disablekb: 1,
@@ -187,22 +209,46 @@
       },
       events: {
         onReady: () => {
-          let n = 0;
-          const wait = () => {
-            const list = yt.getPlaylist?.() || [];
-            if (list.length || n++ > 25) restore();
-            else setTimeout(wait, 160);
-          };
-          wait();
+          ready = true;
+          try { yt.unMute(); yt.setVolume(100); } catch {}
+          show(order[idx]);
+          if (pending === 'play') playNow();
+          else cue(false, resumeAt);
         },
         onStateChange: e => {
           const playing = e.data === 1;
           const paused = e.data === 2;
-          if (playing || paused) setPlaying(playing);
-          if (playing || paused || e.data === 0) snapshot({ playing });
-          current();
+          const ended = e.data === 0;
+          if (playing) {
+            fails = 0;
+            pending = 'play';
+            resumeAt = 0;
+            setPlaying(true);
+            try {
+              const data = yt.getVideoData?.() || {};
+              if (data.video_id) {
+                const found = order.indexOf(data.video_id);
+                if (found >= 0) idx = found;
+                show(data.video_id, data.title);
+              }
+            } catch {}
+            snapshot({ playing: true });
+          } else if (paused && pending !== 'play') {
+            setPlaying(false);
+            snapshot({ playing: false });
+          } else if (ended) {
+            skip(1);
+          }
         },
-        onError: () => { try { yt.nextVideo(); } catch {} }
+        onError: () => {
+          fails += 1;
+          if (fails >= Math.max(order.length, 1)) {
+            pending = null;
+            setPlaying(false);
+            return;
+          }
+          skip(1);
+        }
       }
     });
   };
@@ -212,21 +258,16 @@
     if (!btn) return;
     e.stopPropagation();
     const act = btn.dataset.act;
-    if (!yt) return;
     if (act === 'play') {
-      const on = yt.getPlayerState() === 1;
-      if (on) yt.pauseVideo(); else yt.playVideo();
-      setPlaying(!on);
-      snapshot({ playing: !on });
-    } else if (act === 'next') {
-      yt.nextVideo();
-      snapshot({ playing: true });
-    } else if (act === 'prev') {
-      yt.previousVideo();
-      snapshot({ playing: true });
-    } else if (act === 'shuffle') {
+      if (player.classList.contains('is-playing')) pauseNow();
+      else playNow();
+    } else if (act === 'next') skip(1);
+    else if (act === 'prev') skip(-1);
+    else if (act === 'shuffle') {
       shuffleOn = !shuffleOn;
-      try { yt.setShuffle(shuffleOn); } catch {}
+      const current = order[idx];
+      order = shuffleOn ? mix(ids) : ids.slice();
+      idx = Math.max(0, order.indexOf(current));
       shuffleBtn.classList.toggle('is-on', shuffleOn);
       shuffleBtn.setAttribute('aria-pressed', String(shuffleOn));
       snapshot({ shuffle: shuffleOn });
@@ -235,21 +276,34 @@
 
   addEventListener('pagehide', () => snapshot());
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
-  setInterval(() => { if (yt?.getPlayerState?.() === 1) snapshot(); }, 2000);
+  setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
+
+  const paintCatalog = () => {
+    ids = Object.keys(tracks).length ? Object.keys(tracks) : FALLBACK_IDS.slice();
+    const current = load().videoId;
+    order = shuffleOn ? mix(ids) : ids.slice();
+    idx = Math.max(0, order.indexOf(current));
+    if (idx < 0) idx = 0;
+    show(order[idx] || ids[0]);
+  };
 
   fetch('/content/playlist.json')
     .then(r => r.json())
     .then(d => {
       tracks = d.tracks || {};
-      const id = load().videoId || Object.keys(tracks)[0];
-      if (id && tracks[id]) paint(tracks[id]);
+      const nextIds = Object.keys(tracks);
+      if (nextIds.length) ids = nextIds;
+      if (!ready) paintCatalog();
+      else show(order[idx] || ids[0]);
     })
-    .catch(() => {});
+    .catch(() => show(order[idx] || ids[0]));
+
+  show(order[idx] || ids[0]);
 
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
-  const prev = window.onYouTubeIframeAPIReady;
-  window.onYouTubeIframeAPIReady = () => { prev?.(); boot(); };
+  const prevReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = () => { prevReady?.(); boot(); };
   if (window.YT?.Player) boot();
 })();

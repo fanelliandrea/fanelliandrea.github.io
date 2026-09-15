@@ -101,6 +101,12 @@
     } catch {}
   }
 
+  if (!document.querySelector('script[src="/js/player.js"]')) {
+    const p = document.createElement('script');
+    p.src = '/js/player.js';
+    document.body.appendChild(p);
+  }
+
   const stills = $('#stills');
   if (stills) data.then(entries => {
     const work = entries.filter(e => e.homeWork).sort((a, b) => a.homeWork - b.homeWork);

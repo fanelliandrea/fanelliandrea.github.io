@@ -3,13 +3,15 @@
   if (document.querySelector('.player')) return;
 
   const KEY = 'af-yt';
+  const OPEN_KEY = 'af-player-open';
   const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
     prev: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="1.4" y="2" width="1.5" height="8" rx=".3" fill="currentColor"/><path fill="currentColor" d="M10.4 2.1v7.8L3.6 6z"/></svg>',
     next: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M1.6 2.1v7.8L8.4 6z"/><rect x="9.1" y="2" width="1.5" height="8" rx=".3" fill="currentColor"/></svg>',
-    shuffle: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" d="M1.5 3.2h2.1c.9 0 1.5.5 2.4 1.8M1.5 8.8h2.1c.9 0 1.5-.5 2.4-1.8M8.2 3.2h2.3M8.2 8.8h2.3"/><path fill="currentColor" d="M9.2 1.6l2.2 1.6-2.2 1.6zm0 5.6l2.2 1.6-2.2 1.6z"/></svg>'
+    note: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M8.7 1.2v5.55a1.85 1.85 0 1 1-1.15-1.7V3.05L4.2 3.85v4.55a1.85 1.85 0 1 1-1.15-1.7V2.55z"/></svg>',
+    close: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.4 2.4l7.2 7.2M9.6 2.4l-7.2 7.2"/></svg>'
   };
 
   const load = () => {
@@ -33,17 +35,19 @@
   player.className = 'player sq';
   player.setAttribute('aria-label', 'Music');
   player.innerHTML = `
-    <div class="player-now">
-      <img class="player-cover" alt="" width="72" height="72">
-      <span class="player-meta">
-        <b class="player-title"></b>
-        <span class="player-artist"></span>
-      </span>
+    <div class="player-body">
+      <div class="player-now">
+        <img class="player-cover" alt="" width="72" height="72">
+        <span class="player-meta">
+          <b class="player-title"></b>
+          <span class="player-artist"></span>
+        </span>
+      </div>
+      <button class="player-btn" type="button" data-act="prev" aria-label="Previous">${icon.prev}</button>
+      <button class="player-btn is-play" type="button" data-act="play" aria-label="Play">${icon.play}</button>
+      <button class="player-btn" type="button" data-act="next" aria-label="Next">${icon.next}</button>
     </div>
-    <button class="player-btn" type="button" data-act="prev" aria-label="Previous">${icon.prev}</button>
-    <button class="player-btn is-play" type="button" data-act="play" aria-label="Play">${icon.play}</button>
-    <button class="player-btn" type="button" data-act="next" aria-label="Next">${icon.next}</button>
-    <button class="player-btn is-shuffle" type="button" data-act="shuffle" aria-pressed="false" aria-label="Shuffle">${icon.shuffle}</button>`;
+    <button class="player-btn is-toggle" type="button" data-act="toggle" aria-label="Close player">${icon.close}</button>`;
   document.body.append(player);
 
   const host = document.createElement('div');
@@ -53,7 +57,7 @@
   document.body.append(host);
 
   const playBtn = player.querySelector('[data-act="play"]');
-  const shuffleBtn = player.querySelector('[data-act="shuffle"]');
+  const toggle = player.querySelector('[data-act="toggle"]');
   const coverEl = player.querySelector('.player-cover');
   const titleEl = player.querySelector('.player-title');
   const artistEl = player.querySelector('.player-artist');
@@ -63,19 +67,21 @@
   let ready = false;
   let tracks = {};
   let ids = FALLBACK_IDS.slice();
-  let shuffleOn = saved.shuffle !== false;
-  let order = shuffleOn ? mix(ids) : ids.slice();
+  let order = mix(ids);
   let idx = Math.max(0, order.indexOf(saved.videoId));
-  if (saved.videoId && idx < 0) {
-    order = shuffleOn ? mix(ids) : ids.slice();
-    idx = 0;
-  }
+  if (idx < 0) idx = 0;
   let fails = 0;
   let pending = saved.playing ? 'play' : null;
   let resumeAt = saved.time > 1 ? saved.time : 0;
 
-  shuffleBtn.classList.toggle('is-on', shuffleOn);
-  shuffleBtn.setAttribute('aria-pressed', String(shuffleOn));
+  const setOpen = open => {
+    player.classList.toggle('is-open', open);
+    toggle.innerHTML = open ? icon.close : icon.note;
+    toggle.setAttribute('aria-label', open ? 'Close player' : 'Open player');
+    try { sessionStorage.setItem(OPEN_KEY, open ? '1' : '0'); } catch {}
+  };
+  try { setOpen(sessionStorage.getItem(OPEN_KEY) !== '0'); }
+  catch { setOpen(true); }
 
   const parseMeta = raw => {
     const text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
@@ -132,7 +138,6 @@
     try { if (yt?.getCurrentTime) time = yt.getCurrentTime() || time; } catch {}
     return save({
       playing: player.classList.contains('is-playing'),
-      shuffle: shuffleOn,
       index: idx,
       time,
       videoId: id,
@@ -261,17 +266,9 @@
     if (act === 'play') {
       if (player.classList.contains('is-playing')) pauseNow();
       else playNow();
-    } else if (act === 'next') skip(1);
+    }     else if (act === 'next') skip(1);
     else if (act === 'prev') skip(-1);
-    else if (act === 'shuffle') {
-      shuffleOn = !shuffleOn;
-      const current = order[idx];
-      order = shuffleOn ? mix(ids) : ids.slice();
-      idx = Math.max(0, order.indexOf(current));
-      shuffleBtn.classList.toggle('is-on', shuffleOn);
-      shuffleBtn.setAttribute('aria-pressed', String(shuffleOn));
-      snapshot({ shuffle: shuffleOn });
-    }
+    else if (act === 'toggle') setOpen(!player.classList.contains('is-open'));
   });
 
   addEventListener('pagehide', () => snapshot());
@@ -281,7 +278,7 @@
   const paintCatalog = () => {
     ids = Object.keys(tracks).length ? Object.keys(tracks) : FALLBACK_IDS.slice();
     const current = load().videoId;
-    order = shuffleOn ? mix(ids) : ids.slice();
+    order = mix(ids);
     idx = Math.max(0, order.indexOf(current));
     if (idx < 0) idx = 0;
     show(order[idx] || ids[0]);

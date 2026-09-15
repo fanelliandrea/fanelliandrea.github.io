@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "site-scratch",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-I", "-c", "import os,sys,runpy; os.chdir('/private/tmp/claude-501/-Users-andreafanelli-Desktop-Website/b654badb-022e-4236-a5bd-5c85a2adc1cf/scratchpad/site'); sys.argv=['http.server','4322']; runpy.run_module('http.server', run_name='__main__')"],
+      "port": 4322
+    }
+  ]
+}

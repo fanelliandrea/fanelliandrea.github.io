@@ -1,0 +1,29 @@
+/* Clear sky (live site) + white / grey components (s.page). */
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap");
+
+:root{
+  --sky:        #6eafd8;
+  --field:      radial-gradient(ellipse 90% 80% at 50% 42%, #eaf4fb 0%, #9cc9ea 38%, #5aa0d4 72%, #3d86be 100%);
+  --tile:       #ffffff;
+  --mist:       #d7e0ea;
+  --ink:        #1a222c;
+  --mute:       #5d6874;
+  --line:       rgba(26,34,44,.1);
+  --glass:      rgba(255,255,255,.58);
+  --glass-2:    rgba(255,255,255,.34);
+  --glass-edge: rgba(255,255,255,.72);
+  --depth:      0 28px 70px -32px rgba(28,72,118,.42);
+
+  --sans: "Outfit","Helvetica Neue",Arial,sans-serif;
+
+  --gutter: clamp(1rem,3vw,2.2rem);
+  --r: 1.85rem;
+  --r-lg: 2.4rem;
+  --dur: .6s;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+@supports (corner-shape: squircle){
+  .sq{ corner-shape: squircle; }
+}

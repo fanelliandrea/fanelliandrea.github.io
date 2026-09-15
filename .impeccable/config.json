@@ -1,0 +1,74 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "instrument sans",
+        "createdAt": "2026-09-14T10:35:49.989Z",
+        "reason": "CLAUDE.md §3: Instrument Sans is the brief's named free stand-in until a licensed grotesque (Diatype/Unica77/Suisse) is bought"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "createdAt": "2026-09-14T10:35:50.005Z",
+        "reason": "CLAUDE.md §3: Geist Mono is the brief's named metadata mono stand-in, pending the licensed family's mono"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-14T10:38:10.049Z",
+        "reason": "user confirmed 2026-09-14: uppercase is only short mono metadata labels (max 37 chars, checked in DOM), required by CLAUDE.md §3"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "work.html"
+        ],
+        "createdAt": "2026-09-14T10:38:10.066Z",
+        "reason": "user confirmed 2026-09-14: uppercase is only short mono metadata labels (max 37 chars, checked in DOM), required by CLAUDE.md §3"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "ideas/taste-is-the-only-skill-to-learn.html"
+        ],
+        "createdAt": "2026-09-14T10:38:10.081Z",
+        "reason": "user confirmed 2026-09-14: uppercase is only short mono metadata labels (max 37 chars, checked in DOM), required by CLAUDE.md §3"
+      },
+      {
+        "rule": "marketing-buzzword",
+        "value": "*",
+        "files": [
+          "ideas/taste-is-the-only-skill-to-learn.html"
+        ],
+        "createdAt": "2026-09-14T12:16:57.694Z",
+        "reason": "only hit is 'world-class artists' in Andrea's own published essay (Rick Rubin paragraph), copied verbatim from fanelliandrea.com; not UI copy"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "ideas/taste-is-the-only-skill-to-learn.html"
+        ],
+        "createdAt": "2026-09-14T12:16:57.713Z",
+        "reason": "DOM scan: only multi-line hit is the display pull-quote blockquote (~2rem, lh 1.12, intentional display setting); body prose is 1.55"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-14T12:16:57.731Z",
+        "reason": "DOM scan: candidates are OEM pill/dock details (btn plus-circle inset 4.8px, home-pill dock 5.6px around a nested chip), acc-panel wrappers whose strips carry 1.5rem padding, and the gradient-clipped statement h1 read as a filled box; all intentional or false positives"
+      }
+    ]
+  }
+}

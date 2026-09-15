@@ -1,0 +1,429 @@
+{
+  "_note": "Copy and titles match the live Framer site. Years come from /index. Extra prototype-only rows are onSite:false and stay off the pages.",
+  "entries": [
+    {
+      "slug": "glyph-toys",
+      "year": 2026,
+      "sort": 100,
+      "title": "Glyph Toys",
+      "client": "Nothing",
+      "kind": "object",
+      "role": "Product Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 1,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/jofnozJ9su29yfsUkdPGL9J2dU.gif"
+      ],
+      "href": "/work/glyph-toys.html"
+    },
+    {
+      "slug": "verne-product",
+      "year": 2025,
+      "sort": 90,
+      "title": "Wearphone",
+      "client": "Verne",
+      "kind": "object",
+      "role": "Product Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 2,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/Ja4ZpwVHdM4le1SE3aYt5nuUdE.jpg"
+      ],
+      "href": "/work/verne-product.html"
+    },
+    {
+      "slug": "verne-brand",
+      "year": 2025,
+      "sort": 80,
+      "title": "Verne Technologies",
+      "client": "Verne",
+      "kind": "brand",
+      "role": "Brand Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 3,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/EmmJrjFpTHZWz4vvpSPScJs0icU.jpg"
+      ],
+      "href": "/work/verne-brand.html"
+    },
+    {
+      "slug": "magic-8-ball",
+      "year": 2025,
+      "sort": 70,
+      "title": "Magic 8 Ball",
+      "client": "Self-initiated",
+      "kind": "object",
+      "role": "Product Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 4,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/pquD9lb18LRNDqShqcNgqfzT5A.gif"
+      ],
+      "href": "/work/magic-8-ball.html"
+    },
+    {
+      "slug": "meti",
+      "year": 2024,
+      "sort": 60,
+      "title": "M E T I",
+      "client": "Self-initiated",
+      "kind": "object",
+      "role": "Product Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 5,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/9q2QwFqSGUmCF1KXGDHRtao.jpg"
+      ],
+      "href": "/work/meti.html"
+    },
+    {
+      "slug": "nothing-community",
+      "year": 2024,
+      "yearLabel": "2023–2024",
+      "sort": 50,
+      "title": "Nothing Community",
+      "client": "Nothing",
+      "kind": "object",
+      "role": "Product Design",
+      "status": "published",
+      "onSite": true,
+      "homeWork": 6,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/lstDJn3VR6dOXzZDl9e9pPKq64.png"
+      ],
+      "href": "/work/nothing-community.html"
+    },
+    {
+      "slug": "staffing-agency",
+      "year": 2023,
+      "sort": 40,
+      "title": "Staffing Agency",
+      "client": "—",
+      "kind": "brand",
+      "role": "Strategic Design",
+      "status": "published",
+      "onSite": true,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/UfFoZYx6hYIlK1257WiPGQIC0.jpg"
+      ],
+      "href": "/work/staffing-agency.html"
+    },
+    {
+      "slug": "acexperiences",
+      "year": 2022,
+      "sort": 30,
+      "title": "ACexperiences",
+      "client": "—",
+      "kind": "brand",
+      "role": "Strategic design",
+      "status": "published",
+      "onSite": true,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/GZwrvAhGQI2ecCWwvTRx9ogiUcM.png"
+      ],
+      "href": "/work/acexperiences.html"
+    },
+    {
+      "slug": "dropl",
+      "year": 2021,
+      "sort": 20,
+      "title": "DROPL",
+      "client": "—",
+      "kind": "object",
+      "role": "Product & Service design",
+      "status": "published",
+      "onSite": true,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/tsJkA9pkNU6PY2HVIlNmXQlBVf4.jpg"
+      ],
+      "href": "/work/dropl.html"
+    },
+    {
+      "slug": "clear-sky-elektricity",
+      "year": 2021,
+      "sort": 10,
+      "title": "Clear Sky - ElektriCity",
+      "client": "—",
+      "kind": "object",
+      "role": "Product design",
+      "status": "published",
+      "onSite": true,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/LAzLpRZEn9uaQABMMKNPQl6Rk.jpg"
+      ],
+      "href": "/work/clear-sky-elektricity.html"
+    },
+    {
+      "slug": "the-golden-age-of-audio",
+      "year": 2024,
+      "title": "The Golden Age of Audio",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "homeIdea": 1,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/kmrrWHZYoKU2vX5ZRxn5R4w6twQ.jpg"
+      ],
+      "href": null
+    },
+    {
+      "slug": "fashion-tech",
+      "year": 2024,
+      "title": "The marriage between fashion and technology",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "homeIdea": 2,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/qf2WnlmxirFM67z0zzgOb7qTxY.png"
+      ],
+      "href": null
+    },
+    {
+      "slug": "the-process-is-the-product",
+      "year": 2025,
+      "title": "The Process Is the Product",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "homeIdea": 3,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/0l4s0BG1CWAQf4fEtHPE2ymfjmw.webp"
+      ],
+      "href": null
+    },
+    {
+      "slug": "taste-is-the-only-skill-to-learn",
+      "year": 2024,
+      "date": "2024-01-23",
+      "title": "Taste is the only skill to learn",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "homeIdea": 4,
+      "verified": true,
+      "media": [
+        "https://framerusercontent.com/images/5sst8f9pG2nhXD6p9Yxrfg.jpg"
+      ],
+      "href": "/ideas/taste-is-the-only-skill-to-learn.html"
+    },
+    {
+      "slug": "urban-undergrounds",
+      "year": null,
+      "title": "How to design underground utopias?",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/L95Dx4kot4Eqiusjp95UoSfEihg.png"
+      ],
+      "href": null
+    },
+    {
+      "slug": "great-design-language",
+      "year": null,
+      "title": "Great design starts with language",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/NQ2hlSeCo8lt3QpAvlCuQLdXs.png"
+      ],
+      "href": null
+    },
+    {
+      "slug": "apps-are-evolving-into-experiences",
+      "year": null,
+      "title": "Apps are evolving into Experiences",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/ZqIrvwNUijxlsFQyy6JjyqyiGg.png"
+      ],
+      "href": null
+    },
+    {
+      "slug": "a-future-with-invisible-technology",
+      "year": null,
+      "title": "A future with invisible technology",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/bzxnfua0JckYl58qvcjEwyiMY40.webp"
+      ],
+      "href": null
+    },
+    {
+      "slug": "how-to-design-better-cities",
+      "year": null,
+      "title": "How to design better cities?",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/GpoD5wfwzvYGoXpk3PTfQi41tyM.png"
+      ],
+      "href": null
+    },
+    {
+      "slug": "product-as-a-service",
+      "year": null,
+      "title": "From Ownership to Usership: Product as a Service (PaaS)",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/07N3XjwGsQQmDwu7eIk3iJd2T4.jpg"
+      ],
+      "href": null
+    },
+    {
+      "slug": "movie-her-design-fiction",
+      "year": null,
+      "title": "Why the Movie \"Her\" is a Good Example of Design Fiction?",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/2ZJvWKMTBQivoVMZBvYFezDHGg.webp"
+      ],
+      "href": null
+    },
+    {
+      "slug": "turn-left",
+      "year": null,
+      "title": "What if it was forbidden to turn left?",
+      "client": "Notes",
+      "kind": "writing",
+      "status": "published",
+      "onSite": true,
+      "verified": false,
+      "media": [
+        "https://framerusercontent.com/images/FkO1TsPehIzYECCb16ruG7xa2p8.jpg"
+      ],
+      "href": null
+    },
+    {
+      "slug": "muse",
+      "year": 2026,
+      "title": "Muse",
+      "client": "4FF",
+      "kind": "film",
+      "role": "Launch film, direction",
+      "status": "published",
+      "onSite": false,
+      "verified": false,
+      "media": [],
+      "href": null
+    },
+    {
+      "slug": "undisclosed",
+      "year": 2026,
+      "title": "Undisclosed",
+      "client": "Under NDA",
+      "kind": "object",
+      "role": "Concept",
+      "status": "nda",
+      "onSite": false,
+      "verified": false,
+      "media": [],
+      "href": null
+    },
+    {
+      "slug": "sidekick",
+      "year": 2026,
+      "title": "Sidekick",
+      "client": "Origami Computing",
+      "kind": "object",
+      "role": "Product design",
+      "status": "unreleased",
+      "onSite": false,
+      "verified": false,
+      "media": [],
+      "href": null
+    },
+    {
+      "slug": "fashion-show-invitations",
+      "year": 2023,
+      "title": "Fashion show invitations",
+      "client": "Archive",
+      "kind": "web",
+      "role": "Are.na-based archive",
+      "status": "published",
+      "onSite": false,
+      "verified": false,
+      "media": [],
+      "href": null
+    }
+  ],
+  "apps": [
+    {
+      "label": "Work",
+      "href": "/work.html",
+      "slug": "glyph-toys"
+    },
+    {
+      "label": "About",
+      "href": "/about.html",
+      "slug": "verne-product"
+    },
+    {
+      "label": "Ideas",
+      "href": "/ideas.html",
+      "slug": "taste-is-the-only-skill-to-learn"
+    },
+    {
+      "label": "Contact",
+      "href": "/#contact",
+      "slug": "magic-8-ball"
+    },
+    {
+      "label": "Index",
+      "href": "/register.html",
+      "slug": "meti"
+    },
+    {
+      "label": "Instagram",
+      "href": "https://www.instagram.com/fanelliandrea_/",
+      "slug": "verne-brand"
+    }
+  ]
+}

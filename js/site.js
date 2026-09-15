@@ -50,9 +50,8 @@
     dock.className = 'dock sq';
     dock.setAttribute('aria-label', 'Primary');
     dock.innerHTML = `
-      <button class="dock-toggle" type="button" aria-expanded="false" aria-controls="dock-links" aria-label="Menu">
-        <span class="lbl-menu">menu</span>
-        <span class="lbl-close">chiudi</span>
+      <button class="dock-toggle" type="button" aria-expanded="false" aria-controls="dock-links" aria-label="Open menu">
+        <span class="glyph" aria-hidden="true"><i></i><i></i></span>
       </button>
       <div class="dock-links" id="dock-links">
         <a href="/"${here.home ? ' aria-current="page"' : ''}>Home</a>
@@ -81,7 +80,7 @@
       dock.classList.toggle('is-open', open);
       back.classList.toggle('is-on', open);
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Chiudi' : 'Menu');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     };
     toggle.addEventListener('click', e => {
       e.stopPropagation();

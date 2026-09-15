@@ -5,7 +5,8 @@
       "artist": "Aphex Twin",
       "title": "Xtal",
       "cover": "/content/covers/2tOutF8B3f8.jpg",
-      "deezer": 123789736
+      "deezer": 123789736,
+      "audio": "/content/audio/2tOutF8B3f8.m4a"
     },
     "VHGqsnsuA3c": {
       "artist": "Frank Ocean",
@@ -17,7 +18,8 @@
       "artist": "Grimes",
       "title": "Genesis",
       "cover": "/content/covers/WizNXQGBMEk.jpg",
-      "deezer": 16541038
+      "deezer": 16541038,
+      "audio": "/content/audio/WizNXQGBMEk.m4a"
     },
     "QhZnEagfjTQ": {
       "artist": "Moby",
@@ -29,7 +31,8 @@
       "artist": "The xx",
       "title": "Intro",
       "cover": "/content/covers/xMV6l2y67rk.jpg",
-      "deezer": 3787855
+      "deezer": 3787855,
+      "audio": "/content/audio/xMV6l2y67rk.m4a"
     }
   }
 }

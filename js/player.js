@@ -63,6 +63,12 @@
   const artistEl = player.querySelector('.player-artist');
   const htmlAudio = new Audio();
   htmlAudio.preload = 'auto';
+  const LOCAL_AUDIO = {
+    '2tOutF8B3f8': '/content/audio/2tOutF8B3f8.m4a',
+    'WizNXQGBMEk': '/content/audio/WizNXQGBMEk.m4a',
+    'xMV6l2y67rk': '/content/audio/xMV6l2y67rk.m4a'
+  };
+  const fileFor = id => tracks[id]?.audio || LOCAL_AUDIO[id] || '';
 
   const saved = load();
   let yt = null;
@@ -118,6 +124,8 @@
     probe.remove();
     player.style.setProperty('--player-meta-w', `${Math.ceil(w)}px`);
   };
+
+  const paint = meta => {
     if (!meta) return;
     titleEl.textContent = meta.title || '';
     artistEl.textContent = meta.artist || '';
@@ -159,8 +167,26 @@
     try { htmlAudio.pause(); htmlAudio.removeAttribute('src'); htmlAudio.load(); } catch {}
   };
 
+  const playFile = (id, autoplay) => {
+    const src = fileFor(id);
+    if (!src) return false;
+    expected = id;
+    try { yt?.stopVideo?.(); } catch {}
+    if (!htmlAudio.src.includes(src)) htmlAudio.src = src;
+    show(id);
+    if (autoplay) {
+      const play = htmlAudio.play();
+      if (play && play.catch) play.catch(() => {});
+      pending = 'play';
+      setPlaying(true);
+    }
+    snapshot({ playing: !!autoplay, videoId: id });
+    return true;
+  };
+
   const playFallback = () => {
     const id = expected;
+    if (playFile(id, true)) return;
     const dz = tracks[id]?.deezer;
     show(id);
     if (!dz) return;
@@ -169,7 +195,6 @@
       .then(d => {
         if (expected !== id || !d.preview) return;
         try { yt?.stopVideo?.(); } catch {}
-        hushAudio();
         htmlAudio.src = d.preview;
         const play = htmlAudio.play();
         if (play && play.catch) play.catch(() => {});
@@ -241,9 +266,13 @@
     const id = order[idx] || ids[0];
     if (!id) return;
     expected = id;
-    hushAudio();
     show(id);
     snapshot({ videoId: id, playing: !!autoplay });
+    if (fileFor(id)) {
+      playFile(id, autoplay);
+      return;
+    }
+    hushAudio();
     createPlayer(id, autoplay, start || 0);
   };
 
@@ -252,6 +281,10 @@
     setPlaying(true);
     const id = order[idx];
     show(id);
+    if (fileFor(id)) {
+      playFile(id, true);
+      return;
+    }
     if (htmlAudio.src && htmlAudio.paused) {
       const play = htmlAudio.play();
       if (play && play.catch) play.catch(() => {});
@@ -310,6 +343,7 @@
 
   addEventListener('pagehide', () => snapshot());
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
+  addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
   fetch('/content/playlist.json')
@@ -327,6 +361,7 @@
         if (idx < 0) idx = 0;
       }
       show(order[idx]);
+      sizeMeta();
     })
     .catch(() => show(order[idx] || ids[0]));
 

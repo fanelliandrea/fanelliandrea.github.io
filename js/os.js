@@ -34,7 +34,7 @@
     addEventListener('site:os', layout);
     addEventListener('resize', layout);
 
-    if (site.reduced || !site.fine || !window.gsap) return;
+    if (site.reduced || !site.fine || !window.gsap || innerWidth < 860) return;
 
     gsap.set(desk, { transformPerspective: 1600, transformStyle: 'preserve-3d' });
     const rx = gsap.quickTo(desk, 'rotationX', { duration: 1.5, ease: 'power3.out' });

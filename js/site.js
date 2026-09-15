@@ -88,7 +88,7 @@
 
   const osIdeas = $('#os-ideas');
   if (osIdeas) data.then(entries => {
-    const notes = entries.filter(e => e.onSite !== false && e.kind === 'writing').slice(0, 5);
+    const notes = entries.filter(e => e.onSite !== false && e.kind === 'writing').slice(0, 3);
     osIdeas.innerHTML = notes.map(e => {
       const href = e.href ? `href="${esc(e.href)}"` : 'href="/ideas.html"';
       return `<a class="idea-row" ${href}><span>${esc(e.title)}</span><span class="idea-y">${esc(e.date ? date(e.date) : yearOf(e))}</span></a>`;

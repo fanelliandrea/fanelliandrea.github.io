@@ -80,11 +80,17 @@
     }
     const t = s.time > 1 ? s.time : 0;
     try {
+      yt.mute();
       if (list.length) yt.playVideoAt(i);
       if (t) yt.seekTo(t, true);
-      if (s.playing) yt.playVideo();
-      else yt.pauseVideo();
-    } catch {}
+      if (s.playing) {
+        yt.unMute();
+        yt.playVideo();
+      } else {
+        yt.pauseVideo();
+        yt.unMute();
+      }
+    } catch { try { yt.unMute(); } catch {} }
   };
 
   const boot = () => {

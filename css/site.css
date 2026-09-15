@@ -54,28 +54,63 @@ html.js body[data-page="home"]:not(.lit) .wisp{opacity:0}
 
 main,.dock,.veil{position:relative;z-index:1}
 .dock{z-index:41}.veil{z-index:50}
+.dock-back{z-index:40}
 
 .sq{border-radius:var(--r);overflow:hidden}
 
 .veil{display:none}
+.dock-back{
+  position:fixed;inset:0;
+  background:transparent;
+  opacity:0;pointer-events:none;
+  transition:opacity var(--dur) var(--ease);
+}
+.dock-back.is-on{opacity:1;pointer-events:auto}
+
 .dock{
   position:fixed;left:50%;bottom:1.15rem;translate:-50% 0;z-index:41;
-  display:flex;gap:.35rem;padding:.4rem;
+  display:flex;align-items:center;
+  gap:0;padding:.4rem;
   border-radius:1.85rem;
   background:rgba(255,255,255,.4);
   -webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);
   box-shadow:0 18px 44px -28px rgba(40,70,110,.38);
+  overflow:hidden;
+  transition:gap var(--dur) var(--ease), opacity 1.4s var(--ease);
 }
-.dock a{
+.dock.is-open{gap:.35rem}
+.dock-toggle,.dock a{
   height:2.15rem;padding:0 1.05rem;border-radius:999px;
   display:grid;place-items:center;
   font-size:13px;letter-spacing:.02em;
   background:rgba(255,255,255,.5);
-  transition:background var(--dur) var(--ease),transform var(--dur) var(--ease);
+  white-space:nowrap;
 }
+.dock-toggle .lbl-close{display:none}
+.dock.is-open .dock-toggle .lbl-menu{display:none}
+.dock.is-open .dock-toggle .lbl-close{display:block}
+.dock-links{
+  display:flex;gap:.35rem;
+  width:0;
+  overflow:hidden;
+  transition:width var(--dur) var(--ease);
+}
+.dock-links a{
+  flex:0 0 auto;
+  opacity:0;transform:translateX(-.3rem);
+  transition:
+    opacity .5s var(--ease),
+    transform .5s var(--ease),
+    background var(--dur) var(--ease);
+}
+.dock.is-open .dock-links a{opacity:1;transform:none}
+.dock.is-open .dock-links a:nth-child(1){transition-delay:.05s}
+.dock.is-open .dock-links a:nth-child(2){transition-delay:.09s}
+.dock.is-open .dock-links a:nth-child(3){transition-delay:.13s}
+.dock.is-open .dock-links a:nth-child(4){transition-delay:.17s}
+.dock.is-open .dock-links a:nth-child(5){transition-delay:.21s}
 .dock [aria-current="page"]{background:var(--tile);color:var(--ink)}
-.dock a:active{transform:scale(.97)}
-.dock{transition:opacity 1.4s var(--ease)}
+.dock a:active,.dock-toggle:active{transform:scale(.97)}
 html.js body[data-page="home"]:not(.arrived) .dock{opacity:0}
 body[data-page="work"][data-slug]:not(.arrived) .dock{opacity:0}
 
@@ -241,7 +276,7 @@ html.js .stills .still.in{opacity:1;transform:none}
 .row .year,.row .kind,.row .client{color:var(--mute);font-size:13px}
 
 @media (hover:hover) and (pointer:fine){
-  .dock a:hover,.socials a:hover,.next a:hover{opacity:.55}
+  .dock a:hover,.dock-toggle:hover,.socials a:hover,.next a:hover{opacity:.55}
   .dock [aria-current="page"]:hover{opacity:1;background:var(--tile)}
   .feature:hover img,.still:hover img,.aperture:hover img{transform:scale(1.03);transition:transform 1.2s var(--ease)}
 }
@@ -252,8 +287,10 @@ html.js .stills .still.in{opacity:1;transform:none}
   .row{grid-template-columns:3.4rem 1fr}
   .row .kind,.row .client{display:none}
   .info{max-width:none}
-  .dock{padding:.32rem;gap:.22rem;bottom:.85rem}
-  .dock a{padding:0 .55rem;height:2rem;font-size:12px}
+  .dock{padding:.32rem;bottom:.85rem}
+  .dock.is-open{gap:.22rem}
+  .dock-toggle,.dock a{padding:0 .55rem;height:2rem;font-size:12px}
+  .dock-links{gap:.22rem}
   .gather{
     grid-template-columns:1fr 1fr;
     grid-template-rows:none;
@@ -267,6 +304,9 @@ html.js .stills .still.in{opacity:1;transform:none}
 
 @media (prefers-reduced-motion:reduce){
   .field{animation:none}
-  .aperture,.still .shot,.veil nav a{transform:none!important;filter:none!important;opacity:1!important}
-  .dock,.whisper,.field,.wisp,html.js .stills .still{opacity:1!important;transform:none!important}
+  .aperture,.still .shot,.veil nav a{transform:none!important;filter:none!important}
+  .dock,.whisper,.field,.wisp,html.js .stills .still{opacity:1!important}
+  .dock,.dock-toggle,.dock-links a{transition:none!important}
+  .dock-links a{transform:none!important}
+  .dock.is-open .dock-links a{opacity:1!important}
 }

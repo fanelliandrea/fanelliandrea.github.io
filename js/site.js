@@ -42,16 +42,59 @@
     info: page === 'info',
   };
   if (!$('.dock')) {
+    const back = document.createElement('div');
+    back.className = 'dock-back';
+    back.setAttribute('aria-hidden', 'true');
+
     const dock = document.createElement('nav');
     dock.className = 'dock sq';
     dock.setAttribute('aria-label', 'Primary');
     dock.innerHTML = `
-      <a href="/"${here.home ? ' aria-current="page"' : ''}>Home</a>
-      <a href="/work.html"${here.work ? ' aria-current="page"' : ''}>Work</a>
-      <a href="/ideas.html"${here.ideas ? ' aria-current="page"' : ''}>Ideas</a>
-      <a href="/info.html"${here.info ? ' aria-current="page"' : ''}>Info</a>
-      <a href="mailto:fanelliandrea@outlook.com">Contact</a>`;
-    document.body.appendChild(dock);
+      <button class="dock-toggle" type="button" aria-expanded="false" aria-controls="dock-links">
+        <span class="lbl-menu">menu</span>
+        <span class="lbl-close">chiudi</span>
+      </button>
+      <div class="dock-links" id="dock-links">
+        <a href="/"${here.home ? ' aria-current="page"' : ''}>Home</a>
+        <a href="/work.html"${here.work ? ' aria-current="page"' : ''}>Work</a>
+        <a href="/ideas.html"${here.ideas ? ' aria-current="page"' : ''}>Ideas</a>
+        <a href="/info.html"${here.info ? ' aria-current="page"' : ''}>Info</a>
+        <a href="mailto:fanelliandrea@outlook.com">Contact</a>
+      </div>`;
+    document.body.append(back, dock);
+
+    const toggle = dock.querySelector('.dock-toggle');
+    const links = dock.querySelector('.dock-links');
+    const measure = () => {
+      const trans = links.style.transition;
+      links.style.transition = 'none';
+      links.style.width = 'auto';
+      const w = Math.ceil(links.getBoundingClientRect().width);
+      links.style.width = '0px';
+      links.style.transition = trans;
+      void links.offsetWidth;
+      return w;
+    };
+    const setOpen = open => {
+      if (open) links.style.width = `${measure()}px`;
+      else links.style.width = '0px';
+      dock.classList.toggle('is-open', open);
+      back.classList.toggle('is-on', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Chiudi' : 'Menu');
+    };
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      setOpen(!dock.classList.contains('is-open'));
+    });
+    back.addEventListener('pointerdown', () => setOpen(false));
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+    links.addEventListener('click', e => {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    addEventListener('pageshow', () => setOpen(false));
   }
 
   const stills = $('#stills');

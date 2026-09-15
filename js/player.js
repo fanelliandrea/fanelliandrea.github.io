@@ -4,7 +4,7 @@
 
   const KEY = 'af-yt';
   const OPEN_KEY = 'af-player-open';
-  const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk'];
+  const FALLBACK_IDS = ['sWcLccMuCA8', 'VHGqsnsuA3c', '1FH-q0I1fJY'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -65,11 +65,15 @@
   const saved = load();
   let yt = null;
   let ready = false;
+  let gen = 0;
   let tracks = {};
   let ids = FALLBACK_IDS.slice();
   let order = mix(ids);
-  let idx = Math.max(0, order.indexOf(saved.videoId));
-  if (idx < 0) idx = 0;
+  let idx = 0;
+  if (saved.videoId && ids.includes(saved.videoId)) {
+    idx = Math.max(0, order.indexOf(saved.videoId));
+    if (idx < 0) idx = 0;
+  }
   let fails = 0;
   let pending = saved.playing ? 'play' : null;
   let resumeAt = saved.time > 1 ? saved.time : 0;
@@ -151,30 +155,93 @@
     player.classList.toggle('is-playing', on);
   };
 
-  const cue = (autoplay, start) => {
+  const createPlayer = (id, autoplay, start) => {
+    if (!window.YT?.Player || !id) return;
+    const my = ++gen;
+    ready = false;
+    try { yt.stopVideo(); } catch {}
+    try { yt.destroy(); } catch {}
+    yt = null;
+    host.innerHTML = '<div id="yt-audio"></div>';
+    yt = new YT.Player('yt-audio', {
+      width: 200,
+      height: 200,
+      videoId: id,
+      playerVars: {
+        autoplay: autoplay ? 1 : 0,
+        start: Math.max(0, Math.floor(start || 0)),
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        modestbranding: 1,
+        playsinline: 1,
+        rel: 0,
+        origin: location.origin
+      },
+      events: {
+        onReady: e => {
+          if (my !== gen) return;
+          ready = true;
+          try { e.target.unMute(); e.target.setVolume(100); } catch {}
+          if (autoplay || pending === 'play') {
+            try { e.target.playVideo(); } catch {}
+          }
+        },
+        onStateChange: e => {
+          if (my !== gen) return;
+          if (e.data === 1) {
+            fails = 0;
+            pending = 'play';
+            resumeAt = 0;
+            setPlaying(true);
+            show(order[idx]);
+            snapshot({ playing: true, videoId: order[idx] });
+          } else if (e.data === 2 && pending !== 'play') {
+            setPlaying(false);
+            snapshot({ playing: false });
+          } else if (e.data === 0) skip(1);
+        },
+        onError: () => {
+          if (my !== gen) return;
+          fails += 1;
+          if (fails >= Math.max(order.length, 1)) {
+            pending = null;
+            setPlaying(false);
+            return;
+          }
+          skip(1);
+        }
+      }
+    });
+  };
+
+  const go = (autoplay, start) => {
     const id = order[idx] || ids[0];
     if (!id) return;
     show(id);
     snapshot({ videoId: id, playing: !!autoplay });
-    if (!yt || typeof yt.cueVideoById !== 'function') return;
-    const t = start || 0;
-    try {
-      if (autoplay) yt.loadVideoById({ videoId: id, startSeconds: t });
-      else yt.cueVideoById({ videoId: id, startSeconds: t });
-    } catch {
-      try { yt.loadVideoById(id); } catch {}
-    }
+    createPlayer(id, autoplay, start || 0);
   };
 
   const playNow = () => {
     pending = 'play';
     setPlaying(true);
-    if (!ready || !yt) return;
-    const state = yt.getPlayerState?.();
-    try { yt.unMute(); yt.setVolume(100); } catch {}
-    if (state === 1) return;
-    if (state === 2) { yt.playVideo(); return; }
-    cue(true, resumeAt);
+    const id = order[idx];
+    show(id);
+    if (ready && yt) {
+      try {
+        const cur = yt.getVideoData?.()?.video_id;
+        const st = yt.getPlayerState?.();
+        if (cur === id && st !== 1) {
+          yt.unMute();
+          yt.setVolume(100);
+          yt.playVideo();
+          return;
+        }
+        if (cur === id && st === 1) return;
+      } catch {}
+    }
+    go(true, resumeAt);
   };
 
   const pauseNow = () => {
@@ -191,71 +258,12 @@
     resumeAt = 0;
     pending = 'play';
     setPlaying(true);
-    cue(true, 0);
+    go(true, 0);
   };
 
   const boot = () => {
-    if (yt || !window.YT?.Player) return;
-    const startId = order[idx] || ids[0];
-    yt = new YT.Player('yt-audio', {
-      width: 200,
-      height: 200,
-      videoId: startId,
-      host: 'https://www.youtube.com',
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        disablekb: 1,
-        fs: 0,
-        modestbranding: 1,
-        playsinline: 1,
-        rel: 0,
-        origin: location.origin
-      },
-      events: {
-        onReady: () => {
-          ready = true;
-          try { yt.unMute(); yt.setVolume(100); } catch {}
-          show(order[idx]);
-          if (pending === 'play') playNow();
-          else cue(false, resumeAt);
-        },
-        onStateChange: e => {
-          const playing = e.data === 1;
-          const paused = e.data === 2;
-          const ended = e.data === 0;
-          if (playing) {
-            fails = 0;
-            pending = 'play';
-            resumeAt = 0;
-            setPlaying(true);
-            try {
-              const data = yt.getVideoData?.() || {};
-              if (data.video_id) {
-                const found = order.indexOf(data.video_id);
-                if (found >= 0) idx = found;
-                show(data.video_id, data.title);
-              }
-            } catch {}
-            snapshot({ playing: true });
-          } else if (paused && pending !== 'play') {
-            setPlaying(false);
-            snapshot({ playing: false });
-          } else if (ended) {
-            skip(1);
-          }
-        },
-        onError: () => {
-          fails += 1;
-          if (fails >= Math.max(order.length, 1)) {
-            pending = null;
-            setPlaying(false);
-            return;
-          }
-          skip(1);
-        }
-      }
-    });
+    if (!window.YT?.Player) return;
+    go(pending === 'play', resumeAt);
   };
 
   player.addEventListener('click', e => {
@@ -266,7 +274,7 @@
     if (act === 'play') {
       if (player.classList.contains('is-playing')) pauseNow();
       else playNow();
-    }     else if (act === 'next') skip(1);
+    } else if (act === 'next') skip(1);
     else if (act === 'prev') skip(-1);
     else if (act === 'toggle') setOpen(!player.classList.contains('is-open'));
   });
@@ -275,23 +283,20 @@
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
-  const paintCatalog = () => {
-    ids = Object.keys(tracks).length ? Object.keys(tracks) : FALLBACK_IDS.slice();
-    const current = load().videoId;
-    order = mix(ids);
-    idx = Math.max(0, order.indexOf(current));
-    if (idx < 0) idx = 0;
-    show(order[idx] || ids[0]);
-  };
-
   fetch('/content/playlist.json')
     .then(r => r.json())
     .then(d => {
       tracks = d.tracks || {};
       const nextIds = Object.keys(tracks);
-      if (nextIds.length) ids = nextIds;
-      if (!ready) paintCatalog();
-      else show(order[idx] || ids[0]);
+      if (!nextIds.length) return;
+      ids = nextIds;
+      const current = order[idx];
+      if (!ids.includes(current) || order.length !== ids.length) {
+        order = mix(ids);
+        idx = Math.max(0, order.indexOf(current));
+        if (idx < 0) idx = 0;
+      }
+      show(order[idx]);
     })
     .catch(() => show(order[idx] || ids[0]));
 

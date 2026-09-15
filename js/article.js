@@ -3,11 +3,15 @@
    gathers to normal spacing as it scrolls up, scrubbed to the scroll.
    Transform only; skipped entirely under reduced motion. */
 (() => {
+const runArticle = () => {
   const { $$, reduced } = window.Site;
   if (reduced || !window.gsap || !window.SplitText || !window.ScrollTrigger) return;
+  const paras = $$('.prose p');
+  if (!paras.length) return;
 
   Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1200))]).then(() => {
-    $$('.prose p').forEach(p => {
+    paras.forEach(p => {
+      if (!p.isConnected) return;
       let triggers = [];
       SplitText.create(p, {
         type: 'lines,words', linesClass: 'ln', wordsClass: 'wd', autoSplit: true,
@@ -27,4 +31,6 @@
       });
     });
   });
+};
+addEventListener('site:page', runArticle);
 })();

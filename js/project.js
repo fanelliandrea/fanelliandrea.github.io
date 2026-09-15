@@ -1,5 +1,6 @@
 /* Project page renderer. Each /work/*.html sets body[data-slug]. */
-(async () => {
+(() => {
+const runProject = async () => {
   const { $, $$, esc, thumb, data } = window.Site;
   const slug = document.body.dataset.slug;
   const root = $('#project');
@@ -74,4 +75,6 @@
       });
     });
   }
+};
+addEventListener('site:page', () => { runProject(); });
 })();

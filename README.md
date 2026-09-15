@@ -30,7 +30,7 @@ ideas/*.html           essays (Taste is the only one so far)
 content/register.json  work + writing
 design/tokens.css      colour and type
 css/site.css           layout
-js/site.js             bottom menu, lists
-js/player.js           Spotify embed pill
+js/site.js             bottom menu, lists, in-page navigation (player stays mounted)
+js/player.js           YouTube audio pill
 js/space.js            sky, arrival
 ```

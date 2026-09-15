@@ -107,41 +107,124 @@
     document.body.appendChild(p);
   }
 
-  const stills = $('#stills');
-  if (stills) data.then(entries => {
-    const work = entries.filter(e => e.homeWork).sort((a, b) => a.homeWork - b.homeWork);
-    stills.classList.add('gather');
-    stills.innerHTML = work.map(e => {
-      const href = e.href ? ` href="${esc(e.href)}"` : '';
-      const img = e.media?.[0];
-      const tag = e.href ? 'a' : 'article';
-      return `<${tag} class="piece piece-${e.homeWork} still"${href}>
+  const fill = () => {
+    const stills = $('#stills');
+    if (stills) data.then(entries => {
+      const work = entries.filter(e => e.homeWork).sort((a, b) => a.homeWork - b.homeWork);
+      stills.classList.add('gather');
+      stills.innerHTML = work.map(e => {
+        const href = e.href ? ` href="${esc(e.href)}"` : '';
+        const img = e.media?.[0];
+        const tag = e.href ? 'a' : 'article';
+        return `<${tag} class="piece piece-${e.homeWork} still"${href}>
         <span class="shot sq">${img ? `<img src="${esc(thumb(img, 1600))}" alt="">` : ''}</span>
         <span class="pill">${esc(pad(e.homeWork))} ${esc(e.title)}</span>
       </${tag}>`;
-    }).join('');
-    dispatchEvent(new Event('site:stills'));
-  });
+      }).join('');
+      dispatchEvent(new Event('site:stills'));
+    });
 
-  const notes = $('#notes');
-  if (notes) data.then(entries => {
-    notes.innerHTML = entries.filter(e => e.onSite !== false && e.kind === 'writing').map(e => {
-      const href = e.href ? ` href="${esc(e.href)}"` : '';
-      const tag = e.href ? 'a' : 'article';
-      const img = e.media?.[0];
-      return `<${tag} class="note-card"${href}>
+    const notes = $('#notes');
+    if (notes) data.then(entries => {
+      notes.innerHTML = entries.filter(e => e.onSite !== false && e.kind === 'writing').map(e => {
+        const href = e.href ? ` href="${esc(e.href)}"` : '';
+        const tag = e.href ? 'a' : 'article';
+        const img = e.media?.[0];
+        return `<${tag} class="note-card"${href}>
         <span class="shot sq">${img ? `<img src="${esc(thumb(img, 900))}" alt="">` : ''}</span>
         <span class="caption"><b>${esc(e.title)}</b><span>${esc(e.date ? date(e.date) : yearOf(e))}</span></span>
       </${tag}>`;
-    }).join('');
+      }).join('');
+    });
+
+    const reg = $('#register');
+    if (reg) data.then(entries => {
+      const list = entries.filter(e => e.onSite !== false);
+      reg.innerHTML = list.map(e => {
+        const tag = e.href ? 'a' : 'div';
+        return `<${tag} class="row"${e.href ? ` href="${esc(e.href)}"` : ''}><span class="year">${esc(yearOf(e))}</span><span>${esc(e.title)}</span><span class="client">${esc(e.client || '—')}</span><span class="kind">${esc(label(e))}</span></${tag}>`;
+      }).join('');
+    });
+  };
+  fill();
+
+  const markDock = () => {
+    $$('.dock a[href]').forEach(a => {
+      if (a.getAttribute('href').startsWith('mailto:')) return;
+      try {
+        const u = new URL(a.href, location.href);
+        const here = (u.pathname.replace(/\/index\.html$/, '/') || '/');
+        const now = (location.pathname.replace(/\/index\.html$/, '/') || '/');
+        if (here === now) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      } catch {}
+    });
+  };
+
+  const keep = src => /\/js\/(site|space|player)\.js$/.test(src);
+
+  const loadScripts = doc => {
+    const wait = [];
+    [...doc.querySelectorAll('script[src]')].forEach(s => {
+      const src = s.getAttribute('src');
+      if (!src || keep(src)) return;
+      if (document.querySelector(`script[src="${src}"]`)) return;
+      wait.push(new Promise(res => {
+        const el = document.createElement('script');
+        el.src = src;
+        el.onload = el.onerror = () => res();
+        document.body.appendChild(el);
+      }));
+    });
+    return Promise.all(wait);
+  };
+
+  const pageReady = () => {
+    if (window.gsap) gsap.registerPlugin(...[window.ScrollTrigger, window.SplitText].filter(Boolean));
+    dispatchEvent(new Event('site:page'));
+  };
+
+  const apply = (html, href, push) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    try { window.ScrollTrigger?.getAll?.().forEach(t => t.kill()); } catch {}
+    const next = doc.querySelector('main');
+    const cur = document.querySelector('main');
+    if (next && cur) cur.replaceWith(document.importNode(next, true));
+    document.title = doc.title || document.title;
+    document.body.dataset.page = doc.body.getAttribute('data-page') || '';
+    if (doc.body.hasAttribute('data-slug')) document.body.dataset.slug = doc.body.getAttribute('data-slug');
+    else document.body.removeAttribute('data-slug');
+    if (document.body.dataset.page === 'home') document.body.classList.add('lit', 'arrived');
+    if (push) history.pushState({}, '', href);
+    scrollTo(0, 0);
+    loadScripts(doc).then(() => {
+      fill();
+      markDock();
+      pageReady();
+    });
+  };
+
+  document.addEventListener('click', e => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a[href]');
+    if (!a || a.target || a.hasAttribute('download')) return;
+    const raw = a.getAttribute('href') || '';
+    if (raw.startsWith('mailto:') || raw.startsWith('tel:')) return;
+    const url = new URL(raw, location.href);
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
+    e.preventDefault();
+    const href = url.pathname + url.search + url.hash;
+    if (href === location.pathname + location.search + location.hash) return;
+    fetch(href, { credentials: 'same-origin' }).then(r => {
+      if (!r.ok) throw new Error('nav');
+      return r.text();
+    }).then(html => apply(html, href, true)).catch(() => { location.href = href; });
   });
 
-  const reg = $('#register');
-  if (reg) data.then(entries => {
-    const list = entries.filter(e => e.onSite !== false);
-    reg.innerHTML = list.map(e => {
-      const tag = e.href ? 'a' : 'div';
-      return `<${tag} class="row"${e.href ? ` href="${esc(e.href)}"` : ''}><span class="year">${esc(yearOf(e))}</span><span>${esc(e.title)}</span><span class="client">${esc(e.client || '—')}</span><span class="kind">${esc(label(e))}</span></${tag}>`;
-    }).join('');
+  addEventListener('popstate', () => {
+    fetch(location.href, { credentials: 'same-origin' }).then(r => r.text()).then(html => apply(html, location.href, false));
   });
+
+  addEventListener('DOMContentLoaded', pageReady);
 })();

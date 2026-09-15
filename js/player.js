@@ -74,8 +74,12 @@
   let ids = FALLBACK_IDS.slice();
   let order = mix(ids);
   let idx = 0;
-  let pending = null;
-  let resumeAt = 0;
+  if (saved.videoId && ids.includes(saved.videoId)) {
+    const at = order.indexOf(saved.videoId);
+    if (at >= 0) idx = at;
+  }
+  let pending = saved.playing ? 'play' : null;
+  let resumeAt = saved.playing && saved.time > 1 ? saved.time : 0;
   let expected = order[idx] || ids[0];
   let apiReady = false;
 
@@ -322,6 +326,7 @@
 
   const boot = () => {
     apiReady = !!(window.YT && YT.Player);
+    if (pending === 'play') playNow();
   };
 
   player.addEventListener('click', e => {
@@ -339,6 +344,15 @@
 
   addEventListener('pagehide', () => snapshot());
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
+  addEventListener('site:page', () => {
+    if (pending !== 'play') return;
+    try {
+      const st = yt?.getPlayerState?.();
+      if (st === 1 || st === 3) return;
+    } catch {}
+    if (htmlAudio.src && !htmlAudio.paused) return;
+    playNow();
+  });
   addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
@@ -358,6 +372,7 @@
       }
       show(order[idx]);
       sizeMeta();
+      if (pending === 'play') playNow();
     })
     .catch(() => show(order[idx] || ids[0]));
 

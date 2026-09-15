@@ -4,7 +4,7 @@
 
   const KEY = 'af-yt';
   const OPEN_KEY = 'af-player-open';
-  const FALLBACK_IDS = ['sWcLccMuCA8', 'VHGqsnsuA3c', '1FH-q0I1fJY'];
+  const FALLBACK_IDS = ['2tOutF8B3f8', 'VHGqsnsuA3c', 'WizNXQGBMEk', 'QhZnEagfjTQ', 'xMV6l2y67rk', '26setwoKtUI'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -61,6 +61,8 @@
   const coverEl = player.querySelector('.player-cover');
   const titleEl = player.querySelector('.player-title');
   const artistEl = player.querySelector('.player-artist');
+  const htmlAudio = new Audio();
+  htmlAudio.preload = 'auto';
 
   const saved = load();
   let yt = null;
@@ -70,13 +72,13 @@
   let ids = FALLBACK_IDS.slice();
   let order = mix(ids);
   let idx = 0;
-  if (saved.videoId && ids.includes(saved.videoId)) {
-    idx = Math.max(0, order.indexOf(saved.videoId));
-    if (idx < 0) idx = 0;
+  if (saved.playing && saved.videoId && ids.includes(saved.videoId)) {
+    const at = order.indexOf(saved.videoId);
+    if (at >= 0) idx = at;
   }
-  let fails = 0;
   let pending = saved.playing ? 'play' : null;
   let resumeAt = saved.time > 1 ? saved.time : 0;
+  let expected = order[idx] || ids[0];
 
   const setOpen = open => {
     player.classList.toggle('is-open', open);
@@ -106,25 +108,6 @@
     player.setAttribute('aria-label', ['Music', meta.artist, meta.title].filter(Boolean).join(', '));
   };
 
-  const lookupDeezer = (id, parsed) => {
-    const q = [parsed.artist, parsed.title].filter(Boolean).join(' ');
-    if (!q) return;
-    fetch(`https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=1`)
-      .then(r => r.json())
-      .then(d => {
-        const hit = d.data?.[0];
-        if (!hit) return;
-        const meta = {
-          artist: parsed.artist || hit.artist?.name || '',
-          title: parsed.title || hit.title || '',
-          cover: hit.album?.cover_medium || hit.album?.cover_small || ''
-        };
-        tracks[id] = meta;
-        if (order[idx] === id) paint(meta);
-      })
-      .catch(() => {});
-  };
-
   const show = (id, rawTitle) => {
     if (id && tracks[id]) { paint(tracks[id]); return; }
     const parsed = parseMeta(rawTitle);
@@ -133,7 +116,6 @@
       title: parsed.title,
       cover: id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : ''
     });
-    if (id) lookupDeezer(id, parsed);
   };
 
   const snapshot = extra => {
@@ -155,10 +137,38 @@
     player.classList.toggle('is-playing', on);
   };
 
+  const hushAudio = () => {
+    try { htmlAudio.pause(); htmlAudio.removeAttribute('src'); htmlAudio.load(); } catch {}
+  };
+
+  const playFallback = () => {
+    const id = expected;
+    const dz = tracks[id]?.deezer;
+    show(id);
+    if (!dz) return;
+    fetch(`https://api.deezer.com/track/${dz}`)
+      .then(r => r.json())
+      .then(d => {
+        if (expected !== id || !d.preview) return;
+        try { yt?.stopVideo?.(); } catch {}
+        hushAudio();
+        htmlAudio.src = d.preview;
+        const play = htmlAudio.play();
+        if (play && play.catch) play.catch(() => {});
+        pending = 'play';
+        setPlaying(true);
+        snapshot({ playing: true, videoId: id });
+      })
+      .catch(() => {});
+  };
+
+  htmlAudio.addEventListener('ended', () => skip(1));
+
   const createPlayer = (id, autoplay, start) => {
     if (!window.YT?.Player || !id) return;
     const my = ++gen;
     ready = false;
+    expected = id;
     try { yt.stopVideo(); } catch {}
     try { yt.destroy(); } catch {}
     yt = null;
@@ -190,12 +200,12 @@
         onStateChange: e => {
           if (my !== gen) return;
           if (e.data === 1) {
-            fails = 0;
             pending = 'play';
             resumeAt = 0;
+            hushAudio();
             setPlaying(true);
-            show(order[idx]);
-            snapshot({ playing: true, videoId: order[idx] });
+            show(id);
+            snapshot({ playing: true, videoId: id });
           } else if (e.data === 2 && pending !== 'play') {
             setPlaying(false);
             snapshot({ playing: false });
@@ -203,13 +213,7 @@
         },
         onError: () => {
           if (my !== gen) return;
-          fails += 1;
-          if (fails >= Math.max(order.length, 1)) {
-            pending = null;
-            setPlaying(false);
-            return;
-          }
-          skip(1);
+          if (autoplay || pending === 'play') playFallback();
         }
       }
     });
@@ -218,6 +222,8 @@
   const go = (autoplay, start) => {
     const id = order[idx] || ids[0];
     if (!id) return;
+    expected = id;
+    hushAudio();
     show(id);
     snapshot({ videoId: id, playing: !!autoplay });
     createPlayer(id, autoplay, start || 0);
@@ -228,6 +234,11 @@
     setPlaying(true);
     const id = order[idx];
     show(id);
+    if (htmlAudio.src && htmlAudio.paused) {
+      const play = htmlAudio.play();
+      if (play && play.catch) play.catch(() => {});
+      return;
+    }
     if (ready && yt) {
       try {
         const cur = yt.getVideoData?.()?.video_id;
@@ -249,6 +260,7 @@
     setPlaying(false);
     try { resumeAt = yt?.getCurrentTime?.() || resumeAt; } catch {}
     try { yt?.pauseVideo?.(); } catch {}
+    try { htmlAudio.pause(); } catch {}
     snapshot({ playing: false });
   };
 
@@ -291,11 +303,9 @@
       if (!nextIds.length) return;
       ids = nextIds;
       const current = order[idx];
-      if (!ids.includes(current) || order.length !== ids.length) {
-        order = mix(ids);
-        idx = Math.max(0, order.indexOf(current));
-        if (idx < 0) idx = 0;
-      }
+      order = mix(ids);
+      idx = Math.max(0, order.indexOf(current));
+      if (idx < 0) idx = 0;
       show(order[idx]);
     })
     .catch(() => show(order[idx] || ids[0]));

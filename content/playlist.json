@@ -1,20 +1,41 @@
 {
   "playlist": "PLI_JRzyhoEfc",
   "tracks": {
-    "sWcLccMuCA8": {
+    "2tOutF8B3f8": {
       "artist": "Aphex Twin",
       "title": "Xtal",
-      "cover": "/content/covers/2tOutF8B3f8.jpg"
+      "cover": "/content/covers/2tOutF8B3f8.jpg",
+      "deezer": 123789736
     },
     "VHGqsnsuA3c": {
       "artist": "Frank Ocean",
       "title": "Futura Free",
-      "cover": "/content/covers/VHGqsnsuA3c.jpg"
+      "cover": "/content/covers/VHGqsnsuA3c.jpg",
+      "deezer": 717274002
     },
-    "1FH-q0I1fJY": {
+    "WizNXQGBMEk": {
       "artist": "Grimes",
       "title": "Genesis",
-      "cover": "/content/covers/WizNXQGBMEk.jpg"
+      "cover": "/content/covers/WizNXQGBMEk.jpg",
+      "deezer": 16541038
+    },
+    "QhZnEagfjTQ": {
+      "artist": "Moby",
+      "title": "Porcelain",
+      "cover": "/content/covers/QhZnEagfjTQ.jpg",
+      "deezer": 3786204992
+    },
+    "xMV6l2y67rk": {
+      "artist": "The xx",
+      "title": "Intro",
+      "cover": "/content/covers/xMV6l2y67rk.jpg",
+      "deezer": 3787855
+    },
+    "26setwoKtUI": {
+      "artist": "The Hellp",
+      "title": "SSX",
+      "cover": "/content/covers/26setwoKtUI.jpg",
+      "deezer": 1947756377
     }
   }
 }

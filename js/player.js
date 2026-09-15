@@ -4,7 +4,7 @@
 
   const KEY = 'af-yt';
   const OPEN_KEY = 'af-player-open';
-  const FALLBACK_IDS = ['VHGqsnsuA3c', 'uXpKC8TIAxE', '13EifDb4GYs', 'OQs1Wf3nisg', '9EiLz0z_ins', 'zWeObfh-OKs'];
+  const FALLBACK_IDS = ['VHGqsnsuA3c', 'zWeObfh-OKs', 'QhZnEagfjTQ'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -63,11 +63,7 @@
   const artistEl = player.querySelector('.player-artist');
   const htmlAudio = new Audio();
   htmlAudio.preload = 'auto';
-  const LOCAL_AUDIO = {
-    'uXpKC8TIAxE': '/content/audio/uXpKC8TIAxE.m4a',
-    '13EifDb4GYs': '/content/audio/13EifDb4GYs.m4a',
-    'OQs1Wf3nisg': '/content/audio/OQs1Wf3nisg.m4a'
-  };
+  const LOCAL_AUDIO = {};
   const fileFor = id => tracks[id]?.audio || LOCAL_AUDIO[id] || '';
 
   const saved = load();

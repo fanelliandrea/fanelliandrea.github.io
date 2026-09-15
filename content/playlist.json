@@ -7,38 +7,17 @@
       "cover": "/content/covers/VHGqsnsuA3c.jpg",
       "deezer": 717274002
     },
-    "uXpKC8TIAxE": {
-      "artist": "Aphex Twin",
-      "title": "Xtal",
-      "cover": "/content/covers/uXpKC8TIAxE.jpg",
-      "deezer": 123789736,
-      "audio": "/content/audio/uXpKC8TIAxE.m4a"
-    },
-    "13EifDb4GYs": {
-      "artist": "Moby",
-      "title": "Porcelain",
-      "cover": "/content/covers/13EifDb4GYs.jpg",
-      "deezer": 3786204992,
-      "audio": "/content/audio/13EifDb4GYs.m4a"
-    },
-    "OQs1Wf3nisg": {
-      "artist": "James Blake",
-      "title": "Fall Back",
-      "cover": "/content/covers/OQs1Wf3nisg.jpg",
-      "deezer": 2435115885,
-      "audio": "/content/audio/OQs1Wf3nisg.m4a"
-    },
-    "9EiLz0z_ins": {
-      "artist": "ESPRIT 空想, George Clanton",
-      "title": "Warmpop",
-      "cover": "/content/covers/9EiLz0z_ins.jpg",
-      "deezer": 642845562
-    },
     "zWeObfh-OKs": {
       "artist": "Recondite",
       "title": "Levo",
       "cover": "/content/covers/zWeObfh-OKs.jpg",
       "deezer": 86397579
+    },
+    "QhZnEagfjTQ": {
+      "artist": "Moby",
+      "title": "Porcelain",
+      "cover": "/content/covers/QhZnEagfjTQ.jpg",
+      "deezer": 3786204992
     }
   }
 }

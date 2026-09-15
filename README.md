@@ -30,6 +30,6 @@ ideas/*.html           essays (Taste is the only one so far)
 content/register.json  work + writing
 design/tokens.css      colour and type
 css/site.css           layout
-js/site.js             menu, lists
+js/site.js             bottom menu, lists
 js/space.js            sky, arrival
 ```

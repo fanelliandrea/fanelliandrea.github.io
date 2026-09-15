@@ -284,11 +284,7 @@
       else playNow();
     } else if (act === 'next') skip(1);
     else if (act === 'prev') skip(-1);
-    else if (act === 'toggle') {
-      const open = !player.classList.contains('is-open');
-      if (!open) pauseNow();
-      setOpen(open);
-    }
+    else if (act === 'toggle') setOpen(!player.classList.contains('is-open'));
   });
 
   addEventListener('pagehide', () => snapshot());

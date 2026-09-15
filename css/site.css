@@ -147,7 +147,11 @@ body[data-page="work"][data-slug]:not(.arrived) .dock{opacity:0}
   border-radius:.72rem;
   object-fit:cover;background:rgba(255,255,255,.35);
 }
-.player-meta{display:flex;flex-direction:column;min-width:0;max-width:8.6rem}
+.player-meta{
+  display:flex;flex-direction:column;min-width:0;
+  width:var(--player-meta-w, 7.5rem);
+  flex:0 0 var(--player-meta-w, 7.5rem);
+}
 .player-title,.player-artist{
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.15;
 }
@@ -350,7 +354,6 @@ html.js .stills .still.in{opacity:1;transform:none}
   .player.is-open{gap:.16rem}
   .player-btn{width:2rem;height:2rem}
   .player-cover{width:2rem;height:2rem}
-  .player-meta{max-width:6.2rem}
   .player-title{font-size:11px}
   .player-artist{font-size:10px}
   .gather{

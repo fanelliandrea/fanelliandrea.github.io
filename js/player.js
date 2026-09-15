@@ -96,7 +96,28 @@
     return { artist: '', title: text };
   };
 
-  const paint = meta => {
+  const sizeMeta = () => {
+    const list = Object.values(tracks);
+    if (!list.length) return;
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;left:-9999px;top:0;white-space:nowrap;pointer-events:none';
+    document.body.append(probe);
+    const tStyle = getComputedStyle(titleEl);
+    const aStyle = getComputedStyle(artistEl);
+    let w = 0;
+    for (const t of list) {
+      probe.style.font = tStyle.font;
+      probe.style.letterSpacing = tStyle.letterSpacing;
+      probe.textContent = t.title || '';
+      w = Math.max(w, probe.getBoundingClientRect().width);
+      probe.style.font = aStyle.font;
+      probe.style.letterSpacing = aStyle.letterSpacing;
+      probe.textContent = t.artist || '';
+      w = Math.max(w, probe.getBoundingClientRect().width);
+    }
+    probe.remove();
+    player.style.setProperty('--player-meta-w', `${Math.ceil(w)}px`);
+  };
     if (!meta) return;
     titleEl.textContent = meta.title || '';
     artistEl.textContent = meta.artist || '';

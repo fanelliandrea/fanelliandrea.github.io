@@ -294,13 +294,14 @@
       try {
         const cur = yt.getVideoData?.()?.video_id;
         const st = yt.getPlayerState?.();
-        if (cur === id && st !== 1) {
-          yt.unMute();
-          yt.setVolume(100);
-          yt.playVideo();
+        if (!cur || cur === id) {
+          if (st !== 1) {
+            yt.unMute();
+            yt.setVolume(100);
+            yt.playVideo();
+          }
           return;
         }
-        if (cur === id && st === 1) return;
       } catch {}
     }
     go(true, resumeAt);
@@ -346,12 +347,15 @@
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
   addEventListener('site:page', () => {
     if (pending !== 'play') return;
+    if (htmlAudio.src) {
+      if (htmlAudio.paused) htmlAudio.play().catch(() => {});
+      return;
+    }
     try {
       const st = yt?.getPlayerState?.();
       if (st === 1 || st === 3) return;
+      yt?.playVideo?.();
     } catch {}
-    if (htmlAudio.src && !htmlAudio.paused) return;
-    playNow();
   });
   addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);

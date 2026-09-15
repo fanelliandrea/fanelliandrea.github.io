@@ -31,5 +31,6 @@ content/register.json  work + writing
 design/tokens.css      colour and type
 css/site.css           layout
 js/site.js             bottom menu, lists
+js/player.js           Spotify embed pill
 js/space.js            sky, arrival
 ```

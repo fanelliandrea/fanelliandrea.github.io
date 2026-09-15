@@ -25,6 +25,13 @@
   player.className = 'player sq';
   player.setAttribute('aria-label', 'Music');
   player.innerHTML = `
+    <div class="player-now">
+      <img class="player-cover" alt="" width="72" height="72">
+      <span class="player-meta">
+        <b class="player-title"></b>
+        <span class="player-artist"></span>
+      </span>
+    </div>
     <button class="player-btn" type="button" data-act="prev" aria-label="Previous">${icon.prev}</button>
     <button class="player-btn is-play" type="button" data-act="play" aria-label="Play">${icon.play}</button>
     <button class="player-btn" type="button" data-act="next" aria-label="Next">${icon.next}</button>
@@ -39,11 +46,78 @@
 
   const playBtn = player.querySelector('[data-act="play"]');
   const shuffleBtn = player.querySelector('[data-act="shuffle"]');
+  const coverEl = player.querySelector('.player-cover');
+  const titleEl = player.querySelector('.player-title');
+  const artistEl = player.querySelector('.player-artist');
   const saved = load();
   let yt = null;
+  let tracks = {};
   let shuffleOn = saved.shuffle !== false;
   shuffleBtn.classList.toggle('is-on', shuffleOn);
   shuffleBtn.setAttribute('aria-pressed', String(shuffleOn));
+
+  const parseMeta = raw => {
+    let text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
+    for (const sep of [' - ', ' – ', ' | ']) {
+      if (!text.includes(sep)) continue;
+      const [artist, title] = text.split(sep).map(s => s.trim());
+      if (artist && title) return { artist, title };
+    }
+    return { artist: '', title: text };
+  };
+
+  const paint = meta => {
+    if (!meta) return;
+    titleEl.textContent = meta.title || '';
+    artistEl.textContent = meta.artist || '';
+    if (meta.cover && coverEl.getAttribute('src') !== meta.cover) coverEl.src = meta.cover;
+    coverEl.alt = [meta.artist, meta.title].filter(Boolean).join(' — ');
+    player.setAttribute('aria-label', ['Music', meta.artist, meta.title].filter(Boolean).join(', '));
+  };
+
+  const lookupDeezer = (id, parsed) => {
+    const q = [parsed.artist, parsed.title].filter(Boolean).join(' ');
+    if (!q) return;
+    fetch(`https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=1`)
+      .then(r => r.json())
+      .then(d => {
+        const hit = d.data?.[0];
+        if (!hit) return;
+        const meta = {
+          artist: parsed.artist || hit.artist?.name || '',
+          title: parsed.title || hit.title || '',
+          cover: hit.album?.cover_medium || hit.album?.cover_small || ''
+        };
+        tracks[id] = meta;
+        paint(meta);
+      })
+      .catch(() => {});
+  };
+
+  const show = (id, rawTitle) => {
+    if (!id && !rawTitle) return;
+    if (id && tracks[id]) { paint(tracks[id]); return; }
+    const parsed = parseMeta(rawTitle);
+    const meta = {
+      artist: parsed.artist,
+      title: parsed.title,
+      cover: id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : ''
+    };
+    paint(meta);
+    if (id) lookupDeezer(id, parsed);
+  };
+
+  const current = () => {
+    let id = '', title = '';
+    try {
+      const data = yt?.getVideoData?.() || {};
+      id = data.video_id || '';
+      title = data.title || '';
+    } catch {}
+    if (!id) id = load().videoId || Object.keys(tracks)[0] || '';
+    if (!title && tracks[id]) title = `${tracks[id].artist} - ${tracks[id].title}`;
+    show(id, title);
+  };
 
   const snapshot = extra => {
     if (!yt || typeof yt.getPlayerState !== 'function') return save(extra || {});
@@ -91,6 +165,7 @@
         yt.unMute();
       }
     } catch { try { yt.unMute(); } catch {} }
+    current();
   };
 
   const boot = () => {
@@ -125,6 +200,7 @@
           const paused = e.data === 2;
           if (playing || paused) setPlaying(playing);
           if (playing || paused || e.data === 0) snapshot({ playing });
+          current();
         },
         onError: () => { try { yt.nextVideo(); } catch {} }
       }
@@ -160,6 +236,15 @@
   addEventListener('pagehide', () => snapshot());
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
   setInterval(() => { if (yt?.getPlayerState?.() === 1) snapshot(); }, 2000);
+
+  fetch('/content/playlist.json')
+    .then(r => r.json())
+    .then(d => {
+      tracks = d.tracks || {};
+      const id = load().videoId || Object.keys(tracks)[0];
+      if (id && tracks[id]) paint(tracks[id]);
+    })
+    .catch(() => {});
 
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';

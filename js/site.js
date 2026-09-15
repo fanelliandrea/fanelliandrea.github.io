@@ -41,17 +41,17 @@
     ideas: page === 'ideas',
     info: page === 'info',
   };
-  if (!$('.menu')) {
-    const menu = document.createElement('nav');
-    menu.className = 'menu';
-    menu.setAttribute('aria-label', 'Primary');
-    menu.innerHTML = `
+  if (!$('.dock')) {
+    const dock = document.createElement('nav');
+    dock.className = 'dock sq';
+    dock.setAttribute('aria-label', 'Primary');
+    dock.innerHTML = `
       <a href="/"${here.home ? ' aria-current="page"' : ''}>Home</a>
       <a href="/work.html"${here.work ? ' aria-current="page"' : ''}>Work</a>
       <a href="/ideas.html"${here.ideas ? ' aria-current="page"' : ''}>Ideas</a>
       <a href="/info.html"${here.info ? ' aria-current="page"' : ''}>Info</a>
       <a href="mailto:fanelliandrea@outlook.com">Contact</a>`;
-    document.body.prepend(menu);
+    document.body.appendChild(dock);
   }
 
   const stills = $('#stills');

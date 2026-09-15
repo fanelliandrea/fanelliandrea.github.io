@@ -1,6 +1,6 @@
 # fanelliandrea.com
 
-Personal site of Andrea Fanelli. Static pages in a daylight sky. Home is quiet: the sky and a menu. Work, Ideas, and Info are ordinary pages.
+Personal site of Andrea Fanelli. Static pages in a daylight sky. Home is quiet: the sky and the original bottom menu. Work, Ideas, and Info are ordinary pages with the same nav.
 
 Palette lives in `design/tokens.css` — `#6eafd8`, field `#eaf4fb → #3d86be`, ink `#1a222c`. Not a coral/orange film look.
 
@@ -21,7 +21,7 @@ macOS may block servers from reading `~/Desktop`. Move the folder or grant Termi
 ## Layout
 
 ```
-index.html             home — sky + menu only
+index.html             home — sky + bottom menu only
 work.html              selected work grid
 ideas.html             writing
 info.html              bio

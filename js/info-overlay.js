@@ -57,25 +57,26 @@
       .replace(/"/g, "&quot;");
   }
 
-  function contactKind(c) {
+  function contactId(c) {
     const blob = `${c.id || ""} ${c.label || ""} ${c.href || ""}`.toLowerCase();
+    if (blob.includes("linkedin")) return "linkedin";
     if (blob.includes("mailto:") || blob.includes("email")) return "email";
     if (blob.includes("instagram")) return "instagram";
     if (blob.includes("are.na") || blob.includes("arena")) return "arena";
     return "link";
   }
 
-  function contactIcon(kind) {
-    if (kind === "email") {
-      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 7.5h16v9H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 8.2 12 13l7-4.8"/></svg>`;
+  function contactIcon(id) {
+    if (id === "email") {
+      return `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 7.5h16v9H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 8.2 12 13l7-4.8"/></svg>`;
     }
-    if (kind === "instagram") {
-      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.6" cy="7.4" r="0.9" fill="currentColor"/></svg>`;
+    if (id === "instagram") {
+      return `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.6" cy="7.4" r="0.9" fill="currentColor"/></svg>`;
     }
-    if (kind === "arena") {
-      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="9" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
+    if (id === "arena") {
+      return `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="9" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
     }
-    return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M7 17 17 7M9 7h8v8"/></svg>`;
+    return `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M7 17 17 7M9 7h8v8"/></svg>`;
   }
 
   function orbHtml(orb) {
@@ -95,18 +96,18 @@
 
   function footerHtml(contacts) {
     const items = (contacts || []).filter((c) => {
-      const k = contactKind(c);
-      return k === "email" || k === "instagram" || k === "arena";
+      const id = contactId(c);
+      return id !== "linkedin" && (id === "email" || id === "instagram" || id === "arena");
     });
     if (!items.length) return "";
     return `<nav class="info-frost__footer" aria-label="Contacts">
       ${items
         .map((c) => {
-          const kind = contactKind(c);
-          const label = escapeHtml(c.label || kind);
+          const id = contactId(c);
+          const label = escapeHtml(c.label || id);
           const href = escapeHtml(c.href || "#");
           const external = href.startsWith("http");
-          return `<a class="info-frost__footer-link" href="${href}" aria-label="${label}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${contactIcon(kind)}</a>`;
+          return `<a class="info-frost__footer-link" href="${href}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${contactIcon(id)}<span>${label}</span></a>`;
         })
         .join("")}
     </nav>`;
@@ -148,14 +149,18 @@
           )
           .join("")}
       </div>
+    `;
+
+    const lastInner = `
       ${d.tagline ? `<p class="info-frost__tagline">${escapeHtml(d.tagline)}</p>` : ""}
+      ${footerHtml(contacts)}
     `;
 
     body.innerHTML = [
       card("info", about, "info-frost__card--about"),
       card("philosophy", philosophy),
-      card("skills", skillsInner, "info-frost__card--last"),
-      footerHtml(contacts),
+      card("skills", skillsInner),
+      card("contacts", lastInner, "info-frost__card--last"),
     ].join("");
   }
 

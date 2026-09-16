@@ -885,6 +885,7 @@ body.is-info-open .ideas-pl {
 .info-frost.is-open .info-frost__card:nth-child(1) { animation-delay: 0.04s; }
 .info-frost.is-open .info-frost__card:nth-child(2) { animation-delay: 0.1s; }
 .info-frost.is-open .info-frost__card:nth-child(3) { animation-delay: 0.16s; }
+.info-frost.is-open .info-frost__card:nth-child(4) { animation-delay: 0.22s; }
 
 @keyframes info-card-in {
   from {
@@ -928,6 +929,10 @@ body.is-info-open .ideas-pl {
   color: rgba(255, 255, 255, 0.92);
 }
 
+.info-frost__card--last .info-frost__tagline {
+  margin-top: 0;
+}
+
 .info-frost__point:first-child {
   margin-top: 0;
 }
@@ -945,10 +950,10 @@ body.is-info-open .ideas-pl {
 }
 
 .info-frost__orb {
-  --orb: 6.35rem;
+  --orb: 7rem;
   position: relative;
   width: var(--orb);
-  height: calc(var(--orb) + 0.85rem);
+  height: calc(var(--orb) + 0.95rem);
   margin: 0 auto 1.15rem;
   flex: 0 0 auto;
 }
@@ -1066,41 +1071,36 @@ body.is-info-open .ideas-pl {
 
 .info-frost__footer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.15rem 0 0.4rem;
-  opacity: 0;
-  transform: translateY(0.7rem);
-}
-
-.info-frost.is-open .info-frost__footer {
-  animation: info-card-in 0.6s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) 0.22s both;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  padding-top: 1.05rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .info-frost__footer-link {
-  width: 2.85rem;
-  height: 2.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.42rem 0.85rem 0.42rem 0.62rem;
   border-radius: 999px;
-  display: grid;
-  place-items: center;
   color: #f7f8fa;
-  background: rgba(92, 98, 106, 0.72);
-  -webkit-backdrop-filter: blur(28px) saturate(1.1);
-  backdrop-filter: blur(28px) saturate(1.1);
-  box-shadow:
-    0 -1px 0 rgba(255, 255, 255, 0.16) inset,
-    0 14px 28px -18px rgba(20, 36, 56, 0.5);
-  transition: transform 0.35s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)), background 0.35s;
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  transition: background 0.3s, transform 0.3s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 .info-frost__footer-link:hover {
-  background: rgba(110, 116, 124, 0.82);
-  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
 }
 
 .info-frost__footer-link svg {
   display: block;
+  flex: 0 0 auto;
 }
 
 body[data-page="info"] main.info-shell {

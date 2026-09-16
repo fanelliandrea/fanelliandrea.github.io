@@ -23,14 +23,14 @@
 
   const pose = (i, n, mobile) => {
     const gold = Math.PI * (3 - Math.sqrt(5));
-    const a = i * gold + (unit(i, 1) - 0.5) * 0.85;
-    const r = Math.sqrt((i + 0.55) / n);
+    const a = i * gold;
+    const r = 0.38 + 0.62 * Math.sqrt((i + 0.5) / n);
     return {
       ux: Math.cos(a) * r,
       uy: Math.sin(a) * r,
-      z: -10 - unit(i, 4) * 200 - i * 680,
-      rx: (unit(i, 5) - 0.5) * 8,
-      ry: (unit(i, 6) - 0.5) * 14,
+      z: -10 - i * 680,
+      rx: Math.cos(a) * 5,
+      ry: Math.sin(a) * 11,
       portrait: unit(i, 7) > 0.4,
     };
   };

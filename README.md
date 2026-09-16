@@ -24,7 +24,7 @@ macOS may block servers from reading `~/Desktop`. Move the folder or grant Termi
 index.html             home — sky + bottom menu only
 work.html              selected work as Effect 064 3D cloud (scroll on Z)
 ideas.html             daylight playlist of writing stills (title + Read)
-info.html              bio
+info.html              OEM frost overlay (Ciao + portraits from About)
 work/*.html            project pages from content/projects.json
 ideas/*.html           essays (Taste is the only one so far)
 content/register.json  work + writing
@@ -35,4 +35,5 @@ js/player.js           YouTube audio pill
 js/space.js            sky, arrival
 js/effect064.js        Work 3D cloud + Z fly-through
 js/ideas-playlist.js   Ideas daylight photo playlist (airy12 dark-blue titles)
+js/info-overlay.js     Info dock intercept + frost sheet over the current page
 ```

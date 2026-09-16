@@ -161,7 +161,7 @@
     });
   };
 
-  const keep = src => /\/js\/(site|space|player)\.js$/.test(src);
+  const keep = src => /\/js\/(site|space|player|info-overlay)\.js/.test(src);
 
   const loadScripts = doc => {
     const wait = [];

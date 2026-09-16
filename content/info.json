@@ -1,0 +1,82 @@
+{
+  "label": "info",
+  "name": "Andrea Fanelli",
+  "greeting": "Ciao, my name is Andrea",
+  "intro": "I grew up in Rome, surrounded by beauty: becoming a designer felt inevitable. I'm an optimistic human being with a background in product and strategic design. I believe that with curiosity, intuition and imagination can take you anywhere, that's how I discover most of my ideas. I design meaningful experiences at the edges of perception, color, light and space. Through my work, I connect the past with the future, creating timeless works with a contemporary voice.",
+  "tagline": "I believe great design is about creating a feeling. A powerful tool for communicating and shaping ideas. Not just a way to create objects but relationships that connect things, environments and people.",
+  "basedIn": "Based in Italy",
+  "philosophy": {
+    "title": "Philosophy",
+    "points": [
+      "I rely on authenticity, intuition and transparency to shape my ideas.",
+      "I create objects that carry emotions and design experiences that engage all the senses.",
+      "I embrace a multidisciplinary approach to connect the dots and move beyond categories. Having an idea and expressing it through any medium is key. Each medium offers a unique perspective, which allows me to approach problems from different angles.",
+      "I believe that taste is the one fundamental skill for the future and the process is what gives value to the product.",
+      "Story is the strategy. Every moment is an opportunity to create a connection and tell a story."
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "groups": [
+      {
+        "label": "Forming",
+        "items": [
+          "Creative Direction",
+          "Strategic & Service Design",
+          "Business Model Innovation",
+          "Research",
+          "User Insights",
+          "Concept Development"
+        ]
+      },
+      {
+        "label": "Making",
+        "items": [
+          "Product Design",
+          "Digital Interfaces",
+          "Experience Mapping",
+          "Prototyping",
+          "Visual Storytelling",
+          "Photography"
+        ]
+      }
+    ]
+  },
+  "contacts": {
+    "title": "Contacts",
+    "items": [
+      {
+        "label": "Email",
+        "href": "mailto:fanelliandrea@outlook.com",
+        "value": "fanelliandrea@outlook.com"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/fanelli-andrea/",
+        "value": "fanelli-andrea"
+      },
+      {
+        "label": "Instagram",
+        "href": "https://www.instagram.com/fanelliandrea_/",
+        "value": "@fanelliandrea_"
+      },
+      {
+        "label": "Are.na",
+        "href": "https://www.are.na/andrea-fanelli",
+        "value": "andrea-fanelli"
+      }
+    ]
+  },
+  "photos": [
+    {
+      "src": "/content/info/portrait-01.jpg",
+      "remote": "https://framerusercontent.com/images/9PLzL2rTG7rK8HjGjkT5DKSXPE.jpg?scale-down-to=1024",
+      "alt": "Andrea Fanelli, portrait against classical stone architecture in Rome"
+    },
+    {
+      "src": "/content/info/portrait-02.jpg",
+      "remote": "https://framerusercontent.com/images/rmn24TMZGhE8IWs9gptsFz6qc.jpg?scale-down-to=1024",
+      "alt": "Andrea Fanelli, close portrait in sunlight"
+    }
+  ]
+}

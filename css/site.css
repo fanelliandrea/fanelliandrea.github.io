@@ -751,10 +751,18 @@ body.is-info-open .gather {
   user-select: none;
 }
 
+body.is-info-open [data-effect-064],
+body.is-info-open .ideas-pl {
+  isolation: isolate;
+  z-index: 0;
+  transform-style: flat;
+}
+
 .info-frost {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 200;
+  transform: translateZ(0);
   display: grid;
   place-items: start center;
   padding: 4.5rem 1rem 0;
@@ -784,7 +792,7 @@ body.is-info-open .gather {
   position: fixed;
   top: 1.1rem;
   right: 1.1rem;
-  z-index: 62;
+  z-index: 202;
   width: 2.35rem;
   height: 2.35rem;
   border-radius: 999px;
@@ -812,7 +820,7 @@ body.is-info-open .gather {
   top: 1.25rem;
   left: 50%;
   translate: -50% 0;
-  z-index: 62;
+  z-index: 202;
   font-family: var(--sans, "Outfit", "Helvetica Neue", Arial, sans-serif);
   font-size: 0.72rem;
   font-weight: 500;
@@ -833,7 +841,7 @@ body.is-info-open .gather {
 
 .info-frost__sheet {
   position: relative;
-  z-index: 61;
+  z-index: 201;
   width: min(34rem, 100%);
   max-height: calc(100svh - 4.5rem);
   overflow: auto;

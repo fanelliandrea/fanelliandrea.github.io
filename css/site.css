@@ -317,7 +317,7 @@ body[data-page="ideas"][data-slug] .sky{
   visibility:visible;
 }
 
-/* —— Effect 114: cover flow on daylight sky, Work-style 4:3 cards —— */
+/* —— Effect 114: pastel portrait notes on daylight sky —— */
 .ideas-114{
   position:relative;
   z-index:2;
@@ -348,62 +348,63 @@ body[data-page="ideas"][data-slug] .sky{
   left:50%;
   top:50%;
   display:block;
-  width:min(34vw,340px);
-  aspect-ratio:4 / 3;
+  width:min(24vw,250px);
+  aspect-ratio:3 / 4;
   height:auto;
   overflow:hidden;
   border-radius:var(--r-card);
-  background:#111;
+  background:var(--card-tone,#f3e6d8);
   box-shadow:
-    0 18px 50px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.06);
+    0 18px 50px rgba(28,72,118,.22),
+    0 0 0 1px rgba(255,255,255,.55);
   transform-style:preserve-3d;
   backface-visibility:hidden;
   will-change:transform,opacity;
   opacity:0;
+  color:var(--ink);
 }
-.ideas-114__shot{display:block;width:100%;height:100%;overflow:hidden}
-.ideas-114__card img{
-  width:100%;height:100%;object-fit:cover;
-  transform:scale(1.02);
-  transition:transform .7s var(--ease);
-  pointer-events:none;user-select:none;
+.ideas-114__body{
+  display:flex;flex-direction:column;justify-content:space-between;gap:.85rem;
+  box-sizing:border-box;width:100%;height:100%;
+  padding:1.15rem 1.05rem 1.2rem;
 }
-.ideas-114__card.is-active img{transform:scale(1.01)}
-.ideas-114__meta{
-  position:absolute;left:.7rem;bottom:.7rem;
-  display:inline-flex;align-items:center;gap:.45rem;
-  padding:.35rem .65rem;border-radius:999px;
-  background:rgba(8,10,12,.48);
-  border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:rgba(255,255,255,.92);
-  font-size:.72rem;font-weight:500;letter-spacing:.02em;
-  opacity:0;transform:translateY(6px);
-  transition:opacity .45s var(--ease),transform .45s var(--ease);
-  pointer-events:none;
+.ideas-114__kicker{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.68rem;font-weight:500;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--mute);
 }
-.ideas-114__card.is-active .ideas-114__meta{opacity:1;transform:translateY(0)}
-.ideas-114__meta em{font-style:normal;opacity:.55;font-variant-numeric:tabular-nums}
+.ideas-114__kicker em{font-style:normal;opacity:.65;font-variant-numeric:tabular-nums}
+.ideas-114__heading{
+  display:block;margin-top:auto;
+  font-size:clamp(1.05rem,2.1vw,1.35rem);
+  font-weight:500;letter-spacing:-.035em;line-height:1.2;
+  color:var(--ink);
+}
+.ideas-114__blurb{
+  display:block;margin-top:.55rem;
+  font-size:.84rem;line-height:1.4;color:var(--mute);max-width:18em;
+}
 .ideas-114__nav{
   position:absolute;z-index:8;left:50%;bottom:max(8.6rem,16vh);
   transform:translateX(-50%);
-  display:flex;align-items:center;gap:.55rem;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
   pointer-events:auto;
 }
 .ideas-114__arrow{
-  width:2.55rem;height:2.55rem;border-radius:999px;
-  display:grid;place-items:center;
+  width:2.55rem;height:2.55rem;padding:0;border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center;
   background:var(--glass);
   border:1px solid var(--glass-edge);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   box-shadow:var(--depth);
   color:var(--ink);
-  font-size:1.55rem;line-height:1;
+  line-height:0;
   cursor:pointer;
   transition:opacity var(--dur) var(--ease),background var(--dur) var(--ease),transform .2s var(--ease);
 }
-.ideas-114__arrow span{display:block;margin-top:-.08em}
+.ideas-114__arrow svg{display:block;flex-shrink:0}
+.ideas-114__arrow[data-ideas-prev] svg{transform:translateX(-.5px)}
+.ideas-114__arrow[data-ideas-next] svg{transform:translateX(.5px)}
 .ideas-114__arrow:hover{background:rgba(255,255,255,.72)}
 .ideas-114__arrow:active{transform:scale(.94)}
 .ideas-114__arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
@@ -436,7 +437,7 @@ body[data-page="ideas"][data-slug] .sky{
   position:relative;left:auto;top:auto;width:100%;
   opacity:1!important;transform:none!important;
 }
-.ideas-114.is-reduced .ideas-114__meta{opacity:1;transform:none}
+.ideas-114.is-reduced .ideas-114__heading{opacity:1}
 .ideas-114.is-reduced .ideas-114__caption{
   position:relative;left:auto;top:auto;bottom:auto;transform:none;
   opacity:1!important;margin:1.5rem 0 0;align-items:flex-start;text-align:left;
@@ -565,7 +566,7 @@ body[data-page="ideas"][data-slug] .sky{
   .fx064-card{width:min(70vw,22rem)}
   .fx064-card.is-portrait{width:min(56vw,18rem)}
   .fx064-hint{bottom:6.2rem}
-  .ideas-114__card{width:min(58vw,260px)}
+  .ideas-114__card{width:min(42vw,190px)}
   .ideas-114__nav{bottom:6.8rem}
   .ideas-114__caption{bottom:4.4rem}
   .ideas-114__arrow{width:2.35rem;height:2.35rem}

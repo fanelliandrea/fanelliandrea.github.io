@@ -1,10 +1,42 @@
-/* GSAP Effect 114 — dense edge-to-edge cover flow (Ideas). */
+/* GSAP Effect 114 — pastel note cards, vertical 4:3 cover flow. */
 (() => {
   const ANGLE = 58;
   const DEPTH = 72;
   const SIDE = 4;
   const PERSPECTIVE = 900;
   const EASE = "power3.out";
+
+  /** Soft pastels — one per card, cycles */
+  const PASTELS = [
+    "#f3e6d8",
+    "#e8d5e0",
+    "#d9e6f0",
+    "#e2edd9",
+    "#f0e4d0",
+    "#dde8ef",
+    "#efe0e6",
+    "#e5ebe3",
+    "#ebe4f2",
+    "#f2ebe0",
+    "#dfe9e6",
+    "#eee6dc",
+  ];
+
+  /** Short editorial lines when register has no blurb */
+  const BLURBS = {
+    "the-golden-age-of-audio": "Listening as a craft again.",
+    "fashion-tech": "Where fabric meets interface.",
+    "the-process-is-the-product": "The making is the meaning.",
+    "taste-is-the-only-skill-to-learn": "Judgment over tooling.",
+    "urban-undergrounds": "Cities below the street line.",
+    "great-design-language": "Words before pixels.",
+    "apps-are-evolving-into-experiences": "Beyond the icon grid.",
+    "a-future-with-invisible-technology": "Presence without chrome.",
+    "how-to-design-better-cities": "Form that serves daily life.",
+    "product-as-a-service": "Use over ownership.",
+    "movie-her-design-fiction": "Fiction as a design lab.",
+    "turn-left": "Constraints that reshape the map.",
+  };
 
   let raf = null;
   let progress = 0;
@@ -21,12 +53,6 @@
   let navHandler = null;
   let booting = false;
   let spacing = 0;
-
-  const thumb = (u, w = 1200) => {
-    if (!u) return "";
-    if (/\.gif$/i.test(u)) return u;
-    return `${u}${u.includes("?") ? "&" : "?"}scale-down-to=${w}`;
-  };
 
   const pad = (n) => String(n).padStart(2, "0");
 
@@ -49,6 +75,13 @@
     return `${d}.${m}.${y.slice(2)}`;
   };
 
+  function blurbFor(item) {
+    if (item.blurb) return item.blurb;
+    if (item.excerpt) return item.excerpt;
+    if (BLURBS[item.slug]) return BLURBS[item.slug];
+    return "A note from the practice.";
+  }
+
   async function loadIdeas() {
     if (window.Site?.data) {
       const entries = await window.Site.data;
@@ -62,7 +95,7 @@
 
   function pickIdeas(entries) {
     const writing = entries.filter(
-      (e) => e.onSite !== false && e.kind === "writing" && e.media?.[0]
+      (e) => e.onSite !== false && e.kind === "writing"
     );
     const featured = writing
       .filter((e) => e.homeIdea)
@@ -80,10 +113,11 @@
   function renderCards(host, items) {
     host.innerHTML = "";
     return items.map((item, i) => {
-      const img = item.media?.[0] || "";
       const tag = item.href ? "a" : "article";
       const el = document.createElement(tag);
+      const tone = PASTELS[i % PASTELS.length];
       el.className = "ideas-114__card";
+      el.style.setProperty("--card-tone", tone);
       if (item.href) el.href = item.href;
       el.dataset.index = String(i);
       el.setAttribute(
@@ -96,14 +130,13 @@
           ? String(item.year)
           : item.client || "Notes";
       el.innerHTML = `
-        <span class="ideas-114__shot">
-          <img src="${esc(thumb(img))}" alt="${esc(item.title)}" loading="${
-            i < 6 ? "eager" : "lazy"
-          }" draggable="false" />
+        <span class="ideas-114__body">
+          <span class="ideas-114__kicker"><em>${esc(pad(i + 1))}</em> ${esc(
+            meta
+          )}</span>
+          <span class="ideas-114__heading">${esc(item.title)}</span>
+          <span class="ideas-114__blurb">${esc(blurbFor(item))}</span>
         </span>
-        <span class="ideas-114__meta"><em>${esc(pad(i + 1))}</em> ${esc(
-          meta
-        )}</span>
       `;
       host.appendChild(el);
       el._item = item;
@@ -183,11 +216,7 @@
 
   function step(dir) {
     if (!cards.length) return;
-    target = gsap.utils.clamp(
-      0,
-      cards.length - 1,
-      Math.round(target) + dir
-    );
+    target = gsap.utils.clamp(0, cards.length - 1, Math.round(target) + dir);
     syncNav();
     requestTick();
   }
@@ -269,7 +298,7 @@
   function initReduced(items) {
     root.classList.add("is-reduced");
     cards.forEach((card) => {
-      gsap.set(card, { clearProps: "all", opacity: 1 });
+      gsap.set(card, { clearProps: "transform,opacity,visibility", opacity: 1 });
       card.classList.add("is-active");
       card.tabIndex = 0;
     });

@@ -23,7 +23,7 @@ macOS may block servers from reading `~/Desktop`. Move the folder or grant Termi
 ```
 index.html             home — sky + bottom menu only
 work.html              selected work as Effect 064 3D cloud (scroll on Z)
-ideas.html             writing as Effect 114 cover-flow (4:3 on sky, glass ‹ ›)
+ideas.html             writing as Effect 114 (pastel 3:4 notes, glass ‹ ›)
 info.html              bio
 work/*.html            project pages from content/projects.json
 ideas/*.html           essays (Taste is the only one so far)

@@ -23,7 +23,7 @@ macOS may block servers from reading `~/Desktop`. Move the folder or grant Termi
 ```
 index.html             home — sky + bottom menu only
 work.html              selected work as Effect 064 3D cloud (scroll on Z)
-ideas.html             writing as a Her-style scattered notes board
+ideas.html             writing as a sunset playlist fan (Open idea / Soon)
 info.html              bio
 work/*.html            project pages from content/projects.json
 ideas/*.html           essays (Taste is the only one so far)
@@ -34,5 +34,5 @@ js/site.js             bottom menu, lists, in-page navigation (player stays moun
 js/player.js           YouTube audio pill
 js/space.js            sky, arrival
 js/effect064.js        Work 3D cloud + Z fly-through
-js/ideas-board.js      Ideas Her-style scattered notes (Caveat, drag)
+js/ideas-playlist.js   Ideas sunset playlist fan (mouse / drag / wheel / arrows)
 ```

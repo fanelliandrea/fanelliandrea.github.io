@@ -378,29 +378,40 @@ body[data-page="ideas"][data-slug]{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Soft frame, photo fill — no white stroke rim */
+/* Daybreak playlist chrome: 4px frosted lip, photo in the well, no white stroke */
 .ideas-pl__frame {
   display: block;
   position: relative;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 4px;
   overflow: hidden;
-  border-radius: 0.85rem;
-  background: var(--tone, #f7efe6);
+  border-radius: 1.25rem;
+  background: hsla(0, 0%, 100%, 0.4);
+  border: 1px solid hsla(204, 55%, 72%, 0.16);
   box-shadow:
-    0 14px 36px rgba(28, 72, 118, 0.14),
-    0 3px 10px rgba(28, 72, 118, 0.07);
+    0 10px 15px -3px hsla(204, 45%, 38%, 0.12),
+    0 4px 6px -4px hsla(204, 45%, 38%, 0.1);
   transition:
     box-shadow 0.4s var(--ease),
-    filter 0.4s var(--ease);
+    border-color 0.4s var(--ease);
+}
+
+.ideas-pl__well {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(1.25rem - 4px);
+  background: var(--tone, #d7e0ea);
 }
 
 .ideas-pl__card.is-active .ideas-pl__frame {
+  border-color: hsla(204, 55%, 72%, 0.28);
   box-shadow:
-    0 18px 42px rgba(28, 72, 118, 0.18),
-    0 4px 12px rgba(28, 72, 118, 0.1);
-  filter: brightness(1.02);
+    0 8px 12px -3px hsla(204, 45%, 38%, 0.1),
+    0 2px 4px -2px hsla(204, 45%, 38%, 0.08);
 }
 
 .ideas-pl__shot {
@@ -409,7 +420,6 @@ body[data-page="ideas"][data-slug]{
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.02);
   pointer-events: none;
   user-select: none;
 }
@@ -643,7 +653,11 @@ body[data-page="ideas"][data-slug]{
   }
 
   .ideas-pl__frame {
-    border-radius: 0.95rem;
+    border-radius: 1.15rem;
+  }
+
+  .ideas-pl__well {
+    border-radius: calc(1.15rem - 4px);
   }
 }
 
@@ -756,6 +770,7 @@ body.is-info-open .player {
   z-index: 1;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.25s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 body.is-info-open [data-effect-064],

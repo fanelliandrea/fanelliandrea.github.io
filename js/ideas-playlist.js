@@ -235,12 +235,14 @@
       el.dataset.index = String(i);
       const src = item.media?.[0] ? thumb(item.media[0], 900) : "";
       el.innerHTML = `
-        <span class="ideas-pl__frame sq">
+        <span class="ideas-pl__frame">
+          <span class="ideas-pl__well">
           ${
             src
               ? `<img class="ideas-pl__shot" src="${esc(src)}" alt="" loading="lazy" decoding="async" draggable="false" />`
               : `<span class="ideas-pl__fallback">${esc(item.title)}</span>`
           }
+          </span>
         </span>`;
       el.addEventListener("click", (e) => {
         if (moved) {

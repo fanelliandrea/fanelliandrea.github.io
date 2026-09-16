@@ -452,8 +452,9 @@ body[data-page="ideas"][data-slug]{
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.15;
-  color: var(--ink);
+  color: #ffffff;
   max-width: 18ch;
+  text-shadow: 0 1px 18px rgba(28, 72, 118, 0.28);
 }
 
 .ideas-pl__cta {

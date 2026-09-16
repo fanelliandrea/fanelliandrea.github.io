@@ -1,6 +1,6 @@
 /* Ideas playlist — photo cards in a Daybreak-soft arc on daylight sky. */
 (() => {
-  const STEP = 13; /* degrees between cards */
+  const STEP = 17; /* degrees — keep gaps with broad cards */
   const PASTELS = [
     "#f6d5c4",
     "#f0c8d4",
@@ -50,6 +50,7 @@
   let dragStartTarget = 0;
   let moved = false;
   let navLockUntil = 0;
+  let scrubResumeX = null;
 
   const esc = (s) =>
     String(s ?? "").replace(
@@ -132,13 +133,13 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    cardW = clamp(Math.round(w * 0.155), 150, 240);
-    const cardH = cardW * (4 / 3);
-    /* Bigger wheel, still keep card tops inside the viewport */
-    const orbitTop = h * 0.74;
+    /* Broad frames like the poetry-arc photo (~4:5, ~26–30vw) */
+    cardW = clamp(Math.round(w * 0.28), 240, 400);
+    const cardH = cardW * (5 / 4);
+    const orbitTop = h * 0.82;
     const topPad = clamp(h * 0.04, 18, 40);
     const maxR = Math.max(220, orbitTop - cardH - topPad);
-    radius = clamp(Math.round(Math.min(w * 0.52, h * 0.52, maxR)), 240, 560);
+    radius = clamp(Math.round(Math.min(w * 0.55, h * 0.52, maxR)), 240, 640);
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
     });
@@ -190,8 +191,8 @@
     const x = Math.sin(rad) * radius;
     const y = -Math.cos(rad) * radius;
     const abs = Math.abs(dist);
-    const fadeStart = Math.max(2.4, count() * 0.28);
-    const fadeEnd = fadeStart + 1.4;
+    const fadeStart = Math.max(3.2, count() * 0.38);
+    const fadeEnd = fadeStart + 1.6;
     const alpha =
       abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.4;
     const scale = 1 - Math.min(0.14, abs * 0.028);
@@ -294,8 +295,14 @@
       requestTick();
       return;
     }
+    /* After arrow/keyboard steps, ignore mouse-X scrub until the pointer
+       travels far enough — otherwise the cursor position snaps the wheel back. */
     if (Date.now() < navLockUntil) return;
     if (e.target.closest?.("[data-ideas-nav], .ideas-pl__cta, a")) return;
+    if (scrubResumeX != null) {
+      if (Math.abs(e.clientX - scrubResumeX) < window.innerWidth * 0.07) return;
+      scrubResumeX = null;
+    }
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     setFromClientX(e.clientX);
     requestTick();
@@ -308,6 +315,7 @@
     moved = false;
     dragStartX = e.clientX;
     dragStartTarget = target;
+    scrubResumeX = null;
     root.classList.add("is-dragging");
   }
 
@@ -318,13 +326,17 @@
     requestTick();
   }
 
-  function lockNav(ms = 520) {
+  function lockNav(ms = 900, clientX) {
     navLockUntil = Date.now() + ms;
+    scrubResumeX =
+      typeof clientX === "number" && Number.isFinite(clientX)
+        ? clientX
+        : window.innerWidth * 0.5;
   }
 
-  function step(dir) {
+  function step(dir, clientX) {
     if (!cards.length) return;
-    lockNav();
+    lockNav(1100, clientX);
     target = Math.round(target) + dir;
     updateFocus(modIndex(target));
     requestTick();
@@ -340,7 +352,7 @@
     e.preventDefault();
     const dir = Math.sign(e.deltaY || e.deltaX);
     if (!dir) return;
-    step(dir);
+    step(dir, e.clientX);
   }
 
   function onKey(e) {
@@ -358,10 +370,12 @@
     const next = e.target.closest("[data-ideas-next]");
     if (prev) {
       e.preventDefault();
-      step(-1);
+      e.stopPropagation();
+      step(-1, e.clientX);
     } else if (next) {
       e.preventDefault();
-      step(1);
+      e.stopPropagation();
+      step(1, e.clientX);
     }
   }
 

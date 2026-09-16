@@ -299,6 +299,155 @@ html.js .stills .still.in{opacity:1;transform:none}
 .fx064.fx064-flat .fx064-track{height:auto}
 .fx064.fx064-flat .fx064-stage{position:relative;height:auto;overflow:visible;perspective:none}
 .fx064.fx064-flat .fx064-world{position:relative;inset:auto;display:contents}
+
+/* Ideas page — Effect 114 void stage (does not restyle Work 064) */
+body[data-page="ideas"]:not([data-slug]){
+  background:var(--void);color:#fff;
+  height:100svh;overflow:hidden;overscroll-behavior:none;
+}
+body:has([data-effect-114]){background:var(--void);color:#fff}
+body:has([data-effect-114]) .sky{opacity:0;visibility:hidden}
+body:has([data-effect-114]) :focus-visible{outline-color:rgba(255,255,255,.85)}
+body[data-page="ideas"][data-slug]{background:transparent;color:var(--ink);height:auto;overflow:visible}
+body[data-page="ideas"][data-slug] .sky{opacity:1;visibility:visible}
+
+.hint{
+  position:fixed;left:50%;bottom:5.6rem;translate:-50% 0;z-index:6;
+  display:flex;align-items:center;gap:.45rem;
+  margin:0;padding:.42rem .9rem;border-radius:999px;
+  background:rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.82);
+  pointer-events:none;opacity:0;
+}
+.hint__arrow{
+  display:block;width:.5rem;height:.5rem;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+}
+.hint__arrow--x{
+  transform:rotate(-45deg);
+  animation:hint-slide 1.6s var(--ease) infinite;
+}
+@keyframes hint-slide{
+  0%,100%{transform:translateX(-3px) rotate(-45deg)}
+  50%{transform:translateX(4px) rotate(-45deg)}
+}
+
+/* —— Effect 114: mouse-move cover flow —— */
+.ideas-114{
+  position:relative;
+  min-height:100svh;
+  background:var(--void);
+  color:#fff;
+  overflow:hidden;
+}
+.ideas-114__stage{
+  position:relative;
+  height:100svh;
+  width:100%;
+  overflow:hidden;
+  perspective:900px;
+  perspective-origin:50% 50%;
+  background:#000;
+  cursor:ew-resize;
+  touch-action:pan-y;
+}
+.ideas-114__rail{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.ideas-114__card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  display:block;
+  width:min(17.5vw,230px);
+  height:min(58vh,480px);
+  overflow:hidden;
+  border-radius:2px;
+  background:#0a0a0a;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  will-change:transform,opacity;
+  opacity:0;
+}
+.ideas-114__shot{display:block;width:100%;height:100%;overflow:hidden}
+.ideas-114__card img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.03);
+  transition:transform .7s var(--ease);
+  pointer-events:none;user-select:none;
+}
+.ideas-114__card.is-active img{transform:scale(1.01)}
+.ideas-114__meta{
+  position:absolute;left:.65rem;bottom:.65rem;
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.32rem .58rem;border-radius:999px;
+  background:rgba(8,10,12,.5);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:rgba(255,255,255,.9);
+  font-size:.68rem;font-weight:500;letter-spacing:.02em;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+  pointer-events:none;
+}
+.ideas-114__card.is-active .ideas-114__meta{opacity:1;transform:translateY(0)}
+.ideas-114__meta em{font-style:normal;opacity:.55;font-variant-numeric:tabular-nums}
+.ideas-114__title{
+  position:absolute;z-index:6;left:50%;top:7.5vh;
+  transform:translateX(-50%);text-align:center;
+  pointer-events:none;opacity:0;
+}
+.ideas-114__title h1{
+  margin:0;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+  font-weight:500;letter-spacing:-.055em;line-height:.95;
+  color:rgba(255,255,255,.92);
+  text-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+.ideas-114__title p{
+  margin:.75rem 0 0;font-size:.92rem;
+  color:rgba(255,255,255,.5);letter-spacing:.01em;
+}
+.ideas-114__caption{
+  position:absolute;z-index:6;left:50%;bottom:max(7.5rem,14vh);
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  max-width:min(36rem,calc(100vw - 2.5rem));
+  text-align:center;pointer-events:none;opacity:0;
+}
+.ideas-114__caption-index{
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);font-variant-numeric:tabular-nums;
+}
+.ideas-114__caption-title{
+  font-size:clamp(1rem,2.4vw,1.35rem);
+  font-weight:500;letter-spacing:-.03em;line-height:1.25;
+  color:rgba(255,255,255,.92);
+}
+.ideas-114__error{position:relative;z-index:3;padding:6rem 1.5rem;color:#fff;text-align:center}
+.ideas-114.is-reduced{overflow:visible}
+.ideas-114.is-reduced .ideas-114__stage{
+  height:auto;min-height:100svh;perspective:none;padding:6rem 1.25rem 5rem;cursor:default;
+}
+.ideas-114.is-reduced .ideas-114__rail{
+  position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:1rem;inset:auto;
+}
+.ideas-114.is-reduced .ideas-114__card{
+  position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:4/5;
+  opacity:1!important;transform:none!important;
+}
+.ideas-114.is-reduced .ideas-114__meta{opacity:1;transform:none}
+.ideas-114.is-reduced .ideas-114__title,
+.ideas-114.is-reduced .ideas-114__caption{
+  position:relative;left:auto;top:auto;bottom:auto;transform:none;
+  opacity:1!important;margin:0 0 1.5rem;filter:none!important;
+}
+.ideas-114.is-reduced .ideas-114__caption{margin:1.5rem 0 0;align-items:flex-start;text-align:left}
 .piece-1{grid-column:1;grid-row:1/3}
 .piece-2{grid-column:2/4;grid-row:1}
 .piece-3{grid-column:2;grid-row:2}
@@ -420,12 +569,17 @@ html.js .stills .still.in{opacity:1;transform:none}
   .fx064-card{width:min(70vw,22rem)}
   .fx064-card.is-portrait{width:min(56vw,18rem)}
   .fx064-hint{bottom:6.2rem}
+  .ideas-114__card{width:min(30vw,168px);height:min(50vh,380px)}
+  .ideas-114__title{top:7vh}
+  .ideas-114__caption{bottom:5.2rem}
+  .hint{bottom:6.2rem}
 }
 
 @media (prefers-reduced-motion:reduce){
   .field{animation:none}
   .aperture,.still .shot,.veil nav a,.fx064-card{transform:none!important;filter:none!important}
-  .dock,.player,.whisper,.field,.wisp,html.js .stills .still,.fx064-pill{opacity:1!important}
+  .dock,.player,.whisper,.field,.wisp,html.js .stills .still,.fx064-pill,.hint{opacity:1!important}
+  .hint,.hint__arrow--x{animation:none!important}
   .dock,.dock-toggle,.dock-links a,.player,.player-btn,.player-body{transition:none!important}
   .dock-links a{transform:none!important}
   .dock.is-open .dock-links a{opacity:1!important}

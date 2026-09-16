@@ -34,5 +34,5 @@ js/site.js             bottom menu, lists, in-page navigation (player stays moun
 js/player.js           YouTube audio pill
 js/space.js            sky, arrival
 js/effect064.js        Work 3D cloud + Z fly-through
-js/ideas-playlist.js   Ideas daylight photo playlist (airy5 corner blur; always Read)
+js/ideas-playlist.js   Ideas daylight photo playlist (airy7 arc to bottom corners)
 ```

@@ -253,7 +253,7 @@ html.js .stills .still.in{opacity:1;transform:none}
 .fx064-track{height:560vh}
 .fx064-stage{
   position:sticky;top:0;height:100svh;
-  perspective:1200px;perspective-origin:50% 50%;
+  perspective:980px;perspective-origin:50% 48%;
   overflow:hidden;
 }
 .fx064-world{

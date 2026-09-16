@@ -23,13 +23,14 @@
 
   const pose = (i, n, mobile) => {
     const a = unit(i, 1) * Math.PI * 2;
-    const r = 5 + unit(i, 2) * unit(i, 2) * (mobile ? 18 : 22);
+    const u = unit(i, 2);
+    const r = 5 + (mobile ? 15 : 18) * (u * u);
     return {
       x: Math.cos(a) * r,
-      y: Math.sin(a) * r * (mobile ? 0.58 : 0.7),
-      z: -70 - unit(i, 4) * 180 - i * 420,
-      rx: (unit(i, 5) - 0.5) * 5,
-      ry: (unit(i, 6) - 0.5) * 8,
+      y: Math.sin(a) * r * (mobile ? 0.55 : 0.62),
+      z: -24 - unit(i, 4) * 420 - i * 680,
+      rx: (unit(i, 5) - 0.5) * 8,
+      ry: (unit(i, 6) - 0.5) * 14,
       portrait: unit(i, 7) > 0.4,
     };
   };
@@ -96,10 +97,11 @@
       const bases = cards.map(() => ({ x: 0, y: 0 }));
       const placeXY = () => {
         const w = innerWidth, h = innerHeight;
-        cards.forEach((_, i) => {
+        cards.forEach((card, i) => {
           const p = poses[i];
           bases[i].x = (p.x / 100) * w;
           bases[i].y = (p.y / 100) * h;
+          gsap.set(card, { x: bases[i].x, y: bases[i].y });
         });
       };
 
@@ -109,20 +111,17 @@
       const dof = rel => {
         if (rel > 24) return 0;
         const d = 30 - rel;
-        if (d < 180) return 0;
-        const t = Math.min(1, (d - 180) / 2600);
+        if (d < 160) return 0;
+        const t = Math.min(1, (d - 160) / 3400);
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
-          const near = sCurve(Math.max(0, Math.min(1, (rel + 100) / 200)));
-          const spread = 1 + near * (mobile ? 0.9 : 1.35);
-          gsap.set(card, { x: bases[i].x * spread, y: bases[i].y * spread });
           let opacity = 1;
           if (rel > 8) opacity = 1 - sCurve((rel - 8) / 340);
-          else if (rel < -2800) opacity = Math.max(0.16, 1 - sCurve((-rel - 2800) / 1200));
+          else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
           const gone = opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';

@@ -11,12 +11,14 @@
   --mute:       #5d6874;
   --line:       rgba(26,34,44,.1);
   --glass:      rgba(255,255,255,.58);
-  --void:       #000;
+  --glass-edge: rgba(255,255,255,.45);
+  --depth:      0 18px 44px -28px rgba(40,70,110,.38);
 
   --sans: "Outfit","Helvetica Neue",Arial,sans-serif;
 
   --gutter: clamp(1rem,3vw,2.2rem);
   --r: 1.85rem;
+  --r-card: 1.35rem;
   --r-lg: 2.4rem;
   --dur: .6s;
   --ease: cubic-bezier(.22,1,.36,1);

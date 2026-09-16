@@ -1,12 +1,10 @@
-/* GSAP Effect 114 — dense edge-to-edge mouse cover flow (Ideas). */
+/* GSAP Effect 114 — dense edge-to-edge cover flow (Ideas). */
 (() => {
-  // Tuned against madewithgsap Effect 114 reference: tight pack, strong Y fan, full bleed
   const ANGLE = 58;
   const DEPTH = 72;
-  const SIDE = 4; // visible cards each side → ~9 across
+  const SIDE = 4;
   const PERSPECTIVE = 900;
   const EASE = "power3.out";
-  const MAX = 11;
 
   let raf = null;
   let progress = 0;
@@ -15,13 +13,14 @@
   let root = null;
   let rail = null;
   let caption = null;
-  let hint = null;
+  let prevBtn = null;
+  let nextBtn = null;
   let pointerBound = false;
   let resizeHandler = null;
   let keyHandler = null;
+  let navHandler = null;
   let booting = false;
   let spacing = 0;
-  let settled = false;
 
   const thumb = (u, w = 1200) => {
     if (!u) return "";
@@ -75,7 +74,7 @@
           (b.year ?? -Infinity) - (a.year ?? -Infinity) ||
           String(a.title).localeCompare(String(b.title))
       );
-    return [...featured, ...rest].slice(0, MAX);
+    return [...featured, ...rest];
   }
 
   function renderCards(host, items) {
@@ -112,17 +111,12 @@
     });
   }
 
-  /**
-   * Dense pack like 114: ~9 cards across the full viewport.
-   * Compensate perspective so outer cards still kiss/clip the L/R edges.
-   */
   function measure() {
     if (!cards[0]) return;
     const half = Math.min(SIDE, Math.max(2, (cards.length - 1) / 2));
     const zEdge = half * DEPTH;
     const perspFactor = (PERSPECTIVE + zEdge) / PERSPECTIVE;
-    // Centers span slightly past ±vw/2 after projection → edge cards clip the frame
-    const transformReach = (window.innerWidth * 0.5) * perspFactor * 1.08;
+    const transformReach = window.innerWidth * 0.5 * perspFactor * 1.08;
     spacing = transformReach / half;
   }
 
@@ -130,18 +124,24 @@
     const abs = Math.abs(dist);
     const rotY = gsap.utils.clamp(-ANGLE, ANGLE, -dist * (ANGLE / SIDE));
     const z = -abs * DEPTH + (abs < 0.4 ? (0.4 - abs) * 36 : 0);
-    const scale = 1;
     const alpha = abs > SIDE + 1.8 ? 0 : 1;
     const zIndex = Math.round(200 - abs * 14);
     return {
       x: dist * spacing,
       z,
       rotationY: rotY,
-      scale,
+      scale: 1,
       autoAlpha: alpha,
       zIndex,
       force3D: true,
     };
+  }
+
+  function syncNav() {
+    if (!cards.length) return;
+    const at = Math.round(target);
+    if (prevBtn) prevBtn.disabled = at <= 0;
+    if (nextBtn) nextBtn.disabled = at >= cards.length - 1;
   }
 
   function layout(at, immediate) {
@@ -166,6 +166,7 @@
     });
 
     updateCaption(active);
+    syncNav();
   }
 
   function updateCaption(index) {
@@ -178,6 +179,17 @@
     if (idxEl) idxEl.textContent = pad(index + 1);
     if (titleEl) titleEl.textContent = item.title;
     caption.classList.add("is-on");
+  }
+
+  function step(dir) {
+    if (!cards.length) return;
+    target = gsap.utils.clamp(
+      0,
+      cards.length - 1,
+      Math.round(target) + dir
+    );
+    syncNav();
+    requestTick();
   }
 
   function setTargetFromClientX(clientX) {
@@ -207,13 +219,6 @@
 
   function onPointerMove(e) {
     setTargetFromClientX(e.clientX);
-    if (hint && !settled) {
-      settled = true;
-      gsap.to(hint, { autoAlpha: 0, duration: 0.4, ease: "power2.out" });
-      const title = root?.querySelector(".ideas-114__title");
-      if (title)
-        gsap.to(title, { autoAlpha: 0, duration: 0.45, ease: "power2.out" });
-    }
     requestTick();
   }
 
@@ -251,22 +256,25 @@
       window.removeEventListener("keydown", keyHandler);
       keyHandler = null;
     }
+    if (navHandler && root) {
+      root.removeEventListener("click", navHandler);
+      navHandler = null;
+    }
     cards.forEach((c) => gsap.killTweensOf(c));
     cards = [];
     progress = 0;
     target = 0;
-    settled = false;
   }
 
   function initReduced(items) {
     root.classList.add("is-reduced");
-    if (hint) hint.style.display = "none";
     cards.forEach((card) => {
       gsap.set(card, { clearProps: "all", opacity: 1 });
       card.classList.add("is-active");
       card.tabIndex = 0;
     });
     if (caption && items[0]) updateCaption(0);
+    syncNav();
   }
 
   function initCoverflow() {
@@ -300,9 +308,6 @@
       onComplete: () => {
         layout(progress, true);
         bindPointer();
-        if (hint) {
-          gsap.to(hint, { autoAlpha: 1, duration: 0.55, ease: "power2.out" });
-        }
       },
     });
 
@@ -327,37 +332,46 @@
       );
     });
 
-    const title = root.querySelector(".ideas-114__title");
-    if (title) {
-      intro.fromTo(
-        title,
-        { autoAlpha: 0, y: 8 },
-        { autoAlpha: 0.9, y: 0, duration: 0.7 },
-        0.1
-      );
-    }
-
     if (caption) {
       intro.fromTo(
         caption,
         { autoAlpha: 0, y: 6 },
         { autoAlpha: 1, y: 0, duration: 0.55 },
-        0.4
+        0.35
+      );
+    }
+
+    const nav = root.querySelector("[data-ideas-nav]");
+    if (nav) {
+      intro.fromTo(
+        nav,
+        { autoAlpha: 0, y: 8 },
+        { autoAlpha: 1, y: 0, duration: 0.5 },
+        0.45
       );
     }
 
     keyHandler = (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
       e.preventDefault();
-      const step = e.key === "ArrowLeft" ? -1 : 1;
-      target = gsap.utils.clamp(0, cards.length - 1, Math.round(target) + step);
-      if (hint && !settled) {
-        settled = true;
-        gsap.to(hint, { autoAlpha: 0, duration: 0.35 });
-      }
-      requestTick();
+      step(e.key === "ArrowLeft" ? -1 : 1);
     };
     window.addEventListener("keydown", keyHandler);
+
+    navHandler = (e) => {
+      const prev = e.target.closest("[data-ideas-prev]");
+      const next = e.target.closest("[data-ideas-next]");
+      if (prev) {
+        e.preventDefault();
+        e.stopPropagation();
+        step(-1);
+      } else if (next) {
+        e.preventDefault();
+        e.stopPropagation();
+        step(1);
+      }
+    };
+    root.addEventListener("click", navHandler);
 
     let resizeTimer;
     resizeHandler = () => {
@@ -384,7 +398,8 @@
 
     rail = root.querySelector(".ideas-114__rail");
     caption = root.querySelector("[data-ideas-caption]");
-    hint = document.querySelector("[data-move-hint]");
+    prevBtn = root.querySelector("[data-ideas-prev]");
+    nextBtn = root.querySelector("[data-ideas-next]");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
       .matches;
 

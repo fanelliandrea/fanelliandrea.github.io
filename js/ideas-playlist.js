@@ -208,15 +208,24 @@
       abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.1;
     /* Near-equal size — wheel reads as one airy ring, not a coverflow stack */
     const scale = 1 - Math.min(0.04, abs * 0.01);
+    /* Side cards: soft blur + slight skew/squash, not opacity alone */
+    const edge = Math.max(0, abs - 0.55);
+    const blurPx = Math.min(7.5, edge * 2.6);
+    const skewX = (dist === 0 ? 0 : dist < 0 ? -1 : 1) * Math.min(5.5, edge * 2.1);
+    const scaleX = 1 - Math.min(0.07, edge * 0.028);
+    const scaleY = 1 - Math.min(0.05, edge * 0.02);
     return {
       xPercent: -50,
       yPercent: -100,
       x,
       y,
       rotation: deg,
+      skewX,
+      scaleX: scale * scaleX,
+      scaleY: scale * scaleY,
       transformOrigin: "50% 100%",
       autoAlpha: alpha,
-      scale,
+      filter: blurPx < 0.15 ? "blur(0px)" : `blur(${blurPx.toFixed(2)}px)`,
       zIndex: Math.round(40 - abs * 2),
     };
   }
@@ -229,15 +238,14 @@
     if (title) title.textContent = item.title;
     if (cta) {
       cta.hidden = false;
+      cta.textContent = "Read";
       if (item.href) {
         cta.href = item.href;
-        cta.textContent = "Read";
         cta.removeAttribute("aria-disabled");
         cta.classList.remove("is-soon");
         cta.onclick = null;
       } else {
         cta.href = "#";
-        cta.textContent = "Soon";
         cta.setAttribute("aria-disabled", "true");
         cta.classList.add("is-soon");
         cta.onclick = (e) => e.preventDefault();
@@ -435,7 +443,9 @@
         ...end,
         y: end.y - 36,
         autoAlpha: 0,
-        scale: end.scale * 0.92,
+        scaleX: end.scaleX * 0.92,
+        scaleY: end.scaleY * 0.92,
+        filter: "blur(8px)",
       });
     });
 

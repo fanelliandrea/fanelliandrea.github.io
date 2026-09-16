@@ -1,6 +1,6 @@
-/* Ideas playlist — upward arc of pastel notes on a soft sunset field. */
+/* Ideas playlist — article photos in Daybreak frames on the sunset fan. */
 (() => {
-  const STEP = 14; /* degrees between cards */
+  const STEP = 13; /* degrees between cards */
   const PASTELS = [
     "#f6d5c4",
     "#f0c8d4",
@@ -34,12 +34,14 @@
   let root = null;
   let orbit = null;
   let focusEl = null;
+  let prevBtn = null;
+  let nextBtn = null;
   let cards = [];
   let items = [];
   let progress = 0;
   let target = 0;
   let raf = null;
-  let radius = 420;
+  let radius = 320;
   let cardW = 168;
   let booting = false;
   let pointerBound = false;
@@ -63,12 +65,32 @@
 
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-  const thumb = (u, w = 900) => {
-    if (window.Site?.thumb) return window.Site.thumb(u, w);
-    if (!u) return "";
-    if (/\.gif$/i.test(u)) return u;
-    return `${u}${u.includes("?") ? "&" : "?"}scale-down-to=${w}`;
-  };
+  function count() {
+    return cards.length || 1;
+  }
+
+  /** Shortest signed distance on a looping ring of n slots */
+  function wrapDist(i, p, n = count()) {
+    let d = i - (((p % n) + n) % n);
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
+  }
+
+  function modIndex(p, n = count()) {
+    return ((Math.round(p) % n) + n) % n;
+  }
+
+  /** Nearest absolute progress that lands on index i */
+  function nearestTarget(i) {
+    const n = count();
+    const cur = target;
+    const base = Math.round(cur / n) * n;
+    const candidates = [base + i - n, base + i, base + i + n];
+    return candidates.reduce((best, v) =>
+      Math.abs(v - cur) < Math.abs(best - cur) ? v : best
+    );
+  }
 
   function blurbFor(item) {
     if (item.blurb) return item.blurb;
@@ -109,11 +131,22 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    cardW = clamp(Math.round(w * 0.132), 128, 210);
-    radius = clamp(Math.round(Math.min(w * 0.52, h * 0.62)), 260, 560);
+    cardW = clamp(Math.round(w * 0.122), 118, 190);
+    const cardH = cardW * (4 / 3);
+    /* Orbit sits mid-low; radius must leave room above for full card tops */
+    const orbitTop = h * 0.7;
+    const topPad = clamp(h * 0.06, 28, 56);
+    const maxR = Math.max(180, orbitTop - cardH - topPad);
+    radius = clamp(Math.round(Math.min(w * 0.42, h * 0.42, maxR)), 180, 420);
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
     });
+  }
+
+  function thumb(url, w = 900) {
+    if (window.Site?.thumb) return window.Site.thumb(url, w);
+    if (!url) return "";
+    return /\.gif$/i.test(url) ? url : `${url}?scale-down-to=${w}`;
   }
 
   function renderCards(host, list) {
@@ -122,21 +155,25 @@
       const el = document.createElement("button");
       el.type = "button";
       el.className = "ideas-pl__card";
-      el.style.setProperty("--tone", PASTELS[i % PASTELS.length]);
+      const tone = PASTELS[i % PASTELS.length];
+      el.style.setProperty("--tone", tone);
       el.setAttribute("aria-label", item.title);
       el.dataset.index = String(i);
-      const src = item.media?.[0];
-      const face = src
-        ? `<span class="ideas-pl__shot"><img src="${esc(thumb(src, 900))}" alt="" draggable="false" decoding="async"></span>`
-        : `<span class="ideas-pl__fallback"><span class="ideas-pl__card-title">${esc(item.title)}</span></span>`;
-      el.classList.toggle("has-photo", !!src);
-      el.innerHTML = `<span class="ideas-pl__paper">${face}</span>`;
+      const src = item.media?.[0] ? thumb(item.media[0], 900) : "";
+      el.innerHTML = `
+        <span class="ideas-pl__frame sq">
+          ${
+            src
+              ? `<img class="ideas-pl__shot" src="${esc(src)}" alt="" loading="lazy" decoding="async" draggable="false" />`
+              : `<span class="ideas-pl__fallback">${esc(item.title)}</span>`
+          }
+        </span>`;
       el.addEventListener("click", (e) => {
         if (moved) {
           e.preventDefault();
           return;
         }
-        target = i;
+        target = nearestTarget(i);
         requestTick();
       });
       host.appendChild(el);
@@ -150,7 +187,10 @@
     const x = Math.sin(rad) * radius;
     const y = -Math.cos(rad) * radius;
     const abs = Math.abs(dist);
-    const alpha = abs > 5.2 ? 0 : 1 - Math.max(0, abs - 3.6) / 1.6;
+    const fadeStart = Math.max(2.4, count() * 0.28);
+    const fadeEnd = fadeStart + 1.4;
+    const alpha =
+      abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.4;
     const scale = 1 - Math.min(0.14, abs * 0.028);
     return {
       xPercent: -50,
@@ -195,12 +235,11 @@
 
   function layout(at, immediate) {
     if (!cards.length || !window.gsap) return;
-    const max = cards.length - 1;
-    const p = clamp(at, 0, max);
-    const active = Math.round(p);
+    const n = count();
+    const active = modIndex(at, n);
 
     cards.forEach((card, i) => {
-      const props = propsFor(i - p);
+      const props = propsFor(wrapDist(i, at, n));
       if (immediate) gsap.set(card, props);
       else
         gsap.to(card, {
@@ -214,6 +253,7 @@
     });
 
     updateFocus(active);
+    syncArrows();
   }
 
   function tick() {
@@ -233,34 +273,18 @@
     if (raf == null) raf = requestAnimationFrame(tick);
   }
 
-  function setFromClientX(clientX) {
-    if (!cards.length) return;
-    const max = cards.length - 1;
-    const x = clamp(clientX, 0, window.innerWidth);
-    target = clamp(
-      gsap.utils.mapRange(0.08, 0.92, 0, max, x / window.innerWidth),
-      0,
-      max
-    );
-  }
-
   function onPointerMove(e) {
-    if (dragging) {
-      const dx = e.clientX - dragStartX;
-      if (Math.abs(dx) > 4) moved = true;
-      const delta = (-dx / window.innerWidth) * Math.max(3, cards.length * 0.55);
-      target = clamp(dragStartTarget + delta, 0, cards.length - 1);
-      requestTick();
-      return;
-    }
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      setFromClientX(e.clientX);
-      requestTick();
-    }
+    if (!dragging) return;
+    const dx = e.clientX - dragStartX;
+    if (Math.abs(dx) > 4) moved = true;
+    const delta = (-dx / window.innerWidth) * Math.max(3, count() * 0.55);
+    target = dragStartTarget + delta;
+    requestTick();
   }
 
   function onPointerDown(e) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (e.target.closest("[data-ideas-nav], .ideas-pl__cta, a")) return;
     dragging = true;
     moved = false;
     dragStartX = e.clientX;
@@ -275,24 +299,46 @@
     requestTick();
   }
 
+  function step(dir) {
+    if (!cards.length) return;
+    target = Math.round(target) + dir;
+    /* Keep focus in sync even when many clicks queue before the lerp settles */
+    updateFocus(modIndex(target));
+    requestTick();
+  }
+
+  function syncArrows() {
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
+  }
+
   function onWheel(e) {
     if (!cards.length) return;
     e.preventDefault();
     const dir = Math.sign(e.deltaY || e.deltaX);
     if (!dir) return;
-    target = clamp(Math.round(target) + dir, 0, cards.length - 1);
-    requestTick();
+    step(dir);
   }
 
   function onKey(e) {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
-      target = clamp(Math.round(target) - 1, 0, cards.length - 1);
-      requestTick();
+      step(-1);
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
-      target = clamp(Math.round(target) + 1, 0, cards.length - 1);
-      requestTick();
+      step(1);
+    }
+  }
+
+  function onNavClick(e) {
+    const prev = e.target.closest("[data-ideas-prev]");
+    const next = e.target.closest("[data-ideas-next]");
+    if (prev) {
+      e.preventDefault();
+      step(-1);
+    } else if (next) {
+      e.preventDefault();
+      step(1);
     }
   }
 
@@ -303,6 +349,7 @@
     root.addEventListener("pointerdown", onPointerDown, { passive: true });
     window.addEventListener("pointerup", onPointerUp, { passive: true });
     root.addEventListener("wheel", onWheel, { passive: false });
+    root.addEventListener("click", onNavClick);
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
   }
@@ -314,6 +361,7 @@
     root?.removeEventListener("pointerdown", onPointerDown);
     window.removeEventListener("pointerup", onPointerUp);
     root?.removeEventListener("wheel", onWheel);
+    root?.removeEventListener("click", onNavClick);
     window.removeEventListener("keydown", onKey);
     window.removeEventListener("resize", onResize);
   }
@@ -329,15 +377,14 @@
 
   function intro() {
     measure();
-    const mid = (cards.length - 1) / 2;
-    progress = mid;
-    target = mid;
+    progress = 0;
+    target = 0;
 
     cards.forEach((card, i) => {
-      const end = propsFor(i - mid);
+      const end = propsFor(wrapDist(i, 0));
       gsap.set(card, {
         ...end,
-        y: end.y - 40,
+        y: end.y - 36,
         autoAlpha: 0,
         scale: end.scale * 0.92,
       });
@@ -352,14 +399,14 @@
     });
 
     cards.forEach((card, i) => {
-      const end = propsFor(i - mid);
+      const end = propsFor(wrapDist(i, 0));
       tl.to(
         card,
         {
           ...end,
           duration: 0.95,
         },
-        0.04 + Math.abs(i - mid) * 0.035
+        0.04 + Math.abs(wrapDist(i, 0)) * 0.035
       );
     });
 
@@ -400,6 +447,8 @@
 
     orbit = root.querySelector(".ideas-pl__orbit");
     focusEl = root.querySelector("[data-ideas-focus]");
+    prevBtn = root.querySelector("[data-ideas-prev]");
+    nextBtn = root.querySelector("[data-ideas-next]");
     const preferReduced =
       window.Site?.reduced ||
       matchMedia("(prefers-reduced-motion: reduce)").matches;

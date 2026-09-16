@@ -42,10 +42,10 @@
     const jx = (unit(i, 1) - 0.5) * 0.1;
     const jy = (unit(i, 2) - 0.5) * 0.08;
     return {
-      ux: b.ux + jx,
-      uy: (mobile ? b.uy * 0.9 : b.uy) + jy,
-      s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
-      z: -28 - d * 240 - unit(i, 4) * 50,
+      ux: (b.ux + jx) * 0.62,
+      uy: ((mobile ? b.uy * 0.9 : b.uy) + jy) * 0.62,
+      s: Math.min(1.28, b.s * 1.85 * (mobile ? 0.95 : 1)),
+      z: -12 - d * 240 - unit(i, 4) * 40,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,
@@ -143,7 +143,7 @@
       const paint = () => {
         gsap.set(world, { z: cam.z });
         const room = Math.min(innerWidth, innerHeight);
-        const fadeFrom = room * 0.92;
+        const fadeFrom = room * 1.05;
         const fadeTo = room * 1.12;
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;

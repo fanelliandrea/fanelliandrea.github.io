@@ -262,12 +262,12 @@ html.js .stills .still.in{opacity:1;transform:none}
 }
 .fx064-card{
   position:absolute;left:50%;top:50%;
-  width:min(38vw,20rem);
+  width:min(64vw,36rem);
   color:inherit;
   transform-style:preserve-3d;
   will-change:transform,opacity,filter;
 }
-.fx064-card.is-portrait{width:min(26vw,14.5rem)}
+.fx064-card.is-portrait{width:min(50vw,28rem)}
 .fx064-shot{
   display:block;aspect-ratio:16/10;background:var(--tile);
   box-shadow:
@@ -417,8 +417,8 @@ html.js .stills .still.in{opacity:1;transform:none}
   .piece-1{grid-column:1/-1;grid-row:auto}
   .gather .shot{aspect-ratio:4/5;height:auto}
   .piece-1 .shot{aspect-ratio:5/4}
-  .fx064-card{width:min(52vw,16.5rem)}
-  .fx064-card.is-portrait{width:min(42vw,13.5rem)}
+  .fx064-card{width:min(78vw,24rem)}
+  .fx064-card.is-portrait{width:min(62vw,20rem)}
   .fx064-hint{bottom:6.2rem}
 }
 

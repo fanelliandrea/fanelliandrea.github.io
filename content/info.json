@@ -46,21 +46,19 @@
     "title": "Contacts",
     "items": [
       {
+        "id": "email",
         "label": "Email",
         "href": "mailto:fanelliandrea@outlook.com",
         "value": "fanelliandrea@outlook.com"
       },
       {
-        "label": "LinkedIn",
-        "href": "https://www.linkedin.com/in/fanelli-andrea/",
-        "value": "fanelli-andrea"
-      },
-      {
+        "id": "instagram",
         "label": "Instagram",
         "href": "https://www.instagram.com/fanelliandrea_/",
         "value": "@fanelliandrea_"
       },
       {
+        "id": "arena",
         "label": "Are.na",
         "href": "https://www.are.na/andrea-fanelli",
         "value": "andrea-fanelli"

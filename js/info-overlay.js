@@ -57,15 +57,59 @@
       .replace(/"/g, "&quot;");
   }
 
+  function contactKind(c) {
+    const blob = `${c.id || ""} ${c.label || ""} ${c.href || ""}`.toLowerCase();
+    if (blob.includes("mailto:") || blob.includes("email")) return "email";
+    if (blob.includes("instagram")) return "instagram";
+    if (blob.includes("are.na") || blob.includes("arena")) return "arena";
+    return "link";
+  }
+
+  function contactIcon(kind) {
+    if (kind === "email") {
+      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 7.5h16v9H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 8.2 12 13l7-4.8"/></svg>`;
+    }
+    if (kind === "instagram") {
+      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.6" cy="7.4" r="0.9" fill="currentColor"/></svg>`;
+    }
+    if (kind === "arena") {
+      return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="9" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
+    }
+    return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M7 17 17 7M9 7h8v8"/></svg>`;
+  }
+
   function orbHtml(orb) {
     if (!orb) return "";
     const src = orb.src || orb.remote;
     const alt = escapeHtml(orb.alt || "Andrea Fanelli");
     const fallback = escapeHtml(orb.remote || src);
     return `<div class="info-frost__orb" aria-hidden="${orb.alt ? "false" : "true"}">
-      <span class="info-frost__orb-glow"></span>
-      <img src="${escapeHtml(src)}" alt="${alt}" width="72" height="72" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
+      <span class="info-frost__orb-shadow"></span>
+      <span class="info-frost__orb-ball">
+        <img class="info-frost__orb-core" src="${escapeHtml(src)}" alt="${alt}" width="88" height="88" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
+        <span class="info-frost__orb-glass"></span>
+        <span class="info-frost__orb-spec"></span>
+      </span>
     </div>`;
+  }
+
+  function footerHtml(contacts) {
+    const items = (contacts || []).filter((c) => {
+      const k = contactKind(c);
+      return k === "email" || k === "instagram" || k === "arena";
+    });
+    if (!items.length) return "";
+    return `<nav class="info-frost__footer" aria-label="Contacts">
+      ${items
+        .map((c) => {
+          const kind = contactKind(c);
+          const label = escapeHtml(c.label || kind);
+          const href = escapeHtml(c.href || "#");
+          const external = href.startsWith("http");
+          return `<a class="info-frost__footer-link" href="${href}" aria-label="${label}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${contactIcon(kind)}</a>`;
+        })
+        .join("")}
+    </nav>`;
   }
 
   function card(kicker, inner, extraClass = "") {
@@ -88,13 +132,9 @@
       ${d.intro ? `<p class="info-frost__intro">${escapeHtml(d.intro)}</p>` : ""}
     `;
 
-    const philosophy = `
-      <h2 class="info-frost__section-title">${escapeHtml((d.philosophy && d.philosophy.title) || "Philosophy")}</h2>
-      ${philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("")}
-    `;
+    const philosophy = philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("");
 
     const skillsInner = `
-      <h2 class="info-frost__section-title">${escapeHtml((d.skills && d.skills.title) || "Skills")}</h2>
       <div class="info-frost__skills">
         ${skills
           .map(
@@ -111,26 +151,11 @@
       ${d.tagline ? `<p class="info-frost__tagline">${escapeHtml(d.tagline)}</p>` : ""}
     `;
 
-    const contactsInner = `
-      <h2 class="info-frost__section-title">${escapeHtml((d.contacts && d.contacts.title) || "Contacts")}</h2>
-      <dl class="info-frost__contacts">
-        ${contacts
-          .map(
-            (c) => `
-          <div class="info-frost__contact">
-            <dt>${escapeHtml(c.label)}</dt>
-            <dd><a href="${escapeHtml(c.href)}">${escapeHtml(c.value || c.label)}</a></dd>
-          </div>`
-          )
-          .join("")}
-      </dl>
-    `;
-
     body.innerHTML = [
       card("info", about, "info-frost__card--about"),
       card("philosophy", philosophy),
-      card("skills", skillsInner),
-      card("contacts", contactsInner, "info-frost__card--last"),
+      card("skills", skillsInner, "info-frost__card--last"),
+      footerHtml(contacts),
     ].join("");
   }
 
@@ -179,14 +204,12 @@
       const fallback = previousUrl && !isInfoHref(previousUrl) ? previousUrl : "/";
       history.pushState({ afInfo: false }, "", fallback);
     }
-    if (document.body.dataset.page === "info" && !isInfoHref(location.href)) {
-      // stay on info shell until SPA/nav moves away
-    }
   }
 
   function onDocClick(e) {
     const a = e.target && e.target.closest ? e.target.closest("a") : null;
     if (!a) return;
+    if (a.closest(".info-frost__footer")) return;
     if (!isInfoHref(a.getAttribute("href"))) return;
     e.preventDefault();
     e.stopPropagation();
@@ -211,7 +234,6 @@
     document.addEventListener("keydown", onKey);
     window.addEventListener("popstate", onPop);
 
-    // Patch SPA navigations that swap main: keep intercepting Info
     const page = document.body && document.body.dataset.page;
     if (page === "info" || isInfoHref(location.href)) {
       previousUrl = document.referrer && document.referrer.includes(location.host)
@@ -223,7 +245,6 @@
       }
     }
 
-    // Expose for debugging / site.js hooks
     window.AFInfo = { open: openInfo, close: closeInfo };
   }
 

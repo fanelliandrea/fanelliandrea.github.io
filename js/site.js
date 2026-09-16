@@ -101,9 +101,9 @@
     } catch {}
   }
 
-  if (!document.querySelector('script[src="/js/player.js"]')) {
+  if (!document.querySelector('script[src^="/js/player.js"]')) {
     const p = document.createElement('script');
-    p.src = '/js/player.js';
+    p.src = '/js/player.js?v=yt-8';
     document.body.appendChild(p);
   }
 

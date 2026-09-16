@@ -4,7 +4,7 @@
 
   const KEY = 'af-yt';
   const OPEN_KEY = 'af-player-open';
-  const FALLBACK_IDS = ['VHGqsnsuA3c', 'zWeObfh-OKs', 'QhZnEagfjTQ'];
+  const FALLBACK_IDS = ['VHGqsnsuA3c', 'zWeObfh-OKs', 'QhZnEagfjTQ', '_UbUQ2VuS3M', '0uJ2-dXzwRA', 'NOMa56y_Was', 'OQs1Wf3nisg', 'sHK9usHwxSs'];
   const icon = {
     play: '<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2.4 1.1v9.8L10.6 6z"/></svg>',
     pause: '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.1" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/><rect x="7.5" y="1.4" width="2.4" height="9.2" rx=".4" fill="currentColor"/></svg>',
@@ -360,7 +360,7 @@
   addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
-  fetch('/content/playlist.json')
+  fetch('/content/playlist.json?v=yt-8')
     .then(r => r.json())
     .then(d => {
       tracks = d.tracks || {};

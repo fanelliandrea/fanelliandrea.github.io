@@ -84,13 +84,8 @@
     const src = orb.src || orb.remote;
     const alt = escapeHtml(orb.alt || "Andrea Fanelli");
     const fallback = escapeHtml(orb.remote || src);
-    return `<div class="info-frost__orb" aria-hidden="${orb.alt ? "false" : "true"}">
-      <span class="info-frost__orb-shadow"></span>
-      <span class="info-frost__orb-ball">
-        <img class="info-frost__orb-core" src="${escapeHtml(src)}" alt="${alt}" width="88" height="88" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
-        <span class="info-frost__orb-glass"></span>
-        <span class="info-frost__orb-spec"></span>
-      </span>
+    return `<div class="info-frost__orb">
+      <img src="${escapeHtml(src)}" alt="${alt}" width="72" height="72" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
     </div>`;
   }
 
@@ -133,9 +128,13 @@
       ${d.intro ? `<p class="info-frost__intro">${escapeHtml(d.intro)}</p>` : ""}
     `;
 
-    const philosophy = philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("");
+    const philosophy = `
+      <h2 class="info-frost__section-title">${escapeHtml((d.philosophy && d.philosophy.title) || "Philosophy")}</h2>
+      ${philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("")}
+    `;
 
     const skillsInner = `
+      <h2 class="info-frost__section-title">${escapeHtml((d.skills && d.skills.title) || "Skills")}</h2>
       <div class="info-frost__skills">
         ${skills
           .map(

@@ -366,14 +366,29 @@
   function setFromClientX(clientX) {
     if (!cards.length) return;
     const n = count();
-    const x = clamp(clientX, 0, window.innerWidth);
-    const local = gsap.utils.mapRange(0.08, 0.92, 0, n, x / window.innerWidth);
+    const w = window.innerWidth;
+    /* Map only the central scrub band to the playlist */
+    const x0 = w * 0.3;
+    const x1 = w * 0.7;
+    const x = clamp(clientX, x0, x1);
+    const local = gsap.utils.mapRange(x0, x1, 0, n, x);
     const base = Math.round(progress / n) * n;
     const mapped = base + (((local % n) + n) % n);
     const alts = [mapped - n, mapped, mapped + n];
     target = alts.reduce((best, v) =>
       Math.abs(v - progress) < Math.abs(best - progress) ? v : best
     );
+  }
+
+  function inScrubZone(clientX, clientY) {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const nx = clientX / w;
+    const ny = clientY / h;
+    /* Cursor scrub only in the middle — not the side/bottom corners */
+    if (nx < 0.28 || nx > 0.72) return false;
+    if (ny < 0.06 || ny > 0.72) return false;
+    return true;
   }
 
   function onPointerMove(e) {
@@ -394,6 +409,7 @@
       scrubResumeX = null;
     }
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!inScrubZone(e.clientX, e.clientY)) return;
     setFromClientX(e.clientX);
     requestTick();
   }
@@ -401,6 +417,7 @@
   function onPointerDown(e) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     if (e.target.closest("[data-ideas-nav], .ideas-pl__cta, a")) return;
+    if (!inScrubZone(e.clientX, e.clientY)) return;
     dragging = true;
     moved = false;
     dragStartX = e.clientX;

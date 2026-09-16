@@ -144,7 +144,8 @@
 
     if (desktop) {
       /* Fit arc so outermost cards land near bottom-left / bottom-right */
-      const topPad = clamp(h * 0.05, 22, 48);
+      const topPad = clamp(h * 0.12, 56, 120); /* lower wheel a bit */
+      const drop = clamp(h * 0.045, 28, 56);
       /* Aim the far card body into the corner (origin is bottom-center) */
       const cornerX = clamp(cardW * 0.55, 48, 110);
       const cornerY = h - clamp(h * 0.02, 8, 24);
@@ -156,13 +157,13 @@
         if (s < 0.3) continue;
         const r = (w / 2 - cornerX) / s;
         if (r < 320 || r > w * 1.55) continue;
-        const orbitY = cornerY + c * r;
+        const orbitY = cornerY + c * r + drop;
         const apexTop = orbitY - r - cardH;
-        if (apexTop < 0 || apexTop > h * 0.28) continue;
+        if (apexTop < h * 0.04 || apexTop > h * 0.38) continue;
         const score =
           Math.abs(apexTop - topPad) * 1.2 +
-          Math.abs(cornerY - (h - 16)) * 0.4 +
-          Math.abs(orbitY - h) * 0.05;
+          Math.abs(cornerY - (h - 16)) * 0.35 +
+          Math.abs(orbitY - (h + drop)) * 0.05;
         if (!best || score < best.score) {
           best = { score, r, orbitY, deg, apexTop };
         }
@@ -178,7 +179,7 @@
         /* Keep full opacity through the corner seat; soft-fade just past it */
         fadeSlots = clamp(best.deg / STEP, 3, 7);
       } else {
-        const orbitPct = 1.18;
+        const orbitPct = 1.22;
         if (orbit) orbit.style.top = `${orbitPct * 100}%`;
         const orbitTop = h * orbitPct;
         radius = clamp(
@@ -194,10 +195,10 @@
         fadeSlots = 4.2;
       }
     } else {
-      const orbitPct = 1.08;
+      const orbitPct = 1.12;
       if (orbit) orbit.style.top = `${orbitPct * 100}%`;
       const orbitTop = h * orbitPct;
-      const topPad = clamp(h * 0.06, 22, 44);
+      const topPad = clamp(h * 0.1, 36, 64);
       radius = clamp(
         Math.round(Math.min(w * 0.72, orbitTop - cardH - topPad)),
         260,

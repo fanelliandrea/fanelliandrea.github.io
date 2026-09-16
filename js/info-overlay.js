@@ -108,9 +108,8 @@
     </nav>`;
   }
 
-  function card(kicker, inner, extraClass = "") {
+  function card(inner, extraClass = "") {
     return `<section class="info-frost__card ${extraClass}">
-      <p class="info-frost__kicker">${escapeHtml(kicker)}</p>
       ${inner}
     </section>`;
   }
@@ -128,13 +127,9 @@
       ${d.intro ? `<p class="info-frost__intro">${escapeHtml(d.intro)}</p>` : ""}
     `;
 
-    const philosophy = `
-      <h2 class="info-frost__section-title">${escapeHtml((d.philosophy && d.philosophy.title) || "Philosophy")}</h2>
-      ${philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("")}
-    `;
+    const philosophy = philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("");
 
     const skillsInner = `
-      <h2 class="info-frost__section-title">${escapeHtml((d.skills && d.skills.title) || "Skills")}</h2>
       <div class="info-frost__skills">
         ${skills
           .map(
@@ -156,10 +151,10 @@
     `;
 
     body.innerHTML = [
-      card("info", about, "info-frost__card--about"),
-      card("philosophy", philosophy),
-      card("skills", skillsInner),
-      card("contacts", lastInner, "info-frost__card--last"),
+      card(about, "info-frost__card--about"),
+      card(philosophy),
+      card(skillsInner),
+      card(lastInner, "info-frost__card--last"),
     ].join("");
   }
 

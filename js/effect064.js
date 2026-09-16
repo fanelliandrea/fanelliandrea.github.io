@@ -45,7 +45,7 @@
       ux: b.ux + jx,
       uy: (mobile ? b.uy * 0.9 : b.uy) + jy,
       s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
-      z: -520 - unit(i, 4) * 160 - d * 340,
+      z: -200 - d * 150 - unit(i, 4) * 50,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,
@@ -132,12 +132,12 @@
 
       const cam = { z: 0 };
       const shots = cards.map(c => c.querySelector('.fx064-shot'));
-      const maxBlur = mobile ? 7 : 11;
+      const maxBlur = mobile ? 6 : 9;
       const dof = rel => {
         if (rel > 24) return 0;
         const d = 30 - rel;
-        if (d < 280) return 0;
-        const t = Math.min(1, (d - 280) / 3200);
+        if (d < 220) return 0;
+        const t = Math.min(1, (d - 220) / 1800);
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       const paint = () => {
@@ -165,24 +165,18 @@
       };
 
       placeXY();
+      const PUSH = 480;
       cards.forEach((card, i) => {
         const p = poses[i];
-        gsap.set(card, { z: p.z - 2600, rotationX: 10, rotationY: p.ry * 1.2 });
+        gsap.set(card, { z: p.z - PUSH, rotationX: p.rx, rotationY: p.ry });
       });
       paint();
 
-      const land = gsap.timeline({ defaults: { ease: 'back.out(1.45)' } });
+      const land = gsap.timeline({ defaults: { ease: 'back.out(1.25)' }, onUpdate: paint });
       cards.forEach((card, i) => {
-        const p = poses[i];
-        land.to(card, {
-          z: p.z,
-          rotationX: p.rx,
-          rotationY: p.ry,
-          duration: 1.2,
-          onUpdate: paint,
-        }, 0.05 + i * 0.055);
+        land.to(card, { z: poses[i].z, duration: 1.15 }, 0);
       });
-      if (hint) land.fromTo(hint, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.4);
+      if (hint) land.fromTo(hint, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.25);
 
       if (window.ScrollTrigger) {
         ScrollTrigger.create({

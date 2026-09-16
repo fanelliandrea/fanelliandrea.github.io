@@ -43,6 +43,7 @@
   let raf = null;
   let radius = 320;
   let cardW = 168;
+  let fadeSlots = 3.2;
   let booting = false;
   let pointerBound = false;
   let dragging = false;
@@ -133,22 +134,83 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    /* Moderate frames on a wide gentle wheel — roomy gaps, not stacked */
-    cardW = clamp(Math.round(w * 0.118), 124, 176);
-    const cardH = cardW * (4 / 3);
-    /* Orbit center sits below the fold so the arc can stay wide & shallow */
-    const orbitPct = 1.14;
-    if (orbit) orbit.style.top = `${orbitPct * 100}%`;
-    const orbitTop = h * orbitPct;
-    const topPad = clamp(h * 0.07, 32, 64);
-    const maxR = Math.max(360, orbitTop - cardH - topPad);
-    radius = clamp(Math.round(Math.min(w * 0.82, maxR)), 420, 1100);
-    /* Horizontal gap at the apex: 2 r sin(STEP/2) >= cardW + gap */
-    const gap = clamp(Math.round(cardW * 0.28), 22, 48);
-    const half = Math.asin(
-      clamp((cardW + gap) / (2 * Math.max(radius, 1)), 0.01, 0.95)
+    const desktop = w >= 900;
+    cardW = clamp(
+      Math.round(w * (desktop ? 0.118 : 0.2)),
+      desktop ? 124 : 110,
+      desktop ? 176 : 160
     );
-    STEP = clamp((half * 2 * 180) / Math.PI, 16, 32);
+    const cardH = cardW * (4 / 3);
+
+    if (desktop) {
+      /* Fit arc so outermost cards land near bottom-left / bottom-right */
+      const topPad = clamp(h * 0.05, 22, 48);
+      /* Aim the far card body into the corner (origin is bottom-center) */
+      const cornerX = clamp(cardW * 0.55, 48, 110);
+      const cornerY = h - clamp(h * 0.02, 8, 24);
+      let best = null;
+      for (let deg = 62; deg <= 88; deg += 0.35) {
+        const th = (deg * Math.PI) / 180;
+        const s = Math.sin(th);
+        const c = Math.cos(th);
+        if (s < 0.3) continue;
+        const r = (w / 2 - cornerX) / s;
+        if (r < 320 || r > w * 1.55) continue;
+        const orbitY = cornerY + c * r;
+        const apexTop = orbitY - r - cardH;
+        if (apexTop < 0 || apexTop > h * 0.28) continue;
+        const score =
+          Math.abs(apexTop - topPad) * 1.2 +
+          Math.abs(cornerY - (h - 16)) * 0.4 +
+          Math.abs(orbitY - h) * 0.05;
+        if (!best || score < best.score) {
+          best = { score, r, orbitY, deg, apexTop };
+        }
+      }
+      if (best) {
+        radius = Math.round(best.r);
+        if (orbit) orbit.style.top = `${(best.orbitY / h) * 100}%`;
+        const gap = clamp(Math.round(cardW * 0.24), 18, 40);
+        const half = Math.asin(
+          clamp((cardW + gap) / (2 * Math.max(radius, 1)), 0.01, 0.95)
+        );
+        STEP = clamp((half * 2 * 180) / Math.PI, 12, 24);
+        /* Keep full opacity through the corner seat; soft-fade just past it */
+        fadeSlots = clamp(best.deg / STEP, 3, 7);
+      } else {
+        const orbitPct = 1.18;
+        if (orbit) orbit.style.top = `${orbitPct * 100}%`;
+        const orbitTop = h * orbitPct;
+        radius = clamp(
+          Math.round(Math.min(w * 0.78, orbitTop - cardH - topPad)),
+          420,
+          1200
+        );
+        const gap = clamp(Math.round(cardW * 0.26), 20, 44);
+        const half = Math.asin(
+          clamp((cardW + gap) / (2 * Math.max(radius, 1)), 0.01, 0.95)
+        );
+        STEP = clamp((half * 2 * 180) / Math.PI, 14, 28);
+        fadeSlots = 4.2;
+      }
+    } else {
+      const orbitPct = 1.08;
+      if (orbit) orbit.style.top = `${orbitPct * 100}%`;
+      const orbitTop = h * orbitPct;
+      const topPad = clamp(h * 0.06, 22, 44);
+      radius = clamp(
+        Math.round(Math.min(w * 0.72, orbitTop - cardH - topPad)),
+        260,
+        720
+      );
+      const gap = clamp(Math.round(cardW * 0.22), 16, 36);
+      const half = Math.asin(
+        clamp((cardW + gap) / (2 * Math.max(radius, 1)), 0.01, 0.95)
+      );
+      STEP = clamp((half * 2 * 180) / Math.PI, 15, 30);
+      fadeSlots = clamp(58 / STEP, 2.2, 4);
+    }
+
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
     });
@@ -201,23 +263,22 @@
     const y = -Math.cos(rad) * radius;
     const abs = Math.abs(dist);
     const sign = dist === 0 ? 0 : dist < 0 ? -1 : 1;
-    /* Keep ~5–7 evenly spaced cards visible on the wide arc */
-    const visible = Math.max(2.2, Math.min(3.4, 62 / Math.max(STEP, 1)));
-    const fadeStart = visible;
-    const fadeEnd = fadeStart + 1.1;
+    /* Visible out to the corner-fitted arc length */
+    const fadeStart = fadeSlots;
+    const fadeEnd = fadeStart + 1.15;
     const alpha =
-      abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.1;
+      abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.15;
     /* 0 at center → 1 at outer arc: ease-in so blur/distort build toward corners */
     const t = clamp(abs / Math.max(fadeStart, 0.001), 0, 1);
     const grad = t * t;
     const blurPx = grad * 10;
     /* Corners feel nearer to the screen: larger + swung toward camera */
     const near = grad;
-    const scale = 1 + near * 0.18;
-    const skewX = sign * near * 8.5;
-    const scaleX = 1 + near * 0.1;
-    const scaleY = 1 + near * 0.05;
-    const rotY = -sign * near * 24;
+    const scale = 1 + near * 0.12;
+    const skewX = sign * near * 7;
+    const scaleX = 1 + near * 0.07;
+    const scaleY = 1 + near * 0.035;
+    const rotY = -sign * near * 20;
     return {
       xPercent: -50,
       yPercent: -100,

@@ -103,7 +103,7 @@
       const placeXY = () => {
         lens();
         const w = innerWidth, h = innerHeight;
-        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.36 : 0.4);
+        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.5 : 0.58);
         cards.forEach((card, i) => {
           const p = poses[i];
           bases[i].x = p.ux * R;
@@ -127,7 +127,7 @@
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
-          if (rel > 8) opacity = 1 - sCurve((rel - 8) / 340);
+          if (rel > -260) opacity = 1 - sCurve((rel + 260) / 320);
           else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
           const gone = opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));

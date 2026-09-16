@@ -184,14 +184,29 @@
     return true;
   };
 
+  const dzPreview = dz => new Promise((resolve, reject) => {
+    const cb = '__dz' + Math.random().toString(36).slice(2);
+    const s = document.createElement('script');
+    const done = (err, data) => {
+      clearTimeout(t);
+      delete window[cb];
+      s.remove();
+      err ? reject(err) : resolve(data);
+    };
+    const t = setTimeout(() => done(new Error('timeout')), 8000);
+    window[cb] = data => done(null, data);
+    s.src = `https://api.deezer.com/track/${dz}?output=jsonp&callback=${cb}`;
+    s.onerror = () => done(new Error('jsonp'));
+    document.head.appendChild(s);
+  });
+
   const playFallback = () => {
     const id = expected;
     if (playFile(id, true)) return;
     const dz = tracks[id]?.deezer;
     show(id);
     if (!dz) return;
-    fetch(`https://api.deezer.com/track/${dz}`)
-      .then(r => r.json())
+    dzPreview(dz)
       .then(d => {
         if (expected !== id || !d.preview) return;
         try { yt?.stopVideo?.(); } catch {}
@@ -360,7 +375,7 @@
   addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
-  fetch('/content/playlist.json?v=yt-8')
+  fetch('/content/playlist.json?v=yt-8b')
     .then(r => r.json())
     .then(d => {
       tracks = d.tracks || {};

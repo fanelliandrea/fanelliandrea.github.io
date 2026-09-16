@@ -23,7 +23,7 @@
 
   const pose = (i, n, mobile) => {
     const gold = Math.PI * (3 - Math.sqrt(5));
-    const a = i * gold + (unit(i, 1) - 0.5) * 0.5;
+    const a = i * gold + (unit(i, 1) - 0.5) * 0.85;
     const r = Math.sqrt((i + 0.55) / n);
     return {
       ux: Math.cos(a) * r,

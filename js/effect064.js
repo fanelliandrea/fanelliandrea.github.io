@@ -22,13 +22,13 @@
   };
 
   const pose = (i, n, mobile) => {
-    const a = unit(i, 1) * Math.PI * 2;
-    const u = unit(i, 2);
-    const r = 5 + (mobile ? 15 : 18) * (u * u);
+    const gold = Math.PI * (3 - Math.sqrt(5));
+    const a = i * gold + (unit(i, 1) - 0.5) * 0.5;
+    const r = Math.sqrt((i + 0.55) / n);
     return {
-      x: Math.cos(a) * r,
-      y: Math.sin(a) * r * (mobile ? 0.55 : 0.62),
-      z: -24 - unit(i, 4) * 420 - i * 680,
+      ux: Math.cos(a) * r,
+      uy: Math.sin(a) * r,
+      z: -10 - unit(i, 4) * 200 - i * 680,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: unit(i, 7) > 0.4,
@@ -94,13 +94,20 @@
       gsap.set(world, { transformStyle: 'preserve-3d', force3D: true, z: 0, rotationX: 0, rotationY: 0 });
       gsap.set(cards, { xPercent: -50, yPercent: -50, transformOrigin: '50% 50%', force3D: true });
 
+      const lens = () => {
+        const fov = 2 * Math.atan(18 / 35);
+        stage.style.perspective = `${Math.round((innerWidth / 2) / Math.tan(fov / 2))}px`;
+      };
+
       const bases = cards.map(() => ({ x: 0, y: 0 }));
       const placeXY = () => {
+        lens();
         const w = innerWidth, h = innerHeight;
+        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.36 : 0.4);
         cards.forEach((card, i) => {
           const p = poses[i];
-          bases[i].x = (p.x / 100) * w;
-          bases[i].y = (p.y / 100) * h;
+          bases[i].x = p.ux * R;
+          bases[i].y = p.uy * R;
           gsap.set(card, { x: bases[i].x, y: bases[i].y });
         });
       };

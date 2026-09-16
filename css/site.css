@@ -253,7 +253,7 @@ html.js .stills .still.in{opacity:1;transform:none}
 .fx064-track{height:560vh}
 .fx064-stage{
   position:sticky;top:0;height:100svh;
-  perspective:980px;perspective-origin:50% 48%;
+  perspective:1400px;perspective-origin:50% 48%;
   overflow:hidden;
 }
 .fx064-world{
@@ -262,12 +262,12 @@ html.js .stills .still.in{opacity:1;transform:none}
 }
 .fx064-card{
   position:absolute;left:50%;top:50%;
-  width:min(42vw,22rem);
+  width:min(52vw,28rem);
   color:inherit;
   transform-style:preserve-3d;
   will-change:transform,opacity,filter;
 }
-.fx064-card.is-portrait{width:min(32vw,17rem)}
+.fx064-card.is-portrait{width:min(40vw,22rem)}
 .fx064-shot{
   display:block;aspect-ratio:16/10;background:var(--tile);
   box-shadow:
@@ -417,10 +417,9 @@ html.js .stills .still.in{opacity:1;transform:none}
   .piece-1{grid-column:1/-1;grid-row:auto}
   .gather .shot{aspect-ratio:4/5;height:auto}
   .piece-1 .shot{aspect-ratio:5/4}
-  .fx064-card{width:min(58vw,18rem)}
-  .fx064-card.is-portrait{width:min(46vw,15rem)}
+  .fx064-card{width:min(70vw,22rem)}
+  .fx064-card.is-portrait{width:min(56vw,18rem)}
   .fx064-hint{bottom:6.2rem}
-  .fx064-stage{perspective:1120px}
 }
 
 @media (prefers-reduced-motion:reduce){

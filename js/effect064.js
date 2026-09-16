@@ -21,17 +21,32 @@
     ctx = null;
   };
 
+  /* Loose OS board — mix of sizes, spread across the screen like Her. */
+  const BOARD = [
+    { ux: -0.58, uy: -0.36, s: 0.62, portrait: false },
+    { ux: -0.18, uy: -0.44, s: 0.46, portrait: true },
+    { ux:  0.16, uy: -0.30, s: 0.40, portrait: false },
+    { ux:  0.50, uy: -0.40, s: 0.36, portrait: true },
+    { ux:  0.74, uy: -0.08, s: 0.32, portrait: true },
+    { ux: -0.46, uy:  0.04, s: 0.58, portrait: true },
+    { ux:  0.02, uy:  0.06, s: 0.50, portrait: false },
+    { ux:  0.42, uy:  0.16, s: 0.42, portrait: false },
+    { ux: -0.16, uy:  0.40, s: 1.00, portrait: false },
+    { ux:  0.46, uy:  0.42, s: 0.48, portrait: true },
+  ];
+
   const pose = (i, n, mobile) => {
-    const gold = Math.PI * (3 - Math.sqrt(5));
-    const a = i * gold + (unit(i, 1) - 0.5) * 0.85;
-    const r = 0.38 + 0.62 * Math.sqrt((i + 0.55) / n);
+    const b = BOARD[i % BOARD.length];
+    const jx = (unit(i, 1) - 0.5) * 0.08;
+    const jy = (unit(i, 2) - 0.5) * 0.07;
     return {
-      ux: Math.cos(a) * r,
-      uy: Math.sin(a) * r,
+      ux: b.ux + jx,
+      uy: (mobile ? b.uy * 0.92 : b.uy) + jy,
+      s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
       z: -10 - unit(i, 4) * 200 - i * 680,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
-      portrait: unit(i, 7) > 0.4,
+      portrait: b.portrait,
     };
   };
 
@@ -103,12 +118,13 @@
       const placeXY = () => {
         lens();
         const w = innerWidth, h = innerHeight;
-        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.62 : 0.74);
+        const padX = matchMedia('(max-width: 860px)').matches ? 0.36 : 0.44;
+        const padY = matchMedia('(max-width: 860px)').matches ? 0.32 : 0.38;
         cards.forEach((card, i) => {
           const p = poses[i];
-          bases[i].x = p.ux * R;
-          bases[i].y = p.uy * R;
-          gsap.set(card, { x: bases[i].x, y: bases[i].y });
+          bases[i].x = p.ux * w * padX;
+          bases[i].y = p.uy * h * padY;
+          gsap.set(card, { x: bases[i].x, y: bases[i].y, scale: p.s });
         });
       };
 
@@ -136,7 +152,6 @@
           else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
           const gone = opacity < 0.02;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
-          card.style.visibility = gone ? 'hidden' : 'visible';
           card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';
           const blur = gone ? 0 : dof(rel);
           const shot = shots[i];

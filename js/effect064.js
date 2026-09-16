@@ -23,13 +23,13 @@
 
   const pose = (i, n, mobile) => {
     const a = unit(i, 1) * Math.PI * 2;
-    const r = 12 + unit(i, 2) * (mobile ? 30 : 38);
+    const r = 5 + unit(i, 2) * unit(i, 2) * (mobile ? 18 : 22);
     return {
-      x: Math.cos(a) * r * (mobile ? 0.98 : 1.08),
-      y: Math.sin(a) * r * (mobile ? 0.54 : 0.64) + (unit(i, 3) - 0.5) * 10,
-      z: -12 - unit(i, 4) * 280 - i * 145,
-      rx: (unit(i, 5) - 0.5) * 14,
-      ry: (unit(i, 6) - 0.5) * 26,
+      x: Math.cos(a) * r,
+      y: Math.sin(a) * r * (mobile ? 0.58 : 0.7),
+      z: -70 - unit(i, 4) * 180 - i * 420,
+      rx: (unit(i, 5) - 0.5) * 5,
+      ry: (unit(i, 6) - 0.5) * 8,
       portrait: unit(i, 7) > 0.4,
     };
   };
@@ -86,18 +86,20 @@
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
     const farthest = Math.max(...poses.map(p => -p.z));
-    const travel = farthest + 420;
-    track.style.height = `${Math.max(480, 80 + N * 48)}vh`;
+    const travel = farthest + 560;
+    track.style.height = `${Math.max(560, 90 + N * 62)}vh`;
 
     ctx = gsap.context(() => {
       gsap.set(world, { transformStyle: 'preserve-3d', force3D: true, z: 0, rotationX: 0, rotationY: 0 });
       gsap.set(cards, { xPercent: -50, yPercent: -50, transformOrigin: '50% 50%', force3D: true });
 
+      const bases = cards.map(() => ({ x: 0, y: 0 }));
       const placeXY = () => {
         const w = innerWidth, h = innerHeight;
-        cards.forEach((card, i) => {
+        cards.forEach((_, i) => {
           const p = poses[i];
-          gsap.set(card, { x: (p.x / 100) * w, y: (p.y / 100) * h });
+          bases[i].x = (p.x / 100) * w;
+          bases[i].y = (p.y / 100) * h;
         });
       };
 
@@ -107,17 +109,20 @@
       const dof = rel => {
         if (rel > 24) return 0;
         const d = 30 - rel;
-        if (d < 140) return 0;
-        const t = Math.min(1, (d - 140) / 1800);
+        if (d < 180) return 0;
+        const t = Math.min(1, (d - 180) / 2600);
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
+          const near = sCurve(Math.max(0, Math.min(1, (rel + 100) / 200)));
+          const spread = 1 + near * (mobile ? 0.9 : 1.35);
+          gsap.set(card, { x: bases[i].x * spread, y: bases[i].y * spread });
           let opacity = 1;
           if (rel > 8) opacity = 1 - sCurve((rel - 8) / 340);
-          else if (rel < -2200) opacity = Math.max(0.2, 1 - sCurve((-rel - 2200) / 1000));
+          else if (rel < -2800) opacity = Math.max(0.16, 1 - sCurve((-rel - 2800) / 1200));
           const gone = opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
@@ -134,7 +139,7 @@
       placeXY();
       cards.forEach((card, i) => {
         const p = poses[i];
-        gsap.set(card, { z: p.z - 2000, rotationX: 28, rotationY: p.ry * 1.6 });
+        gsap.set(card, { z: p.z - 2600, rotationX: 10, rotationY: p.ry * 1.2 });
       });
       paint();
 
@@ -169,8 +174,8 @@
         const ry = gsap.quickTo(world, 'rotationY', { duration: 1.15, ease: 'power3.out' });
         stage.addEventListener('pointermove', e => {
           const r = stage.getBoundingClientRect();
-          rx(((e.clientY - r.top) / r.height - 0.5) * -6);
-          ry(((e.clientX - r.left) / r.width - 0.5) * 8);
+          rx(((e.clientY - r.top) / r.height - 0.5) * -3);
+          ry(((e.clientX - r.left) / r.width - 0.5) * 4);
         });
         stage.addEventListener('pointerleave', () => { rx(0); ry(0); });
       }

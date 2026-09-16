@@ -253,7 +253,7 @@ html.js .stills .still.in{opacity:1;transform:none}
 .fx064-track{height:560vh}
 .fx064-stage{
   position:sticky;top:0;height:100svh;
-  perspective:1400px;perspective-origin:50% 46%;
+  perspective:1200px;perspective-origin:50% 50%;
   overflow:hidden;
 }
 .fx064-world{
@@ -420,7 +420,7 @@ html.js .stills .still.in{opacity:1;transform:none}
   .fx064-card{width:min(58vw,18rem)}
   .fx064-card.is-portrait{width:min(46vw,15rem)}
   .fx064-hint{bottom:6.2rem}
-  .fx064-stage{perspective:900px}
+  .fx064-stage{perspective:1120px}
 }
 
 @media (prefers-reduced-motion:reduce){

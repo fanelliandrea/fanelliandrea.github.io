@@ -1,10 +1,17 @@
 /* 064 — work stills scatter into a 3D cloud; scroll flies the camera on Z. */
 (() => {
-  const Z_STEP = 320;
   let ctx = null;
   let seq = 0;
   let onResize = null;
-  const golden = Math.PI * (3 - Math.sqrt(5));
+
+  const unit = (i, s) => {
+    const n = Math.sin(i * 127.13 + s * 311.7) * 43758.5453;
+    return n - Math.floor(n);
+  };
+  const sCurve = t => {
+    const x = t < 0 ? 0 : t > 1 ? 1 : t;
+    return x * x * (3 - 2 * x);
+  };
 
   const kill = () => {
     seq += 1;
@@ -15,16 +22,15 @@
   };
 
   const pose = (i, n, mobile) => {
-    const k = i + 1.2;
-    const a = k * golden + 0.45;
-    const r = 4.2 + Math.sqrt(k) * (mobile ? 6.4 : 6.2);
+    const a = unit(i, 1) * Math.PI * 2;
+    const r = 12 + unit(i, 2) * (mobile ? 30 : 38);
     return {
-      x: Math.cos(a) * r * (mobile ? 0.74 : 0.68),
-      y: Math.sin(a * 1.08) * r * (mobile ? 0.4 : 0.36),
-      z: -50 - i * Z_STEP + (i % 2 ? -36 : 20),
-      rx: Math.sin(a) * 8,
-      ry: Math.cos(a) * (mobile ? 9 : 16),
-      portrait: i % 3 !== 1,
+      x: Math.cos(a) * r * (mobile ? 0.98 : 1.08),
+      y: Math.sin(a) * r * (mobile ? 0.54 : 0.64) + (unit(i, 3) - 0.5) * 10,
+      z: -12 - unit(i, 4) * 280 - i * 145,
+      rx: (unit(i, 5) - 0.5) * 14,
+      ry: (unit(i, 6) - 0.5) * 26,
+      portrait: unit(i, 7) > 0.4,
     };
   };
 
@@ -79,7 +85,8 @@
     const cards = [...world.querySelectorAll('.fx064-card')];
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
-    const travel = (N - 1) * Z_STEP + 520;
+    const farthest = Math.max(...poses.map(p => -p.z));
+    const travel = farthest + 420;
     track.style.height = `${Math.max(480, 80 + N * 48)}vh`;
 
     ctx = gsap.context(() => {
@@ -98,30 +105,30 @@
       const shots = cards.map(c => c.querySelector('.fx064-shot'));
       const maxBlur = mobile ? 10 : 16;
       const dof = rel => {
-        if (rel > 40) return 0;
-        const d = rel - 30;
-        if (d > -140 && d < 120) return 0;
-        const t = Math.min(1, (-d - 140) / 2100);
-        return Math.round(t * t * maxBlur * 2) / 2;
+        if (rel > 24) return 0;
+        const d = 30 - rel;
+        if (d < 140) return 0;
+        const t = Math.min(1, (d - 140) / 1800);
+        return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
-          if (rel > 36) opacity = Math.max(0, 1 - (rel - 36) / 70);
-          else if (rel < -2400) opacity = Math.max(0.18, 1 - (-rel - 2400) / 900);
-          const gone = opacity < 0.02 || rel > 110;
-          card.style.opacity = gone ? '0' : String(opacity);
+          if (rel > 8) opacity = 1 - sCurve((rel - 8) / 340);
+          else if (rel < -2200) opacity = Math.max(0.2, 1 - sCurve((-rel - 2200) / 1000));
+          const gone = opacity < 0.015;
+          card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
-          card.style.pointerEvents = gone || opacity < 0.35 ? 'none' : 'auto';
+          card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';
           const blur = gone ? 0 : dof(rel);
           const shot = shots[i];
           if (shot) shot.style.filter = blur ? `blur(${blur}px)` : 'none';
-          const mid = Math.abs(rel + 40);
-          if (pills[i]) pills[i].style.opacity = String(!gone && mid < 360 && opacity > 0.5 && blur < 2 ? 1 - mid / 460 : 0);
+          const mid = Math.abs(rel + 20);
+          if (pills[i]) pills[i].style.opacity = String(!gone && mid < 380 && opacity > 0.55 && blur < 2 ? 1 - mid / 480 : 0);
         });
-        if (hint) hint.style.opacity = String(Math.max(0, 1 - cam.z / 280));
+        if (hint) hint.style.opacity = String(Math.max(0, 1 - sCurve(cam.z / 320)));
       };
 
       placeXY();

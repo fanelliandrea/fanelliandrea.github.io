@@ -45,7 +45,7 @@
       ux: b.ux + jx,
       uy: (mobile ? b.uy * 0.9 : b.uy) + jy,
       s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
-      z: -220 - d * 240 - unit(i, 4) * 70,
+      z: -28 - d * 240 - unit(i, 4) * 50,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,
@@ -143,7 +143,7 @@
       const paint = () => {
         gsap.set(world, { z: cam.z });
         const room = Math.min(innerWidth, innerHeight);
-        const fadeFrom = room * 0.72;
+        const fadeFrom = room * 0.92;
         const fadeTo = room * 1.12;
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
@@ -165,7 +165,7 @@
       };
 
       placeXY();
-      const PUSH = 480;
+      const PUSH = 320;
       cards.forEach((card, i) => {
         const p = poses[i];
         gsap.set(card, { z: p.z - PUSH, rotationX: p.rx, rotationY: p.ry });

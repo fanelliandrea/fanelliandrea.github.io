@@ -403,33 +403,56 @@ body[data-page="ideas"][data-slug]{
 }
 
 .ideas-pl__paper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.7rem;
+  display: block;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 1.05rem 0.95rem 1.1rem;
-  border-radius: 0.55rem;
+  overflow: hidden;
+  border-radius: 1.15rem;
   background: var(--tone, #f7efe6);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55) inset,
-    0 18px 40px rgba(72, 42, 58, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.42) inset,
+    0 18px 40px rgba(72, 42, 58, 0.18),
     0 2px 8px rgba(72, 42, 58, 0.08);
   color: #2a2430;
-  text-align: left;
   transition:
     box-shadow 0.35s var(--ease),
-    filter 0.35s var(--ease);
+    filter 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.ideas-pl__shot,
+.ideas-pl__shot img,
+.ideas-pl__fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ideas-pl__shot img {
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  transform: scale(1.04);
+  transition: transform 0.8s var(--ease);
+}
+
+.ideas-pl__fallback {
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem 0.9rem;
 }
 
 .ideas-pl__card.is-active .ideas-pl__paper {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.65) inset,
-    0 26px 54px rgba(72, 42, 58, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    0 26px 54px rgba(72, 42, 58, 0.26),
     0 4px 12px rgba(72, 42, 58, 0.1);
   filter: brightness(1.03);
+}
+
+.ideas-pl__card.is-active .ideas-pl__shot img {
+  transform: scale(1.08);
 }
 
 .ideas-pl__card-title {

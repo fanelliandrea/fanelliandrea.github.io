@@ -63,6 +63,13 @@
 
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
+  const thumb = (u, w = 900) => {
+    if (window.Site?.thumb) return window.Site.thumb(u, w);
+    if (!u) return "";
+    if (/\.gif$/i.test(u)) return u;
+    return `${u}${u.includes("?") ? "&" : "?"}scale-down-to=${w}`;
+  };
+
   function blurbFor(item) {
     if (item.blurb) return item.blurb;
     if (item.excerpt) return item.excerpt;
@@ -102,7 +109,7 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    cardW = clamp(Math.round(w * 0.118), 118, 188);
+    cardW = clamp(Math.round(w * 0.132), 128, 210);
     radius = clamp(Math.round(Math.min(w * 0.52, h * 0.62)), 260, 560);
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
@@ -118,11 +125,12 @@
       el.style.setProperty("--tone", PASTELS[i % PASTELS.length]);
       el.setAttribute("aria-label", item.title);
       el.dataset.index = String(i);
-      el.innerHTML = `
-        <span class="ideas-pl__paper">
-          <span class="ideas-pl__card-title">${esc(item.title)}</span>
-          <span class="ideas-pl__card-blurb">${esc(blurbFor(item))}</span>
-        </span>`;
+      const src = item.media?.[0];
+      const face = src
+        ? `<span class="ideas-pl__shot"><img src="${esc(thumb(src, 900))}" alt="" draggable="false" decoding="async"></span>`
+        : `<span class="ideas-pl__fallback"><span class="ideas-pl__card-title">${esc(item.title)}</span></span>`;
+      el.classList.toggle("has-photo", !!src);
+      el.innerHTML = `<span class="ideas-pl__paper">${face}</span>`;
       el.addEventListener("click", (e) => {
         if (moved) {
           e.preventDefault();

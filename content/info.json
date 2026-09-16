@@ -67,16 +67,9 @@
       }
     ]
   },
-  "photos": [
-    {
-      "src": "/content/info/portrait-01.jpg",
-      "remote": "https://framerusercontent.com/images/9PLzL2rTG7rK8HjGjkT5DKSXPE.jpg?scale-down-to=1024",
-      "alt": "Andrea Fanelli, portrait against classical stone architecture in Rome"
-    },
-    {
-      "src": "/content/info/portrait-02.jpg",
-      "remote": "https://framerusercontent.com/images/rmn24TMZGhE8IWs9gptsFz6qc.jpg?scale-down-to=1024",
-      "alt": "Andrea Fanelli, close portrait in sunlight"
-    }
-  ]
+  "orb": {
+    "src": "/content/info/orb.png",
+    "remote": "https://framerusercontent.com/images/rmn24TMZGhE8IWs9gptsFz6qc.jpg?scale-down-to=1024",
+    "alt": "Andrea Fanelli"
+  }
 }

@@ -32,16 +32,14 @@
     root.setAttribute("aria-hidden", "true");
     root.innerHTML = `
       <div class="info-frost__veil" data-info-close tabindex="-1"></div>
-      <div class="info-frost__mark">Andrea Fanelli</div>
       <button class="info-frost__close" type="button" data-info-close aria-label="Close info">
         <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
           <path d="M3 3l8 8M11 3L3 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </button>
-      <article class="info-frost__sheet" role="dialog" aria-modal="true" aria-labelledby="info-frost-title" data-info-sheet>
-        <p class="info-frost__kicker">info</p>
+      <div class="info-frost__stack" role="dialog" aria-modal="true" aria-labelledby="info-frost-title" data-info-sheet>
         <div data-info-body></div>
-      </article>
+      </div>
     `;
     document.body.appendChild(root);
     root.addEventListener("click", (e) => {
@@ -59,27 +57,43 @@
       .replace(/"/g, "&quot;");
   }
 
-  function photoHtml(photo) {
-    const src = photo.src || photo.remote;
-    const alt = escapeHtml(photo.alt || "Portrait");
-    return `<figure class="info-frost__photo"><img src="${escapeHtml(src)}" alt="${alt}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${escapeHtml(photo.remote || src)}'" /></figure>`;
+  function orbHtml(orb) {
+    if (!orb) return "";
+    const src = orb.src || orb.remote;
+    const alt = escapeHtml(orb.alt || "Andrea Fanelli");
+    const fallback = escapeHtml(orb.remote || src);
+    return `<div class="info-frost__orb" aria-hidden="${orb.alt ? "false" : "true"}">
+      <span class="info-frost__orb-glow"></span>
+      <img src="${escapeHtml(src)}" alt="${alt}" width="72" height="72" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
+    </div>`;
+  }
+
+  function card(kicker, inner, extraClass = "") {
+    return `<section class="info-frost__card ${extraClass}">
+      <p class="info-frost__kicker">${escapeHtml(kicker)}</p>
+      ${inner}
+    </section>`;
   }
 
   function render(body, d) {
-    const photos = d.photos || [];
+    const orb = d.orb || (d.photos && d.photos[0]) || null;
     const philo = (d.philosophy && d.philosophy.points) || [];
     const skills = (d.skills && d.skills.groups) || [];
     const contacts = (d.contacts && d.contacts.items) || [];
 
-    body.innerHTML = `
+    const about = `
+      ${orbHtml(orb)}
       <h1 class="info-frost__greeting" id="info-frost-title">${escapeHtml(d.greeting || d.name || "Info")}</h1>
       ${d.basedIn ? `<p class="info-frost__meta">${escapeHtml(d.basedIn)}</p>` : ""}
-      ${photos[0] ? photoHtml(photos[0]) : ""}
       ${d.intro ? `<p class="info-frost__intro">${escapeHtml(d.intro)}</p>` : ""}
-      <hr class="info-frost__rule" />
+    `;
+
+    const philosophy = `
       <h2 class="info-frost__section-title">${escapeHtml((d.philosophy && d.philosophy.title) || "Philosophy")}</h2>
       ${philo.map((p) => `<p class="info-frost__point">${escapeHtml(p)}</p>`).join("")}
-      <hr class="info-frost__rule" />
+    `;
+
+    const skillsInner = `
       <h2 class="info-frost__section-title">${escapeHtml((d.skills && d.skills.title) || "Skills")}</h2>
       <div class="info-frost__skills">
         ${skills
@@ -94,9 +108,10 @@
           )
           .join("")}
       </div>
-      ${photos[1] ? `<hr class="info-frost__rule" />${photoHtml(photos[1])}` : ""}
       ${d.tagline ? `<p class="info-frost__tagline">${escapeHtml(d.tagline)}</p>` : ""}
-      <hr class="info-frost__rule" />
+    `;
+
+    const contactsInner = `
       <h2 class="info-frost__section-title">${escapeHtml((d.contacts && d.contacts.title) || "Contacts")}</h2>
       <dl class="info-frost__contacts">
         ${contacts
@@ -110,6 +125,13 @@
           .join("")}
       </dl>
     `;
+
+    body.innerHTML = [
+      card("info", about, "info-frost__card--about"),
+      card("philosophy", philosophy),
+      card("skills", skillsInner),
+      card("contacts", contactsInner, "info-frost__card--last"),
+    ].join("");
   }
 
   async function loadData() {

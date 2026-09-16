@@ -101,7 +101,7 @@
         const d = rel - 30;
         if (d > -140 && d < 120) return 0;
         if (d < 0) {
-          const t = Math.min(1, (-d - 140) / 1500);
+          const t = Math.min(1, (-d - 140) / 2100);
           return Math.round(t * t * maxBlur * 2) / 2;
         }
         const t = Math.min(1, (d - 120) / 380);

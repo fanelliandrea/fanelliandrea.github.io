@@ -45,7 +45,7 @@
       ux: b.ux + jx,
       uy: (mobile ? b.uy * 0.9 : b.uy) + jy,
       s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
-      z: -200 - d * 150 - unit(i, 4) * 50,
+      z: -220 - d * 240 - unit(i, 4) * 70,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,

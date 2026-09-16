@@ -1,4 +1,4 @@
-/* Ideas playlist — photo cards in a Daybreak-soft arc on daylight sky. */
+/* Ideas playlist — register photos in Daybreak-style frames on daylight sky. */
 (() => {
   let STEP = 18; /* degrees — recomputed so cards never overlap */
   const PASTELS = [

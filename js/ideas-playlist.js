@@ -349,12 +349,13 @@
   function tick() {
     raf = null;
     const delta = target - progress;
-    if (Math.abs(delta) < 0.0012) {
+    if (Math.abs(delta) < 0.0009) {
       progress = target;
       layout(progress, true);
       return;
     }
-    progress += delta * 0.16;
+    /* Soft follow — fluid but not snappy */
+    progress += delta * 0.08;
     layout(progress, true);
     raf = requestAnimationFrame(tick);
   }
@@ -375,9 +376,11 @@
     const base = Math.round(progress / n) * n;
     const mapped = base + (((local % n) + n) % n);
     const alts = [mapped - n, mapped, mapped + n];
-    target = alts.reduce((best, v) =>
+    const desired = alts.reduce((best, v) =>
       Math.abs(v - progress) < Math.abs(best - progress) ? v : best
     );
+    /* Ease toward the cursor mapping — no hard snaps */
+    target += (desired - target) * 0.2;
   }
 
   function inScrubZone(clientX, clientY) {
@@ -395,7 +398,7 @@
     if (dragging) {
       const dx = e.clientX - dragStartX;
       if (Math.abs(dx) > 4) moved = true;
-      const delta = (-dx / window.innerWidth) * Math.max(3, count() * 0.55);
+      const delta = (-dx / window.innerWidth) * Math.max(1.6, count() * 0.28);
       target = dragStartTarget + delta;
       requestTick();
       return;
@@ -433,7 +436,7 @@
     requestTick();
   }
 
-  function lockNav(ms = 900, clientX) {
+  function lockNav(ms = 1100, clientX) {
     navLockUntil = Date.now() + ms;
     scrubResumeX =
       typeof clientX === "number" && Number.isFinite(clientX)
@@ -443,7 +446,7 @@
 
   function step(dir, clientX) {
     if (!cards.length) return;
-    lockNav(1100, clientX);
+    lockNav(1200, clientX);
     target = Math.round(target) + dir;
     updateFocus(modIndex(target));
     requestTick();
@@ -457,6 +460,7 @@
   function onWheel(e) {
     if (!cards.length) return;
     e.preventDefault();
+    if (Date.now() < navLockUntil) return;
     const dir = Math.sign(e.deltaY || e.deltaX);
     if (!dir) return;
     step(dir, e.clientX);

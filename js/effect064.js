@@ -1,11 +1,9 @@
-/* 064 — scroll-revealed gallery.
-   Cards sail in from deep Z and land with a bounce. Scroll then
-   moves the field along Z, so you travel forward and back through it. */
+/* 064 — work stills scatter into a 3D cloud; scroll flies the camera on Z. */
 (() => {
+  const Z_STEP = 320;
   let ctx = null;
   let seq = 0;
   let onResize = null;
-
   const golden = Math.PI * (3 - Math.sqrt(5));
 
   const kill = () => {
@@ -18,12 +16,12 @@
 
   const pose = (i, n, mobile) => {
     const k = i + 1.2;
-    const a = k * golden + 0.4;
-    const r = Math.sqrt(k / (n + 1.2)) * (mobile ? 28 : 34);
+    const a = k * golden + 0.45;
+    const r = 7 + Math.sqrt(k) * (mobile ? 7.5 : 9.5);
     return {
-      x: Math.cos(a) * r * (mobile ? 0.95 : 1.12),
-      y: Math.sin(a) * r * (mobile ? 0.52 : 0.6),
-      z: -80 - i * 260 + (i % 2 ? -48 : 28),
+      x: Math.cos(a) * r * (mobile ? 0.78 : 0.86),
+      y: Math.sin(a * 1.08) * r * (mobile ? 0.42 : 0.46),
+      z: -50 - i * Z_STEP + (i % 2 ? -36 : 20),
       rx: Math.sin(a) * 8,
       ry: Math.cos(a) * (mobile ? 9 : 16),
       portrait: i % 3 !== 1,
@@ -81,8 +79,8 @@
     const cards = [...world.querySelectorAll('.fx064-card')];
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
-    const travel = (N - 1) * 260 + 880;
-    track.style.height = `${Math.max(420, 90 + N * 52)}vh`;
+    const travel = (N - 1) * Z_STEP + 520;
+    track.style.height = `${Math.max(480, 80 + N * 48)}vh`;
 
     ctx = gsap.context(() => {
       gsap.set(world, { transformStyle: 'preserve-3d', force3D: true, z: 0, rotationX: 0, rotationY: 0 });
@@ -102,47 +100,42 @@
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
-          if (rel > 160) opacity = Math.max(0, 1 - (rel - 160) / 380);
+          if (rel > 180) opacity = Math.max(0, 1 - (rel - 180) / 360);
+          else if (rel < -2200) opacity = Math.max(0.12, 1 - (-rel - 2200) / 900);
           card.style.opacity = String(opacity);
-          card.style.pointerEvents = opacity < 0.3 || rel > 140 ? 'none' : 'auto';
-          const mid = Math.abs(rel + 80);
-          if (pills[i]) pills[i].style.opacity = String(mid < 380 && opacity > 0.5 ? 1 - mid / 480 : 0);
+          card.style.pointerEvents = opacity < 0.28 || rel > 160 ? 'none' : 'auto';
+          const mid = Math.abs(rel + 60);
+          if (pills[i]) pills[i].style.opacity = String(mid < 400 && opacity > 0.45 ? 1 - mid / 500 : 0);
         });
-        if (hint) hint.style.opacity = String(Math.max(0, 1 - cam.z / 260));
+        if (hint) hint.style.opacity = String(Math.max(0, 1 - cam.z / 280));
       };
 
       placeXY();
       cards.forEach((card, i) => {
         const p = poses[i];
-        gsap.set(card, {
-          z: p.z - 1800,
-          rotationX: 28,
-          rotationY: p.ry * 1.6,
-          opacity: 0,
-        });
+        gsap.set(card, { z: p.z - 2000, rotationX: 28, rotationY: p.ry * 1.6 });
       });
+      paint();
 
-      const land = gsap.timeline({ defaults: { ease: 'back.out(1.5)' } });
+      const land = gsap.timeline({ defaults: { ease: 'back.out(1.45)' } });
       cards.forEach((card, i) => {
         const p = poses[i];
         land.to(card, {
           z: p.z,
           rotationX: p.rx,
           rotationY: p.ry,
-          opacity: 1,
-          duration: 1.15,
-        }, 0.06 + i * 0.08);
+          duration: 1.2,
+          onUpdate: paint,
+        }, 0.05 + i * 0.055);
       });
       if (hint) land.fromTo(hint, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.4);
-      land.add(() => paint());
 
       if (window.ScrollTrigger) {
         ScrollTrigger.create({
           trigger: track,
           start: 'top top',
           end: 'bottom bottom',
-          pin: false,
-          scrub: 0.7,
+          scrub: 0.65,
           onUpdate: self => {
             cam.z = self.progress * travel;
             paint();

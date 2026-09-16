@@ -867,6 +867,14 @@ body.is-info-open .ideas-pl {
   opacity: 1;
 }
 
+.info-frost [data-info-body] {
+  width: min(34rem, calc(100% - 2.2rem));
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0 auto;
+}
+
 .info-frost__stack::-webkit-scrollbar {
   width: 8px;
 }
@@ -882,7 +890,7 @@ body.is-info-open .ideas-pl {
 
 .info-frost__card {
   position: relative;
-  width: min(34rem, calc(100% - 2.2rem));
+  width: 100%;
   padding: 1.55rem 1.45rem 1.7rem;
   border-radius: 2.15rem;
   color: #f7f8fa;

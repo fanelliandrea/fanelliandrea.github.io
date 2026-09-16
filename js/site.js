@@ -125,7 +125,7 @@
     });
 
     const notes = $('#notes');
-    if (notes && !$('[data-effect-114]')) data.then(entries => {
+    if (notes && !$('[data-effect-114]') && !$('[data-ideas-board]')) data.then(entries => {
       notes.innerHTML = entries.filter(e => e.onSite !== false && e.kind === 'writing').map(e => {
         const href = e.href ? ` href="${esc(e.href)}"` : '';
         const tag = e.href ? 'a' : 'article';

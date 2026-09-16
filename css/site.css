@@ -273,6 +273,8 @@ html.js .stills .still.in{opacity:1;transform:none}
   box-shadow:
     0 0 0 1px rgba(255,255,255,.35),
     0 28px 70px -36px rgba(20,50,90,.55);
+  will-change:filter;
+  backface-visibility:hidden;
 }
 .fx064-card.is-portrait .fx064-shot{aspect-ratio:4/5}
 .fx064-shot img{width:100%;height:100%;object-fit:cover}

@@ -17,10 +17,10 @@
   const pose = (i, n, mobile) => {
     const k = i + 1.2;
     const a = k * golden + 0.45;
-    const r = 7 + Math.sqrt(k) * (mobile ? 7.5 : 9.5);
+    const r = 7 + Math.sqrt(k) * (mobile ? 9.2 : 9.5);
     return {
-      x: Math.cos(a) * r * (mobile ? 0.78 : 0.86),
-      y: Math.sin(a * 1.08) * r * (mobile ? 0.42 : 0.46),
+      x: Math.cos(a) * r * (mobile ? 0.9 : 0.86),
+      y: Math.sin(a * 1.08) * r * (mobile ? 0.5 : 0.46),
       z: -50 - i * Z_STEP + (i % 2 ? -36 : 20),
       rx: Math.sin(a) * 8,
       ry: Math.cos(a) * (mobile ? 9 : 16),
@@ -95,17 +95,32 @@
       };
 
       const cam = { z: 0 };
+      const shots = cards.map(c => c.querySelector('.fx064-shot'));
+      const maxBlur = mobile ? 10 : 16;
+      const dof = rel => {
+        const d = rel - 30;
+        if (d > -140 && d < 120) return 0;
+        if (d < 0) {
+          const t = Math.min(1, (-d - 140) / 1500);
+          return Math.round(t * t * maxBlur * 2) / 2;
+        }
+        const t = Math.min(1, (d - 120) / 380);
+        return Math.round(t * (maxBlur * 0.7) * 2) / 2;
+      };
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
           if (rel > 180) opacity = Math.max(0, 1 - (rel - 180) / 360);
-          else if (rel < -2200) opacity = Math.max(0.12, 1 - (-rel - 2200) / 900);
+          else if (rel < -2200) opacity = Math.max(0.18, 1 - (-rel - 2200) / 900);
           card.style.opacity = String(opacity);
           card.style.pointerEvents = opacity < 0.28 || rel > 160 ? 'none' : 'auto';
+          const blur = dof(rel);
+          const shot = shots[i];
+          if (shot) shot.style.filter = blur ? `blur(${blur}px)` : 'none';
           const mid = Math.abs(rel + 60);
-          if (pills[i]) pills[i].style.opacity = String(mid < 400 && opacity > 0.45 ? 1 - mid / 500 : 0);
+          if (pills[i]) pills[i].style.opacity = String(mid < 400 && opacity > 0.45 && blur < 2 ? 1 - mid / 500 : 0);
         });
         if (hint) hint.style.opacity = String(Math.max(0, 1 - cam.z / 280));
       };

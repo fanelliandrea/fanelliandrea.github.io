@@ -852,7 +852,7 @@ body.is-info-open .ideas-pl {
   align-items: center;
   gap: 0.7rem;
   padding: 0 0 5.5rem;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.38) transparent;
   transform: translateY(1.4rem);

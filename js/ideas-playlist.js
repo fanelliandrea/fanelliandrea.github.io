@@ -295,6 +295,7 @@
       return;
     }
     if (Date.now() < navLockUntil) return;
+    if (e.target.closest?.("[data-ideas-nav], .ideas-pl__cta, a")) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     setFromClientX(e.clientX);
     requestTick();

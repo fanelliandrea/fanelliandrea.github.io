@@ -44,8 +44,14 @@
     return {
       ux: (b.ux + jx) * 0.74,
       uy: ((mobile ? b.uy * 0.9 : b.uy) + jy) * 0.74,
-      s: Math.min(1.28, b.s * 1.85 * (mobile ? 0.95 : 1)),
-      z: -12 - d * 480 - unit(i, 4) * 80,
+      s: d === 0
+        ? Math.min(1.32, b.s * 2.05 * (mobile ? 0.95 : 1))
+        : b.s * (mobile ? 0.88 : 0.95),
+      z: d === 0
+        ? -16 - unit(i, 4) * 18
+        : d === 1
+          ? -460 - unit(i, 4) * 40
+          : -1100 - (d - 2) * 780 - unit(i, 4) * 90,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,

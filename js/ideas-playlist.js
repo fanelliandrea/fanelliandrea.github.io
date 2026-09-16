@@ -1,6 +1,6 @@
 /* Ideas playlist — photo cards in a Daybreak-soft arc on daylight sky. */
 (() => {
-  const STEP = 17; /* degrees — keep gaps with broad cards */
+  let STEP = 18; /* degrees — recomputed so cards never overlap */
   const PASTELS = [
     "#f6d5c4",
     "#f0c8d4",
@@ -133,13 +133,22 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    /* Broad frames like the poetry-arc photo (~4:5, ~26–30vw) */
-    cardW = clamp(Math.round(w * 0.28), 240, 400);
-    const cardH = cardW * (5 / 4);
-    const orbitTop = h * 0.82;
-    const topPad = clamp(h * 0.04, 18, 40);
-    const maxR = Math.max(220, orbitTop - cardH - topPad);
-    radius = clamp(Math.round(Math.min(w * 0.55, h * 0.52, maxR)), 240, 640);
+    /* Moderate frames on a wide gentle wheel — roomy gaps, not stacked */
+    cardW = clamp(Math.round(w * 0.118), 124, 176);
+    const cardH = cardW * (4 / 3);
+    /* Orbit center sits below the fold so the arc can stay wide & shallow */
+    const orbitPct = 1.14;
+    if (orbit) orbit.style.top = `${orbitPct * 100}%`;
+    const orbitTop = h * orbitPct;
+    const topPad = clamp(h * 0.07, 32, 64);
+    const maxR = Math.max(360, orbitTop - cardH - topPad);
+    radius = clamp(Math.round(Math.min(w * 0.82, maxR)), 420, 1100);
+    /* Horizontal gap at the apex: 2 r sin(STEP/2) >= cardW + gap */
+    const gap = clamp(Math.round(cardW * 0.28), 22, 48);
+    const half = Math.asin(
+      clamp((cardW + gap) / (2 * Math.max(radius, 1)), 0.01, 0.95)
+    );
+    STEP = clamp((half * 2 * 180) / Math.PI, 16, 32);
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
     });
@@ -191,11 +200,14 @@
     const x = Math.sin(rad) * radius;
     const y = -Math.cos(rad) * radius;
     const abs = Math.abs(dist);
-    const fadeStart = Math.max(3.2, count() * 0.38);
-    const fadeEnd = fadeStart + 1.6;
+    /* Keep ~5–7 evenly spaced cards visible on the wide arc */
+    const visible = Math.max(2.2, Math.min(3.4, 62 / Math.max(STEP, 1)));
+    const fadeStart = visible;
+    const fadeEnd = fadeStart + 1.1;
     const alpha =
-      abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.4;
-    const scale = 1 - Math.min(0.14, abs * 0.028);
+      abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.1;
+    /* Near-equal size — wheel reads as one airy ring, not a coverflow stack */
+    const scale = 1 - Math.min(0.04, abs * 0.01);
     return {
       xPercent: -50,
       yPercent: -100,

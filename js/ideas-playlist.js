@@ -1,4 +1,4 @@
-/* Ideas playlist — article photos in Daybreak frames on the sunset fan. */
+/* Ideas playlist — photo cards in a Daybreak-soft arc on daylight sky. */
 (() => {
   const STEP = 13; /* degrees between cards */
   const PASTELS = [
@@ -49,6 +49,7 @@
   let dragStartX = 0;
   let dragStartTarget = 0;
   let moved = false;
+  let navLockUntil = 0;
 
   const esc = (s) =>
     String(s ?? "").replace(
@@ -131,13 +132,13 @@
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
     const h = stage?.clientHeight || window.innerHeight;
-    cardW = clamp(Math.round(w * 0.122), 118, 190);
+    cardW = clamp(Math.round(w * 0.155), 150, 240);
     const cardH = cardW * (4 / 3);
-    /* Orbit sits mid-low; radius must leave room above for full card tops */
-    const orbitTop = h * 0.7;
-    const topPad = clamp(h * 0.06, 28, 56);
-    const maxR = Math.max(180, orbitTop - cardH - topPad);
-    radius = clamp(Math.round(Math.min(w * 0.42, h * 0.42, maxR)), 180, 420);
+    /* Bigger wheel, still keep card tops inside the viewport */
+    const orbitTop = h * 0.74;
+    const topPad = clamp(h * 0.04, 18, 40);
+    const maxR = Math.max(220, orbitTop - cardH - topPad);
+    radius = clamp(Math.round(Math.min(w * 0.52, h * 0.52, maxR)), 240, 560);
     cards.forEach((el) => {
       el.style.width = `${cardW}px`;
     });
@@ -173,7 +174,9 @@
           e.preventDefault();
           return;
         }
+        lockNav();
         target = nearestTarget(i);
+        updateFocus(i);
         requestTick();
       });
       host.appendChild(el);
@@ -208,18 +211,14 @@
   function updateFocus(index) {
     if (!focusEl || !items[index]) return;
     const item = items[index];
-    const kicker = focusEl.querySelector("[data-ideas-kicker]");
     const title = focusEl.querySelector("[data-ideas-title]");
-    const blurb = focusEl.querySelector("[data-ideas-blurb]");
     const cta = focusEl.querySelector("[data-ideas-cta]");
-    if (kicker) kicker.textContent = `Idea ${String(index + 1).padStart(2, "0")}`;
     if (title) title.textContent = item.title;
-    if (blurb) blurb.textContent = blurbFor(item);
     if (cta) {
       cta.hidden = false;
       if (item.href) {
         cta.href = item.href;
-        cta.textContent = "Open idea";
+        cta.textContent = "Read";
         cta.removeAttribute("aria-disabled");
         cta.classList.remove("is-soon");
         cta.onclick = null;
@@ -273,12 +272,31 @@
     if (raf == null) raf = requestAnimationFrame(tick);
   }
 
+  function setFromClientX(clientX) {
+    if (!cards.length) return;
+    const n = count();
+    const x = clamp(clientX, 0, window.innerWidth);
+    const local = gsap.utils.mapRange(0.08, 0.92, 0, n, x / window.innerWidth);
+    const base = Math.round(progress / n) * n;
+    const mapped = base + (((local % n) + n) % n);
+    const alts = [mapped - n, mapped, mapped + n];
+    target = alts.reduce((best, v) =>
+      Math.abs(v - progress) < Math.abs(best - progress) ? v : best
+    );
+  }
+
   function onPointerMove(e) {
-    if (!dragging) return;
-    const dx = e.clientX - dragStartX;
-    if (Math.abs(dx) > 4) moved = true;
-    const delta = (-dx / window.innerWidth) * Math.max(3, count() * 0.55);
-    target = dragStartTarget + delta;
+    if (dragging) {
+      const dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 4) moved = true;
+      const delta = (-dx / window.innerWidth) * Math.max(3, count() * 0.55);
+      target = dragStartTarget + delta;
+      requestTick();
+      return;
+    }
+    if (Date.now() < navLockUntil) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    setFromClientX(e.clientX);
     requestTick();
   }
 
@@ -299,10 +317,14 @@
     requestTick();
   }
 
+  function lockNav(ms = 520) {
+    navLockUntil = Date.now() + ms;
+  }
+
   function step(dir) {
     if (!cards.length) return;
+    lockNav();
     target = Math.round(target) + dir;
-    /* Keep focus in sync even when many clicks queue before the lerp settles */
     updateFocus(modIndex(target));
     requestTick();
   }

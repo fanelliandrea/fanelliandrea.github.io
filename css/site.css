@@ -350,7 +350,7 @@ body[data-page="ideas"][data-slug]{
 .ideas-pl__orbit {
   position: absolute;
   left: 50%;
-  top: 70%;
+  top: 74%;
   width: 0;
   height: 0;
   transform: translate(-50%, 0);
@@ -374,7 +374,7 @@ body[data-page="ideas"][data-slug]{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Daybreak-like chrome: soft squircle frame, warm soft shadow, photo fill */
+/* Soft frame, photo fill — no white stroke rim */
 .ideas-pl__frame {
   display: block;
   position: relative;
@@ -385,8 +385,6 @@ body[data-page="ideas"][data-slug]{
   border-radius: 1.15rem;
   background: var(--tone, #f7efe6);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.65) inset,
-    0 0 0 1px rgba(255, 255, 255, 0.55),
     0 22px 48px rgba(28, 72, 118, 0.22),
     0 4px 12px rgba(28, 72, 118, 0.1);
   transition:
@@ -396,8 +394,6 @@ body[data-page="ideas"][data-slug]{
 
 .ideas-pl__card.is-active .ideas-pl__frame {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.75) inset,
-    0 0 0 1px rgba(255, 255, 255, 0.72),
     0 28px 60px rgba(28, 72, 118, 0.3),
     0 6px 16px rgba(28, 72, 118, 0.14);
   filter: brightness(1.03);
@@ -434,24 +430,16 @@ body[data-page="ideas"][data-slug]{
   position: absolute;
   z-index: 6;
   left: 50%;
-  top: 62%;
+  top: 58%;
   transform: translate(-50%, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
+  gap: 1rem;
   width: min(28rem, calc(100vw - 2.5rem));
   text-align: center;
   pointer-events: none;
   opacity: 0;
-}
-
-.ideas-pl__kicker {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mute);
 }
 
 .ideas-pl__title {
@@ -461,13 +449,6 @@ body[data-page="ideas"][data-slug]{
   line-height: 1.12;
   color: var(--ink);
   max-width: 16ch;
-}
-
-.ideas-pl__blurb {
-  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
-  line-height: 1.45;
-  color: var(--mute);
-  max-width: 34ch;
 }
 
 .ideas-pl__cta {
@@ -636,13 +617,13 @@ body[data-page="ideas"][data-slug]{
 
 @media (max-width: 860px) {
   .ideas-pl__orbit {
-    top: 64%;
+    top: 68%;
   }
 
   .ideas-pl__focus {
-    top: 56%;
+    top: 52%;
     transform: translate(-50%, 0);
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
   .ideas-pl__title {

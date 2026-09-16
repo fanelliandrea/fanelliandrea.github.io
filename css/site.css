@@ -751,6 +751,13 @@ body.is-info-open .gather {
   user-select: none;
 }
 
+body.is-info-open .dock,
+body.is-info-open .player {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
 body.is-info-open [data-effect-064],
 body.is-info-open .ideas-pl {
   isolation: isolate;

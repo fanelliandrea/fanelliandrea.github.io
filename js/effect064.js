@@ -24,7 +24,7 @@
   const pose = (i, n, mobile) => {
     const gold = Math.PI * (3 - Math.sqrt(5));
     const a = i * gold + (unit(i, 1) - 0.5) * 0.85;
-    const r = Math.sqrt((i + 0.55) / n);
+    const r = 0.38 + 0.62 * Math.sqrt((i + 0.55) / n);
     return {
       ux: Math.cos(a) * r,
       uy: Math.sin(a) * r,
@@ -103,7 +103,7 @@
       const placeXY = () => {
         lens();
         const w = innerWidth, h = innerHeight;
-        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.56 : 0.66);
+        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.62 : 0.74);
         cards.forEach((card, i) => {
           const p = poses[i];
           bases[i].x = p.ux * R;
@@ -124,12 +124,17 @@
       };
       const paint = () => {
         gsap.set(world, { z: cam.z });
+        const room = Math.min(innerWidth, innerHeight);
+        const fadeFrom = room * 0.72;
+        const fadeTo = room * 1.12;
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
-          if (rel > -22) opacity = 1 - sCurve((rel + 22) / 200);
+          const box = card.getBoundingClientRect();
+          const span = Math.max(box.width, box.height);
+          if (span > fadeFrom) opacity = 1 - sCurve((span - fadeFrom) / (fadeTo - fadeFrom));
           else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
-          const gone = opacity < 0.015;
+          const gone = opacity < 0.02;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
           card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';

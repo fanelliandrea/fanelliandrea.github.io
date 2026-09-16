@@ -45,7 +45,7 @@
       ux: (b.ux + jx) * 0.74,
       uy: ((mobile ? b.uy * 0.9 : b.uy) + jy) * 0.74,
       s: Math.min(1.28, b.s * 1.85 * (mobile ? 0.95 : 1)),
-      z: -12 - d * 320 - unit(i, 4) * 50,
+      z: -12 - d * 480 - unit(i, 4) * 80,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,

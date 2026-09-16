@@ -109,7 +109,7 @@
 
   const fill = () => {
     const stills = $('#stills');
-    if (stills) data.then(entries => {
+    if (stills && !$('[data-effect-064]')) data.then(entries => {
       const work = entries.filter(e => e.homeWork).sort((a, b) => a.homeWork - b.homeWork);
       stills.classList.add('gather');
       stills.innerHTML = work.map(e => {

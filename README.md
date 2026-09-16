@@ -22,7 +22,7 @@ macOS may block servers from reading `~/Desktop`. Move the folder or grant Termi
 
 ```
 index.html             home — sky + bottom menu only
-work.html              selected work grid
+work.html              selected work as Effect 064 3D cloud (scroll on Z)
 ideas.html             writing
 info.html              bio
 work/*.html            project pages from content/projects.json
@@ -33,4 +33,5 @@ css/site.css           layout
 js/site.js             bottom menu, lists, in-page navigation (player stays mounted)
 js/player.js           YouTube audio pill
 js/space.js            sky, arrival
+js/effect064.js        Work 3D cloud + Z fly-through
 ```

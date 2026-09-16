@@ -247,6 +247,56 @@ html.js .stills .still.in{opacity:1;transform:none}
   font-size:13px;letter-spacing:.02em;line-height:1;
   pointer-events:none;
 }
+
+/* 064 — 3D work cloud, camera on Z */
+.fx064{position:relative;z-index:1}
+.fx064-track{height:560vh}
+.fx064-stage{
+  position:sticky;top:0;height:100svh;
+  perspective:1400px;perspective-origin:50% 46%;
+  overflow:hidden;
+}
+.fx064-world{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+}
+.fx064-card{
+  position:absolute;left:50%;top:50%;
+  width:min(38vw,21rem);
+  color:inherit;
+  transform-style:preserve-3d;
+  will-change:transform,opacity,filter;
+}
+.fx064-card.is-portrait{width:min(28vw,16.5rem)}
+.fx064-shot{
+  display:block;aspect-ratio:16/10;background:var(--tile);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.35),
+    0 28px 70px -36px rgba(20,50,90,.55);
+}
+.fx064-card.is-portrait .fx064-shot{aspect-ratio:4/5}
+.fx064-shot img{width:100%;height:100%;object-fit:cover}
+.fx064-pill{
+  position:absolute;left:.7rem;bottom:.7rem;
+  padding:.42rem .85rem;border-radius:999px;
+  background:rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  font-size:13px;letter-spacing:.02em;line-height:1;
+  pointer-events:none;
+  opacity:0;
+}
+.fx064-hint{
+  position:absolute;left:50%;bottom:5.6rem;translate:-50% 0;z-index:2;
+  margin:0;padding:.42rem .9rem;border-radius:999px;
+  background:rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  font-size:12px;letter-spacing:.06em;color:var(--ink);
+  pointer-events:none;
+}
+.fx064.fx064-flat{padding:0 var(--gutter)}
+.fx064.fx064-flat .fx064-track{height:auto}
+.fx064.fx064-flat .fx064-stage{position:relative;height:auto;overflow:visible;perspective:none}
+.fx064.fx064-flat .fx064-world{position:relative;inset:auto;display:contents}
 .piece-1{grid-column:1;grid-row:1/3}
 .piece-2{grid-column:2/4;grid-row:1}
 .piece-3{grid-column:2;grid-row:2}
@@ -336,7 +386,7 @@ html.js .stills .still.in{opacity:1;transform:none}
 @media (hover:hover) and (pointer:fine){
   .dock a:hover,.dock-toggle:hover,.player-btn:hover,.socials a:hover,.next a:hover{opacity:.55}
   .dock [aria-current="page"]:hover{opacity:1;background:var(--tile)}
-  .feature:hover img,.still:hover img,.aperture:hover img{transform:scale(1.03);transition:transform 1.2s var(--ease)}
+  .feature:hover img,.still:hover img,.aperture:hover img,.fx064-card:hover img{transform:scale(1.03);transition:transform 1.2s var(--ease)}
 }
 
 @media (max-width:860px){
@@ -365,12 +415,16 @@ html.js .stills .still.in{opacity:1;transform:none}
   .piece-1{grid-column:1/-1;grid-row:auto}
   .gather .shot{aspect-ratio:4/5;height:auto}
   .piece-1 .shot{aspect-ratio:5/4}
+  .fx064-card{width:min(58vw,18rem)}
+  .fx064-card.is-portrait{width:min(44vw,14.5rem)}
+  .fx064-hint{bottom:5.1rem}
+  .fx064-stage{perspective:900px}
 }
 
 @media (prefers-reduced-motion:reduce){
   .field{animation:none}
-  .aperture,.still .shot,.veil nav a{transform:none!important;filter:none!important}
-  .dock,.player,.whisper,.field,.wisp,html.js .stills .still{opacity:1!important}
+  .aperture,.still .shot,.veil nav a,.fx064-card{transform:none!important;filter:none!important}
+  .dock,.player,.whisper,.field,.wisp,html.js .stills .still,.fx064-pill{opacity:1!important}
   .dock,.dock-toggle,.dock-links a,.player,.player-btn,.player-body{transition:none!important}
   .dock-links a{transform:none!important}
   .dock.is-open .dock-links a{opacity:1!important}

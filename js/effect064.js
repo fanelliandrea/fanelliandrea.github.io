@@ -23,27 +23,29 @@
 
   /* Loose OS board — mix of sizes, spread across the screen like Her. */
   const BOARD = [
-    { ux: -0.58, uy: -0.36, s: 0.62, portrait: false },
-    { ux: -0.18, uy: -0.44, s: 0.46, portrait: true },
-    { ux:  0.16, uy: -0.30, s: 0.40, portrait: false },
-    { ux:  0.50, uy: -0.40, s: 0.36, portrait: true },
-    { ux:  0.74, uy: -0.08, s: 0.32, portrait: true },
-    { ux: -0.46, uy:  0.04, s: 0.58, portrait: true },
-    { ux:  0.02, uy:  0.06, s: 0.50, portrait: false },
-    { ux:  0.42, uy:  0.16, s: 0.42, portrait: false },
-    { ux: -0.16, uy:  0.40, s: 1.00, portrait: false },
-    { ux:  0.46, uy:  0.42, s: 0.48, portrait: true },
+    { ux: -0.72, uy: -0.42, s: 0.64, portrait: false },
+    { ux: -0.28, uy: -0.48, s: 0.48, portrait: true },
+    { ux:  0.22, uy: -0.38, s: 0.42, portrait: false },
+    { ux:  0.62, uy: -0.44, s: 0.38, portrait: true },
+    { ux:  0.82, uy: -0.06, s: 0.34, portrait: true },
+    { ux: -0.68, uy:  0.08, s: 0.56, portrait: true },
+    { ux: -0.12, uy:  0.12, s: 0.50, portrait: false },
+    { ux:  0.48, uy:  0.10, s: 0.44, portrait: false },
+    { ux: -0.38, uy:  0.46, s: 0.88, portrait: false },
+    { ux:  0.58, uy:  0.44, s: 0.50, portrait: true },
   ];
+  const DEPTH = [2, 0, 5, 1, 7, 3, 8, 4, 6, 9];
 
   const pose = (i, n, mobile) => {
     const b = BOARD[i % BOARD.length];
-    const jx = (unit(i, 1) - 0.5) * 0.08;
-    const jy = (unit(i, 2) - 0.5) * 0.07;
+    const d = DEPTH[i % DEPTH.length];
+    const jx = (unit(i, 1) - 0.5) * 0.1;
+    const jy = (unit(i, 2) - 0.5) * 0.08;
     return {
       ux: b.ux + jx,
-      uy: (mobile ? b.uy * 0.92 : b.uy) + jy,
+      uy: (mobile ? b.uy * 0.9 : b.uy) + jy,
       s: b.s * (mobile ? 0.92 : 1) * (0.94 + unit(i, 3) * 0.12),
-      z: -10 - unit(i, 4) * 200 - i * 680,
+      z: -520 - unit(i, 4) * 160 - d * 340,
       rx: (unit(i, 5) - 0.5) * 8,
       ry: (unit(i, 6) - 0.5) * 14,
       portrait: b.portrait,
@@ -118,8 +120,8 @@
       const placeXY = () => {
         lens();
         const w = innerWidth, h = innerHeight;
-        const padX = matchMedia('(max-width: 860px)').matches ? 0.36 : 0.44;
-        const padY = matchMedia('(max-width: 860px)').matches ? 0.32 : 0.38;
+        const padX = matchMedia('(max-width: 860px)').matches ? 0.4 : 0.48;
+        const padY = matchMedia('(max-width: 860px)').matches ? 0.36 : 0.42;
         cards.forEach((card, i) => {
           const p = poses[i];
           bases[i].x = p.ux * w * padX;
@@ -130,12 +132,12 @@
 
       const cam = { z: 0 };
       const shots = cards.map(c => c.querySelector('.fx064-shot'));
-      const maxBlur = mobile ? 10 : 16;
+      const maxBlur = mobile ? 7 : 11;
       const dof = rel => {
         if (rel > 24) return 0;
         const d = 30 - rel;
-        if (d < 160) return 0;
-        const t = Math.min(1, (d - 160) / 3400);
+        if (d < 280) return 0;
+        const t = Math.min(1, (d - 280) / 3200);
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       const paint = () => {
@@ -149,7 +151,7 @@
           const box = card.getBoundingClientRect();
           const span = Math.max(box.width, box.height);
           if (span > fadeFrom) opacity = 1 - sCurve((span - fadeFrom) / (fadeTo - fadeFrom));
-          else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
+          else if (rel < -4800) opacity = Math.max(0.2, 1 - sCurve((-rel - 4800) / 1400));
           const gone = opacity < 0.02;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';

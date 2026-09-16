@@ -200,33 +200,41 @@
     const x = Math.sin(rad) * radius;
     const y = -Math.cos(rad) * radius;
     const abs = Math.abs(dist);
+    const sign = dist === 0 ? 0 : dist < 0 ? -1 : 1;
     /* Keep ~5–7 evenly spaced cards visible on the wide arc */
     const visible = Math.max(2.2, Math.min(3.4, 62 / Math.max(STEP, 1)));
     const fadeStart = visible;
     const fadeEnd = fadeStart + 1.1;
     const alpha =
       abs >= fadeEnd ? 0 : abs <= fadeStart ? 1 : 1 - (abs - fadeStart) / 1.1;
-    /* Near-equal size — wheel reads as one airy ring, not a coverflow stack */
-    const scale = 1 - Math.min(0.04, abs * 0.01);
-    /* Side cards: soft blur + slight skew/squash, not opacity alone */
-    const edge = Math.max(0, abs - 0.55);
-    const blurPx = Math.min(7.5, edge * 2.6);
-    const skewX = (dist === 0 ? 0 : dist < 0 ? -1 : 1) * Math.min(5.5, edge * 2.1);
-    const scaleX = 1 - Math.min(0.07, edge * 0.028);
-    const scaleY = 1 - Math.min(0.05, edge * 0.02);
+    /* 0 at center → 1 at outer arc: ease-in so blur/distort build toward corners */
+    const t = clamp(abs / Math.max(fadeStart, 0.001), 0, 1);
+    const grad = t * t;
+    const blurPx = grad * 10;
+    /* Corners feel nearer to the screen: larger + swung toward camera */
+    const near = grad;
+    const scale = 1 + near * 0.18;
+    const skewX = sign * near * 8.5;
+    const scaleX = 1 + near * 0.1;
+    const scaleY = 1 + near * 0.05;
+    const rotY = -sign * near * 24;
     return {
       xPercent: -50,
       yPercent: -100,
       x,
       y,
+      z: near * 90,
       rotation: deg,
+      rotationY: rotY,
       skewX,
       scaleX: scale * scaleX,
       scaleY: scale * scaleY,
       transformOrigin: "50% 100%",
+      transformPerspective: 1100,
       autoAlpha: alpha,
-      filter: blurPx < 0.15 ? "blur(0px)" : `blur(${blurPx.toFixed(2)}px)`,
+      filter: blurPx < 0.2 ? "blur(0px)" : `blur(${blurPx.toFixed(2)}px)`,
       zIndex: Math.round(40 - abs * 2),
+      force3D: true,
     };
   }
 

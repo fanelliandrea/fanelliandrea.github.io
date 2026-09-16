@@ -122,14 +122,15 @@
         const t = Math.min(1, (d - 160) / 3400);
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
+      let landed = false;
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
           const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
           let opacity = 1;
-          if (rel > -22) opacity = 1 - sCurve((rel + 22) / 200);
+          if (landed && rel > -22) opacity = 1 - sCurve((rel + 22) / 200);
           else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
-          const gone = opacity < 0.015;
+          const gone = landed && opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
           card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';
@@ -145,20 +146,29 @@
       placeXY();
       cards.forEach((card, i) => {
         const p = poses[i];
-        gsap.set(card, { z: p.z - 2600, rotationX: 10, rotationY: p.ry * 1.2 });
+        gsap.set(card, { z: p.z - 2600, rotationX: 10, rotationY: p.ry * 1.2, scale: 0.94 });
       });
       paint();
 
-      const land = gsap.timeline({ defaults: { ease: 'back.out(1.45)' } });
+      const land = gsap.timeline({
+        onComplete: () => { landed = true; paint(); },
+      });
       cards.forEach((card, i) => {
         const p = poses[i];
+        const at = 0.05 + i * 0.055;
         land.to(card, {
           z: p.z,
+          duration: 1.15,
+          ease: 'power3.out',
+          onUpdate: paint,
+        }, at);
+        land.to(card, {
           rotationX: p.rx,
           rotationY: p.ry,
+          scale: 1,
           duration: 1.2,
-          onUpdate: paint,
-        }, 0.05 + i * 0.055);
+          ease: 'back.out(1.45)',
+        }, at);
       });
       if (hint) land.fromTo(hint, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.4);
 

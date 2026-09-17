@@ -4,3 +4,4 @@ dist/
 .astro/
 .vercel/
 .impeccable/hook.cache.json
+.netlify/

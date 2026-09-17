@@ -21,7 +21,8 @@
 .diary-word.is-name{top:46%;font-size:clamp(2.2rem, 6vw, 4.2rem)}
 .diary-word.is-tag{
   top:48%;
-  font-size:clamp(1.55rem, 3.8vw, 2.35rem);
+  width:min(90vw, 38rem);
+  font-size:clamp(1.35rem, 3.2vw, 2.05rem);
   line-height:1.22;
 }
 .diary-word.is-place{top:54%;font-size:clamp(1.7rem, 4vw, 2.6rem)}

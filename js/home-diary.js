@@ -1,13 +1,14 @@
 /* Diary words that surface on the home sky, then leave the room quiet. */
 (() => {
   const ROOT_ID = 'home-diary';
-  const CSS = '/css/home-diary.css?v=home-diary1';
-  const FALLBACK = [
+  const CSS = '/css/home-diary.css?v=home-diary2';
+  /* Live fanelliandrea.com — not the redesign draft. */
+  const LINES = [
     { text: 'Ciao.', kind: 'ciao' },
     { text: 'Andrea Fanelli', kind: 'name' },
-    { text: 'Product and strategic design.', kind: 'tag' },
-    { text: 'Based in Italy.', kind: 'place' },
-    { text: 'Great design is about creating a feeling.', kind: 'feel' },
+    { text: 'A curious mind exploring the edges of all that\'s possible with design and beyond.', kind: 'tag' },
+    { text: 'Based in Italy', kind: 'place' },
+    { text: 'I believe great design is about creating a feeling.', kind: 'feel' },
     { text: 'Welcome', kind: 'welcome' }
   ];
 
@@ -35,32 +36,6 @@
     root.setAttribute('aria-hidden', 'true');
     document.body.appendChild(root);
     return root;
-  };
-
-  const firstSentence = s => {
-    const t = String(s || '').trim();
-    if (!t) return '';
-    const cut = t.match(/^[^.!?]+[.!?]?/);
-    return (cut ? cut[0] : t).trim();
-  };
-
-  const feelLine = tagline => {
-    const raw = firstSentence(tagline);
-    if (!raw) return FALLBACK[4].text;
-    return raw.replace(/^I believe\s+/i, '').replace(/^\w/, c => c.toUpperCase());
-  };
-
-  const linesFrom = d => {
-    if (!d) return FALLBACK;
-    const based = String(d.basedIn || 'Based in Italy').replace(/\.$/, '') + '.';
-    return [
-      { text: 'Ciao.', kind: 'ciao' },
-      { text: d.name || 'Andrea Fanelli', kind: 'name' },
-      { text: 'Product and strategic design.', kind: 'tag' },
-      { text: based, kind: 'place' },
-      { text: feelLine(d.tagline), kind: 'feel' },
-      { text: 'Welcome', kind: 'welcome' }
-    ];
   };
 
   const kill = () => {
@@ -132,11 +107,7 @@
       return;
     }
     seen = true;
-    const go = lines => play(root, lines);
-    fetch('/content/info.json')
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => go(linesFrom(d)))
-      .catch(() => go(FALLBACK));
+    play(root, LINES);
   };
 
   addEventListener('site:page', start);

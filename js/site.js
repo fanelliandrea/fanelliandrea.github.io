@@ -109,7 +109,8 @@
 
   const fill = () => {
     const stills = $('#stills');
-    if (stills && !$('[data-effect-064]')) data.then(entries => {
+    // Effect 064 owns Work when [data-effect-064] is present — skip stills hydrate
+    if (stills && !document.querySelector('[data-effect-064]')) data.then(entries => {
       const work = entries.filter(e => e.homeWork).sort((a, b) => a.homeWork - b.homeWork);
       stills.classList.add('gather');
       stills.innerHTML = work.map(e => {
@@ -125,7 +126,7 @@
     });
 
     const notes = $('#notes');
-    if (notes && !$('[data-ideas-playlist]') && !$('[data-ideas-board]')) data.then(entries => {
+    if (notes) data.then(entries => {
       notes.innerHTML = entries.filter(e => e.onSite !== false && e.kind === 'writing').map(e => {
         const href = e.href ? ` href="${esc(e.href)}"` : '';
         const tag = e.href ? 'a' : 'article';
@@ -161,7 +162,7 @@
     });
   };
 
-  const keep = src => /\/js\/(site|space|player|info-overlay|home-diary)\.js/.test(src);
+  const keep = src => /\/js\/(site|space|player|info-overlay)\.js/.test(src);
 
   const loadScripts = doc => {
     const wait = [];
@@ -194,19 +195,9 @@
     document.body.dataset.page = doc.body.getAttribute('data-page') || '';
     if (doc.body.hasAttribute('data-slug')) document.body.dataset.slug = doc.body.getAttribute('data-slug');
     else document.body.removeAttribute('data-slug');
-    if (doc.body.hasAttribute('data-layout')) document.body.dataset.layout = doc.body.getAttribute('data-layout');
-    else document.body.removeAttribute('data-layout');
     if (document.body.dataset.page === 'home') document.body.classList.add('lit', 'arrived');
     if (push) history.pushState({}, '', href);
     scrollTo(0, 0);
-    doc.querySelectorAll('link[rel="stylesheet"][href]').forEach(link => {
-      const href = link.getAttribute('href');
-      if (!href || document.querySelector(`link[href="${href}"]`)) return;
-      const el = document.createElement('link');
-      el.rel = 'stylesheet';
-      el.href = href;
-      document.head.append(el);
-    });
     loadScripts(doc).then(() => {
       fill();
       markDock();

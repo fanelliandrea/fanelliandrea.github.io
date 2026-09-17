@@ -35,6 +35,8 @@
     };
   };
 
+  const LOCK = `<span class="fx064-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V8.2a4 4 0 0 1 8 0V11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16" r="1.15" fill="currentColor"/></svg></span>`;
+
   const boot = async () => {
     kill();
     const my = seq;
@@ -43,7 +45,13 @@
     if (!site || !root || document.body.dataset.page !== 'work' || document.body.dataset.slug) return;
 
     const { esc, pad, thumb, data, reduced, fine } = site;
-    const items = (await data).filter(e => e.onSite !== false && e.kind !== 'writing' && e.media?.length);
+    const locked = await fetch('/content/projects.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(d => d.lockedWork || [])
+      .catch(() => []);
+    const published = (await data).filter(e => e.onSite !== false && e.kind !== 'writing' && e.media?.length && !e.locked);
+    const items = [...published, ...locked.filter(e => e.media?.length)]
+      .sort((a, b) => (b.sort ?? b.year ?? -Infinity) - (a.sort ?? a.year ?? -Infinity));
     if (my !== seq || !items.length) return;
 
     const track = root.querySelector('.fx064-track') || root;
@@ -56,11 +64,13 @@
       root.classList.add('gather', 'stills', 'fx064-flat');
       track.style.height = 'auto';
       world.innerHTML = items.map((e, i) => {
-        const href = e.href ? ` href="${esc(e.href)}"` : '';
-        const tag = e.href ? 'a' : 'article';
-        const n = e.homeWork || i + 1;
-        return `<${tag} class="piece piece-${n} still"${href}>
+        const lockedCard = !!e.locked;
+        const href = !lockedCard && e.href ? ` href="${esc(e.href)}"` : '';
+        const tag = !lockedCard && e.href ? 'a' : 'article';
+        const n = i + 1;
+        return `<${tag} class="piece piece-${n} still${lockedCard ? ' is-locked' : ''}"${href}${lockedCard ? ' aria-hidden="true"' : ''}>
           <span class="shot sq"><img src="${esc(thumb(e.media[0], 1600))}" alt=""></span>
+          ${lockedCard ? LOCK : ''}
           <span class="pill">${esc(pad(n))} ${esc(e.title)}</span>
         </${tag}>`;
       }).join('');
@@ -73,12 +83,18 @@
     const mobile = matchMedia('(max-width: 860px)').matches;
     const N = items.length;
     world.innerHTML = items.map((e, i) => {
-      const href = e.href ? ` href="${esc(e.href)}"` : '';
-      const tag = e.href ? 'a' : 'article';
+      const lockedCard = !!e.locked;
+      const href = !lockedCard && e.href ? ` href="${esc(e.href)}"` : '';
+      const tag = !lockedCard && e.href ? 'a' : 'article';
       const p = pose(i, N, mobile);
-      const n = e.homeWork || i + 1;
-      return `<${tag} class="fx064-card${p.portrait ? ' is-portrait' : ' is-land'}"${href} aria-label="${esc(e.title)}">
+      const n = i + 1;
+      const orient = lockedCard ? '' : (p.portrait ? ' is-portrait' : ' is-land');
+      const label = lockedCard
+        ? ` aria-hidden="true"`
+        : ` aria-label="${esc(e.title)}"`;
+      return `<${tag} class="fx064-card${orient}${lockedCard ? ' is-locked' : ''}"${href}${label}>
         <span class="fx064-shot sq"><img src="${esc(thumb(e.media[0], 900))}" alt="" decoding="async" draggable="false"></span>
+        ${lockedCard ? LOCK : ''}
         <span class="fx064-pill">${esc(pad(n))} ${esc(e.title)}</span>
       </${tag}>`;
     }).join('');
@@ -86,6 +102,20 @@
     const cards = [...world.querySelectorAll('.fx064-card')];
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
+    cards.forEach((card, i) => {
+      if (!items[i]?.locked) return;
+      const img = card.querySelector('img');
+      const shot = card.querySelector('.fx064-shot');
+      if (!img || !shot) return;
+      const fit = () => {
+        if (!img.naturalWidth) return;
+        shot.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+        if (img.naturalHeight > img.naturalWidth) card.classList.add('is-portrait');
+        else card.classList.remove('is-portrait');
+      };
+      if (img.complete) fit();
+      else img.addEventListener('load', fit, { once: true });
+    });
     const farthest = Math.max(...poses.map(p => -p.z));
     const travel = farthest + 560;
     track.style.height = `${Math.max(560, 90 + N * 62)}vh`;
@@ -133,7 +163,7 @@
           const gone = landed && opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
-          card.style.pointerEvents = gone || opacity < 0.32 ? 'none' : 'auto';
+          card.style.pointerEvents = gone || opacity < 0.32 || card.classList.contains('is-locked') ? 'none' : 'auto';
           const blur = gone ? 0 : dof(rel);
           const shot = shots[i];
           if (shot) shot.style.filter = blur ? `blur(${blur}px)` : 'none';

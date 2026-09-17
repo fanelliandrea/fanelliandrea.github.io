@@ -61,16 +61,10 @@
   const coverEl = player.querySelector('.player-cover');
   const titleEl = player.querySelector('.player-title');
   const artistEl = player.querySelector('.player-artist');
-
-  const YT_ORIGINS = [
-    'https://dynamic-mousse-ad9447.netlify.app',
-    'http://127.0.0.1:43123',
-    'http://localhost:43123'
-  ];
-  const ytOrigin = YT_ORIGINS.includes(location.origin)
-    ? location.origin
-    : location.origin;
-  let ytTries = {};
+  const htmlAudio = new Audio();
+  htmlAudio.preload = 'auto';
+  const LOCAL_AUDIO = {};
+  const fileFor = id => tracks[id]?.audio || LOCAL_AUDIO[id] || '';
 
   const saved = load();
   let yt = null;
@@ -84,8 +78,8 @@
     const at = order.indexOf(saved.videoId);
     if (at >= 0) idx = at;
   }
-  let pending = saved.playing ? 'play' : null;
-  let resumeAt = saved.playing && saved.time > 1 ? saved.time : 0;
+  let pending = null;
+  let resumeAt = 0;
   let expected = order[idx] || ids[0];
   let apiReady = false;
 
@@ -95,8 +89,7 @@
     toggle.setAttribute('aria-label', open ? 'Close player' : 'Open player');
     try { sessionStorage.setItem(OPEN_KEY, open ? '1' : '0'); } catch {}
   };
-  try { setOpen(sessionStorage.getItem(OPEN_KEY) === '1'); }
-  catch { setOpen(false); }
+  setOpen(false);
 
   const parseMeta = raw => {
     const text = String(raw || '').replace(/\s*\((?:HQ|Official[^)]*|Audio|Video|Lyrics|Visualizer)\)\s*$/i, '').trim();
@@ -169,6 +162,38 @@
     player.classList.toggle('is-playing', on);
   };
 
+  const hushAudio = () => {
+    try { htmlAudio.pause(); htmlAudio.removeAttribute('src'); htmlAudio.load(); } catch {}
+  };
+
+  const playFile = (id, autoplay) => {
+    const src = fileFor(id);
+    if (!src) return false;
+    expected = id;
+    try { yt?.stopVideo?.(); } catch {}
+    if (!htmlAudio.src.includes(src)) htmlAudio.src = src;
+    show(id);
+    if (autoplay) {
+      const play = htmlAudio.play();
+      if (play && play.catch) play.catch(() => {});
+      pending = 'play';
+      setPlaying(true);
+    }
+    snapshot({ playing: !!autoplay, videoId: id });
+    return true;
+  };
+
+  const playFallback = () => {
+    const id = expected;
+    if (playFile(id, true)) return;
+    pending = null;
+    setPlaying(false);
+    show(id);
+    snapshot({ playing: false, videoId: id });
+  };
+
+  htmlAudio.addEventListener('ended', () => skip(1));
+
   const createPlayer = (id, autoplay, start) => {
     if (!window.YT?.Player || !id) return;
     const my = ++gen;
@@ -191,7 +216,7 @@
         modestbranding: 1,
         playsinline: 1,
         rel: 0,
-        origin: ytOrigin
+        origin: location.origin
       },
       events: {
         onReady: e => {
@@ -207,8 +232,7 @@
           if (e.data === 1) {
             pending = 'play';
             resumeAt = 0;
-            ytTries[id] = 0;
-            delete player.dataset.ytError;
+            hushAudio();
             setPlaying(true);
             show(id);
             snapshot({ playing: true, videoId: id });
@@ -217,18 +241,9 @@
             snapshot({ playing: false });
           } else if (e.data === 0) skip(1);
         },
-        onError: e => {
+        onError: () => {
           if (my !== gen) return;
-          const code = e?.data;
-          player.dataset.ytError = String(code ?? '');
-          const n = (ytTries[id] || 0) + 1;
-          ytTries[id] = n;
-          if ((autoplay || pending === 'play') && n < 2) {
-            createPlayer(id, true, 0);
-            return;
-          }
-          setPlaying(false);
-          snapshot({ playing: false });
+          if (autoplay || pending === 'play') playFallback();
         }
       }
     });
@@ -240,6 +255,11 @@
     expected = id;
     show(id);
     snapshot({ videoId: id, playing: !!autoplay });
+    if (fileFor(id)) {
+      playFile(id, autoplay);
+      return;
+    }
+    hushAudio();
     createPlayer(id, autoplay, start || 0);
   };
 
@@ -248,6 +268,15 @@
     setPlaying(true);
     const id = order[idx];
     show(id);
+    if (fileFor(id)) {
+      playFile(id, true);
+      return;
+    }
+    if (htmlAudio.src && htmlAudio.paused) {
+      const play = htmlAudio.play();
+      if (play && play.catch) play.catch(() => {});
+      return;
+    }
     if (ready && yt) {
       try {
         const cur = yt.getVideoData?.()?.video_id;
@@ -270,6 +299,7 @@
     setPlaying(false);
     try { resumeAt = yt?.getCurrentTime?.() || resumeAt; } catch {}
     try { yt?.pauseVideo?.(); } catch {}
+    try { htmlAudio.pause(); } catch {}
     snapshot({ playing: false });
   };
 
@@ -304,6 +334,10 @@
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
   addEventListener('site:page', () => {
     if (pending !== 'play') return;
+    if (htmlAudio.src) {
+      if (htmlAudio.paused) htmlAudio.play().catch(() => {});
+      return;
+    }
     try {
       const st = yt?.getPlayerState?.();
       if (st === 1 || st === 3) return;

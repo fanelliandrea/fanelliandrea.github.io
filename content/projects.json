@@ -1,1240 +1,1277 @@
 {
   "_note": "Case study copy and media from the live Framer site (www.fanelliandrea.com). Do not invent years, names, or copy.",
-  "glyph-toys": {
-    "slug": "glyph-toys",
-    "title": "Glyph Toys",
-    "year": 2026,
-    "client": "Nothing",
-    "role": "Product Design",
-    "href": "/work/glyph-toys.html",
-    "hero": {
-      "src": "/assets/work/glyph-toys/hero.gif",
-      "alt": "Glyph Toys on the Phone (4a) Pro Glyph Matrix"
+  "lockedWork": [
+    {
+      "slug": "origami-computing-kami",
+      "title": "Origami Computing - KAMI",
+      "sort": 95,
+      "year": 2026,
+      "kind": "object",
+      "locked": true,
+      "media": [
+        "/assets/work/locked/origami-computing-kami.png"
+      ]
     },
-    "lead": [
-      "For the launch of the Phone (4a) Pro, Nothing asked us to design new Glyph Toys. Some new small experiences that live on the back of the device, inside the Glyph Matrix.",
-      "In a few weeks we explored ideas, designed, prototyped and built to have them ready for the community at the keynote."
-    ],
-    "cta": {
-      "label": "Available on Nothing Playground",
-      "href": "https://playground.nothing.tech/detail/toy/Fv6tiKmO2XZNPRoU"
+    {
+      "slug": "4ff-muse",
+      "title": "4ff - Muse",
+      "sort": 85,
+      "year": 2026,
+      "kind": "film",
+      "locked": true,
+      "media": [
+        "/assets/work/locked/4ff-muse.png"
+      ]
     },
-    "details": {
-      "Type": "Product Design",
-      "When": "2026",
-      "Role & responsabilities": "UX/UI\nInteraction Design\nCreative Coding",
-      "Team": "Andrea Fanelli\nEmre Kayganaci\nFrancesco Berti"
+    {
+      "slug": "co-star",
+      "title": "Co-Star",
+      "sort": 75,
+      "year": 2026,
+      "kind": "object",
+      "locked": true,
+      "media": [
+        "/assets/work/locked/co-star.png"
+      ]
+    }
+  ],
+  "projects": {
+    "glyph-toys": {
+      "slug": "glyph-toys",
+      "title": "Glyph Toys",
+      "year": 2026,
+      "client": "Nothing",
+      "role": "Product Design",
+      "href": "/work/glyph-toys.html",
+      "hero": {
+        "src": "/assets/work/glyph-toys/hero.gif",
+        "alt": "Glyph Toys on the Phone (4a) Pro Glyph Matrix"
+      },
+      "lead": [
+        "For the launch of the Phone (4a) Pro, Nothing asked us to design new Glyph Toys. Some new small experiences that live on the back of the device, inside the Glyph Matrix.",
+        "In a few weeks we explored ideas, designed, prototyped and built to have them ready for the community at the keynote."
+      ],
+      "cta": {
+        "label": "Available on Nothing Playground",
+        "href": "https://playground.nothing.tech/detail/toy/Fv6tiKmO2XZNPRoU"
+      },
+      "details": {
+        "Type": "Product Design",
+        "When": "2026",
+        "Role & responsabilities": "UX/UI\nInteraction Design\nCreative Coding",
+        "Team": "Andrea Fanelli\nEmre Kayganaci\nFrancesco Berti"
+      },
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/glyph-toys/phones-trio.png",
+          "alt": "Three Phone (4a) Pro colorways showing Glyph Toys on the rear matrix"
+        },
+        {
+          "type": "section",
+          "title": "Remember to look up",
+          "body": [
+            "We spend too much time looking down at our phones. So we built something to remind you to look up.",
+            "Star Map uses your location to render the nearest constellation directly above you, slowly turning overhead as the hours drift by, until the stars shift and a new one takes its place. Place the phone face down and the Glyph Matrix lights up with the sky. Flip it back and it's gone."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/glyph-toys/module-close-a.png",
+              "alt": "Close-up of the Glyph Matrix module",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/glyph-toys/module-close-b.png",
+              "alt": "Glyph Matrix camera island detail",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/glyph-toys/constellations.png",
+          "alt": "Eleven major star constellations mapped to the Glyph Matrix"
+        },
+        {
+          "type": "section",
+          "title": "The prototype is the product",
+          "body": [
+            "To test the idea, we built a browser-based prototype simulating the Glyph Matrix at 13×13 pixels. It reads your location and the current time, calculates which constellation sits directly at your zenith, and projects it onto the grid, rotating live as the Earth turns via Local Sidereal Time. 11 constellations, automatic crossfades, swipe navigation to explore the sky manually. A way to see if the sky could live on a grid of LEDs."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/glyph-toys/star-map-ui.png",
+              "alt": "Glyph Star Map prototype interface",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/glyph-toys/glyph-grid-a.png",
+              "alt": "Constellation pixel studies on the Glyph grid",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The mechanics of a second",
+          "body": [
+            "While Star Map looks outward, Micro Rotor goes in the opposite direction.",
+            "It renders an automatic watch movement on the Glyph Matrix: rotor, bridges, jewels, balance wheel and escape wheel. Everything mapped onto a 13×13 LED grid, each part reduced to its minimum readable pixel form while preserving how they sit and move in relation to one another.",
+            "The rotor swings with the phone's gyroscope. Move it and it spins, set it down and it settles. A mechanical object, translated into pixels."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/glyph-toys/movement-map.png",
+              "alt": "Micro rotor movement mapped onto a 13×13 LED grid",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/glyph-toys/micro-rotor.gif",
+              "alt": "Micro Rotor Glyph Toy in motion",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Proof of movement",
+          "body": [
+            "To simulate the internal parts of a watch movement, we built a browser-based prototype of the Glyph Matrix at 13×13 pixels. The gyroscope feeds gravity and inertia directly into the rotor. Tilt the phone and it swings, hold it still and it settles. Every component rendered in pixel art: bridges, jewels, balance wheel, escape wheel. Momentum-based physics, 90° rotor snapping, a 4Hz beat holding the whole movement together."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/glyph-toys/micro-rotor-ui.png",
+              "alt": "Micro Rotor Glyph prototype interface",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/glyph-toys/glyph-grid-b.png",
+              "alt": "Micro Rotor pixel states on the Glyph grid",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/glyph-toys/process-chat.png",
+              "alt": "Design process chat and Glyph animation studies",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ],
+      "next": [
+        "verne-product",
+        "verne-brand"
+      ]
     },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/glyph-toys/phones-trio.png",
-        "alt": "Three Phone (4a) Pro colorways showing Glyph Toys on the rear matrix"
-      },
-      {
-        "type": "section",
-        "title": "Remember to look up",
-        "body": [
-          "We spend too much time looking down at our phones. So we built something to remind you to look up.",
-          "Star Map uses your location to render the nearest constellation directly above you, slowly turning overhead as the hours drift by, until the stars shift and a new one takes its place. Place the phone face down and the Glyph Matrix lights up with the sky. Flip it back and it's gone."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/glyph-toys/module-close-a.png",
-            "alt": "Close-up of the Glyph Matrix module",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/glyph-toys/module-close-b.png",
-            "alt": "Glyph Matrix camera island detail",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/glyph-toys/constellations.png",
-        "alt": "Eleven major star constellations mapped to the Glyph Matrix"
-      },
-      {
-        "type": "section",
-        "title": "The prototype is the product",
-        "body": [
-          "To test the idea, we built a browser-based prototype simulating the Glyph Matrix at 13×13 pixels. It reads your location and the current time, calculates which constellation sits directly at your zenith, and projects it onto the grid, rotating live as the Earth turns via Local Sidereal Time. 11 constellations, automatic crossfades, swipe navigation to explore the sky manually. A way to see if the sky could live on a grid of LEDs."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/glyph-toys/star-map-ui.png",
-            "alt": "Glyph Star Map prototype interface",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/glyph-toys/glyph-grid-a.png",
-            "alt": "Constellation pixel studies on the Glyph grid",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "The mechanics of a second",
-        "body": [
-          "While Star Map looks outward, Micro Rotor goes in the opposite direction.",
-          "It renders an automatic watch movement on the Glyph Matrix: rotor, bridges, jewels, balance wheel and escape wheel. Everything mapped onto a 13×13 LED grid, each part reduced to its minimum readable pixel form while preserving how they sit and move in relation to one another.",
-          "The rotor swings with the phone's gyroscope. Move it and it spins, set it down and it settles. A mechanical object, translated into pixels."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/glyph-toys/movement-map.png",
-            "alt": "Micro rotor movement mapped onto a 13×13 LED grid",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/glyph-toys/micro-rotor.gif",
-            "alt": "Micro Rotor Glyph Toy in motion",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Proof of movement",
-        "body": [
-          "To simulate the internal parts of a watch movement, we built a browser-based prototype of the Glyph Matrix at 13×13 pixels. The gyroscope feeds gravity and inertia directly into the rotor. Tilt the phone and it swings, hold it still and it settles. Every component rendered in pixel art: bridges, jewels, balance wheel, escape wheel. Momentum-based physics, 90° rotor snapping, a 4Hz beat holding the whole movement together."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/glyph-toys/micro-rotor-ui.png",
-            "alt": "Micro Rotor Glyph prototype interface",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/glyph-toys/glyph-grid-b.png",
-            "alt": "Micro Rotor pixel states on the Glyph grid",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/glyph-toys/process-chat.png",
-            "alt": "Design process chat and Glyph animation studies",
-            "layout": "squircle"
-          }
-        ]
-      }
-    ],
-    "next": [
-      "verne-product",
-      "verne-brand"
-    ]
-  },
-  "verne-product": {
-    "slug": "verne-product",
-    "title": "Wearphone",
-    "year": 2025,
-    "yearLabel": null,
-    "client": "Verne",
-    "role": "Product Design",
-    "href": "/work/verne-product.html",
-    "hero": {
-      "src": "/assets/work/verne-product/hero.jpg",
-      "alt": "Wearphone"
-    },
-    "lead": [
-      "Wearphone is a hardware device designed for Verne to let you speak freely while keeping your voice private, enabling a new way to interact with vocal AI. I worked with the founders in the early stage of the product, across two concept phases, helping shape the idea, explore form proposals and frame the experience. This work contributed to the product that Verne later developed and presented at CES 2026 in Las Vegas.",
-      "The first concept was heavily influenced by Japanese culture and their approach to music hardware. I looked at classic Walkman headphones and how they naturally fit both the head and neck."
-    ],
-    "details": {
-      "Type": "Product Design",
-      "When": "2025",
-      "Role & responsabilities": "Concept Development\nProduct Design Direction\nExperience & Interaction Design"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/verne-product/01.png",
+    "verne-product": {
+      "slug": "verne-product",
+      "title": "Wearphone",
+      "year": 2025,
+      "yearLabel": null,
+      "client": "Verne",
+      "role": "Product Design",
+      "href": "/work/verne-product.html",
+      "hero": {
+        "src": "/assets/work/verne-product/hero.jpg",
         "alt": "Wearphone"
       },
-      {
-        "type": "section",
-        "title": "First Concept Direction",
-        "body": [
-          "That's where the core idea came from: a rotating pivot system that allows for 2 positions, one for resting on the neck and one for use on the face.",
-          "To keep it simple, the same rotating pivot also becomes the main interaction button, one on each side. A tap or long press (3+ seconds) activates different functions."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-product/02.png",
-            "alt": "First Concept Direction",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "Wearphone is a hardware device designed for Verne to let you speak freely while keeping your voice private, enabling a new way to interact with vocal AI. I worked with the founders in the early stage of the product, across two concept phases, helping shape the idea, explore form proposals and frame the experience. This work contributed to the product that Verne later developed and presented at CES 2026 in Las Vegas.",
+        "The first concept was heavily influenced by Japanese culture and their approach to music hardware. I looked at classic Walkman headphones and how they naturally fit both the head and neck."
+      ],
+      "details": {
+        "Type": "Product Design",
+        "When": "2025",
+        "Role & responsabilities": "Concept Development\nProduct Design Direction\nExperience & Interaction Design"
       },
-      {
-        "type": "section",
-        "title": "Fashion × Tech",
-        "body": [
-          "The headband system uses a quick-release magnetic mechanism, with the band attaching to the rotating pivots.",
-          "If you wear something on your face, it inevitably becomes fashion.So it's not just how you use it, but also how you wear it."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-product/03.png",
-            "alt": "Fashion × Tech",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Second Concept Direction",
-        "body": [
-          "When the device is not in use, it also becomes a wearable object, almost like a handbag. No longer seen only as a technological product, but as something you carry with you, hold in your hand, or rest on your shoulder like a bag.",
-          "The outer shell takes on an aesthetic role and becomes a removable, washable, and replaceable layer of fabric. I explored two versions in neoprene and fabric, along with an option in Japanese denim."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-product/04.png",
-            "alt": "Second Concept Direction",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "The process is the product",
-        "body": [
-          "This version was developed later, after working on Verne's identity, so that the product and the brand would start speaking the same language.",
-          "This direction imagines Wearphone as a single unified piece. It features a dark blue neoprene body with orange accents, which are the brand's colors."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-product/05.jpg",
-            "alt": "The process is the product",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "The Golden Age of Audio",
-        "body": [
-          "On the back, a soft orange cushion with the Verne brand makes the product recognizable from a distance. The buttons are connected by a thin cable to the metal earphones with the Verne logo engraved on them.",
-          "The work on Wearphone was not a linear process. Over the course of 2-3 months and two dedicated sessions with the founders, we exchanged calls, screenshots, ideas, and messages.",
-          "We explored 5-6 initial concepts, testing the behavior and feel of the product. Then we refined both the functionality and form through constant iteration.",
-          "Subsequently, prototypes and physical models developed in Japan helped us understand how the product behaves in real life.",
-          "This project also comes from a simple belief: we are living in the golden age of audio. Voice is human, emotional, and direct. It carries nuance that screens can’t. In my presentation, I explored how audio is becoming the next interface layer: from earbuds to voice notes to AI agents. Wearphone fits right into this shift: it creates a private space for speech, letting you talk to AI in public without raising your voice or your phone. A small object that sits on your face, but really belongs to a much bigger story about how we will communicate next."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-product/06.jpg",
-            "alt": "The Golden Age of Audio",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/verne-product/07.png",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-product/08.gif",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-product/09.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-product/10.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-product/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "verne-brand",
-      "magic-8-ball"
-    ]
-  },
-  "verne-brand": {
-    "slug": "verne-brand",
-    "title": "Verne Technologies",
-    "year": 2025,
-    "yearLabel": null,
-    "client": "Verne",
-    "role": "Brand Design",
-    "href": "/work/verne-brand.html",
-    "hero": {
-      "src": "/assets/work/verne-brand/hero.jpg",
-      "alt": "Verne Technologies"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/verne-product/01.png",
+          "alt": "Wearphone"
+        },
+        {
+          "type": "section",
+          "title": "First Concept Direction",
+          "body": [
+            "That's where the core idea came from: a rotating pivot system that allows for 2 positions, one for resting on the neck and one for use on the face.",
+            "To keep it simple, the same rotating pivot also becomes the main interaction button, one on each side. A tap or long press (3+ seconds) activates different functions."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-product/02.png",
+              "alt": "First Concept Direction",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Fashion × Tech",
+          "body": [
+            "The headband system uses a quick-release magnetic mechanism, with the band attaching to the rotating pivots.",
+            "If you wear something on your face, it inevitably becomes fashion.So it's not just how you use it, but also how you wear it."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-product/03.png",
+              "alt": "Fashion × Tech",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Second Concept Direction",
+          "body": [
+            "When the device is not in use, it also becomes a wearable object, almost like a handbag. No longer seen only as a technological product, but as something you carry with you, hold in your hand, or rest on your shoulder like a bag.",
+            "The outer shell takes on an aesthetic role and becomes a removable, washable, and replaceable layer of fabric. I explored two versions in neoprene and fabric, along with an option in Japanese denim."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-product/04.png",
+              "alt": "Second Concept Direction",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The process is the product",
+          "body": [
+            "This version was developed later, after working on Verne's identity, so that the product and the brand would start speaking the same language.",
+            "This direction imagines Wearphone as a single unified piece. It features a dark blue neoprene body with orange accents, which are the brand's colors."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-product/05.jpg",
+              "alt": "The process is the product",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The Golden Age of Audio",
+          "body": [
+            "On the back, a soft orange cushion with the Verne brand makes the product recognizable from a distance. The buttons are connected by a thin cable to the metal earphones with the Verne logo engraved on them.",
+            "The work on Wearphone was not a linear process. Over the course of 2-3 months and two dedicated sessions with the founders, we exchanged calls, screenshots, ideas, and messages.",
+            "We explored 5-6 initial concepts, testing the behavior and feel of the product. Then we refined both the functionality and form through constant iteration.",
+            "Subsequently, prototypes and physical models developed in Japan helped us understand how the product behaves in real life.",
+            "This project also comes from a simple belief: we are living in the golden age of audio. Voice is human, emotional, and direct. It carries nuance that screens can’t. In my presentation, I explored how audio is becoming the next interface layer: from earbuds to voice notes to AI agents. Wearphone fits right into this shift: it creates a private space for speech, letting you talk to AI in public without raising your voice or your phone. A small object that sits on your face, but really belongs to a much bigger story about how we will communicate next."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-product/06.jpg",
+              "alt": "The Golden Age of Audio",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/verne-product/07.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-product/08.gif",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-product/09.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-product/10.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-product/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "verne-brand",
+        "magic-8-ball"
+      ]
     },
-    "lead": [
-      "Verne Technologies is a Japanese start-up inspired by the words of Jules Verne. Together, we created a new identity that reflects their vision of the future. The result is a brand shaped by curiosity, discovery and the idea that technology should be accessible and human.",
-      "Jules Verne wrote stories about exploring hidden worlds long before they were possible. Verne Technologies carries on that same sense of adventure. By taking inspiration from science fiction and applying it to technology, they create real products we can use in our daily lives."
-    ],
-    "details": {
-      "Type": "Brand Design",
-      "When": "2025",
-      "Role & responsabilities": "Logo Design\nVisual Direction\nTypography & Color System\nApplications & Guidelines"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/verne-brand/01.jpg",
+    "verne-brand": {
+      "slug": "verne-brand",
+      "title": "Verne Technologies",
+      "year": 2025,
+      "yearLabel": null,
+      "client": "Verne",
+      "role": "Brand Design",
+      "href": "/work/verne-brand.html",
+      "hero": {
+        "src": "/assets/work/verne-brand/hero.jpg",
         "alt": "Verne Technologies"
       },
-      {
-        "type": "section",
-        "title": "Make real",
-        "body": [
-          "The logo reflects the company's spirit in a clear and flexible silhouette, easy to use across different contexts. It brings their initials together in a shape reminiscent of Jules Verne's imaginary worlds, while evoking the gesture of framing new perspectives."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-brand/02.jpg",
-            "alt": "Make real",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "Verne Technologies is a Japanese start-up inspired by the words of Jules Verne. Together, we created a new identity that reflects their vision of the future. The result is a brand shaped by curiosity, discovery and the idea that technology should be accessible and human.",
+        "Jules Verne wrote stories about exploring hidden worlds long before they were possible. Verne Technologies carries on that same sense of adventure. By taking inspiration from science fiction and applying it to technology, they create real products we can use in our daily lives."
+      ],
+      "details": {
+        "Type": "Brand Design",
+        "When": "2025",
+        "Role & responsabilities": "Logo Design\nVisual Direction\nTypography & Color System\nApplications & Guidelines"
       },
-      {
-        "type": "section",
-        "title": "Tech that feels close",
-        "body": [
-          "Eurostile is a typeface with the weight of a classic. Some call it the Sistine Chapel of graphic design. It’s been part of space programs and the sci-fi and animated films that shaped our imagination. It just fits for Verne, a brand that looks forward and makes the future feel near."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-brand/03.jpg",
-            "alt": "Tech that feels close",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Written in the future",
-        "body": [
-          "To bring Verne's world to life, we started by searching for images that looked like fragments of a dream: soft, shifting and utopian. Then we trained a model to create custom visuals that reflected the same energy. What came out is a universe of images that make you feel optimistic about the future."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-brand/04.jpg",
-            "alt": "Written in the future",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "A vision in motion",
-        "body": [
-          "We built this brand around the things that move us, the stories and images that shape how we see the world. Verne is shaped by movies, manga, anime, music, and books that fuel our imagination for the future. And that’s where Verne finds its voice."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-brand/05.jpg",
-            "alt": "A vision in motion",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Inspired by culture",
-        "body": [
-          "The logo reflects the company's spirit in a clear and flexible silhouette, easy to use across different contexts. It brings their initials together in a shape reminiscent of Jules Verne's imaginary worlds, while evoking the gesture of framing new perspectives."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/verne-brand/06.jpg",
-            "alt": "Inspired by culture",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-brand/07.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-brand/08.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-brand/09.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-brand/10.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/verne-brand/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "magic-8-ball",
-      "meti"
-    ]
-  },
-  "magic-8-ball": {
-    "slug": "magic-8-ball",
-    "title": "Magic 8 Ball",
-    "year": 2025,
-    "yearLabel": null,
-    "client": "Self-initiated",
-    "role": "Product Design",
-    "href": "/work/magic-8-ball.html",
-    "hero": {
-      "src": "/assets/work/magic-8-ball/hero.gif",
-      "alt": "Magic 8 Ball"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/verne-brand/01.jpg",
+          "alt": "Verne Technologies"
+        },
+        {
+          "type": "section",
+          "title": "Make real",
+          "body": [
+            "The logo reflects the company's spirit in a clear and flexible silhouette, easy to use across different contexts. It brings their initials together in a shape reminiscent of Jules Verne's imaginary worlds, while evoking the gesture of framing new perspectives."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-brand/02.jpg",
+              "alt": "Make real",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Tech that feels close",
+          "body": [
+            "Eurostile is a typeface with the weight of a classic. Some call it the Sistine Chapel of graphic design. It’s been part of space programs and the sci-fi and animated films that shaped our imagination. It just fits for Verne, a brand that looks forward and makes the future feel near."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-brand/03.jpg",
+              "alt": "Tech that feels close",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Written in the future",
+          "body": [
+            "To bring Verne's world to life, we started by searching for images that looked like fragments of a dream: soft, shifting and utopian. Then we trained a model to create custom visuals that reflected the same energy. What came out is a universe of images that make you feel optimistic about the future."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-brand/04.jpg",
+              "alt": "Written in the future",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "A vision in motion",
+          "body": [
+            "We built this brand around the things that move us, the stories and images that shape how we see the world. Verne is shaped by movies, manga, anime, music, and books that fuel our imagination for the future. And that’s where Verne finds its voice."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-brand/05.jpg",
+              "alt": "A vision in motion",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Inspired by culture",
+          "body": [
+            "The logo reflects the company's spirit in a clear and flexible silhouette, easy to use across different contexts. It brings their initials together in a shape reminiscent of Jules Verne's imaginary worlds, while evoking the gesture of framing new perspectives."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/verne-brand/06.jpg",
+              "alt": "Inspired by culture",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-brand/07.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-brand/08.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-brand/09.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-brand/10.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/verne-brand/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "magic-8-ball",
+        "meti"
+      ]
     },
-    "lead": [
-      "Nothing came to us with a secret brief for their new phone release.",
-      "In just a few weeks, wrapped in mystery, we worked side by side with their team to design and build something new for the Glyph Matrix, a pixel interface that speaks from the back of the phone."
-    ],
-    "details": {
-      "Type": "Product Design",
-      "When": "2025",
-      "Role & responsabilities": "Concept Development\nProduct Design\nMotion Design"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/magic-8-ball/01.jpg",
+    "magic-8-ball": {
+      "slug": "magic-8-ball",
+      "title": "Magic 8 Ball",
+      "year": 2025,
+      "yearLabel": null,
+      "client": "Self-initiated",
+      "role": "Product Design",
+      "href": "/work/magic-8-ball.html",
+      "hero": {
+        "src": "/assets/work/magic-8-ball/hero.gif",
         "alt": "Magic 8 Ball"
       },
-      {
-        "type": "section",
-        "title": "When light becomes language",
-        "body": [
-          "The result is the Magic 8 Ball, part of Glyph Toys: a collection of micro-experiences that make the device feel alive and playful. 🎱",
-          "1x Designer2x Developers"
-        ],
-        "media": [
-          {
-            "src": "/assets/work/magic-8-ball/02.jpg",
-            "alt": "When light becomes language",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "Nothing came to us with a secret brief for their new phone release.",
+        "In just a few weeks, wrapped in mystery, we worked side by side with their team to design and build something new for the Glyph Matrix, a pixel interface that speaks from the back of the phone."
+      ],
+      "details": {
+        "Type": "Product Design",
+        "When": "2025",
+        "Role & responsabilities": "Concept Development\nProduct Design\nMotion Design"
       },
-      {
-        "type": "section",
-        "title": "The evolution of the glyph interface",
-        "body": [
-          "Light is no longer just a tool, it becomes the voice.With the Glyph Matrix, light isn’t decoration. It’s a way to communicate with the user.",
-          "A system of signals, patterns, and animations that speaks without words.A deliberately simple interface, designed to show only the essentials.All at a glance, without the need to unlock the phone."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/magic-8-ball/03.jpg",
-            "alt": "The evolution of the glyph interface",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Make tech fun again",
-        "body": [
-          "Fewer distractions, more meaning.",
-          "From the very beginning, the Glyph Interface made Nothing phones instantly recognizable.A glow that stood out even from a distance.It was a signature, part of their identity."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/magic-8-ball/04.jpg",
-            "alt": "Make tech fun again",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "All eyes on it",
-        "body": [
-          "The idea was to create a calmer, more mindful way to use technology.Light signals instead of checking the screen.Simple cues instead of constant notifications.",
-          "Over time, the interface has been refined and pushed further.With the new Glyph Matrix, that idea evolves again and becomes more expressive."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/magic-8-ball/05.jpg",
-            "alt": "All eyes on it",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "title": "Community is the moat",
-        "body": [
-          "Some see it as a gimmick. But that’s missing the point.Most products today are designed to make you feel no emotion.The Glyph Matrix was designed not only for utility, but also for play.",
-          "Glyph Toys are small experiences that live inside the Glyph Matrix.Little moments that surprise, entertain and give the phone a soul.",
-          "They remind us that technology doesn’t have to be only serious or functional.It can be fun. It can bring joy. It can be human.",
-          "The Magic 8 Ball didn’t go unnoticed.Wired, The Guardian, and Wallpaper all mentioned it in their coverage of Phone (3), highlighting it as one of the most playful uses of the new Glyph Matrix.Even MKBHD, the most influential tech creator on YouTube, featured it in his video, calling it “cool.”",
-          "Nothing has always built with its community, inviting designers, developers and other creatives to shape what technology can feel like.Co-creation is their real moat. Projects born from collaboration, not just top-down design.",
-          "We had worked together before, but this was the first time we co-created for a device ahead of launch."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/magic-8-ball/06.jpg",
-            "alt": "Community is the moat",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/magic-8-ball/07.jpg",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/magic-8-ball/08.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/magic-8-ball/09.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/magic-8-ball/10.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/magic-8-ball/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "meti",
-      "nothing-community"
-    ]
-  },
-  "meti": {
-    "slug": "meti",
-    "title": "M E T I",
-    "year": 2024,
-    "yearLabel": null,
-    "client": "Self-initiated",
-    "role": "Product Design",
-    "href": "/work/meti.html",
-    "hero": {
-      "src": "/assets/work/meti/hero.jpg",
-      "alt": "M E T I"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/magic-8-ball/01.jpg",
+          "alt": "Magic 8 Ball"
+        },
+        {
+          "type": "section",
+          "title": "When light becomes language",
+          "body": [
+            "The result is the Magic 8 Ball, part of Glyph Toys: a collection of micro-experiences that make the device feel alive and playful. 🎱",
+            "1x Designer2x Developers"
+          ],
+          "media": [
+            {
+              "src": "/assets/work/magic-8-ball/02.jpg",
+              "alt": "When light becomes language",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The evolution of the glyph interface",
+          "body": [
+            "Light is no longer just a tool, it becomes the voice.With the Glyph Matrix, light isn’t decoration. It’s a way to communicate with the user.",
+            "A system of signals, patterns, and animations that speaks without words.A deliberately simple interface, designed to show only the essentials.All at a glance, without the need to unlock the phone."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/magic-8-ball/03.jpg",
+              "alt": "The evolution of the glyph interface",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Make tech fun again",
+          "body": [
+            "Fewer distractions, more meaning.",
+            "From the very beginning, the Glyph Interface made Nothing phones instantly recognizable.A glow that stood out even from a distance.It was a signature, part of their identity."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/magic-8-ball/04.jpg",
+              "alt": "Make tech fun again",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "All eyes on it",
+          "body": [
+            "The idea was to create a calmer, more mindful way to use technology.Light signals instead of checking the screen.Simple cues instead of constant notifications.",
+            "Over time, the interface has been refined and pushed further.With the new Glyph Matrix, that idea evolves again and becomes more expressive."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/magic-8-ball/05.jpg",
+              "alt": "All eyes on it",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Community is the moat",
+          "body": [
+            "Some see it as a gimmick. But that’s missing the point.Most products today are designed to make you feel no emotion.The Glyph Matrix was designed not only for utility, but also for play.",
+            "Glyph Toys are small experiences that live inside the Glyph Matrix.Little moments that surprise, entertain and give the phone a soul.",
+            "They remind us that technology doesn’t have to be only serious or functional.It can be fun. It can bring joy. It can be human.",
+            "The Magic 8 Ball didn’t go unnoticed.Wired, The Guardian, and Wallpaper all mentioned it in their coverage of Phone (3), highlighting it as one of the most playful uses of the new Glyph Matrix.Even MKBHD, the most influential tech creator on YouTube, featured it in his video, calling it “cool.”",
+            "Nothing has always built with its community, inviting designers, developers and other creatives to shape what technology can feel like.Co-creation is their real moat. Projects born from collaboration, not just top-down design.",
+            "We had worked together before, but this was the first time we co-created for a device ahead of launch."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/magic-8-ball/06.jpg",
+              "alt": "Community is the moat",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/magic-8-ball/07.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/magic-8-ball/08.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/magic-8-ball/09.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/magic-8-ball/10.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/magic-8-ball/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "meti",
+        "nothing-community"
+      ]
     },
-    "lead": [
-      "METI isn’t just another device – it’s a response to the noise of modern life. It was born from the desire to simplify, to create something that doesn’t demand attention but restores it.",
-      "The first step was to strip away the distractions. No endless notifications, no multitasking. Just a single-purpose tool designed to help you focus on the present.",
-      "Modern technology often fragments our time, pulling us into constant interruptions. METI takes the opposite approach – it’s designed to bring clarity, encouraging undivided attention to the task at hand."
-    ],
-    "details": {
-      "Type": "Product Design",
-      "When": "2024",
-      "Role & responsabilities": "Creative direction\nIndustrial design\nUX/UI design\nProduct strategy"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/meti/01.gif",
+    "meti": {
+      "slug": "meti",
+      "title": "M E T I",
+      "year": 2024,
+      "yearLabel": null,
+      "client": "Self-initiated",
+      "role": "Product Design",
+      "href": "/work/meti.html",
+      "hero": {
+        "src": "/assets/work/meti/hero.jpg",
         "alt": "M E T I"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "The name METI reflects this philosophy. It’s a fusion of \"mind\" and \"time,\" symbolizing the harmony between mental clarity and the moments that shape our day.",
-          "x2 Strategic Designersx1 Rendering Specialistx1 UX/UI Designer",
-          "People are increasingly distracted by technology, reducing their ability to be present and weakening personal connections. We live in an age of constant distractions.",
-          "Although distractions have always been a part of our lives, the rise of mobile technology has created a storm of notifications, making it increasingly difficult to focus amidst the growing noise.",
-          "M E T I is a single-purpose tool designed to break the cycle of distractions and bring focus back to your day.",
-          "Its shape, reminiscent of an hourglass, not only serves to give meaning to the object: it provides symmetry, so that it can naturally fit left- and right-handed people's hands. An ancient symbol becomes a modern tool. M E T I turns time into a tangible experience.",
-          "METI is available in 3 colors: Lavanda, Oceano, Corallo. Our vision for these colors takes inspiration from nature’s palette. We imagined these hues as gradients, pushing beyond conventional colours.",
-          "Packaging is often used for transport and then becomes waste.",
-          "Our packaging is different: it makes an essential part of the product.  It functions as a stand and allows you to charge it, keeping M E T I always by your side.",
-          "Transparent like a block of ice that freezes the product in time and never melts.",
-          "No doubt the smartphones are useful but they are a Pandora’s box, full of distractions, always in our pockets.",
-          "We decided to design an object that is physically with you and allows you to manage your time intentionally. When M E T I is active, the phone locks for the duration of the session.",
-          "We also designed the “shake to pair” interaction to make the first contact with the product natural and effortless, as it should be. One shake, and you’re ready to focus.",
-          "What usually takes you 3 hours to study can now be done in just 60 minutes, without losing focus.",
-          "Create personalized sessions for your favorite activities, starting them whenever you need.",
-          "When you're truly focused on something, the rest seems to disappear."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/meti/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/meti/03.jpg",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "METI isn’t just another device – it’s a response to the noise of modern life. It was born from the desire to simplify, to create something that doesn’t demand attention but restores it.",
+        "The first step was to strip away the distractions. No endless notifications, no multitasking. Just a single-purpose tool designed to help you focus on the present.",
+        "Modern technology often fragments our time, pulling us into constant interruptions. METI takes the opposite approach – it’s designed to bring clarity, encouraging undivided attention to the task at hand."
+      ],
+      "details": {
+        "Type": "Product Design",
+        "When": "2024",
+        "Role & responsabilities": "Creative direction\nIndustrial design\nUX/UI design\nProduct strategy"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/04.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/05.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/06.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/07.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/08.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/10.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/meti/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "nothing-community",
-      "staffing-agency"
-    ]
-  },
-  "nothing-community": {
-    "slug": "nothing-community",
-    "title": "Nothing Community",
-    "year": 2024,
-    "yearLabel": "2023–2024",
-    "client": "Nothing",
-    "role": "Product Design",
-    "href": "/work/nothing-community.html",
-    "hero": {
-      "src": "/assets/work/nothing-community/hero.png",
-      "alt": "Nothing Community"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/meti/01.gif",
+          "alt": "M E T I"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "The name METI reflects this philosophy. It’s a fusion of \"mind\" and \"time,\" symbolizing the harmony between mental clarity and the moments that shape our day.",
+            "x2 Strategic Designersx1 Rendering Specialistx1 UX/UI Designer",
+            "People are increasingly distracted by technology, reducing their ability to be present and weakening personal connections. We live in an age of constant distractions.",
+            "Although distractions have always been a part of our lives, the rise of mobile technology has created a storm of notifications, making it increasingly difficult to focus amidst the growing noise.",
+            "M E T I is a single-purpose tool designed to break the cycle of distractions and bring focus back to your day.",
+            "Its shape, reminiscent of an hourglass, not only serves to give meaning to the object: it provides symmetry, so that it can naturally fit left- and right-handed people's hands. An ancient symbol becomes a modern tool. M E T I turns time into a tangible experience.",
+            "METI is available in 3 colors: Lavanda, Oceano, Corallo. Our vision for these colors takes inspiration from nature’s palette. We imagined these hues as gradients, pushing beyond conventional colours.",
+            "Packaging is often used for transport and then becomes waste.",
+            "Our packaging is different: it makes an essential part of the product.  It functions as a stand and allows you to charge it, keeping M E T I always by your side.",
+            "Transparent like a block of ice that freezes the product in time and never melts.",
+            "No doubt the smartphones are useful but they are a Pandora’s box, full of distractions, always in our pockets.",
+            "We decided to design an object that is physically with you and allows you to manage your time intentionally. When M E T I is active, the phone locks for the duration of the session.",
+            "We also designed the “shake to pair” interaction to make the first contact with the product natural and effortless, as it should be. One shake, and you’re ready to focus.",
+            "What usually takes you 3 hours to study can now be done in just 60 minutes, without losing focus.",
+            "Create personalized sessions for your favorite activities, starting them whenever you need.",
+            "When you're truly focused on something, the rest seems to disappear."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/meti/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/meti/03.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/04.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/05.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/06.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/07.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/08.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/10.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/meti/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "nothing-community",
+        "staffing-agency"
+      ]
     },
-    "lead": [
-      "I am an active member of the Nothing community and deeply share their vision. In recent months I have developed several concepts, from products to interfaces, focused on improving the experience with technology.",
-      "My contributions include winning a design competition, inspiring AI companion ideas and working on a co-creation project with the community, contributing to the design of hardware and packaging.",
-      "Nothing Loop (∞) is a smart ring concept."
-    ],
-    "details": {
-      "Type": "Product Design",
-      "When": "2023-2024",
-      "Role & responsabilities": "UX/UI design\nIndustrial design",
-      "Team": "Infinity at Your Fingertips\nMilan Heritage\nA friendly companion always with you\nEvery Pixel Serves a Purpose"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/nothing-community/01.png",
+    "nothing-community": {
+      "slug": "nothing-community",
+      "title": "Nothing Community",
+      "year": 2024,
+      "yearLabel": "2023–2024",
+      "client": "Nothing",
+      "role": "Product Design",
+      "href": "/work/nothing-community.html",
+      "hero": {
+        "src": "/assets/work/nothing-community/hero.png",
         "alt": "Nothing Community"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "Light is a central element of this project. A way to bring the product to life and tell more with less (screens).",
-          "Loop offers an unobtrusive alternative to smartwatches, providing a frictionless user experience and minimal distraction.",
-          "It was also showcased along with community projects at the Nothing Phone 2a launch in Delhi.",
-          "I participated in Nothing's CMF sub-brand competition, designing dials that celebrate the heritage of Italian design.",
-          "Our interface, Citylife, is inspired by contemporary Milan, reflecting the dynamism of the city. Essential elements are in the foreground and offer functionality without sacrificing style.",
-          "Citylife won the contest and is now available to CMF Watch Pro users.",
-          "Nothing Calm is the idea of a friendly AI companion designed with privacy at its core and inspired by the principles of calm technology.",
-          "It integrates seamlessly by enhancing the user experience with multimodal and adaptive interactions that evolve with their preferences.",
-          "This software solution is a strategic move that integrates seamlessly with Nothing's growing ecosystem of products and services.",
-          "The company is introducing some of these features in its products, such as ChatGPT in earbuds.",
-          "Nothing Spaces is software for Nothing OS designed to create distinct spaces for every aspect of your life.",
-          "With different spaces for different purposes, you can customize your digital environment using widgets, backgrounds, and various profiles and settings.",
-          "Considering the amount of time we spend on our phones, Nothing Spaces emphasizes the importance of customizing digital spaces to meet specific needs.",
-          "One of its key features is the ability to easily switch between personal and work spaces, eliminating the need to switch phones or log in again.",
-          "I participated in the Nothing Community Edition Project, a multi-stage co-design initiative to design a new edition of Phone (2a) together with the community.",
-          "In Hardware Phase 1, I proposed 'Sky', inspired by the idea that behind the clouds the sky is always blue. Shades of colour combined with turquoise accents aim to evoke emotions and create a phone with a soul that feels like the world around it.",
-          "In Phase 3 Packaging, I collaborated with Emre on 'Into Glow'. We wanted to create packaging that was consistent with the rest but stood out, exploring light as a material to influence users' perception. The packaging involves multiple senses: it is seen, felt and touched, even in the dark, for an unforgettable unboxing experience."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/nothing-community/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/nothing-community/03.png",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "I am an active member of the Nothing community and deeply share their vision. In recent months I have developed several concepts, from products to interfaces, focused on improving the experience with technology.",
+        "My contributions include winning a design competition, inspiring AI companion ideas and working on a co-creation project with the community, contributing to the design of hardware and packaging.",
+        "Nothing Loop (∞) is a smart ring concept."
+      ],
+      "details": {
+        "Type": "Product Design",
+        "When": "2023-2024",
+        "Role & responsabilities": "UX/UI design\nIndustrial design",
+        "Team": "Infinity at Your Fingertips\nMilan Heritage\nA friendly companion always with you\nEvery Pixel Serves a Purpose"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/04.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/05.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/06.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/07.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/08.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/10.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/nothing-community/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "staffing-agency",
-      "acexperiences"
-    ]
-  },
-  "staffing-agency": {
-    "slug": "staffing-agency",
-    "title": "Staffing Agency",
-    "year": 2023,
-    "yearLabel": null,
-    "client": "—",
-    "role": "Strategic Design",
-    "href": "/work/staffing-agency.html",
-    "hero": {
-      "src": "/assets/work/staffing-agency/hero.jpg",
-      "alt": "Staffing Agency"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/nothing-community/01.png",
+          "alt": "Nothing Community"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "Light is a central element of this project. A way to bring the product to life and tell more with less (screens).",
+            "Loop offers an unobtrusive alternative to smartwatches, providing a frictionless user experience and minimal distraction.",
+            "It was also showcased along with community projects at the Nothing Phone 2a launch in Delhi.",
+            "I participated in Nothing's CMF sub-brand competition, designing dials that celebrate the heritage of Italian design.",
+            "Our interface, Citylife, is inspired by contemporary Milan, reflecting the dynamism of the city. Essential elements are in the foreground and offer functionality without sacrificing style.",
+            "Citylife won the contest and is now available to CMF Watch Pro users.",
+            "Nothing Calm is the idea of a friendly AI companion designed with privacy at its core and inspired by the principles of calm technology.",
+            "It integrates seamlessly by enhancing the user experience with multimodal and adaptive interactions that evolve with their preferences.",
+            "This software solution is a strategic move that integrates seamlessly with Nothing's growing ecosystem of products and services.",
+            "The company is introducing some of these features in its products, such as ChatGPT in earbuds.",
+            "Nothing Spaces is software for Nothing OS designed to create distinct spaces for every aspect of your life.",
+            "With different spaces for different purposes, you can customize your digital environment using widgets, backgrounds, and various profiles and settings.",
+            "Considering the amount of time we spend on our phones, Nothing Spaces emphasizes the importance of customizing digital spaces to meet specific needs.",
+            "One of its key features is the ability to easily switch between personal and work spaces, eliminating the need to switch phones or log in again.",
+            "I participated in the Nothing Community Edition Project, a multi-stage co-design initiative to design a new edition of Phone (2a) together with the community.",
+            "In Hardware Phase 1, I proposed 'Sky', inspired by the idea that behind the clouds the sky is always blue. Shades of colour combined with turquoise accents aim to evoke emotions and create a phone with a soul that feels like the world around it.",
+            "In Phase 3 Packaging, I collaborated with Emre on 'Into Glow'. We wanted to create packaging that was consistent with the rest but stood out, exploring light as a material to influence users' perception. The packaging involves multiple senses: it is seen, felt and touched, even in the dark, for an unforgettable unboxing experience."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/nothing-community/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/nothing-community/03.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/04.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/05.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/06.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/07.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/08.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/10.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/nothing-community/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "staffing-agency",
+        "acexperiences"
+      ]
     },
-    "lead": [
-      "Our client, a multinational staffing agency, needed to evolve from a basic service provider to a market leader. The challenge was to redefine the candidate and client journey to improve their market positioning.",
-      "We conducted research, identified insights and drivers, and developed case studies and concept seeds. We co-created strategic initiatives, designed an optimized to-be journey. Our work served to outline streams of projects to reposition the agency, gaining significant attention and new opportunities.",
-      "1 x Strategic Designer"
-    ],
-    "details": {
-      "Type": "Strategic Design",
-      "When": "2023",
-      "Role & responsabilities": "Research\nConcept Development\nExperience Mapping"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/staffing-agency/01.jpg",
+    "staffing-agency": {
+      "slug": "staffing-agency",
+      "title": "Staffing Agency",
+      "year": 2023,
+      "yearLabel": null,
+      "client": "—",
+      "role": "Strategic Design",
+      "href": "/work/staffing-agency.html",
+      "hero": {
+        "src": "/assets/work/staffing-agency/hero.jpg",
         "alt": "Staffing Agency"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "Our client wanted to revolutionize its value proposition to become a leading and trusted staffing agency. Embracing a new hybrid business model that blends digital and offline experiences, the goal was to improve the candidate and client experience.",
-          "The project focused on assessing the current customer segment model and customer experiences, then updating these elements to align with the new value proposition. The transformation covered Italy, Germany, LATAM, and Portugal.",
-          "To understand the context, point of view, and experiences of candidates and clients, we began with a kick-off workshop involving key stakeholders. This collaborative session helped outline initial insights and set the project’s direction.",
-          "Next, we conducted comprehensive stakeholder interviews to gather diverse perspectives and ensure in-depth understanding. All results, including insights from the workshop and interviews, were included in a report.",
-          "To explore further, we used several research methods.",
-          "First, there was a quantitative survey with 2,000 candidates in Italy, Germany, Brazil and Portugal. Then qualitative interviews were conducted with sales representatives, branch employees and customers, including ethnographic research through observation of branch employees in Milan.",
-          "The collected data were then analyzed and synthesized leading to 9 key insights and 6 business drivers, which formed the basis for the design phase.",
-          "Together with 11 key stakeholders, we participated in a co-design workshop. Starting with research opportunities, the participants generated concepts to improve the future candidate and client experience.",
-          "The ideas collectively generated became key strategic initiatives to guide future implementation.",
-          "We then mapped “To-Be” journeys and developed an action plan to implement these initiatives.",
-          "Combining different research methods was essential to understanding the aspirations of candidates and clients.",
-          "Communication and alignment with stakeholders has been critical to the implementation and adoption of new initiatives, reaffirming that strategic design is as much about people and processes as it is about ideas.",
-          "This project allowed us to present our work to senior executives, expanding our impact and opening up new design streams."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/staffing-agency/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/staffing-agency/03.png",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "Our client, a multinational staffing agency, needed to evolve from a basic service provider to a market leader. The challenge was to redefine the candidate and client journey to improve their market positioning.",
+        "We conducted research, identified insights and drivers, and developed case studies and concept seeds. We co-created strategic initiatives, designed an optimized to-be journey. Our work served to outline streams of projects to reposition the agency, gaining significant attention and new opportunities.",
+        "1 x Strategic Designer"
+      ],
+      "details": {
+        "Type": "Strategic Design",
+        "When": "2023",
+        "Role & responsabilities": "Research\nConcept Development\nExperience Mapping"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/04.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/05.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/06.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/07.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/08.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/10.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/staffing-agency/11.png",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "acexperiences",
-      "dropl"
-    ]
-  },
-  "acexperiences": {
-    "slug": "acexperiences",
-    "title": "ACexperiences",
-    "year": 2022,
-    "yearLabel": null,
-    "client": "—",
-    "role": "Strategic design",
-    "href": "/work/acexperiences.html",
-    "hero": {
-      "src": "/assets/work/acexperiences/hero.png",
-      "alt": "ACexperiences"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/staffing-agency/01.jpg",
+          "alt": "Staffing Agency"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "Our client wanted to revolutionize its value proposition to become a leading and trusted staffing agency. Embracing a new hybrid business model that blends digital and offline experiences, the goal was to improve the candidate and client experience.",
+            "The project focused on assessing the current customer segment model and customer experiences, then updating these elements to align with the new value proposition. The transformation covered Italy, Germany, LATAM, and Portugal.",
+            "To understand the context, point of view, and experiences of candidates and clients, we began with a kick-off workshop involving key stakeholders. This collaborative session helped outline initial insights and set the project’s direction.",
+            "Next, we conducted comprehensive stakeholder interviews to gather diverse perspectives and ensure in-depth understanding. All results, including insights from the workshop and interviews, were included in a report.",
+            "To explore further, we used several research methods.",
+            "First, there was a quantitative survey with 2,000 candidates in Italy, Germany, Brazil and Portugal. Then qualitative interviews were conducted with sales representatives, branch employees and customers, including ethnographic research through observation of branch employees in Milan.",
+            "The collected data were then analyzed and synthesized leading to 9 key insights and 6 business drivers, which formed the basis for the design phase.",
+            "Together with 11 key stakeholders, we participated in a co-design workshop. Starting with research opportunities, the participants generated concepts to improve the future candidate and client experience.",
+            "The ideas collectively generated became key strategic initiatives to guide future implementation.",
+            "We then mapped “To-Be” journeys and developed an action plan to implement these initiatives.",
+            "Combining different research methods was essential to understanding the aspirations of candidates and clients.",
+            "Communication and alignment with stakeholders has been critical to the implementation and adoption of new initiatives, reaffirming that strategic design is as much about people and processes as it is about ideas.",
+            "This project allowed us to present our work to senior executives, expanding our impact and opening up new design streams."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/staffing-agency/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/staffing-agency/03.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/04.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/05.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/06.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/07.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/08.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/10.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/staffing-agency/11.png",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "acexperiences",
+        "dropl"
+      ]
     },
-    "lead": [
-      "The leading consumer association in Italy came to us with a clear vision of how to shape its strategic future and expand its presence in the Italian market, focusing on the food, health and wellness sectors. The goal was to stimulate the growth and retention of their current customer base by attracting new user segments, creating innovative digital services that aligned with their core values and offered a seamless shopping experience.",
-      "Having more than 20 years of experience in providing product and information-related services, our client has established itself as a trusted voice in the industry. It has created a number of outlets to reach its audience, including magazines, websites, podcasts, and videos, but communication remains a challenge for the association. While it has a strong following for its print publications, the rigid tone with which it addresses its audience often results in a lack of engagement and limits the association's ability to attract new followers.",
-      "The concept of a service focused on food experiences, reflecting the client's brand values. Our goal has been to create pleasure associated with food by taking a proactive approach and meeting the needs of customers interested in food."
-    ],
-    "details": {
-      "Type": "Strategic design",
-      "When": "2022",
-      "Role & responsabilities": "Market analysis\nService design\nBusiness model development",
-      "Team": "To understand the problem, you need to understand the client\nInsights from the market\nDescribe the opportunities\nMixed service and business design approach\nTaking a step forward\nCo-create & Ideation\nScenario building\nValidating the desirability of the concept\nIterating on the prototype\nUnderstand the underlying problem before attempting to solve it\nOptimize for relevance using data\nLet the stories shine"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/acexperiences/01.png",
+    "acexperiences": {
+      "slug": "acexperiences",
+      "title": "ACexperiences",
+      "year": 2022,
+      "yearLabel": null,
+      "client": "—",
+      "role": "Strategic design",
+      "href": "/work/acexperiences.html",
+      "hero": {
+        "src": "/assets/work/acexperiences/hero.png",
         "alt": "ACexperiences"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "1 x Design lead2 x Service designers2 x Strategic designers1 x Visual designer",
-          "After carefully studying our client's organization and what had been done in the past that did not work, a listening phase began to thoroughly understand what the needs were. So we started by interviewing 6 stakeholders to understand what their desires were and what was wrong. Our focus then shifted outward, continuing with interviews with 17 prospects and customers. These interviews were critical for us to gather valuable qualitative insights that allowed us to understand what were the underlying motivations driving their choices.",
-          "Next, we dove into desk research, clustering common patterns and finding 33 case studies from the market. The end result of this divergent phase of Understand was to produce an Insight Report to present to the client during the co-design workshop. Within this report was a Trend Reframing, in which we included the main evidence, needs, and values generated for the client. For each trend, we chose to show some case studies, which illustrated the main characteristics, the values they reflected in the customer, and the most prominent experiential moments. Insights were then generated from the research, which we showed in the final part of the paper, highlighting what might be opportunities to follow in the workshop.In our project, people have always been at the center. In our project, people have always been at the center. Prospects provided us with valuable insights during interviews and active participation in the workshop in collaboration with the client.",
-          "During the first Co-design workshop, we told the client about the evidence from the research phase, which served to identify opportunities. This workshop involved stakeholders who, together with prospects, pulled out ideas through generative tools. These ideas were refined into 4 concepts of value-added services that would go into the customer journey to-be integrated.",
-          "In our design process, we combined methodologies and tools from both the service and business design fields. During the Strategy Alignment workshop we focused together with stakeholders on creating the business model canvas.",
-          "The client's primary goal was to create services that allow for fulfilling experiences related to food and wellness. Also present were secondary objectives regarding enjoying food by obtaining reliable information while building knowledge about healthy eating and deepening the connection with the local area by discovering products and traditions.",
-          "Based on these assumptions, we mapped the food experience market competition. We selected 21 case studies, which were then clustered into the following 6 categories: food-related experiences, food and wellness vacations, places discovery, art and culture activities, gift-box and active and sport vacations. These 6 categories were distributed within a Competitive Arena, in which we divided the competitors into direct, indirect and potential/experiential.",
-          "We did not just identify best practices and map them but wanted to go further. With the customer journey in mind, we highlighted areas of opportunity for the customer by indicating which steps in the journey were best to innovate with service.",
-          "We also identified 6 design drivers that were key to designing the user experience. In addition to being consistent with the objectives identified by stakeholders and the business, Design Drivers reflect both the needs that emerged during research activities and market trends identified in selected benchmark cases. Each Design Driver contributes to the identification of a value to be considered in the design phase and is concretely translated into indications of functionality and service features that can be implemented in the final output. The generation of Design Drivers is therefore an essential prerequisite for designing a solution consistent with design requirements and user needs and behaviors.",
-          "Following the workshops, a 2-week Sprint phase was held, during which a document outlining the project was produced.",
-          "Starting with the 4 concepts generated, which were explored in detail and varied in theme and feasibility, stakeholders then voted on one that would be carried forward. The final concept was AC Experiences, refined over the weeks to make it more feasible and closer to the client's needs.",
-          "In the sprint part of our process, a map of the service system was drawn to highlight the roles of stakeholders inside and outside the organization, the clients and how they were connected to each other. We also went deeper into delineating what the types of experiences were in our service, dividing the always-on experiences from those that were part of the client schedule. Experience Building Blocks were created that allowed us to define experience formats and break them down by moments in the customer journey. To contextualize the concept generated during the co-design workshop, we created a storyboard of the service that would help us better tell the customer about the needs of the target audience by showing the digital touchpoints we had designed for the experience. This story fit into the customer's experiential journey that the consumer alliance had initially asked us to create.",
-          "To validate the effectiveness of our solutions, we sought feedback from our target audience through qualitative and quantitative testing. The interviews considered the opinion of 6 participants from the customer research panel and ideation workshop. Together with them, we conducted a 1:1 remote interview of 1 hour each, where we told them the storyboard of the experience and showed the prototype to describe the concept.We then reached more than 1,000 people nationwide with a survey targeting members of our client's community.",
-          "This feedback was critical in determining the desirability and feasibility of our results and allowed us to refine our ideas to better meet their needs. From the first concept version we wanted to validate, there were improvements. We added relevant features to address their needs and clarified some of their concerns.",
-          "From this short but intense project, I learned a lot but most importantly I derived 3 principles from it that will guide my design in the future, which are as follows:",
-          "People often think they have the solution in their pocket from the beginning but they do not. Only by being in contact with users and doing research do you realize what are the relevant problems to solve for them.",
-          "Data Driven Design may seem like something very distant and abstract but it is not. Indeed, it can be very useful to collect data and using it to your advantage in design can make all the difference in a project.",
-          "Last but not least, give stories their due. Stories are key in communicating with your users and stakeholders. They help connect us with other people and better convey our message."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/acexperiences/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/acexperiences/03.png",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "The leading consumer association in Italy came to us with a clear vision of how to shape its strategic future and expand its presence in the Italian market, focusing on the food, health and wellness sectors. The goal was to stimulate the growth and retention of their current customer base by attracting new user segments, creating innovative digital services that aligned with their core values and offered a seamless shopping experience.",
+        "Having more than 20 years of experience in providing product and information-related services, our client has established itself as a trusted voice in the industry. It has created a number of outlets to reach its audience, including magazines, websites, podcasts, and videos, but communication remains a challenge for the association. While it has a strong following for its print publications, the rigid tone with which it addresses its audience often results in a lack of engagement and limits the association's ability to attract new followers.",
+        "The concept of a service focused on food experiences, reflecting the client's brand values. Our goal has been to create pleasure associated with food by taking a proactive approach and meeting the needs of customers interested in food."
+      ],
+      "details": {
+        "Type": "Strategic design",
+        "When": "2022",
+        "Role & responsabilities": "Market analysis\nService design\nBusiness model development",
+        "Team": "To understand the problem, you need to understand the client\nInsights from the market\nDescribe the opportunities\nMixed service and business design approach\nTaking a step forward\nCo-create & Ideation\nScenario building\nValidating the desirability of the concept\nIterating on the prototype\nUnderstand the underlying problem before attempting to solve it\nOptimize for relevance using data\nLet the stories shine"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/04.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/05.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/06.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/07.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/08.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/10.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/acexperiences/11.png",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "dropl",
-      "clear-sky-elektricity"
-    ]
-  },
-  "dropl": {
-    "slug": "dropl",
-    "title": "DROPL",
-    "year": 2021,
-    "yearLabel": null,
-    "client": "—",
-    "role": "Product & Service design",
-    "href": "/work/dropl.html",
-    "hero": {
-      "src": "/assets/work/dropl/hero.jpg",
-      "alt": "DROPL"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/acexperiences/01.png",
+          "alt": "ACexperiences"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "1 x Design lead2 x Service designers2 x Strategic designers1 x Visual designer",
+            "After carefully studying our client's organization and what had been done in the past that did not work, a listening phase began to thoroughly understand what the needs were. So we started by interviewing 6 stakeholders to understand what their desires were and what was wrong. Our focus then shifted outward, continuing with interviews with 17 prospects and customers. These interviews were critical for us to gather valuable qualitative insights that allowed us to understand what were the underlying motivations driving their choices.",
+            "Next, we dove into desk research, clustering common patterns and finding 33 case studies from the market. The end result of this divergent phase of Understand was to produce an Insight Report to present to the client during the co-design workshop. Within this report was a Trend Reframing, in which we included the main evidence, needs, and values generated for the client. For each trend, we chose to show some case studies, which illustrated the main characteristics, the values they reflected in the customer, and the most prominent experiential moments. Insights were then generated from the research, which we showed in the final part of the paper, highlighting what might be opportunities to follow in the workshop.In our project, people have always been at the center. In our project, people have always been at the center. Prospects provided us with valuable insights during interviews and active participation in the workshop in collaboration with the client.",
+            "During the first Co-design workshop, we told the client about the evidence from the research phase, which served to identify opportunities. This workshop involved stakeholders who, together with prospects, pulled out ideas through generative tools. These ideas were refined into 4 concepts of value-added services that would go into the customer journey to-be integrated.",
+            "In our design process, we combined methodologies and tools from both the service and business design fields. During the Strategy Alignment workshop we focused together with stakeholders on creating the business model canvas.",
+            "The client's primary goal was to create services that allow for fulfilling experiences related to food and wellness. Also present were secondary objectives regarding enjoying food by obtaining reliable information while building knowledge about healthy eating and deepening the connection with the local area by discovering products and traditions.",
+            "Based on these assumptions, we mapped the food experience market competition. We selected 21 case studies, which were then clustered into the following 6 categories: food-related experiences, food and wellness vacations, places discovery, art and culture activities, gift-box and active and sport vacations. These 6 categories were distributed within a Competitive Arena, in which we divided the competitors into direct, indirect and potential/experiential.",
+            "We did not just identify best practices and map them but wanted to go further. With the customer journey in mind, we highlighted areas of opportunity for the customer by indicating which steps in the journey were best to innovate with service.",
+            "We also identified 6 design drivers that were key to designing the user experience. In addition to being consistent with the objectives identified by stakeholders and the business, Design Drivers reflect both the needs that emerged during research activities and market trends identified in selected benchmark cases. Each Design Driver contributes to the identification of a value to be considered in the design phase and is concretely translated into indications of functionality and service features that can be implemented in the final output. The generation of Design Drivers is therefore an essential prerequisite for designing a solution consistent with design requirements and user needs and behaviors.",
+            "Following the workshops, a 2-week Sprint phase was held, during which a document outlining the project was produced.",
+            "Starting with the 4 concepts generated, which were explored in detail and varied in theme and feasibility, stakeholders then voted on one that would be carried forward. The final concept was AC Experiences, refined over the weeks to make it more feasible and closer to the client's needs.",
+            "In the sprint part of our process, a map of the service system was drawn to highlight the roles of stakeholders inside and outside the organization, the clients and how they were connected to each other. We also went deeper into delineating what the types of experiences were in our service, dividing the always-on experiences from those that were part of the client schedule. Experience Building Blocks were created that allowed us to define experience formats and break them down by moments in the customer journey. To contextualize the concept generated during the co-design workshop, we created a storyboard of the service that would help us better tell the customer about the needs of the target audience by showing the digital touchpoints we had designed for the experience. This story fit into the customer's experiential journey that the consumer alliance had initially asked us to create.",
+            "To validate the effectiveness of our solutions, we sought feedback from our target audience through qualitative and quantitative testing. The interviews considered the opinion of 6 participants from the customer research panel and ideation workshop. Together with them, we conducted a 1:1 remote interview of 1 hour each, where we told them the storyboard of the experience and showed the prototype to describe the concept.We then reached more than 1,000 people nationwide with a survey targeting members of our client's community.",
+            "This feedback was critical in determining the desirability and feasibility of our results and allowed us to refine our ideas to better meet their needs. From the first concept version we wanted to validate, there were improvements. We added relevant features to address their needs and clarified some of their concerns.",
+            "From this short but intense project, I learned a lot but most importantly I derived 3 principles from it that will guide my design in the future, which are as follows:",
+            "People often think they have the solution in their pocket from the beginning but they do not. Only by being in contact with users and doing research do you realize what are the relevant problems to solve for them.",
+            "Data Driven Design may seem like something very distant and abstract but it is not. Indeed, it can be very useful to collect data and using it to your advantage in design can make all the difference in a project.",
+            "Last but not least, give stories their due. Stories are key in communicating with your users and stakeholders. They help connect us with other people and better convey our message."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/acexperiences/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/acexperiences/03.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/04.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/05.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/06.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/07.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/08.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/10.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/acexperiences/11.png",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "dropl",
+        "clear-sky-elektricity"
+      ]
     },
-    "lead": [
-      "During 2020, I found that in the world there are over 1.7 billion people still do not have basic sanitation services, such as private toilets or latrines. Every day there are about 800 children who die from water and sanitation problems that could be prevented. That is why I decided to choose sanitation for my thesis project and get out into the field to design a solution to help solve the problem.",
-      "DROPL is a system designed to recycle and reuse human waste, turning it into raw material. This waste can become a resource once it is transformed into biogas (fuel or energy) and into fertilizer. Within the system are a service for daily waste collection, a dry toilet designed for adults and children, and a tent for privacy in the home. There is also an app for purchasing the toilet and keeping track of the service. DROPL is in line with UN Sustainable Development Goal 6.",
-      "Toward the end of 2020, I discovered the problem, so in November I decided to jump in headlong with the research right around the time of World Toilet Day. Unfortunately, due to the global pandemic and various blockades straddling 2020 and 2021, it was not possible for me to travel to talk to users in India or sub-Saharan Africa. Therefore, I did mainly desk research, from which I learned a lot and gained several insights. I immersed myself in the problem by watching hours of documentaries, online interviews, reading articles and documents on the subject, and learning more and more."
-    ],
-    "details": {
-      "Type": "Product & Service design",
-      "When": "2021",
-      "Role & responsabilities": "User research\nProduct service & system design\nProduct strategy\nArt direction",
-      "Team": "Design brief\nA book as an outcome of the research\nAnalyzing the competition\nA drop-shaped toilet\nDefining dimensions\nChoosing materials and production processes\nIterate, iterate, iterate\nCreative direction of the project"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/dropl/01.png",
+    "dropl": {
+      "slug": "dropl",
+      "title": "DROPL",
+      "year": 2021,
+      "yearLabel": null,
+      "client": "—",
+      "role": "Product & Service design",
+      "href": "/work/dropl.html",
+      "hero": {
+        "src": "/assets/work/dropl/hero.jpg",
         "alt": "DROPL"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "After that, to make the project even more challenging, I decided to give myself a design brief. ‍The Dropl project will have to be designed by putting users and their needs first, with a mission to provide a sustainable, low-cost service that operates without water or energy, turning waste into fuel or energy. The project will also have to provide users with privacy, security, and dignity while providing a convenient and cost-free service.",
-          "The resulting outcome was a 10-chapter book in which I explore the world of toilets from different perspectives through my research. Starting with the dynamics around the problem, I gathered various insights such as the problem of girls being forced to drop out of school because of the absence of toilets or even the various ways that exist to turn waste into resources. During the research I interfaced with solutions from the past but also gathered several case studies of solutions in the present",
-          "In the weeks following the research there was a Define phase, in which I started from what emerged to figure out the next steps. This helped me highlight the pain and needs of the Personas, which then guided me through the project. Based on these assumptions, I was able to throw down a Service System map that told what I had in mind. To make it more concrete, I mapped all the actors and the relationships that connected them, starting from core users to direct and indirect stakeholders.",
-          "Before getting down to the actual design, I devoted myself to studying what the competitors were doing. I analyzed both startups and big players to understand what their offerings were, how they were operating in the market, and their business model. The outcome that came out of that was a benchmark, where the driving force was the features that I cared about, such as privacy or designing an inclusive product.",
-          "Once the building blocks of my system were defined, I began to design the product that users would use, namely a dry compost toilet to be placed inside their homes. This is a toilet that works without flushing and does not need energy to be used. Users can use the toilet either in the squat position or while sitting. The name Dropl comes from the somewhat unusual shape of this product, which makes it somewhat unique and certainly less boring than its competitors.",
-          "After finalizing the product concept, my focus shifted to meticulous and detailed design to assess its feasibility. Starting with initial sketches, I gradually evolved the concept into digital illustrations and then moved on to creating 3D models. 3D modeling proved invaluable in prototyping the toilet, allowing me to refine its form and functionality. In addition, 3D renderings provided a quick visualization of the final result, helping to evaluate and iterate the design. Throughout this iterative process, I paid special attention to ensuring that the size of the toilet was suitable for adults and children, promoting accessibility for users of all ages.",
-          "In the 3D design phase, much attention was paid to selecting ideal manufacturing techniques that would allow efficient scaling of the project while minimizing costs. With this in mind, I took the strategic decision to use rotational molding for the main body, which would be made of durable PP (polypropylene). This approach ensured that the product would maintain the desired shape and would also allow production to be tested on a smaller batch of units, optimizing the manufacturing process.",
-          "For the upper part of the product, however, a different approach was taken to achieve cost efficiency on larger production batches. Injection molding and blow molding methods were chosen, using HDPE (high-density polyethylene) as the material of choice. By taking advantage of these techniques, it was possible to optimize production costs while maintaining the desired product quality and functionality.",
-          "Regarding prototyping, I employed a combination of digital and physical techniques to ensure complete iteration and achieve optimal results. In addition to digital prototypes, I used laser-cut cardboard and plastic materials to create 3D printed models. These tangible prototypes allowed for hands-on testing and continuous refinement of the design. By adopting hybrid prototyping, I was able to iterate efficiently and make continuous improvements throughout the design process.",
-          "The last few weeks much attention has been devoted to giving the project a compelling creative direction, to make the project marketable. To this end, a series of renderings were created to ensure cohesion and effectively communicate the functionality of the project. These visual representations served as the basis for developing storyboards for a communication video aligned with the United Nations Sustainable Development Goals (UN SDGs).",
-          "By aligning the project's narrative with these global goals, it was possible to emphasize its positive impact and resonate with target audiences on a broader scale. Attention to creative direction and alignment with the UN SDGs enabled the project's vision and potential to be presented more effectively, enhancing its appeal and engaging for future stakeholders.",
-          "My involvement in the DROPL project lasted several months, during which I gained valuable insights beyond traditional product design. Although the thesis was primarily about developing a physical product, I had the opportunity to engage in service and interface design, incorporating systems thinking into my approach. This experience taught me how to navigate and address complex problems by adopting a holistic perspective. I learned to embrace an end-to-end product design process, starting with in-depth research, proceeding to design, and concluding with industrial delivery and production phases. This comprehensive approach allowed me to better appreciate the interconnectedness of the various design elements and the importance of considering the entire user journey."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/dropl/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/dropl/03.jpg",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "During 2020, I found that in the world there are over 1.7 billion people still do not have basic sanitation services, such as private toilets or latrines. Every day there are about 800 children who die from water and sanitation problems that could be prevented. That is why I decided to choose sanitation for my thesis project and get out into the field to design a solution to help solve the problem.",
+        "DROPL is a system designed to recycle and reuse human waste, turning it into raw material. This waste can become a resource once it is transformed into biogas (fuel or energy) and into fertilizer. Within the system are a service for daily waste collection, a dry toilet designed for adults and children, and a tent for privacy in the home. There is also an app for purchasing the toilet and keeping track of the service. DROPL is in line with UN Sustainable Development Goal 6.",
+        "Toward the end of 2020, I discovered the problem, so in November I decided to jump in headlong with the research right around the time of World Toilet Day. Unfortunately, due to the global pandemic and various blockades straddling 2020 and 2021, it was not possible for me to travel to talk to users in India or sub-Saharan Africa. Therefore, I did mainly desk research, from which I learned a lot and gained several insights. I immersed myself in the problem by watching hours of documentaries, online interviews, reading articles and documents on the subject, and learning more and more."
+      ],
+      "details": {
+        "Type": "Product & Service design",
+        "When": "2021",
+        "Role & responsabilities": "User research\nProduct service & system design\nProduct strategy\nArt direction",
+        "Team": "Design brief\nA book as an outcome of the research\nAnalyzing the competition\nA drop-shaped toilet\nDefining dimensions\nChoosing materials and production processes\nIterate, iterate, iterate\nCreative direction of the project"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/04.gif",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/05.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/06.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/07.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/08.jpg",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/10.gif",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/dropl/11.jpg",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "clear-sky-elektricity",
-      "glyph-toys"
-    ]
-  },
-  "clear-sky-elektricity": {
-    "slug": "clear-sky-elektricity",
-    "title": "Clear Sky - ElektriCity",
-    "year": 2021,
-    "yearLabel": null,
-    "client": "—",
-    "role": "Product design",
-    "href": "/work/clear-sky-elektricity.html",
-    "hero": {
-      "src": "/assets/work/clear-sky-elektricity/hero.jpg",
-      "alt": "Clear Sky - ElektriCity"
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/dropl/01.png",
+          "alt": "DROPL"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "After that, to make the project even more challenging, I decided to give myself a design brief. ‍The Dropl project will have to be designed by putting users and their needs first, with a mission to provide a sustainable, low-cost service that operates without water or energy, turning waste into fuel or energy. The project will also have to provide users with privacy, security, and dignity while providing a convenient and cost-free service.",
+            "The resulting outcome was a 10-chapter book in which I explore the world of toilets from different perspectives through my research. Starting with the dynamics around the problem, I gathered various insights such as the problem of girls being forced to drop out of school because of the absence of toilets or even the various ways that exist to turn waste into resources. During the research I interfaced with solutions from the past but also gathered several case studies of solutions in the present",
+            "In the weeks following the research there was a Define phase, in which I started from what emerged to figure out the next steps. This helped me highlight the pain and needs of the Personas, which then guided me through the project. Based on these assumptions, I was able to throw down a Service System map that told what I had in mind. To make it more concrete, I mapped all the actors and the relationships that connected them, starting from core users to direct and indirect stakeholders.",
+            "Before getting down to the actual design, I devoted myself to studying what the competitors were doing. I analyzed both startups and big players to understand what their offerings were, how they were operating in the market, and their business model. The outcome that came out of that was a benchmark, where the driving force was the features that I cared about, such as privacy or designing an inclusive product.",
+            "Once the building blocks of my system were defined, I began to design the product that users would use, namely a dry compost toilet to be placed inside their homes. This is a toilet that works without flushing and does not need energy to be used. Users can use the toilet either in the squat position or while sitting. The name Dropl comes from the somewhat unusual shape of this product, which makes it somewhat unique and certainly less boring than its competitors.",
+            "After finalizing the product concept, my focus shifted to meticulous and detailed design to assess its feasibility. Starting with initial sketches, I gradually evolved the concept into digital illustrations and then moved on to creating 3D models. 3D modeling proved invaluable in prototyping the toilet, allowing me to refine its form and functionality. In addition, 3D renderings provided a quick visualization of the final result, helping to evaluate and iterate the design. Throughout this iterative process, I paid special attention to ensuring that the size of the toilet was suitable for adults and children, promoting accessibility for users of all ages.",
+            "In the 3D design phase, much attention was paid to selecting ideal manufacturing techniques that would allow efficient scaling of the project while minimizing costs. With this in mind, I took the strategic decision to use rotational molding for the main body, which would be made of durable PP (polypropylene). This approach ensured that the product would maintain the desired shape and would also allow production to be tested on a smaller batch of units, optimizing the manufacturing process.",
+            "For the upper part of the product, however, a different approach was taken to achieve cost efficiency on larger production batches. Injection molding and blow molding methods were chosen, using HDPE (high-density polyethylene) as the material of choice. By taking advantage of these techniques, it was possible to optimize production costs while maintaining the desired product quality and functionality.",
+            "Regarding prototyping, I employed a combination of digital and physical techniques to ensure complete iteration and achieve optimal results. In addition to digital prototypes, I used laser-cut cardboard and plastic materials to create 3D printed models. These tangible prototypes allowed for hands-on testing and continuous refinement of the design. By adopting hybrid prototyping, I was able to iterate efficiently and make continuous improvements throughout the design process.",
+            "The last few weeks much attention has been devoted to giving the project a compelling creative direction, to make the project marketable. To this end, a series of renderings were created to ensure cohesion and effectively communicate the functionality of the project. These visual representations served as the basis for developing storyboards for a communication video aligned with the United Nations Sustainable Development Goals (UN SDGs).",
+            "By aligning the project's narrative with these global goals, it was possible to emphasize its positive impact and resonate with target audiences on a broader scale. Attention to creative direction and alignment with the UN SDGs enabled the project's vision and potential to be presented more effectively, enhancing its appeal and engaging for future stakeholders.",
+            "My involvement in the DROPL project lasted several months, during which I gained valuable insights beyond traditional product design. Although the thesis was primarily about developing a physical product, I had the opportunity to engage in service and interface design, incorporating systems thinking into my approach. This experience taught me how to navigate and address complex problems by adopting a holistic perspective. I learned to embrace an end-to-end product design process, starting with in-depth research, proceeding to design, and concluding with industrial delivery and production phases. This comprehensive approach allowed me to better appreciate the interconnectedness of the various design elements and the importance of considering the entire user journey."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/dropl/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/dropl/03.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/04.gif",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/05.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/06.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/07.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/08.jpg",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/10.gif",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/dropl/11.jpg",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "clear-sky-elektricity",
+        "glyph-toys"
+      ]
     },
-    "lead": [
-      "Designing STEM toys for schools that support teaching and learning about the global transition from fossil fuels to renewable energy.",
-      "We decided to design for low-age target, knowing the playfulness of the products we are going to present.",
-      "Each kit aims to raise awareness on the exploitation of renewable energy, making sure to give generation Z the right tools to do better."
-    ],
-    "details": {
-      "Type": "Product design",
-      "When": "2021",
-      "Role & responsabilities": "Product strategy\nUser research\nProduct design"
-    },
-    "blocks": [
-      {
-        "type": "media",
-        "layout": "full",
-        "src": "/assets/work/clear-sky-elektricity/01.gif",
+    "clear-sky-elektricity": {
+      "slug": "clear-sky-elektricity",
+      "title": "Clear Sky - ElektriCity",
+      "year": 2021,
+      "yearLabel": null,
+      "client": "—",
+      "role": "Product design",
+      "href": "/work/clear-sky-elektricity.html",
+      "hero": {
+        "src": "/assets/work/clear-sky-elektricity/hero.jpg",
         "alt": "Clear Sky - ElektriCity"
       },
-      {
-        "type": "section",
-        "title": null,
-        "body": [
-          "6 × product designers",
-          "The project presents a modular kit consisting of various nodes that make up ElektriCity. Some nodes represent traditional forms of energy, while others highlight renewable energy options such as solar, wind and hydropower. Each node fits together like a jigsaw puzzle to illustrate the transition to a sustainable city, offering children an engaging and educational experience.",
-          "During the pandemic, we adopted a hybrid working approach. We balanced work at home and in the lab with the necessary precautions, allowing us to design, prototype and realise our project. We developed our final models using different materials and prototyping techniques, including welding, 3D printing, laser cutting and milling. We made sure that the electrical circuits worked as intended, focusing on sustainability and durability throughout the process.",
-          "We designed cardboard packaging reminiscent of a school exercise book, with an elastic band that allows it to function as a binder. Before finalizing this form factor, we experimented with different options, prototyping with cardboard through laser cutting to simulate the final model for die-cutting production. The packaging is designed to be easily stored and stacked in a bookcase. Inside, the pieces are fitted into sustainable foam that protects them.",
-          "As seen in the packaging, we have created marketable kits, including a basic kit, an expansion kit and a school kit. The cards within each kit facilitate play and at the same time educate on the ecological transition.",
-          "In the school kit, students are divided into groups. Each group receives a territory card illustrating the value of the modules. The aim is for the groups to work together and build a self-sufficient city powered by renewable energy.",
-          "For several months we worked for the first time with a hybrid approach. Starting from the brief, we developed and delivered a production-ready project, managing all aspects from product design to communication and packaging. This experience taught us the importance of flexibility, collaboration and attention to detail at every stage of the project, ensuring a complete and cohesive result."
-        ],
-        "media": [
-          {
-            "src": "/assets/work/clear-sky-elektricity/02.png",
-            "alt": "",
-            "layout": "squircle"
-          },
-          {
-            "src": "/assets/work/clear-sky-elektricity/03.png",
-            "alt": "",
-            "layout": "squircle"
-          }
-        ]
+      "lead": [
+        "Designing STEM toys for schools that support teaching and learning about the global transition from fossil fuels to renewable energy.",
+        "We decided to design for low-age target, knowing the playfulness of the products we are going to present.",
+        "Each kit aims to raise awareness on the exploitation of renewable energy, making sure to give generation Z the right tools to do better."
+      ],
+      "details": {
+        "Type": "Product design",
+        "When": "2021",
+        "Role & responsabilities": "Product strategy\nUser research\nProduct design"
       },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/04.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/05.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/06.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/07.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/08.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/09.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/10.png",
-        "alt": ""
-      },
-      {
-        "type": "media",
-        "layout": "squircle",
-        "src": "/assets/work/clear-sky-elektricity/11.png",
-        "alt": ""
-      }
-    ],
-    "next": [
-      "glyph-toys",
-      "verne-product"
-    ]
+      "blocks": [
+        {
+          "type": "media",
+          "layout": "full",
+          "src": "/assets/work/clear-sky-elektricity/01.gif",
+          "alt": "Clear Sky - ElektriCity"
+        },
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "6 × product designers",
+            "The project presents a modular kit consisting of various nodes that make up ElektriCity. Some nodes represent traditional forms of energy, while others highlight renewable energy options such as solar, wind and hydropower. Each node fits together like a jigsaw puzzle to illustrate the transition to a sustainable city, offering children an engaging and educational experience.",
+            "During the pandemic, we adopted a hybrid working approach. We balanced work at home and in the lab with the necessary precautions, allowing us to design, prototype and realise our project. We developed our final models using different materials and prototyping techniques, including welding, 3D printing, laser cutting and milling. We made sure that the electrical circuits worked as intended, focusing on sustainability and durability throughout the process.",
+            "We designed cardboard packaging reminiscent of a school exercise book, with an elastic band that allows it to function as a binder. Before finalizing this form factor, we experimented with different options, prototyping with cardboard through laser cutting to simulate the final model for die-cutting production. The packaging is designed to be easily stored and stacked in a bookcase. Inside, the pieces are fitted into sustainable foam that protects them.",
+            "As seen in the packaging, we have created marketable kits, including a basic kit, an expansion kit and a school kit. The cards within each kit facilitate play and at the same time educate on the ecological transition.",
+            "In the school kit, students are divided into groups. Each group receives a territory card illustrating the value of the modules. The aim is for the groups to work together and build a self-sufficient city powered by renewable energy.",
+            "For several months we worked for the first time with a hybrid approach. Starting from the brief, we developed and delivered a production-ready project, managing all aspects from product design to communication and packaging. This experience taught us the importance of flexibility, collaboration and attention to detail at every stage of the project, ensuring a complete and cohesive result."
+          ],
+          "media": [
+            {
+              "src": "/assets/work/clear-sky-elektricity/02.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "/assets/work/clear-sky-elektricity/03.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/04.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/05.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/06.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/07.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/08.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/09.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/10.png",
+          "alt": ""
+        },
+        {
+          "type": "media",
+          "layout": "squircle",
+          "src": "/assets/work/clear-sky-elektricity/11.png",
+          "alt": ""
+        }
+      ],
+      "next": [
+        "glyph-toys",
+        "verne-product"
+      ]
+    }
   }
 }

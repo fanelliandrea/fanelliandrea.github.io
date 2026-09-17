@@ -21,6 +21,11 @@
   --r: 1.85rem;
   --r-card: 1.35rem;
   --r-lg: 2.4rem;
+  --r-media: clamp(2.4rem, 7vw, 6.25rem);
+  --case-ink: var(--ink);
+  --case-mute: var(--mute);
+  --case-gutter: clamp(1.25rem, 6vw, 4.5rem);
+  --case-gap: clamp(3.5rem, 9vw, 7rem);
   --dur: .6s;
   --ease: cubic-bezier(.22,1,.36,1);
 }

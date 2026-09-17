@@ -18,23 +18,9 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        path, _, query = self.path.partition('?')
-        if path == '/work/glyph-toys.html' and 'v=case-sky3' not in query:
-            self.send_response(302)
-            self.send_header('Location', '/work/glyph-toys.html?v=case-sky3')
-            self.send_header('Cache-Control', 'no-store')
-            self.end_headers()
-            return
         return super().do_GET()
 
     def do_HEAD(self):
-        path, _, query = self.path.partition('?')
-        if path == '/work/glyph-toys.html' and 'v=case-sky3' not in query:
-            self.send_response(302)
-            self.send_header('Location', '/work/glyph-toys.html?v=case-sky3')
-            self.send_header('Cache-Control', 'no-store')
-            self.end_headers()
-            return
         return super().do_HEAD()
 
 

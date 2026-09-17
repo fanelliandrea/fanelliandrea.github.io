@@ -98,7 +98,7 @@ body {
 }
 
 body[data-page="work"] {
-  background: #4e96c9;
+  background: var(--sky);
 }
 
 body[data-page="ideas"] {
@@ -135,15 +135,13 @@ html:has(body[data-page="home"]) {
   overscroll-behavior: none;
 }
 
-/* Effect 064: void stage; frosted chrome stays above. Ideas playlist sits on sunset. */
-body:has([data-effect-064]) {
-  background: var(--void);
-  color: #fff;
+body[data-page="work"]:not([data-slug]) .sky {
+  opacity: 1;
+  visibility: visible;
 }
 
-body:has([data-effect-064]) .sky {
-  opacity: 0;
-  visibility: hidden;
+body[data-page="work"]:not([data-slug]) .sky .field {
+  background: var(--field);
 }
 
 a {
@@ -231,10 +229,6 @@ img {
 :focus-visible {
   outline: 1.5px solid var(--ink);
   outline-offset: 3px;
-}
-
-body:has([data-effect-064]) :focus-visible {
-  outline-color: rgba(255, 255, 255, 0.85);
 }
 
 ::selection {

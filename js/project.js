@@ -1,10 +1,10 @@
-/* Project pages. Case layout (Glyph Toys) + classic renderer for other work/*.html */
+/* Project pages. case-bs2 renderer for /work/*.html */
 (() => {
-  if (window.__afProjectSky3) return;
-  window.__afProjectSky3 = true;
+  if (window.__afProjectBs2) return;
+  window.__afProjectBs2 = true;
 
-  const BOOT = 'af-project-sky3';
-  const CASE_CSS = '/css/project-case.css?v=case-sky3';
+  const BOOT = 'af-project-bs2';
+  const CASE_CSS = '/css/project-case.css?v=case-bs2';
 
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -12,7 +12,7 @@
 
   const figure = item => {
     if (!item?.src) return '';
-    const layout = item.layout || 'squircle';
+    const layout = item.layout === 'full' ? 'full' : 'squircle';
     return `<figure class="case-media case-media--${esc(layout)} sq">
       <img src="${esc(item.src)}" alt="${esc(item.alt || '')}" loading="lazy" decoding="async">
     </figure>`;
@@ -56,6 +56,8 @@
     return p.role || p.type || '';
   };
 
+  const yearOf = p => p?.yearLabel || p?.year || '';
+
   const nextHtml = (slugs, catalog, register) => {
     const cards = (slugs || []).map(slug => {
       const p = catalog[slug];
@@ -82,6 +84,7 @@
 
   const renderCase = (project, register, catalog) => {
     const hero = project.hero && typeof project.hero === 'object' ? project.hero : { src: project.hero || '', alt: project.title };
+    const year = yearOf(project);
     const cta = project.cta
       ? `<p class="case-cta"><a href="${esc(project.cta.href)}" rel="noopener" target="_blank">${esc(project.cta.label)}</a></p>`
       : '';
@@ -90,8 +93,8 @@
         <img src="${esc(hero.src || '')}" alt="${esc(hero.alt || project.title)}" fetchpriority="high">
       </section>
       <section class="case-intro">
-        <p class="case-eyebrow"><a href="/work.html">Work</a> / ${esc(project.year || '')}</p>
-        <h1>${esc(project.title)}</h1>
+        <p class="case-eyebrow"><a href="/work.html">Work</a></p>
+        <h1>${esc(project.title)}${year ? `, ${esc(year)}` : ''}</h1>
         <p class="case-meta">${esc([project.client, roleOf(project)].filter(Boolean).join(' · '))}</p>
         <div class="case-prose case-prose--lead">${paras(project.lead)}</div>
         ${cta}
@@ -105,22 +108,22 @@
   };
 
   const ensureCaseCss = () => {
-    if (document.querySelector('link[data-case-sky]')) return;
+    if (document.querySelector('link[data-case-bs2]')) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = CASE_CSS;
-    link.dataset.caseSky = '1';
+    link.dataset.caseBs2 = '1';
     document.head.append(link);
   };
 
   let catalogPromise;
   const loadCatalog = () => {
     if (!catalogPromise) {
-      catalogPromise = fetch('/content/projects.json?v=case-sky3', { cache: 'no-store' })
+      catalogPromise = fetch('/content/projects.json?v=case-bs2', { cache: 'no-store' })
         .then(r => r.json())
         .then(d => {
-          const catalog = d.projects && typeof d.projects === 'object' && !d.title ? { ...d, ...d.projects } : d;
-          /* Prefer nested case objects when present, keep flat keys for other work pages. */
+          const catalog = d.projects && typeof d.projects === 'object' && !d.title ? { ...d.projects } : { ...d };
+          delete catalog._note;
           window.__AF_PROJECTS__ = catalog;
           return catalog;
         })
@@ -164,87 +167,7 @@
     }
   };
 
-  const runClassic = async () => {
-    const site = window.Site;
-    if (!site) return;
-    const { $, $$, esc: sEsc, thumb, data } = site;
-    const slug = document.body.dataset.slug;
-    const root = $('#project');
-    if (!slug || !root) return;
-
-    const [projects, entries] = await Promise.all([
-      loadCatalog(),
-      data,
-    ]);
-    const p = projects[slug];
-    if (!p) { root.innerHTML = '<p class="prose">This project is not on file.</p>'; return; }
-    if (p.blocks) return;
-
-    const work = entries.filter(e => e.onSite !== false && e.kind !== 'writing');
-    const i = work.findIndex(e => e.slug === slug);
-    const next = work[(i + 1) % work.length];
-    const prev = work[(i - 1 + work.length) % work.length];
-    const hero = (typeof p.hero === 'string' ? p.hero : p.hero?.src) || work[i]?.media?.[0];
-
-    const facts = [
-      ['Type', p.type],
-      ['When', p.when],
-      ['Role & responsabilities', Array.isArray(p.role) ? p.role.join('\n') : p.role],
-      ['Team', (p.team || []).join('\n')],
-    ].filter(([, v]) => v);
-
-    const sections = (p.sections || []).map(s => {
-      const h = s.h ? `<h2>${sEsc(s.h)}</h2>` : '';
-      const h3 = s.h3 ? `<h3>${sEsc(s.h3)}</h3>` : '';
-      const para = (s.paras || []).map(t => `<p>${sEsc(t)}</p>`).join('');
-      const links = (s.links || []).map(l => `<p><a href="${sEsc(l.href)}" rel="noopener">${sEsc(l.label)}</a></p>`).join('');
-      return h + h3 + para + links;
-    }).join('');
-
-    document.title = `${p.title} — Andrea Fanelli`;
-    delete document.body.dataset.layout;
-    root.innerHTML = `
-    <header class="p-hero">
-      ${hero ? `<img src="${sEsc(thumb(hero, 2400))}" alt="">` : ''}
-    </header>
-    <div class="p-copy rise">
-      <span class="kicker">${sEsc(p.type || '')}</span>
-      <h1>${sEsc(p.title)}</h1>
-    </div>
-    ${p.lede ? `<p class="lede-block">${sEsc(p.lede)}</p>` : ''}
-    <dl class="facts">${facts.map(([k, v]) => `<div><dt>${sEsc(k)}</dt><dd>${sEsc(v).replace(/\n/g, '<br>')}</dd></div>`).join('')}</dl>
-    <div class="prose">${p.intro ? `<p>${sEsc(p.intro)}</p>` : ''}${p.note ? `<p>${sEsc(p.note)}</p>` : ''}${sections}</div>
-    <nav class="next" aria-label="Next projects">
-      <div><span class="kicker">Previous</span>${prev ? `<a href="${sEsc(prev.href)}">${sEsc(prev.title)}</a>` : ''}</div>
-      <div style="text-align:right"><span class="kicker">Next</span>${next ? `<a href="${sEsc(next.href)}">${sEsc(next.title)}</a>` : ''}</div>
-    </nav>`;
-
-    if (window.gsap && !site.reduced && window.SplitText && window.ScrollTrigger) {
-      Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 900))]).then(() => {
-        $$('.prose p').forEach(pEl => {
-          let triggers = [];
-          SplitText.create(pEl, {
-            type: 'lines,words', linesClass: 'ln', wordsClass: 'wd', autoSplit: true,
-            onSplit(self) {
-              triggers.forEach(t => t.kill(true));
-              const spread = Math.min(22, innerWidth * 0.018);
-              triggers = self.lines.map(line => {
-                const words = [...line.querySelectorAll('.wd')];
-                const mid = (words.length - 1) / 2;
-                return gsap.fromTo(words,
-                  { x: idx => (idx - mid) * spread, opacity: 0.28 },
-                  { x: 0, opacity: 1, ease: 'none',
-                    scrollTrigger: { trigger: line, start: 'top 96%', end: 'top 58%', scrub: 0.6 } }
-                ).scrollTrigger;
-              });
-            },
-          });
-        });
-      });
-    }
-  };
-
-  const boot = () => { mountCase(); runClassic(); };
+  const boot = () => { mountCase(); };
   addEventListener('site:page', boot);
   addEventListener('DOMContentLoaded', boot);
   if (document.readyState !== 'loading') boot();

@@ -18,7 +18,7 @@
     const site = window.Site;
     if (!site) return;
     const { $, $$, reduced } = site;
-    document.body.classList.add('lit', 'arrived');
+    document.body.classList.add('lit');
 
     if (reduced || !window.gsap) return;
 
@@ -127,7 +127,13 @@
     });
   });
 
-  setTimeout(() => document.body.classList.add('arrived', 'lit'), 180);
+  setTimeout(() => {
+    document.body.classList.add('lit');
+    if (document.body.dataset.page !== 'home') document.body.classList.add('arrived');
+  }, 180);
+  setTimeout(() => {
+    if (document.body.dataset.page === 'home') document.body.classList.add('arrived');
+  }, 16000);
 
   if (document.readyState !== 'loading') boot();
   else addEventListener('DOMContentLoaded', boot);

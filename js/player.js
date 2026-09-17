@@ -61,10 +61,16 @@
   const coverEl = player.querySelector('.player-cover');
   const titleEl = player.querySelector('.player-title');
   const artistEl = player.querySelector('.player-artist');
-  const htmlAudio = new Audio();
-  htmlAudio.preload = 'auto';
-  const LOCAL_AUDIO = {};
-  const fileFor = id => tracks[id]?.audio || LOCAL_AUDIO[id] || '';
+
+  const YT_ORIGINS = [
+    'https://dynamic-mousse-ad9447.netlify.app',
+    'http://127.0.0.1:43123',
+    'http://localhost:43123'
+  ];
+  const ytOrigin = YT_ORIGINS.includes(location.origin)
+    ? location.origin
+    : location.origin;
+  let ytTries = {};
 
   const saved = load();
   let yt = null;
@@ -163,65 +169,6 @@
     player.classList.toggle('is-playing', on);
   };
 
-  const hushAudio = () => {
-    try { htmlAudio.pause(); htmlAudio.removeAttribute('src'); htmlAudio.load(); } catch {}
-  };
-
-  const playFile = (id, autoplay) => {
-    const src = fileFor(id);
-    if (!src) return false;
-    expected = id;
-    try { yt?.stopVideo?.(); } catch {}
-    if (!htmlAudio.src.includes(src)) htmlAudio.src = src;
-    show(id);
-    if (autoplay) {
-      const play = htmlAudio.play();
-      if (play && play.catch) play.catch(() => {});
-      pending = 'play';
-      setPlaying(true);
-    }
-    snapshot({ playing: !!autoplay, videoId: id });
-    return true;
-  };
-
-  const dzPreview = dz => new Promise((resolve, reject) => {
-    const cb = '__dz' + Math.random().toString(36).slice(2);
-    const s = document.createElement('script');
-    const done = (err, data) => {
-      clearTimeout(t);
-      delete window[cb];
-      s.remove();
-      err ? reject(err) : resolve(data);
-    };
-    const t = setTimeout(() => done(new Error('timeout')), 8000);
-    window[cb] = data => done(null, data);
-    s.src = `https://api.deezer.com/track/${dz}?output=jsonp&callback=${cb}`;
-    s.onerror = () => done(new Error('jsonp'));
-    document.head.appendChild(s);
-  });
-
-  const playFallback = () => {
-    const id = expected;
-    if (playFile(id, true)) return;
-    const dz = tracks[id]?.deezer;
-    show(id);
-    if (!dz) return;
-    dzPreview(dz)
-      .then(d => {
-        if (expected !== id || !d.preview) return;
-        try { yt?.stopVideo?.(); } catch {}
-        htmlAudio.src = d.preview;
-        const play = htmlAudio.play();
-        if (play && play.catch) play.catch(() => {});
-        pending = 'play';
-        setPlaying(true);
-        snapshot({ playing: true, videoId: id });
-      })
-      .catch(() => {});
-  };
-
-  htmlAudio.addEventListener('ended', () => skip(1));
-
   const createPlayer = (id, autoplay, start) => {
     if (!window.YT?.Player || !id) return;
     const my = ++gen;
@@ -244,7 +191,7 @@
         modestbranding: 1,
         playsinline: 1,
         rel: 0,
-        origin: location.origin
+        origin: ytOrigin
       },
       events: {
         onReady: e => {
@@ -260,7 +207,8 @@
           if (e.data === 1) {
             pending = 'play';
             resumeAt = 0;
-            hushAudio();
+            ytTries[id] = 0;
+            delete player.dataset.ytError;
             setPlaying(true);
             show(id);
             snapshot({ playing: true, videoId: id });
@@ -269,9 +217,18 @@
             snapshot({ playing: false });
           } else if (e.data === 0) skip(1);
         },
-        onError: () => {
+        onError: e => {
           if (my !== gen) return;
-          if (autoplay || pending === 'play') playFallback();
+          const code = e?.data;
+          player.dataset.ytError = String(code ?? '');
+          const n = (ytTries[id] || 0) + 1;
+          ytTries[id] = n;
+          if ((autoplay || pending === 'play') && n < 2) {
+            createPlayer(id, true, 0);
+            return;
+          }
+          setPlaying(false);
+          snapshot({ playing: false });
         }
       }
     });
@@ -283,11 +240,6 @@
     expected = id;
     show(id);
     snapshot({ videoId: id, playing: !!autoplay });
-    if (fileFor(id)) {
-      playFile(id, autoplay);
-      return;
-    }
-    hushAudio();
     createPlayer(id, autoplay, start || 0);
   };
 
@@ -296,15 +248,6 @@
     setPlaying(true);
     const id = order[idx];
     show(id);
-    if (fileFor(id)) {
-      playFile(id, true);
-      return;
-    }
-    if (htmlAudio.src && htmlAudio.paused) {
-      const play = htmlAudio.play();
-      if (play && play.catch) play.catch(() => {});
-      return;
-    }
     if (ready && yt) {
       try {
         const cur = yt.getVideoData?.()?.video_id;
@@ -327,7 +270,6 @@
     setPlaying(false);
     try { resumeAt = yt?.getCurrentTime?.() || resumeAt; } catch {}
     try { yt?.pauseVideo?.(); } catch {}
-    try { htmlAudio.pause(); } catch {}
     snapshot({ playing: false });
   };
 
@@ -362,10 +304,6 @@
   addEventListener('visibilitychange', () => { if (document.hidden) snapshot(); });
   addEventListener('site:page', () => {
     if (pending !== 'play') return;
-    if (htmlAudio.src) {
-      if (htmlAudio.paused) htmlAudio.play().catch(() => {});
-      return;
-    }
     try {
       const st = yt?.getPlayerState?.();
       if (st === 1 || st === 3) return;
@@ -375,7 +313,7 @@
   addEventListener('resize', sizeMeta);
   setInterval(() => { if (player.classList.contains('is-playing')) snapshot(); }, 2000);
 
-  fetch('/content/playlist.json?v=yt-8b')
+  fetch('/content/playlist.json?v=yt-full-1')
     .then(r => r.json())
     .then(d => {
       tracks = d.tracks || {};

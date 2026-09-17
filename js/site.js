@@ -103,7 +103,7 @@
 
   if (!document.querySelector('script[src^="/js/player.js"]')) {
     const p = document.createElement('script');
-    p.src = '/js/player.js?v=yt-8b';
+    p.src = '/js/player.js?v=yt-full-1';
     document.body.appendChild(p);
   }
 

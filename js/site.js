@@ -194,9 +194,19 @@
     document.body.dataset.page = doc.body.getAttribute('data-page') || '';
     if (doc.body.hasAttribute('data-slug')) document.body.dataset.slug = doc.body.getAttribute('data-slug');
     else document.body.removeAttribute('data-slug');
+    if (doc.body.hasAttribute('data-layout')) document.body.dataset.layout = doc.body.getAttribute('data-layout');
+    else document.body.removeAttribute('data-layout');
     if (document.body.dataset.page === 'home') document.body.classList.add('lit', 'arrived');
     if (push) history.pushState({}, '', href);
     scrollTo(0, 0);
+    doc.querySelectorAll('link[rel="stylesheet"][href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || document.querySelector(`link[href="${href}"]`)) return;
+      const el = document.createElement('link');
+      el.rel = 'stylesheet';
+      el.href = href;
+      document.head.append(el);
+    });
     loadScripts(doc).then(() => {
       fill();
       markDock();

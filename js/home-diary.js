@@ -1,16 +1,8 @@
-/* Diary words that surface on the home sky, then leave the room quiet. */
+/* One pale line on the home sky: live-site hero, letter by letter. */
 (() => {
   const ROOT_ID = 'home-diary';
-  const CSS = '/css/home-diary.css?v=home-diary2';
-  /* Live fanelliandrea.com — not the redesign draft. */
-  const LINES = [
-    { text: 'Ciao.', kind: 'ciao' },
-    { text: 'Andrea Fanelli', kind: 'name' },
-    { text: 'A curious mind exploring the edges of all that\'s possible with design and beyond.', kind: 'tag' },
-    { text: 'Based in Italy', kind: 'place' },
-    { text: 'I believe great design is about creating a feeling.', kind: 'feel' },
-    { text: 'Welcome', kind: 'welcome' }
-  ];
+  const CSS = '/css/home-diary.css?v=home-diary4';
+  const LINE = "A curious mind exploring the edges of all that's possible with design and beyond.";
 
   let tl = null;
   let seen = false;
@@ -52,44 +44,61 @@
   const hide = root => {
     if (!root) return;
     root.replaceChildren();
-    root.setAttribute('aria-hidden', 'true');
   };
 
-  const play = (root, lines) => {
+  const build = root => {
+    const p = document.createElement('p');
+    p.className = 'diary-line';
+    const words = LINE.split(' ').map(text => {
+      const wrap = document.createElement('span');
+      wrap.className = 'diary-word';
+      const letters = [...text].map(ch => {
+        const s = document.createElement('span');
+        s.className = 'diary-l';
+        s.textContent = ch;
+        wrap.appendChild(s);
+        return s;
+      });
+      return { wrap, letters };
+    });
+    words.forEach((word, i) => {
+      p.appendChild(word.wrap);
+      if (i < words.length - 1) p.appendChild(document.createTextNode(' '));
+    });
+    root.appendChild(p);
+    return words;
+  };
+
+  const showAll = words => {
+    words.forEach(w => w.letters.forEach(el => { el.style.opacity = '1'; }));
+  };
+
+  const play = root => {
     kill();
     hide(root);
     document.body.classList.add('lit');
     document.body.classList.remove('arrived');
 
-    const words = lines.map(line => {
-      const el = document.createElement('p');
-      el.className = `diary-word is-${line.kind}`;
-      el.textContent = line.text;
-      root.appendChild(el);
-      return el;
-    });
+    const words = build(root);
 
     if (reduced() || !window.gsap) {
-      const last = words[words.length - 1];
-      if (last) last.style.opacity = '1';
+      showAll(words);
       arrive();
       return;
     }
 
-    gsap.set(words, { opacity: 0, y: 16 });
-    tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-
-    words.forEach((el, i) => {
-      const last = i === words.length - 1;
-      const hold = last ? 1.45 : .95;
-      const at = i * 2.05;
-      tl.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: .7,
-        onStart: last ? arrive : undefined
-      }, at);
-      tl.to(el, { opacity: 0, y: -10, duration: .5 }, at + .7 + hold);
+    gsap.set(words.flatMap(w => w.letters), { opacity: 0 });
+    tl = gsap.timeline({ defaults: { ease: 'none' } });
+    let at = .45;
+    const perLetter = .048;
+    const letterDur = .14;
+    const wordPause = .28;
+    words.forEach((word, wi) => {
+      word.letters.forEach((el, li) => {
+        tl.to(el, { opacity: 1, duration: letterDur }, at + li * perLetter);
+      });
+      at += word.letters.length * perLetter + wordPause;
+      if (wi === words.length - 1) tl.add(arrive, at);
     });
   };
 
@@ -102,12 +111,14 @@
       return;
     }
     if (seen) {
+      kill();
       hide(root);
+      showAll(build(root));
       arrive();
       return;
     }
     seen = true;
-    play(root, LINES);
+    play(root);
   };
 
   addEventListener('site:page', start);

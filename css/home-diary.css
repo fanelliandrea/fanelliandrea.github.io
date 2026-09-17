@@ -9,6 +9,12 @@
   padding:0 var(--gutter) 7rem;
 }
 .diary-line{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:baseline;
+  column-gap:.33em;
+  row-gap:.12em;
   margin:0;
   max-width:min(92vw, 42rem);
   color:rgba(247,251,255,.92);
@@ -18,13 +24,18 @@
   line-height:1.28;
   letter-spacing:.015em;
   text-align:center;
+  overflow-wrap:normal;
+  word-break:keep-all;
+  hyphens:none;
 }
 .diary-word{
+  flex:0 0 auto;
   display:inline-block;
   white-space:nowrap;
+  word-break:keep-all;
 }
 .diary-l{
-  display:inline-block;
+  display:inline;
   opacity:0;
 }
 

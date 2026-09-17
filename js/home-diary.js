@@ -1,7 +1,7 @@
 /* One pale line on the home sky: live-site hero, letter by letter. */
 (() => {
   const ROOT_ID = 'home-diary';
-  const CSS = '/css/home-diary.css?v=home-diary4';
+  const CSS = '/css/home-diary.css?v=home-diary6';
   const LINE = "A curious mind exploring the edges of all that's possible with design and beyond.";
 
   let tl = null;
@@ -61,10 +61,7 @@
       });
       return { wrap, letters };
     });
-    words.forEach((word, i) => {
-      p.appendChild(word.wrap);
-      if (i < words.length - 1) p.appendChild(document.createTextNode(' '));
-    });
+    words.forEach(word => p.appendChild(word.wrap));
     root.appendChild(p);
     return words;
   };

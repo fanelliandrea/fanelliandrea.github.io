@@ -66,8 +66,7 @@
     ]
   },
   "orb": {
-    "src": "/content/info/orb.png",
-    "remote": "https://framerusercontent.com/images/rmn24TMZGhE8IWs9gptsFz6qc.jpg?scale-down-to=1024",
+    "src": "/assets/info/andrea-portrait.png",
     "alt": "Andrea Fanelli"
   }
 }

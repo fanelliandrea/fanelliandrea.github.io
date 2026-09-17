@@ -25,17 +25,24 @@
     const gold = Math.PI * (3 - Math.sqrt(5));
     const a = i * gold;
     const r = 0.38 + 0.62 * Math.sqrt((i + 0.5) / n);
+    const ang = ((a % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    const polar = ang > Math.PI ? ang - Math.PI * 2 : ang;
     return {
       ux: Math.cos(a) * r,
       uy: Math.sin(a) * r,
       z: -10 - i * 680,
-      rx: Math.cos(a) * 5,
-      ry: Math.sin(a) * 11,
+      rz: polar * (180 / Math.PI) * 0.09,
       portrait: unit(i, 7) > 0.4,
     };
   };
 
   const LOCK = `<span class="fx064-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V8.2a4 4 0 0 1 8 0V11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16" r="1.15" fill="currentColor"/></svg></span>`;
+  const lockAspect = e => {
+    const slug = e.slug || '';
+    if (slug === 'origami-computing-kami') return { ratio: '4 / 5', portrait: true };
+    if (slug === '4ff-muse') return { ratio: '4 / 3', portrait: false };
+    return null;
+  };
 
   const boot = async () => {
     kill();
@@ -44,7 +51,7 @@
     const root = document.querySelector('[data-effect-064]');
     if (!site || !root || document.body.dataset.page !== 'work' || document.body.dataset.slug) return;
 
-    const { esc, pad, thumb, data, reduced, fine } = site;
+    const { esc, thumb, data, reduced, fine } = site;
     const locked = await fetch('/content/projects.json', { cache: 'no-store' })
       .then(r => r.json())
       .then(d => d.lockedWork || [])
@@ -68,10 +75,10 @@
         const href = !lockedCard && e.href ? ` href="${esc(e.href)}"` : '';
         const tag = !lockedCard && e.href ? 'a' : 'article';
         const n = i + 1;
-        return `<${tag} class="piece piece-${n} still${lockedCard ? ' is-locked' : ''}"${href}${lockedCard ? ' aria-hidden="true"' : ''}>
-          <span class="shot sq"><img src="${esc(thumb(e.media[0], 1600))}" alt=""></span>
-          ${lockedCard ? LOCK : ''}
-          <span class="pill">${esc(pad(n))} ${esc(e.title)}</span>
+        return `<${tag} class="piece piece-${n} still${lockedCard ? ' is-locked' : ''}"${href}${lockedCard ? ' aria-label="' + esc(e.title) + '"' : ''}>
+          <span class="shot fx064-shot"><span class="fx064-frame"><span class="fx064-well"><img src="${esc(thumb(e.media[0], 1600))}" alt=""></span></span>
+            <span class="pill fx064-pill">${lockedCard ? LOCK : ''}${esc(e.title)}</span>
+          </span>
         </${tag}>`;
       }).join('');
       if (hint) hint.hidden = true;
@@ -87,15 +94,15 @@
       const href = !lockedCard && e.href ? ` href="${esc(e.href)}"` : '';
       const tag = !lockedCard && e.href ? 'a' : 'article';
       const p = pose(i, N, mobile);
-      const n = i + 1;
-      const orient = lockedCard ? '' : (p.portrait ? ' is-portrait' : ' is-land');
-      const label = lockedCard
-        ? ` aria-hidden="true"`
-        : ` aria-label="${esc(e.title)}"`;
-      return `<${tag} class="fx064-card${orient}${lockedCard ? ' is-locked' : ''}"${href}${label}>
-        <span class="fx064-shot sq"><img src="${esc(thumb(e.media[0], 900))}" alt="" decoding="async" draggable="false"></span>
-        ${lockedCard ? LOCK : ''}
-        <span class="fx064-pill">${esc(pad(n))} ${esc(e.title)}</span>
+      const aspect = lockedCard ? lockAspect(e) : null;
+      const portrait = aspect ? aspect.portrait : p.portrait;
+      const orient = portrait ? ' is-portrait' : ' is-land';
+      const shotStyle = aspect ? ` style="aspect-ratio:${aspect.ratio}"` : '';
+      return `<${tag} class="fx064-card${orient}${lockedCard ? ' is-locked' : ''}"${href} aria-label="${esc(e.title)}">
+        <span class="fx064-shot"${shotStyle}>
+          <span class="fx064-frame"><span class="fx064-well"><img src="${esc(thumb(e.media[0], 900))}" alt="" decoding="async" draggable="false"></span></span>
+          <span class="fx064-pill">${lockedCard ? LOCK : ''}${esc(e.title)}</span>
+        </span>
       </${tag}>`;
     }).join('');
 
@@ -103,7 +110,8 @@
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
     cards.forEach((card, i) => {
-      if (!items[i]?.locked) return;
+      const e = items[i];
+      if (!e?.locked || lockAspect(e)) return;
       const img = card.querySelector('img');
       const shot = card.querySelector('.fx064-shot');
       if (!img || !shot) return;
@@ -176,7 +184,7 @@
       placeXY();
       cards.forEach((card, i) => {
         const p = poses[i];
-        gsap.set(card, { z: p.z - 2600, rotationX: 10, rotationY: p.ry * 1.2, scale: 0.94 });
+        gsap.set(card, { z: p.z - 2600, rotationX: 0, rotationY: 0, rotationZ: p.rz * 1.2, scale: 0.94 });
       });
       paint();
 
@@ -193,8 +201,13 @@
           onUpdate: paint,
         }, at);
         land.to(card, {
-          rotationX: p.rx,
-          rotationY: p.ry,
+          rotationX: 0,
+          rotationY: 0,
+          rotationZ: p.rz,
+          duration: 1.15,
+          ease: 'power3.out',
+        }, at);
+        land.to(card, {
           scale: 1,
           duration: 1.2,
           ease: 'back.out(1.45)',
@@ -230,7 +243,7 @@
         const m = matchMedia('(max-width: 860px)').matches;
         cards.forEach((_, i) => { poses[i] = pose(i, N, m); });
         placeXY();
-        cards.forEach((card, i) => gsap.set(card, { z: poses[i].z, rotationX: poses[i].rx, rotationY: poses[i].ry }));
+        cards.forEach((card, i) => gsap.set(card, { z: poses[i].z, rotationX: 0, rotationY: 0, rotationZ: poses[i].rz }));
         paint();
         window.ScrollTrigger?.refresh?.();
       };

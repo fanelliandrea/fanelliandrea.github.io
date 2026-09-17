@@ -8,7 +8,7 @@ import os
 ROOT = Path(__file__).resolve().parents[1]
 PORT = 43123
 NO_STORE = {'.html', '.js', '.css', '.json'}
-WORK_QS = 'v=fx064-lock2'
+WORK_QS = 'v=fx064-lock5'
 
 
 class Handler(SimpleHTTPRequestHandler):

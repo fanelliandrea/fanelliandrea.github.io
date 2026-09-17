@@ -1,5 +1,5 @@
 (() => {
-  const DATA_URL = "/content/info.json";
+  const DATA_URL = "/content/info.json?v=info-portrait1";
   const PATH = "/info.html";
   const ROOT_ID = "info-frost-root";
 
@@ -85,7 +85,7 @@
     const alt = escapeHtml(orb.alt || "Andrea Fanelli");
     const fallback = escapeHtml(orb.remote || src);
     return `<div class="info-frost__orb">
-      <img src="${escapeHtml(src)}" alt="${alt}" width="72" height="72" decoding="async" onerror="this.onerror=null;this.src='${fallback}'" />
+      <img src="${escapeHtml(src)}" alt="${alt}" width="72" height="72" decoding="async"${orb.remote ? ` onerror="this.onerror=null;this.src='${fallback}'"` : ""} />
     </div>`;
   }
 
@@ -194,14 +194,22 @@
     if (!open) return;
     open = false;
     const root = document.getElementById(ROOT_ID);
+    const active = document.activeElement;
     if (root) {
       root.classList.remove("is-open");
       root.setAttribute("aria-hidden", "true");
+      if (active && root.contains(active)) active.blur();
     }
     document.body.classList.remove("is-info-open");
     if (historyNav && isInfoHref(location.href)) {
       const fallback = previousUrl && !isInfoHref(previousUrl) ? previousUrl : "/";
       history.pushState({ afInfo: false }, "", fallback);
+    }
+    window.Site?.markDock?.();
+    const dockToggle = document.querySelector(".dock-toggle");
+    if (dockToggle) {
+      dockToggle.focus({ preventScroll: true });
+      dockToggle.blur();
     }
   }
 

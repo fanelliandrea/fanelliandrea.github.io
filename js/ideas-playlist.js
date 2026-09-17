@@ -130,78 +130,6 @@
     return [...featured, ...rest];
   }
 
-  function ensureIdeasCss() {
-    const href = "/css/ideas.css?v=ideas-land1";
-    const existing = [...document.querySelectorAll('link[rel="stylesheet"]')].find((l) =>
-      (l.getAttribute("href") || "").includes("/css/ideas.css")
-    );
-    if (existing) return Promise.resolve();
-    return new Promise((resolve) => {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.onload = link.onerror = () => resolve();
-      document.head.appendChild(link);
-    });
-  }
-
-  function painted() {
-    return new Promise((resolve) => {
-      const go = () => requestAnimationFrame(() => requestAnimationFrame(resolve));
-      if (document.fonts?.ready) {
-        Promise.race([
-          document.fonts.ready,
-          new Promise((r) => setTimeout(r, 500)),
-        ]).then(go);
-      } else go();
-    });
-  }
-
-  function stageSize() {
-    const stage = root?.querySelector(".ideas-pl__stage");
-    const w = stage?.clientWidth || 0;
-    const h = stage?.clientHeight || 0;
-    return { w, h, ready: w > 80 && h > 80 };
-  }
-
-  async function waitLayout() {
-    await painted();
-    for (let i = 0; i < 16; i++) {
-      measure();
-      if (stageSize().ready) break;
-      await new Promise((r) => requestAnimationFrame(r));
-    }
-    measure();
-  }
-
-  function watchRelayout() {
-    const stage = root?.querySelector(".ideas-pl__stage");
-    if (stage && window.ResizeObserver && !stage._afIdeasRo) {
-      let timer = null;
-      const ro = new ResizeObserver(() => {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-          measure();
-          layout(progress, true);
-        }, 40);
-      });
-      ro.observe(stage);
-      stage._afIdeasRo = ro;
-    }
-    const relayout = () => {
-      measure();
-      layout(progress, true);
-    };
-    if (document.fonts?.addEventListener) {
-      document.fonts.addEventListener("loadingdone", relayout, { once: true });
-    }
-    addEventListener("load", relayout, { once: true });
-    cards.forEach((card) => {
-      const img = card.querySelector("img");
-      if (img && !img.complete) img.addEventListener("load", relayout, { once: true });
-    });
-  }
-
   function measure() {
     const stage = root.querySelector(".ideas-pl__stage");
     const w = stage?.clientWidth || window.innerWidth;
@@ -681,13 +609,14 @@
       items = await loadIdeas();
       if (!items.length) throw new Error("no writing");
       cards = renderCards(orbit, items);
-      await ensureIdeasCss();
-      await waitLayout();
-      if (preferReduced) reduced();
-      else {
-        intro();
-        watchRelayout();
+      if (!document.querySelector('link[href*="/css/ideas.css"]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/ideas.css?v=ideas-live1";
+        document.head.appendChild(link);
       }
+      if (preferReduced) reduced();
+      else requestAnimationFrame(intro);
     } catch (err) {
       console.error(err);
       orbit.innerHTML = `<p class="ideas-pl__error">Could not load ideas.</p>`;

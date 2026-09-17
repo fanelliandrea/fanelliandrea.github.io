@@ -156,11 +156,17 @@
         const u = new URL(a.href, location.href);
         const here = (u.pathname.replace(/\/index\.html$/, '/') || '/');
         const now = (location.pathname.replace(/\/index\.html$/, '/') || '/');
+        const infoPage = here === '/info' || here === '/info.html' || here.endsWith('/info.html');
+        if (infoPage) {
+          a.removeAttribute('aria-current');
+          return;
+        }
         if (here === now) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
       } catch {}
     });
   };
+  window.Site.markDock = markDock;
 
   const keep = src => /\/js\/(site|space|player|info-overlay)\.js/.test(src);
 

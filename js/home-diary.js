@@ -1,7 +1,7 @@
 /* One pale line on the home sky: live-site hero, letter by letter. */
 (() => {
   const ROOT_ID = 'home-diary';
-  const CSS = '/css/home-diary.css?v=home-diary6';
+  const CSS = '/css/home-diary.css?v=home-diary7';
   const LINE = "A curious mind exploring the edges of all that's possible with design and beyond.";
 
   let tl = null;
@@ -86,10 +86,10 @@
 
     gsap.set(words.flatMap(w => w.letters), { opacity: 0 });
     tl = gsap.timeline({ defaults: { ease: 'none' } });
-    let at = .45;
-    const perLetter = .048;
-    const letterDur = .14;
-    const wordPause = .28;
+    let at = .28;
+    const perLetter = .026;
+    const letterDur = .08;
+    const wordPause = .14;
     words.forEach((word, wi) => {
       word.letters.forEach((el, li) => {
         tl.to(el, { opacity: 1, duration: letterDur }, at + li * perLetter);

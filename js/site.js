@@ -194,7 +194,7 @@
     document.body.dataset.page = doc.body.getAttribute('data-page') || '';
     if (doc.body.hasAttribute('data-slug')) document.body.dataset.slug = doc.body.getAttribute('data-slug');
     else document.body.removeAttribute('data-slug');
-    if (document.body.dataset.page === 'home') document.body.classList.add('lit');
+    if (document.body.dataset.page === 'home') document.body.classList.add('lit', 'arrived');
     if (push) history.pushState({}, '', href);
     scrollTo(0, 0);
     loadScripts(doc).then(() => {

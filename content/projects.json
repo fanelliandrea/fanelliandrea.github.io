@@ -1,13 +1,13 @@
 {
   "glyph-toys": {
+    "slug": "glyph-toys",
     "title": "Glyph Toys",
-    "layout": "case",
     "year": 2026,
     "client": "Nothing",
     "role": "Product Design",
     "href": "/work/glyph-toys.html",
     "hero": {
-      "src": "/assets/work/glyph-toys/jofnozJ9su29yfsUkdPGL9J2dU.gif",
+      "src": "/assets/work/glyph-toys/hero.gif",
       "alt": "Glyph Toys on the Phone (4a) Pro Glyph Matrix"
     },
     "lead": [
@@ -28,7 +28,7 @@
       {
         "type": "media",
         "layout": "full",
-        "src": "/assets/work/glyph-toys/XOeCSOlNlHI0ZozvZlzBs9pse0.png",
+        "src": "/assets/work/glyph-toys/phones-trio.png",
         "alt": "Three Phone (4a) Pro colorways showing Glyph Toys on the rear matrix"
       },
       {
@@ -40,12 +40,12 @@
         ],
         "media": [
           {
-            "src": "/assets/work/glyph-toys/bfLryooQIwauHoo0PF8bOWwB0.png",
+            "src": "/assets/work/glyph-toys/module-close-a.png",
             "alt": "Close-up of the Glyph Matrix module",
             "layout": "squircle"
           },
           {
-            "src": "/assets/work/glyph-toys/qmyhR14QtAuh7hNuPBkbWT1EVws.png",
+            "src": "/assets/work/glyph-toys/module-close-b.png",
             "alt": "Glyph Matrix camera island detail",
             "layout": "squircle"
           }
@@ -54,23 +54,23 @@
       {
         "type": "media",
         "layout": "squircle",
-        "src": "/assets/work/glyph-toys/lgyXZrEN1poTP75eBnwlTAWrpoY.png",
+        "src": "/assets/work/glyph-toys/constellations.png",
         "alt": "Eleven major star constellations mapped to the Glyph Matrix"
       },
       {
         "type": "section",
         "title": "The prototype is the product",
         "body": [
-          "To test the idea, we built a browser-based prototype simulating the Glyph Matrix at 13×13 pixels. It reads your location and the current time, calculates which constellation sits directly at your zenith, and projects it onto the grid, rotating live as the Earth turns via Local Sidereal Time. 11 constellations, automatic crossfades, swipe navigation to explore the sky manually. A way to see if the sky could live on a grid of LEDs."
+          "To test the idea, we built a browser-based prototype simulating the Glyph Matrix at 13\u00d713 pixels. It reads your location and the current time, calculates which constellation sits directly at your zenith, and projects it onto the grid, rotating live as the Earth turns via Local Sidereal Time. 11 constellations, automatic crossfades, swipe navigation to explore the sky manually. A way to see if the sky could live on a grid of LEDs."
         ],
         "media": [
           {
-            "src": "/assets/work/glyph-toys/MWZ0A6WsXynFfIrgvzuEy1mkIoU.png",
+            "src": "/assets/work/glyph-toys/star-map-ui.png",
             "alt": "Glyph Star Map prototype interface",
             "layout": "squircle"
           },
           {
-            "src": "/assets/work/glyph-toys/oXnOodFeTkUSBPMFs97JeMnbMIk.png",
+            "src": "/assets/work/glyph-toys/glyph-grid-a.png",
             "alt": "Constellation pixel studies on the Glyph grid",
             "layout": "squircle"
           }
@@ -81,17 +81,17 @@
         "title": "The mechanics of a second",
         "body": [
           "While Star Map looks outward, Micro Rotor goes in the opposite direction.",
-          "It renders an automatic watch movement on the Glyph Matrix: rotor, bridges, jewels, balance wheel and escape wheel. Everything mapped onto a 13×13 LED grid, each part reduced to its minimum readable pixel form while preserving how they sit and move in relation to one another.",
+          "It renders an automatic watch movement on the Glyph Matrix: rotor, bridges, jewels, balance wheel and escape wheel. Everything mapped onto a 13\u00d713 LED grid, each part reduced to its minimum readable pixel form while preserving how they sit and move in relation to one another.",
           "The rotor swings with the phone's gyroscope. Move it and it spins, set it down and it settles. A mechanical object, translated into pixels."
         ],
         "media": [
           {
-            "src": "/assets/work/glyph-toys/sxC2gp37sNtHaxFzk3gDuxSRdU.png",
-            "alt": "Micro rotor movement mapped onto a 13×13 LED grid",
+            "src": "/assets/work/glyph-toys/movement-map.png",
+            "alt": "Micro rotor movement mapped onto a 13\u00d713 LED grid",
             "layout": "squircle"
           },
           {
-            "src": "/assets/work/glyph-toys/x7eI2pRarNeqPsZWjbyRc4VUfA.gif",
+            "src": "/assets/work/glyph-toys/micro-rotor.gif",
             "alt": "Micro Rotor Glyph Toy in motion",
             "layout": "squircle"
           }
@@ -101,28 +101,32 @@
         "type": "section",
         "title": "Proof of movement",
         "body": [
-          "To simulate the internal parts of a watch movement, we built a browser-based prototype of the Glyph Matrix at 13×13 pixels. The gyroscope feeds gravity and inertia directly into the rotor. Tilt the phone and it swings, hold it still and it settles. Every component rendered in pixel art: bridges, jewels, balance wheel, escape wheel. Momentum-based physics, 90° rotor snapping, a 4Hz beat holding the whole movement together."
+          "To simulate the internal parts of a watch movement, we built a browser-based prototype of the Glyph Matrix at 13\u00d713 pixels. The gyroscope feeds gravity and inertia directly into the rotor. Tilt the phone and it swings, hold it still and it settles. Every component rendered in pixel art: bridges, jewels, balance wheel, escape wheel. Momentum-based physics, 90\u00b0 rotor snapping, a 4Hz beat holding the whole movement together."
         ],
         "media": [
           {
-            "src": "/assets/work/glyph-toys/QKR7Zcj3ZylANyvWM1QneOnEyKE.png",
+            "src": "/assets/work/glyph-toys/micro-rotor-ui.png",
             "alt": "Micro Rotor Glyph prototype interface",
             "layout": "squircle"
           },
           {
-            "src": "/assets/work/glyph-toys/HK1pHfBB8AYpNCaINEzGWQe2Z0.png",
+            "src": "/assets/work/glyph-toys/glyph-grid-b.png",
             "alt": "Micro Rotor pixel states on the Glyph grid",
             "layout": "squircle"
           },
           {
-            "src": "/assets/work/glyph-toys/IojXVUUJqMFJYaKsSfCVJiVUieU.png",
+            "src": "/assets/work/glyph-toys/process-chat.png",
             "alt": "Design process chat and Glyph animation studies",
             "layout": "squircle"
           }
         ]
       }
     ],
-    "next": ["verne-product", "verne-brand"]
+    "next": [
+      "verne-product",
+      "verne-brand"
+    ],
+    "layout": "case"
   },
   "verne-product": {
     "title": "Wearphone",
@@ -150,7 +154,7 @@
         ]
       },
       {
-        "h": "Fashion × Tech",
+        "h": "Fashion \u00d7 Tech",
         "paras": [
           "If you wear something on your face, it inevitably becomes fashion. So it's not just how you use it, but also how you wear it.",
           "When the device is not in use, it also becomes a wearable object, almost like a handbag. No longer seen only as a technological product, but as something you carry with you, hold in your hand, or rest on your shoulder like a bag.",
@@ -176,7 +180,7 @@
       {
         "h": "The Golden Age of Audio",
         "paras": [
-          "This project also comes from a simple belief: we are living in the golden age of audio. Voice is human, emotional, and direct. It carries nuance that screens can’t. In my presentation, I explored how audio is becoming the next interface layer: from earbuds to voice notes to AI agents. Wearphone fits right into this shift: it creates a private space for speech, letting you talk to AI in public without raising your voice or your phone. A small object that sits on your face, but really belongs to a much bigger story about how we will communicate next."
+          "This project also comes from a simple belief: we are living in the golden age of audio. Voice is human, emotional, and direct. It carries nuance that screens can\u2019t. In my presentation, I explored how audio is becoming the next interface layer: from earbuds to voice notes to AI agents. Wearphone fits right into this shift: it creates a private space for speech, letting you talk to AI in public without raising your voice or your phone. A small object that sits on your face, but really belongs to a much bigger story about how we will communicate next."
         ]
       }
     ]
@@ -213,7 +217,7 @@
       {
         "h": "Written in the future",
         "paras": [
-          "Eurostile is a typeface with the weight of a classic. Some call it the Sistine Chapel of graphic design. It’s been part of space programs and the sci-fi and animated films that shaped our imagination. It just fits for Verne, a brand that looks forward and makes the future feel near."
+          "Eurostile is a typeface with the weight of a classic. Some call it the Sistine Chapel of graphic design. It\u2019s been part of space programs and the sci-fi and animated films that shaped our imagination. It just fits for Verne, a brand that looks forward and makes the future feel near."
         ]
       },
       {
@@ -225,7 +229,7 @@
       {
         "h": "Inspired by culture",
         "paras": [
-          "We built this brand around the things that move us, the stories and images that shape how we see the world. Verne is shaped by movies, manga, anime, music, and books that fuel our imagination for the future. And that’s where Verne finds its voice."
+          "We built this brand around the things that move us, the stories and images that shape how we see the world. Verne is shaped by movies, manga, anime, music, and books that fuel our imagination for the future. And that\u2019s where Verne finds its voice."
         ]
       }
     ]
@@ -250,7 +254,7 @@
       {
         "h": "When light becomes language",
         "paras": [
-          "Light is no longer just a tool, it becomes the voice. With the Glyph Matrix, light isn’t decoration. It’s a way to communicate with the user.",
+          "Light is no longer just a tool, it becomes the voice. With the Glyph Matrix, light isn\u2019t decoration. It\u2019s a way to communicate with the user.",
           "A system of signals, patterns, and animations that speaks without words. A deliberately simple interface, designed to show only the essentials. All at a glance, without the need to unlock the phone.",
           "Fewer distractions, more meaning."
         ]
@@ -266,15 +270,15 @@
       {
         "h": "Make tech fun again",
         "paras": [
-          "Some see it as a gimmick. But that’s missing the point. Most products today are designed to make you feel no emotion. The Glyph Matrix was designed not only for utility, but also for play.",
+          "Some see it as a gimmick. But that\u2019s missing the point. Most products today are designed to make you feel no emotion. The Glyph Matrix was designed not only for utility, but also for play.",
           "Glyph Toys are small experiences that live inside the Glyph Matrix. Little moments that surprise, entertain and give the phone a soul.",
-          "They remind us that technology doesn’t have to be only serious or functional. It can be fun. It can bring joy. It can be human."
+          "They remind us that technology doesn\u2019t have to be only serious or functional. It can be fun. It can bring joy. It can be human."
         ]
       },
       {
         "h": "All eyes on it",
         "paras": [
-          "The Magic 8 Ball didn’t go unnoticed. Wired, The Guardian, and Wallpaper all mentioned it in their coverage of Phone (3), highlighting it as one of the most playful uses of the new Glyph Matrix. Even MKBHD, the most influential tech creator on YouTube, featured it in his video, calling it “cool.”"
+          "The Magic 8 Ball didn\u2019t go unnoticed. Wired, The Guardian, and Wallpaper all mentioned it in their coverage of Phone (3), highlighting it as one of the most playful uses of the new Glyph Matrix. Even MKBHD, the most influential tech creator on YouTube, featured it in his video, calling it \u201ccool.\u201d"
         ]
       },
       {
@@ -289,8 +293,8 @@
   "meti": {
     "title": "M E T I",
     "hero": "https://framerusercontent.com/images/9q2QwFqSGUmCF1KXGDHRtao.jpg",
-    "lede": "METI isn’t just another device – it’s a response to the noise of modern life. It was born from the desire to simplify, to create something that doesn’t demand attention but restores it.",
-    "intro": "The first step was to strip away the distractions. No endless notifications, no multitasking. Just a single-purpose tool designed to help you focus on the present. The name METI reflects this philosophy. It’s a fusion of \"mind\" and \"time,\" symbolizing the harmony between mental clarity and the moments that shape our day.",
+    "lede": "METI isn\u2019t just another device \u2013 it\u2019s a response to the noise of modern life. It was born from the desire to simplify, to create something that doesn\u2019t demand attention but restores it.",
+    "intro": "The first step was to strip away the distractions. No endless notifications, no multitasking. Just a single-purpose tool designed to help you focus on the present. The name METI reflects this philosophy. It\u2019s a fusion of \"mind\" and \"time,\" symbolizing the harmony between mental clarity and the moments that shape our day.",
     "type": "Product Design",
     "when": "2024",
     "role": [
@@ -317,7 +321,7 @@
         "paras": [
           "M E T I is a single-purpose tool designed to break the cycle of distractions and bring focus back to your day.",
           "Its shape, reminiscent of an hourglass, not only serves to give meaning to the object: it provides symmetry, so that it can naturally fit left- and right-handed people's hands. An ancient symbol becomes a modern tool. M E T I turns time into a tangible experience.",
-          "METI is available in 3 colors: Lavanda, Oceano, Corallo. Our vision for these colors takes inspiration from nature’s palette. We imagined these hues as gradients, pushing beyond conventional colours."
+          "METI is available in 3 colors: Lavanda, Oceano, Corallo. Our vision for these colors takes inspiration from nature\u2019s palette. We imagined these hues as gradients, pushing beyond conventional colours."
         ]
       },
       {
@@ -329,11 +333,11 @@
         ]
       },
       {
-        "h": "“It could have been an app”",
+        "h": "\u201cIt could have been an app\u201d",
         "paras": [
-          "No doubt the smartphones are useful but they are a Pandora’s box, full of distractions, always in our pockets.",
+          "No doubt the smartphones are useful but they are a Pandora\u2019s box, full of distractions, always in our pockets.",
           "We decided to design an object that is physically with you and allows you to manage your time intentionally. When M E T I is active, the phone locks for the duration of the session.",
-          "We also designed the “shake to pair” interaction to make the first contact with the product natural and effortless, as it should be. One shake, and you’re ready to focus."
+          "We also designed the \u201cshake to pair\u201d interaction to make the first contact with the product natural and effortless, as it should be. One shake, and you\u2019re ready to focus."
         ]
       },
       {
@@ -352,20 +356,20 @@
     "lede": "I am an active member of the Nothing community and deeply share their vision. In recent months I have developed several concepts, from products to interfaces, focused on improving the experience with technology.",
     "intro": "My contributions include winning a design competition, inspiring AI companion ideas and working on a co-creation project with the community, contributing to the design of hardware and packaging.",
     "type": "Product Design",
-    "when": "2023–2024",
+    "when": "2023\u20132024",
     "role": [
       "UX/UI design",
       "Industrial design"
     ],
     "team": [
-      "—"
+      "\u2014"
     ],
     "sections": [
       {
-        "h": "Nothing loop (∞)",
+        "h": "Nothing loop (\u221e)",
         "h3": "Infinity at Your Fingertips",
         "paras": [
-          "Nothing Loop (∞) is a smart ring concept.",
+          "Nothing Loop (\u221e) is a smart ring concept.",
           "Light is a central element of this project. A way to bring the product to life and tell more with less (screens).",
           "Loop offers an unobtrusive alternative to smartwatches, providing a frictionless user experience and minimal distraction. It was also showcased along with community projects at the Nothing Phone 2a launch in Delhi."
         ],
@@ -482,7 +486,7 @@
         "h": "Design Phase",
         "paras": [
           "Together with 11 key stakeholders, we participated in a co-design workshop. The ideas collectively generated became key strategic initiatives to guide future implementation.",
-          "We then mapped “To-Be” journeys and developed an action plan to implement these initiatives."
+          "We then mapped \u201cTo-Be\u201d journeys and developed an action plan to implement these initiatives."
         ]
       },
       {
@@ -636,7 +640,7 @@
       "Product design"
     ],
     "team": [
-      "6 × product designers"
+      "6 \u00d7 product designers"
     ],
     "sections": [
       {

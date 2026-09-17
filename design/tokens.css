@@ -26,6 +26,7 @@
   --case-mute: var(--mute);
   --case-gutter: clamp(1.25rem, 6vw, 4.5rem);
   --case-gap: clamp(3.5rem, 9vw, 7rem);
+  --case-surface: transparent;
   --dur: .6s;
   --ease: cubic-bezier(.22,1,.36,1);
 }

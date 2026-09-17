@@ -134,7 +134,7 @@
     if (!root) return;
     const slug = root.getAttribute('data-project-case') || document.body.dataset.slug;
     if (!slug) return;
-    if (root.dataset.boot === BOOT && root.dataset.caseSlug === slug && root.querySelector('.case-hero')) return;
+    if (root.dataset.boot === BOOT && root.dataset.caseSlug === slug && root.querySelector('.case-body')) return;
 
     ensureCaseCss();
     delete document.body.dataset.layout;

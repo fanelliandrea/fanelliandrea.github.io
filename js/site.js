@@ -16,6 +16,7 @@
     return `${d}.${m}.${y.slice(2)}`;
   };
   const page = document.body.dataset.page || '';
+  document.documentElement.dataset.page = page;
 
   const data = fetch('/content/register.json').then(r => r.json()).then(d => d.entries
     .map((e, i) => ({ ...e, _i: i }))

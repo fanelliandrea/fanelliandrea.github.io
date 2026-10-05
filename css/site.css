@@ -129,7 +129,7 @@ body[data-page="info"] {
   min-height: 100svh;
 }
 
-html:has(body[data-page="home"]) {
+html[data-page="home"] {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;
@@ -1027,8 +1027,6 @@ body.is-info-open [data-effect-064],
 body.is-info-open .ideas-pl,
 body.is-info-open .stills,
 body.is-info-open .gather {
-  filter: blur(28px) saturate(0.92);
-  transition: filter 0.55s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   pointer-events: none;
   user-select: none;
 }
@@ -1495,7 +1493,8 @@ body[data-page="info"] .info-shell__hint {
   color: inherit;
   cursor: pointer;
   transform-style: preserve-3d;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 .fx064-card.is-portrait {
   width: min(40vw, 22rem);
@@ -1504,7 +1503,6 @@ body[data-page="info"] .info-shell__hint {
   display: block;
   position: relative;
   aspect-ratio: 16 / 10;
-  will-change: filter;
   backface-visibility: hidden;
   pointer-events: none;
 }
@@ -1591,16 +1589,25 @@ body[data-page="info"] .info-shell__hint {
   pointer-events: none;
   transform: none;
   transform-style: flat;
+  contain: layout paint;
 }
 .fx064-hit {
   position: absolute;
+  left: 0;
+  top: 0;
   display: block;
+  width: 1px;
+  height: 1px;
   border-radius: 1.25rem;
   cursor: pointer;
-  pointer-events: auto;
+  pointer-events: none;
+  transform: translate3d(-9999px, 0, 0);
+  transform-origin: 0 0;
+  will-change: transform;
+  contain: layout paint;
 }
-.fx064-hit[hidden] {
-  display: none;
+.fx064-hit.is-on {
+  pointer-events: auto;
 }
 .fx064-hint {
   position: absolute;

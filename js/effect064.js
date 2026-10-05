@@ -5,6 +5,7 @@
   let onResize = null;
   let onTick = null;
   let hitsLayer = null;
+  let raf = 0;
 
   const unit = (i, s) => {
     const n = Math.sin(i * 127.13 + s * 311.7) * 43758.5453;
@@ -17,6 +18,8 @@
 
   const kill = () => {
     seq += 1;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
     if (onResize) removeEventListener('resize', onResize);
     onResize = null;
     if (onTick) {
@@ -116,6 +119,7 @@
     hitsLayer?.remove();
     hitsLayer = document.createElement('div');
     hitsLayer.className = 'fx064-hits';
+    const hits = [];
     items.forEach((e, i) => {
       if (e.locked || !e.href) return;
       const a = document.createElement('a');
@@ -126,6 +130,7 @@
       a.addEventListener('pointerenter', () => cards[i]?.classList.add('is-hot'));
       a.addEventListener('pointerleave', () => cards[i]?.classList.remove('is-hot'));
       hitsLayer.appendChild(a);
+      hits.push(a);
     });
     stage.appendChild(hitsLayer);
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
@@ -159,78 +164,207 @@
       };
 
       const bases = cards.map(() => ({ x: 0, y: 0 }));
+      const zs = poses.map(p => p.z);
+      const rzs = poses.map(p => p.rz);
+      const scs = poses.map(() => 1);
+      const shotWH = cards.map(() => ({ w: 1, h: 1 }));
+      const view = { w: innerWidth, h: innerHeight, p: 1400 };
+      const cam = { z: 0 };
+      const shots = cards.map(c => c.querySelector('.fx064-shot'));
       const placeXY = () => {
         lens();
-        const w = innerWidth, h = innerHeight;
-        const R = Math.min(w, h) * (matchMedia('(max-width: 860px)').matches ? 0.56 : 0.66);
+        view.w = stage.clientWidth || innerWidth;
+        view.h = stage.clientHeight || innerHeight;
+        view.p = parseFloat(stage.style.perspective) || 1400;
+        const R = Math.min(view.w, view.h) * (matchMedia('(max-width: 860px)').matches ? 0.56 : 0.66);
         cards.forEach((card, i) => {
           const p = poses[i];
           bases[i].x = p.ux * R;
           bases[i].y = p.uy * R;
           gsap.set(card, { x: bases[i].x, y: bases[i].y });
+          const shot = shots[i];
+          shotWH[i].w = shot?.offsetWidth || card.offsetWidth || 1;
+          shotWH[i].h = shot?.offsetHeight || card.offsetHeight || 1;
         });
       };
-
-      const cam = { z: 0 };
-      const shots = cards.map(c => c.querySelector('.fx064-shot'));
-      const maxBlur = mobile ? 10 : 16;
+      const maxBlur = mobile ? 4 : 6;
       const dof = rel => {
         if (rel > 24) return 0;
         const d = 30 - rel;
-        if (d < 160) return 0;
-        const t = Math.min(1, (d - 160) / 3400);
-        return Math.round(sCurve(t) * maxBlur * 2) / 2;
+        if (d < 220) return 0;
+        const t = Math.min(1, (d - 220) / 3400);
+        return Math.round(sCurve(t) * maxBlur);
       };
       let landed = false;
-      const syncHits = () => {
-        if (!hitsLayer) return;
-        const sr = stage.getBoundingClientRect();
-        hitsLayer.querySelectorAll('.fx064-hit').forEach(hit => {
-          const card = cards[+hit.dataset.i];
-          if (!card) return;
-          const shot = card.querySelector('.fx064-shot') || card;
-          const r = shot.getBoundingClientRect();
-          const gone = card.style.visibility === 'hidden';
-          const opacity = parseFloat(card.style.opacity || '1');
-          const on = !gone && opacity >= 0.32 && r.width > 8 && r.height > 8;
-          hit.hidden = !on;
-          hit.style.pointerEvents = on ? 'auto' : 'none';
-          if (!on) return;
-          hit.style.left = `${r.left - sr.left}px`;
-          hit.style.top = `${r.top - sr.top}px`;
-          hit.style.width = `${r.width}px`;
-          hit.style.height = `${r.height}px`;
-        });
+      let lastCam = NaN;
+      let lastRx = NaN;
+      let lastRy = NaN;
+      const DEG = Math.PI / 180;
+      const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+
+      const writeHit = (hit, on, x, y, w, h) => {
+        if (hit._on !== on) {
+          hit._on = on;
+          hit.classList.toggle('is-on', on);
+        }
+        if (!on) return;
+        const tx = Math.round(x);
+        const ty = Math.round(y);
+        const tw = Math.max(8, Math.round(w));
+        const th = Math.max(8, Math.round(h));
+        if (hit._x !== tx || hit._y !== ty) {
+          hit._x = tx;
+          hit._y = ty;
+          hit.style.transform = `translate3d(${tx}px,${ty}px,0)`;
+        }
+        if (hit._w !== tw) {
+          hit._w = tw;
+          hit.style.width = `${tw}px`;
+        }
+        if (hit._h !== th) {
+          hit._h = th;
+          hit.style.height = `${th}px`;
+        }
       };
+
+      const syncHits = (worldRx, worldRy) => {
+        if (!hitsLayer) return;
+        const P = view.p;
+        const ox = view.w * 0.5;
+        const oy = view.h * 0.48;
+        const tx0 = view.w * 0.5;
+        const ty0 = view.h * 0.5;
+        const cy = Math.cos(worldRy);
+        const sy = Math.sin(worldRy);
+        const cx = Math.cos(worldRx);
+        const sx = Math.sin(worldRx);
+        for (let h = 0; h < hits.length; h++) {
+          const hit = hits[h];
+          const i = +hit.dataset.i;
+          const card = cards[i];
+          if (!card) continue;
+          const opacity = card._op ?? 1;
+          const gone = card._gone === 1;
+          if (gone || opacity < 0.32) {
+            writeHit(hit, false, 0, 0, 0, 0);
+            continue;
+          }
+          const hw = shotWH[i].w * 0.5;
+          const hh = shotWH[i].h * 0.5;
+          const rz = rzs[i] * DEG;
+          const cr = Math.cos(rz);
+          const sr = Math.sin(rz);
+          const sc = scs[i];
+          const bx = bases[i].x;
+          const by = bases[i].y;
+          const cz = zs[i];
+          let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9, ok = 0;
+          for (let c = 0; c < 4; c++) {
+            const lx = corners[c][0] * hw * sc;
+            const ly = corners[c][1] * hh * sc;
+            const x1 = lx * cr - ly * sr + bx;
+            const y1 = lx * sr + ly * cr + by;
+            const x2 = x1 * cy + cz * sy;
+            const z2 = -x1 * sy + cz * cy;
+            const y3 = y1 * cx - z2 * sx;
+            const z3 = y1 * sx + z2 * cx + cam.z;
+            const d = P - z3;
+            if (d < 8) continue;
+            const k = P / d;
+            const sxv = ox + (tx0 + x2 - ox) * k;
+            const syv = oy + (ty0 + y3 - oy) * k;
+            if (sxv < minX) minX = sxv;
+            if (syv < minY) minY = syv;
+            if (sxv > maxX) maxX = sxv;
+            if (syv > maxY) maxY = syv;
+            ok += 1;
+          }
+          const w = maxX - minX;
+          const ht = maxY - minY;
+          writeHit(hit, ok > 2 && w > 8 && ht > 8, minX, minY, w, ht);
+        }
+      };
+
       const paint = () => {
-        gsap.set(world, { z: cam.z });
-        cards.forEach((card, i) => {
-          const rel = (gsap.getProperty(card, 'z') || 0) + cam.z;
+        if (world._z !== cam.z) {
+          world._z = cam.z;
+          gsap.set(world, { z: cam.z });
+        }
+        const worldRx = (gsap.getProperty(world, 'rotationX') || 0) * DEG;
+        const worldRy = (gsap.getProperty(world, 'rotationY') || 0) * DEG;
+        for (let i = 0; i < N; i++) {
+          const card = cards[i];
+          if (!landed) {
+            zs[i] = gsap.getProperty(card, 'z') || 0;
+            rzs[i] = gsap.getProperty(card, 'rotationZ') || 0;
+            scs[i] = gsap.getProperty(card, 'scale') || 1;
+          } else {
+            zs[i] = poses[i].z;
+            rzs[i] = poses[i].rz;
+            scs[i] = 1;
+          }
+          const rel = zs[i] + cam.z;
           let opacity = 1;
           if (landed && rel > -22) opacity = 1 - sCurve((rel + 22) / 200);
           else if (rel < -3600) opacity = Math.max(0.14, 1 - sCurve((-rel - 3600) / 1400));
           const gone = landed && opacity < 0.015;
-          card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
-          card.style.visibility = gone ? 'hidden' : 'visible';
-          card.style.pointerEvents = 'none';
+          const op = gone ? 0 : Math.max(0, opacity);
+          if (card._op !== op) {
+            card._op = op;
+            card.style.opacity = String(op);
+          }
+          const vis = gone ? 1 : 0;
+          if (card._gone !== vis) {
+            card._gone = vis;
+            card.style.visibility = gone ? 'hidden' : 'visible';
+          }
           const blur = gone ? 0 : dof(rel);
           const shot = shots[i];
-          if (shot) shot.style.filter = blur ? `blur(${blur}px)` : 'none';
+          if (shot && shot._blur !== blur) {
+            shot._blur = blur;
+            shot.style.filter = blur ? `blur(${blur}px)` : 'none';
+          }
           const mid = Math.abs(rel + 20);
-          if (pills[i]) pills[i].style.opacity = String(!gone && mid < 380 && opacity > 0.55 && blur < 2 ? 1 - mid / 480 : 0);
+          const pillOp = !gone && mid < 380 && opacity > 0.55 && blur < 2 ? 1 - mid / 480 : 0;
+          const pill = pills[i];
+          if (pill && pill._op !== pillOp) {
+            pill._op = pillOp;
+            pill.style.opacity = String(pillOp);
+          }
+        }
+        if (hint) {
+          const hop = Math.max(0, 1 - sCurve(cam.z / 320));
+          if (hint._op !== hop) {
+            hint._op = hop;
+            hint.style.opacity = String(hop);
+          }
+        }
+        if (!landed || lastCam !== cam.z || lastRx !== worldRx || lastRy !== worldRy) {
+          lastCam = cam.z;
+          lastRx = worldRx;
+          lastRy = worldRy;
+          syncHits(worldRx, worldRy);
+        }
+      };
+
+      const requestPaint = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          paint();
         });
-        if (hint) hint.style.opacity = String(Math.max(0, 1 - sCurve(cam.z / 320)));
-        syncHits();
       };
 
       placeXY();
       cards.forEach((card, i) => {
         const p = poses[i];
+        card.style.pointerEvents = 'none';
         gsap.set(card, { z: p.z - 2600, rotationX: 0, rotationY: 0, rotationZ: p.rz * 1.2, scale: 0.94 });
       });
       paint();
 
       const land = gsap.timeline({
+        onUpdate: requestPaint,
         onComplete: () => { landed = true; paint(); },
       });
       cards.forEach((card, i) => {
@@ -240,7 +374,6 @@
           z: p.z,
           duration: 1.15,
           ease: 'power3.out',
-          onUpdate: paint,
         }, at);
         land.to(card, {
           rotationX: 0,
@@ -265,7 +398,7 @@
           scrub: 0.65,
           onUpdate: self => {
             cam.z = self.progress * travel;
-            paint();
+            requestPaint();
           },
         });
       }
@@ -274,11 +407,11 @@
         const rx = gsap.quickTo(world, 'rotationX', { duration: 1.15, ease: 'power3.out' });
         const ry = gsap.quickTo(world, 'rotationY', { duration: 1.15, ease: 'power3.out' });
         stage.addEventListener('pointermove', e => {
-          const r = stage.getBoundingClientRect();
-          rx(((e.clientY - r.top) / r.height - 0.5) * -3);
-          ry(((e.clientX - r.left) / r.width - 0.5) * 4);
+          rx((e.clientY / view.h - 0.5) * -3);
+          ry((e.clientX / view.w - 0.5) * 4);
+          requestPaint();
         });
-        stage.addEventListener('pointerleave', () => { rx(0); ry(0); });
+        stage.addEventListener('pointerleave', () => { rx(0); ry(0); requestPaint(); });
       }
 
       onResize = () => {
@@ -290,8 +423,6 @@
         window.ScrollTrigger?.refresh?.();
       };
       addEventListener('resize', onResize);
-      onTick = syncHits;
-      gsap.ticker.add(onTick);
     }, root);
   };
 

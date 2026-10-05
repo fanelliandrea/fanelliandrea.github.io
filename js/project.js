@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-full2";
+  const BOOT = "af-project-blur3";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>
@@ -120,9 +120,7 @@
       </a>
       <button type="button" class="case-chrome__top" data-case-top hidden aria-label="Back to top">Top</button>
     </nav>
-    <div class="case-scroll-veil" data-case-veil aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>`;
+    <div class="case-scroll-veil" data-case-veil aria-hidden="true"></div>`;
 
   const render = (project, register, catalog) => {
     const hero = project.hero || {};
@@ -179,12 +177,13 @@
 
   const bindChrome = (root) => {
     const top = root.querySelector("[data-case-top]");
-    // Keep the veil inside the case root so SPA swaps remove it from Work / Ideas / Home
-    const veil = root.querySelector("[data-case-veil]");
+    // Host veil on body so it stacks under dock/player (not trapped in .case)
+    let veil = root.querySelector("[data-case-veil]") || document.querySelector("[data-case-veil]");
     if (veil) {
-      // fixed positioning still works from inside .case
       veil.hidden = false;
+      if (veil.parentElement !== document.body) document.body.appendChild(veil);
     }
+    document.body.classList.add("arrived", "lit");
     if (!top) return;
 
     const paint = () => {

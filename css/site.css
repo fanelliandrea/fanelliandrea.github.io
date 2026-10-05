@@ -463,11 +463,20 @@ html.js body[data-page="home"]:not(.arrived) .player {
   opacity: 0;
 }
 
-/* Case pages keep dock + player visible while scrolling */
+/* Case pages: dock + player always above the fold blur */
 body[data-page="work"][data-slug] .dock,
 body[data-page="work"][data-slug] .player {
-  opacity: 1;
-  z-index: 50;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 80 !important;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 14px 40px -18px rgba(20, 30, 45, 0.5);
+}
+
+body[data-page="work"][data-slug] .dock-toggle,
+body[data-page="work"][data-slug] .dock a,
+body[data-page="work"][data-slug] .player-btn {
+  background: rgba(255, 255, 255, 0.92);
 }
 
 /* —— Music player pill —— */
@@ -1000,7 +1009,7 @@ body[data-page="ideas"][data-slug] .sky {
   line-height: 1.2;
 }
 
-/* Case-detail only: smooth progressive blur (no color wash / banding) */
+/* Case-detail only: one soft homogeneous blur (no stacked bands) */
 .case-scroll-veil {
   display: none;
 }
@@ -1011,66 +1020,30 @@ body[data-page="work"][data-slug] .case-scroll-veil {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 36;
-  height: min(42vh, 18rem);
+  z-index: 30;
+  height: min(48vh, 22rem);
   pointer-events: none;
   background: transparent;
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(1) {
-  height: 100%;
-  -webkit-backdrop-filter: blur(1.5px) saturate(1.05);
-  backdrop-filter: blur(1.5px) saturate(1.05);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(2) {
-  height: 88%;
-  -webkit-backdrop-filter: blur(3px) saturate(1.05);
-  backdrop-filter: blur(3px) saturate(1.05);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(3) {
-  height: 74%;
-  -webkit-backdrop-filter: blur(6px) saturate(1.06);
-  backdrop-filter: blur(6px) saturate(1.06);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 100%);
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(4) {
-  height: 58%;
-  -webkit-backdrop-filter: blur(11px) saturate(1.06);
-  backdrop-filter: blur(11px) saturate(1.06);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%);
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(5) {
-  height: 42%;
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 32%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 32%, #000 100%);
-}
-
-body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(6) {
-  height: 28%;
-  -webkit-backdrop-filter: blur(28px) saturate(1.08);
-  backdrop-filter: blur(28px) saturate(1.08);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 40%, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 40%, #000 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(1.08);
+  backdrop-filter: blur(22px) saturate(1.08);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 18%,
+    rgba(0, 0, 0, 0.62) 42%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.08) 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 18%,
+    rgba(0, 0, 0, 0.62) 42%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0.08) 86%,
+    transparent 100%
+  );
 }
 
 @media (hover: hover) and (pointer: fine) {

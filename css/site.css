@@ -1075,7 +1075,7 @@ body[data-page="work"][data-slug] .case-scroll-veil {
   }
 
   .case-scroll-veil {
-    height: min(36vh, 14rem);
+    height: min(44vh, 18rem);
   }
 
   .case-intro {

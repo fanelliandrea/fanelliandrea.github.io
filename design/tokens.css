@@ -31,11 +31,11 @@
   --r-lg: 2.4rem;
   --r-card: 0.85rem;
   --r-media: clamp(2.75rem, 8vw, 6.5rem);
-  /* Case pages: pale azure, lighter than page sky (#6eafd8) */
-  --case-surface: #eaf4fb;
-  --case-surface-soft: #f5fafd;
-  --case-ink: #14181e;
-  --case-mute: #6a737c;
+  /* Case pages: clear white, OEM / 1x */
+  --case-surface: #ffffff;
+  --case-surface-soft: #ffffff;
+  --case-ink: #1a222c;
+  --case-mute: #5d6874;
   --case-gutter: clamp(1.25rem, 8vw, 7.5rem);
   --case-gap: clamp(4rem, 11vw, 8.5rem);
   --dur: 0.6s;

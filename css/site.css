@@ -652,7 +652,7 @@ body[data-page="work"][data-slug]:not(.arrived) .dock {
 
 /* —— Project case: white field, Satoshi, medium type —— */
 body[data-page="work"][data-slug] {
-  background: #fff;
+  background: var(--case-surface);
   color: var(--case-ink);
 }
 
@@ -676,8 +676,9 @@ body[data-page="ideas"][data-slug] .sky {
   position: relative;
   z-index: 2;
   color: var(--case-ink);
-  background: #fff;
-  padding: 0 0 clamp(5rem, 12vw, 8rem);
+  background: var(--case-surface);
+  /* Extra bottom room so the always-on fold fade never covers the pager */
+  padding: 0 0 calc(clamp(5rem, 12vw, 8rem) + min(26vh, 11rem));
   text-align: left;
   font-family: "Satoshi", var(--sans);
   font-weight: 400;
@@ -840,14 +841,14 @@ body[data-page="ideas"][data-slug] .sky {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(3.25rem, 8vw, 6rem);
+  gap: var(--case-gap);
 }
 
 .case-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.75rem, 4vw, 2.5rem);
+  gap: var(--case-gap);
   width: 100%;
 }
 
@@ -856,6 +857,8 @@ body[data-page="ideas"][data-slug] .sky {
   flex-direction: column;
   align-items: stretch;
   text-align: left;
+  /* Equal air above the title and below the last line */
+  padding-block: 0;
 }
 
 .case-section__media {
@@ -863,7 +866,7 @@ body[data-page="ideas"][data-slug] .sky {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: clamp(3.25rem, 8vw, 6rem);
+  gap: var(--case-gap);
 }
 
 .case-credits {
@@ -992,52 +995,83 @@ body[data-page="ideas"][data-slug] .sky {
   line-height: 1.2;
 }
 
-/* Soft white fade at the fold — invites the first scroll */
+/* Case-detail only: Ideas-style progressive blur + soft mist at the fold */
 .case-scroll-veil {
+  display: none;
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil {
+  display: block;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 37;
-  height: min(42vh, 20rem);
+  height: min(30vh, 13.5rem);
   pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.5s var(--ease);
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.35) 28%,
-    rgba(255, 255, 255, 0.78) 62%,
-    rgba(255, 255, 255, 0.96) 84%,
-    #fff 100%
+    rgba(238, 243, 247, 0) 0%,
+    rgba(238, 243, 247, 0.28) 40%,
+    rgba(238, 243, 247, 0.72) 78%,
+    var(--case-surface) 100%
   );
 }
 
-.case-scroll-veil::after {
-  content: "";
+body[data-page="work"][data-slug] .case-scroll-veil i {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(1) {
+  height: 100%;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(2) {
+  height: 86%;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 100%);
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(3) {
+  height: 70%;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 100%);
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(4) {
+  height: 54%;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 100%);
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(5) {
+  height: 38%;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 42%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 42%, #000 100%);
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i:nth-child(6) {
+  height: 24%;
   -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.35) 40%,
-    #000 78%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.35) 40%,
-    #000 78%,
-    #000 100%
-  );
-}
-
-.case-scroll-veil.is-gone {
-  opacity: 0;
-  visibility: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 50%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 50%, #000 100%);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1062,7 +1096,7 @@ body[data-page="ideas"][data-slug] .sky {
   }
 
   .case-scroll-veil {
-    height: min(34vh, 14rem);
+    height: min(24vh, 10rem);
   }
 
   .case-hero.case-media--bleed {
@@ -1088,7 +1122,7 @@ body[data-page="ideas"][data-slug] .sky {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .case-scroll-veil {
+  body[data-page="work"][data-slug] .case-scroll-veil i {
     display: none;
   }
 }

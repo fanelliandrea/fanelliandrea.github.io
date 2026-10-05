@@ -32,9 +32,9 @@
   --r-lg: 2.4rem;
   --r-card: 0.85rem;
   --r-media: clamp(2.75rem, 8vw, 6.5rem);
-  /* Case pages: clear white, OEM / 1x */
-  --case-surface: #ffffff;
-  --case-surface-soft: #ffffff;
+  /* Case pages: soft cool mist so the bottom fade can read */
+  --case-surface: #eef3f7;
+  --case-surface-soft: #f5f8fb;
   --case-ink: #1a222c;
   --case-mute: #5d6874;
   --case-gutter: clamp(1.25rem, 8vw, 7.5rem);

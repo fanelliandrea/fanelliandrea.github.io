@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-land1";
+  const BOOT = "af-project-blur1";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>
@@ -120,7 +120,9 @@
       </a>
       <button type="button" class="case-chrome__top" data-case-top hidden aria-label="Back to top">Top</button>
     </nav>
-    <div class="case-scroll-veil" data-case-veil aria-hidden="true"></div>`;
+    <div class="case-scroll-veil" data-case-veil aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>`;
 
   const render = (project, register, catalog) => {
     const hero = project.hero || {};
@@ -171,22 +173,26 @@
     return catalogPromise;
   };
 
+  const killVeil = () => {
+    document.querySelectorAll("[data-case-veil]").forEach((el) => el.remove());
+  };
+
   const bindChrome = (root) => {
     const top = root.querySelector("[data-case-top]");
-    let veil = root.querySelector("[data-case-veil]");
-    if (veil && veil.parentElement !== document.body) {
-      document.body.appendChild(veil);
+    // Keep the veil inside the case root so SPA swaps remove it from Work / Ideas / Home
+    const veil = root.querySelector("[data-case-veil]");
+    if (veil) {
+      // fixed positioning still works from inside .case
+      veil.hidden = false;
     }
-    if (!top && !veil) return;
+    if (!top) return;
 
     const paint = () => {
       const y = window.scrollY || 0;
-      if (top) top.hidden = y < Math.min(420, window.innerHeight * 0.55);
-      // Keep the fold fade until the first hero has been opened
-      if (veil) veil.classList.toggle("is-gone", y > window.innerHeight * 0.45);
+      top.hidden = y < Math.min(420, window.innerHeight * 0.55);
     };
 
-    top?.addEventListener("click", () => {
+    top.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -196,9 +202,18 @@
 
   const mount = async () => {
     const root = document.querySelector(rootSel);
-    if (!root) return;
+    const onCase =
+      document.body.dataset.page === "work" &&
+      (document.body.dataset.slug || root?.getAttribute("data-project-case"));
+    if (!onCase || !root) {
+      killVeil();
+      return;
+    }
     const slug = root.getAttribute("data-project-case") || document.body.dataset.slug;
-    if (!slug) return;
+    if (!slug) {
+      killVeil();
+      return;
+    }
     if (root.dataset.boot === BOOT && root.dataset.slug === slug && root.childElementCount) return;
 
     const [catalog, register] = await Promise.all([

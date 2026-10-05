@@ -1987,7 +1987,7 @@ body[data-page="info"] .info-shell__hint {
 
   .player {
     right: 0.85rem;
-    bottom: 4.35rem;
+    bottom: 0.85rem;
     padding: 0.32rem;
     max-width: calc(100vw - 1.7rem);
   }
@@ -2082,7 +2082,7 @@ body[data-page="info"] .info-shell__hint {
 
    Dock: fit-content so WebKit does not stretch a fixed flex box to the
    viewport width. Player: height/top auto so it cannot become a full-height
-   box (mid-sky). Lift uses sibling only — dock is appended before player. */
+   box (mid-sky). Same bottom as the dock — do not lift when the menu opens. */
 
 .dock,
 .player {
@@ -2101,8 +2101,4 @@ body[data-page="info"] .info-shell__hint {
 
 .player {
   left: auto;
-}
-
-.dock.is-open ~ .player.is-open {
-  bottom: calc(1.15rem + 3.05rem);
 }

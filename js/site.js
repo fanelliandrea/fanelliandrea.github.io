@@ -55,7 +55,7 @@
         <a href="/"${here.home ? ' aria-current="page"' : ''}>Home</a>
         <a href="/work.html"${here.work ? ' aria-current="page"' : ''}>Work</a>
         <a href="/ideas.html"${here.ideas ? ' aria-current="page"' : ''}>Ideas</a>
-        <a href="/info.html"${here.info ? ' aria-current="page"' : ''}>Info</a>
+        <a href="/info.html">Info</a>
         <a href="mailto:fanelliandrea@outlook.com">Contact</a>
       </div>`;
     document.body.append(dock);
@@ -106,6 +106,12 @@
     const p = document.createElement('script');
     p.src = '/js/player.js?v=yt-full-1';
     document.body.appendChild(p);
+  }
+
+  if (!document.querySelector('script[src*="info-overlay.js"]')) {
+    const info = document.createElement('script');
+    info.src = '/js/info-overlay.js?v=info-live2';
+    document.body.appendChild(info);
   }
 
   const fill = () => {
@@ -169,6 +175,11 @@
   };
   window.Site.markDock = markDock;
 
+  const isInfoPath = path => {
+    const p = (path || '').replace(/\/+$/, '') || '/';
+    return p === '/info' || p === '/info.html' || p.endsWith('/info.html');
+  };
+
   const keep = src => /\/js\/(site|space|player|info-overlay)\.js/.test(src);
 
   const loadScripts = doc => {
@@ -200,8 +211,16 @@
     if (next && cur) cur.replaceWith(document.importNode(next, true));
     document.title = doc.title || document.title;
     document.body.dataset.page = doc.body.getAttribute('data-page') || '';
+    document.documentElement.dataset.page = document.body.dataset.page;
     if (doc.body.hasAttribute('data-slug')) document.body.dataset.slug = doc.body.getAttribute('data-slug');
     else document.body.removeAttribute('data-slug');
+    if (window.AFInfo?.close) window.AFInfo.close({ historyNav: false });
+    document.body.classList.remove('is-info-open');
+    const frost = document.getElementById('info-frost-root');
+    if (frost) {
+      frost.classList.remove('is-open');
+      frost.setAttribute('aria-hidden', 'true');
+    }
     if (document.body.dataset.page === 'home') document.body.classList.add('lit', 'arrived');
     if (push) history.pushState({}, '', href);
     scrollTo(0, 0);
@@ -221,6 +240,7 @@
     const url = new URL(raw, location.href);
     if (url.origin !== location.origin) return;
     if (url.pathname === location.pathname && url.hash) return;
+    if (isInfoPath(url.pathname)) return;
     e.preventDefault();
     const href = url.pathname + url.search + url.hash;
     if (href === location.pathname + location.search + location.hash) return;
@@ -231,6 +251,7 @@
   });
 
   addEventListener('popstate', () => {
+    if (isInfoPath(location.pathname)) return;
     fetch(location.href, { credentials: 'same-origin' }).then(r => r.text()).then(html => apply(html, location.href, false));
   });
 

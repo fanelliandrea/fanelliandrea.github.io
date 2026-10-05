@@ -1,5 +1,5 @@
 (() => {
-  const DATA_URL = "/content/info.json?v=info-sides1";
+  const DATA_URL = "/content/info.json?v=info-live2";
   const PATH = "/info.html";
   const ROOT_ID = "info-frost-root";
 
@@ -208,7 +208,7 @@
   }
 
   function closeInfo({ historyNav = true } = {}) {
-    if (!open) return;
+    const wasOpen = open;
     open = false;
     const root = document.getElementById(ROOT_ID);
     const active = document.activeElement;
@@ -218,6 +218,7 @@
       if (active && root.contains(active)) active.blur();
     }
     document.body.classList.remove("is-info-open");
+    if (!wasOpen) return;
     if (historyNav && isInfoHref(location.href)) {
       const fallback = previousUrl && !isInfoHref(previousUrl) ? previousUrl : "/";
       history.pushState({ afInfo: false }, "", fallback);

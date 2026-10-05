@@ -758,10 +758,10 @@ body[data-page="ideas"][data-slug] .sky {
 .case-section__copy h2 {
   margin: 0;
   font-family: "Satoshi", var(--sans);
-  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  font-size: clamp(2.7rem, 4.4vw, 3.3rem);
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.25;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   color: var(--case-ink);
   text-wrap: balance;
 }

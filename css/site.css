@@ -818,17 +818,34 @@ body[data-page="ideas"][data-slug] .sky {
   letter-spacing: 0.005em;
 }
 
+.case-prose p {
+  display: block;
+  margin: 0;
+}
+
+.case-prose p + p {
+  margin-top: 1.35em;
+}
+
 .case-intro .case-prose {
   text-align: center;
   margin-top: 1.15rem;
+}
+
+.case-intro .case-prose p + p {
+  margin-top: 1.25em;
 }
 
 .case-intro .case-cta {
   margin-top: 1.25rem;
 }
 
-.case-prose p + p {
-  margin-top: 1rem;
+.case-section__copy h2 + .case-prose {
+  margin-top: 1.35rem;
+}
+
+.case-section__copy:not(:has(h2)) .case-prose {
+  margin-top: 0;
 }
 
 .case-cta {

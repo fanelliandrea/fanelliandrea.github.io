@@ -1,31 +1,28 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-dream1";
+  const BOOT = "af-project-dream2";
   const rootSel = "[data-project-case]";
 
-  /* Dreamy Apple-style edge/corner blur — crisp center, soft periphery + gentle fold */
+  /* Dreamy edge blur — short rim + fold only, center stays crisp */
   const veilLayers = () => {
     const edge = [
-      { blur: 1.25, clear: 54, mid: 78 },
-      { blur: 3.5, clear: 60, mid: 84 },
-      { blur: 8, clear: 66, mid: 90 },
-      { blur: 14, clear: 72, mid: 95 },
-      { blur: 22, clear: 78, mid: 98 },
+      { blur: 2, clear: 91, mid: 97 },
+      { blur: 6, clear: 93, mid: 98 },
+      { blur: 12, clear: 95, mid: 99 },
     ]
       .map(({ blur, clear, mid }) => {
-        // Ellipse sits a touch high so the bottom edge feels dreamier
-        const mask = `radial-gradient(ellipse 86% 80% at 50% 38%, transparent ${clear}%, rgba(0,0,0,0.4) ${mid}%, #000 100%)`;
+        const mask = `radial-gradient(ellipse 92% 88% at 50% 48%, transparent ${clear}%, rgba(0,0,0,0.45) ${mid}%, #000 100%)`;
         return `<i class="case-dream__edge" style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask}"></i>`;
       })
       .join("");
 
-    const fold = [0, 1, 2, 3, 4]
+    // Bottom fold stays compact (~10–16% of viewport)
+    const fold = [0, 1, 2]
       .map((i) => {
-        const blur = (1.2 + i * 3.2).toFixed(1);
-        const a = Math.max(0, 42 + i * 9);
-        const b = Math.min(100, 68 + i * 7);
-        const mask = `linear-gradient(to top, #000 0%, rgba(0,0,0,0.75) ${(10 + i * 3).toFixed(1)}%, transparent ${b.toFixed(1)}%)`;
-        return `<i class="case-dream__fold" style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask};height:${(38 + i * 8).toFixed(1)}%"></i>`;
+        const blur = (2 + i * 5).toFixed(1);
+        const h = 10 + i * 3;
+        const mask = `linear-gradient(to top, #000 0%, rgba(0,0,0,0.7) 35%, transparent 100%)`;
+        return `<i class="case-dream__fold" style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask};height:${h}%"></i>`;
       })
       .join("");
 
@@ -39,11 +36,17 @@
         ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
     );
 
-  const paras = (lines = []) =>
-    lines
+  const paras = (lines = []) => {
+    const list = Array.isArray(lines)
+      ? lines
+      : String(lines ?? "")
+          .split(/\n+/)
+          .map((s) => s.trim());
+    return list
       .filter(Boolean)
       .map((t) => `<p>${esc(t)}</p>`)
       .join("");
+  };
 
   const figure = (item) => {
     if (!item?.src) return "";
@@ -67,15 +70,47 @@
     </section>`;
   };
 
+  /* Keep long untitled walls broken into short paragraph groups (2–3 lines) */
+  const expandBlocks = (blocks = []) => {
+    const out = [];
+    for (const block of blocks) {
+      if (
+        block?.type === "section" &&
+        !block.title &&
+        Array.isArray(block.body) &&
+        block.body.length > 3
+      ) {
+        const body = block.body.filter(Boolean);
+        const media = block.media || [];
+        for (let i = 0; i < body.length; i += 2) {
+          out.push({
+            type: "section",
+            title: null,
+            body: body.slice(i, i + 2),
+            media: i === 0 ? media : [],
+          });
+        }
+        continue;
+      }
+      out.push(block);
+    }
+    return out;
+  };
+
   const blockHtml = (block) => {
     if (!block) return "";
     if (block.type === "media") return figure(block);
     if (block.type === "section") {
       const media = (block.media || []).map(figure).join("");
+      const title = block.title
+        ? `<h2>${esc(block.title)}</h2>`
+        : "";
+      const prose = paras(block.body);
+      if (!title && !prose && !media) return "";
       return `<section class="case-section">
         <header class="case-section__copy">
-          <h2>${esc(block.title)}</h2>
-          <div class="case-prose">${paras(block.body)}</div>
+          ${title}
+          ${prose ? `<div class="case-prose">${prose}</div>` : ""}
         </header>
         ${media ? `<div class="case-section__media">${media}</div>` : ""}
       </section>`;
@@ -178,7 +213,7 @@
       ${heroFig}
 
       <div class="case-body">
-        ${(project.blocks || []).map(blockHtml).join("")}
+        ${expandBlocks(project.blocks || []).map(blockHtml).join("")}
       </div>
 
       ${credits(project.details)}

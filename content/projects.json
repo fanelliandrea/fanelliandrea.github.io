@@ -712,8 +712,7 @@
       },
       "lead": [
         "I am an active member of the Nothing community and deeply share their vision. In recent months I have developed several concepts, from products to interfaces, focused on improving the experience with technology.",
-        "My contributions include winning a design competition, inspiring AI companion ideas and working on a co-creation project with the community, contributing to the design of hardware and packaging.",
-        "Nothing Loop (∞) is a smart ring concept."
+        "My contributions include winning a design competition, inspiring AI companion ideas and working on a co-creation project with the community, contributing to the design of hardware and packaging."
       ],
       "details": {
         "Type": "Product Design",
@@ -730,25 +729,12 @@
         },
         {
           "type": "section",
-          "title": null,
+          "title": "Nothing Loop (∞)",
           "body": [
+            "Nothing Loop (∞) is a smart ring concept.",
             "Light is a central element of this project. A way to bring the product to life and tell more with less (screens).",
             "Loop offers an unobtrusive alternative to smartwatches, providing a frictionless user experience and minimal distraction.",
-            "It was also showcased along with community projects at the Nothing Phone 2a launch in Delhi.",
-            "I participated in Nothing's CMF sub-brand competition, designing dials that celebrate the heritage of Italian design.",
-            "Our interface, Citylife, is inspired by contemporary Milan, reflecting the dynamism of the city. Essential elements are in the foreground and offer functionality without sacrificing style.",
-            "Citylife won the contest and is now available to CMF Watch Pro users.",
-            "Nothing Calm is the idea of a friendly AI companion designed with privacy at its core and inspired by the principles of calm technology.",
-            "It integrates seamlessly by enhancing the user experience with multimodal and adaptive interactions that evolve with their preferences.",
-            "This software solution is a strategic move that integrates seamlessly with Nothing's growing ecosystem of products and services.",
-            "The company is introducing some of these features in its products, such as ChatGPT in earbuds.",
-            "Nothing Spaces is software for Nothing OS designed to create distinct spaces for every aspect of your life.",
-            "With different spaces for different purposes, you can customize your digital environment using widgets, backgrounds, and various profiles and settings.",
-            "Considering the amount of time we spend on our phones, Nothing Spaces emphasizes the importance of customizing digital spaces to meet specific needs.",
-            "One of its key features is the ability to easily switch between personal and work spaces, eliminating the need to switch phones or log in again.",
-            "I participated in the Nothing Community Edition Project, a multi-stage co-design initiative to design a new edition of Phone (2a) together with the community.",
-            "In Hardware Phase 1, I proposed 'Sky', inspired by the idea that behind the clouds the sky is always blue. Shades of colour combined with turquoise accents aim to evoke emotions and create a phone with a soul that feels like the world around it.",
-            "In Phase 3 Packaging, I collaborated with Emre on 'Into Glow'. We wanted to create packaging that was consistent with the rest but stood out, exploring light as a material to influence users' perception. The packaging involves multiple senses: it is seen, felt and touched, even in the dark, for an unforgettable unboxing experience."
+            "It was also showcased along with community projects at the Nothing Phone 2a launch in Delhi."
           ],
           "media": [
             {
@@ -762,6 +748,48 @@
               "layout": "squircle"
             }
           ]
+        },
+        {
+          "type": "section",
+          "title": "Citylife for CMF",
+          "body": [
+            "I participated in Nothing's CMF sub-brand competition, designing dials that celebrate the heritage of Italian design.",
+            "Our interface, Citylife, is inspired by contemporary Milan, reflecting the dynamism of the city. Essential elements are in the foreground and offer functionality without sacrificing style.",
+            "Citylife won the contest and is now available to CMF Watch Pro users."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Nothing Calm",
+          "body": [
+            "Nothing Calm is the idea of a friendly AI companion designed with privacy at its core and inspired by the principles of calm technology.",
+            "It integrates seamlessly by enhancing the user experience with multimodal and adaptive interactions that evolve with their preferences.",
+            "This software solution is a strategic move that integrates seamlessly with Nothing's growing ecosystem of products and services.",
+            "The company is introducing some of these features in its products, such as ChatGPT in earbuds."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Nothing Spaces",
+          "body": [
+            "Nothing Spaces is software for Nothing OS designed to create distinct spaces for every aspect of your life.",
+            "With different spaces for different purposes, you can customize your digital environment using widgets, backgrounds, and various profiles and settings.",
+            "Considering the amount of time we spend on our phones, Nothing Spaces emphasizes the importance of customizing digital spaces to meet specific needs.",
+            "One of its key features is the ability to easily switch between personal and work spaces, eliminating the need to switch phones or log in again."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Community Edition",
+          "body": [
+            "I participated in the Nothing Community Edition Project, a multi-stage co-design initiative to design a new edition of Phone (2a) together with the community.",
+            "In Hardware Phase 1, I proposed 'Sky', inspired by the idea that behind the clouds the sky is always blue. Shades of colour combined with turquoise accents aim to evoke emotions and create a phone with a soul that feels like the world around it.",
+            "In Phase 3 Packaging, I collaborated with Emre on 'Into Glow'. We wanted to create packaging that was consistent with the rest but stood out, exploring light as a material to influence users' perception. The packaging involves multiple senses: it is seen, felt and touched, even in the dark, for an unforgettable unboxing experience."
+          ],
+          "media": []
         },
         {
           "type": "media",

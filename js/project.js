@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-dream2";
+  const BOOT = "af-project-sans1";
   const rootSel = "[data-project-case]";
 
   /* Dreamy edge blur — short rim + fold only, center stays crisp */

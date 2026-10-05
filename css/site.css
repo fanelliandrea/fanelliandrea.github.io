@@ -2074,3 +2074,82 @@ body[data-page="info"] .info-shell__hint {
     animation: none;
   }
 }
+
+/* Safari / WebKit: compact centered dock + stacked player
+   Bug: a position:fixed flex container with width:auto fills the viewport
+   in WebKit, so .dock becomes a full-width pale strip (pills left, note
+   right). Independent `translate` does not shrink-wrap that box. Desktop
+   .player also shares bottom:1.15rem with the dock, so the open pill sits
+   on Contact. Chrome shrink-wraps; Safari does not.
+
+   Target: compact dock cluster, compact player pill above it, no overlap. */
+
+.dock,
+.player {
+  box-sizing: border-box;
+  width: -webkit-max-content;
+  width: max-content;
+  max-width: calc(100vw - 2.3rem);
+  flex-wrap: nowrap;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dock {
+  position: fixed;
+  left: 50%;
+  right: auto;
+  bottom: 1.15rem;
+  justify-content: flex-start;
+  translate: none;
+  -webkit-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
+}
+
+.dock-toggle,
+.dock-links,
+.dock-links a,
+.player-body,
+.player-body > *,
+.player-btn {
+  flex: 0 0 auto;
+}
+
+.dock-links {
+  min-width: 0;
+}
+
+.player {
+  position: fixed;
+  left: auto;
+  right: 1.15rem;
+  bottom: 1.15rem;
+  justify-content: flex-end;
+  translate: none;
+  -webkit-transform: none;
+  transform: none;
+}
+
+/* Both open: lift the player so it sits above the dock cluster (target). */
+.dock.is-open ~ .player.is-open,
+body:has(.dock.is-open) .player.is-open {
+  bottom: calc(1.15rem + 2.95rem + 0.72rem);
+}
+
+@media (max-width: 860px) {
+  .dock {
+    bottom: 0.85rem;
+  }
+
+  .player {
+    right: 0.85rem;
+    bottom: 4.35rem;
+    max-width: calc(100vw - 1.7rem);
+  }
+
+  .dock.is-open ~ .player.is-open,
+  body:has(.dock.is-open) .player.is-open {
+    bottom: calc(0.85rem + 2.64rem + 0.65rem);
+  }
+}

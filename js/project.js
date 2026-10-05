@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-back1";
+  const BOOT = "af-project-veil2";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>
@@ -173,13 +173,17 @@
 
   const bindChrome = (root) => {
     const top = root.querySelector("[data-case-top]");
-    const veil = root.querySelector("[data-case-veil]");
+    let veil = root.querySelector("[data-case-veil]");
+    if (veil && veil.parentElement !== document.body) {
+      document.body.appendChild(veil);
+    }
     if (!top && !veil) return;
 
     const paint = () => {
       const y = window.scrollY || 0;
-      if (top) top.hidden = y < Math.min(520, window.innerHeight * 0.7);
-      if (veil) veil.classList.toggle("is-gone", y > 48);
+      if (top) top.hidden = y < Math.min(420, window.innerHeight * 0.55);
+      // Keep the fold fade until the first hero has been opened
+      if (veil) veil.classList.toggle("is-gone", y > window.innerHeight * 0.45);
     };
 
     top?.addEventListener("click", () => {

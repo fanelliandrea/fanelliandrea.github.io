@@ -3,6 +3,8 @@
   let ctx = null;
   let seq = 0;
   let onResize = null;
+  let onTick = null;
+  let hitsLayer = null;
 
   const unit = (i, s) => {
     const n = Math.sin(i * 127.13 + s * 311.7) * 43758.5453;
@@ -17,6 +19,12 @@
     seq += 1;
     if (onResize) removeEventListener('resize', onResize);
     onResize = null;
+    if (onTick) {
+      try { window.gsap?.ticker.remove(onTick); } catch {}
+      onTick = null;
+    }
+    hitsLayer?.remove();
+    hitsLayer = null;
     try { ctx?.revert(); } catch {}
     ctx = null;
   };
@@ -91,22 +99,35 @@
     const N = items.length;
     world.innerHTML = items.map((e, i) => {
       const lockedCard = !!e.locked;
-      const href = !lockedCard && e.href ? ` href="${esc(e.href)}"` : '';
-      const tag = !lockedCard && e.href ? 'a' : 'article';
       const p = pose(i, N, mobile);
       const aspect = lockedCard ? lockAspect(e) : null;
       const portrait = aspect ? aspect.portrait : p.portrait;
       const orient = portrait ? ' is-portrait' : ' is-land';
       const shotStyle = aspect ? ` style="aspect-ratio:${aspect.ratio}"` : '';
-      return `<${tag} class="fx064-card${orient}${lockedCard ? ' is-locked' : ''}"${href} aria-label="${esc(e.title)}">
+      return `<article class="fx064-card${orient}${lockedCard ? ' is-locked' : ''}" aria-label="${esc(e.title)}">
         <span class="fx064-shot"${shotStyle}>
           <span class="fx064-frame"><span class="fx064-well"><img src="${esc(thumb(e.media[0], 900))}" alt="" decoding="async" draggable="false"></span></span>
           <span class="fx064-pill">${lockedCard ? LOCK : ''}${esc(e.title)}</span>
         </span>
-      </${tag}>`;
+      </article>`;
     }).join('');
 
     const cards = [...world.querySelectorAll('.fx064-card')];
+    hitsLayer?.remove();
+    hitsLayer = document.createElement('div');
+    hitsLayer.className = 'fx064-hits';
+    items.forEach((e, i) => {
+      if (e.locked || !e.href) return;
+      const a = document.createElement('a');
+      a.className = 'fx064-hit';
+      a.href = e.href;
+      a.setAttribute('aria-label', e.title);
+      a.dataset.i = String(i);
+      a.addEventListener('pointerenter', () => cards[i]?.classList.add('is-hot'));
+      a.addEventListener('pointerleave', () => cards[i]?.classList.remove('is-hot'));
+      hitsLayer.appendChild(a);
+    });
+    stage.appendChild(hitsLayer);
     const pills = cards.map(c => c.querySelector('.fx064-pill'));
     const poses = cards.map((_, i) => pose(i, N, mobile));
     cards.forEach((card, i) => {
@@ -161,6 +182,26 @@
         return Math.round(sCurve(t) * maxBlur * 2) / 2;
       };
       let landed = false;
+      const syncHits = () => {
+        if (!hitsLayer) return;
+        const sr = stage.getBoundingClientRect();
+        hitsLayer.querySelectorAll('.fx064-hit').forEach(hit => {
+          const card = cards[+hit.dataset.i];
+          if (!card) return;
+          const shot = card.querySelector('.fx064-shot') || card;
+          const r = shot.getBoundingClientRect();
+          const gone = card.style.visibility === 'hidden';
+          const opacity = parseFloat(card.style.opacity || '1');
+          const on = !gone && opacity >= 0.32 && r.width > 8 && r.height > 8;
+          hit.hidden = !on;
+          hit.style.pointerEvents = on ? 'auto' : 'none';
+          if (!on) return;
+          hit.style.left = `${r.left - sr.left}px`;
+          hit.style.top = `${r.top - sr.top}px`;
+          hit.style.width = `${r.width}px`;
+          hit.style.height = `${r.height}px`;
+        });
+      };
       const paint = () => {
         gsap.set(world, { z: cam.z });
         cards.forEach((card, i) => {
@@ -171,7 +212,7 @@
           const gone = landed && opacity < 0.015;
           card.style.opacity = gone ? '0' : String(Math.max(0, opacity));
           card.style.visibility = gone ? 'hidden' : 'visible';
-          card.style.pointerEvents = gone || opacity < 0.32 || card.classList.contains('is-locked') ? 'none' : 'auto';
+          card.style.pointerEvents = 'none';
           const blur = gone ? 0 : dof(rel);
           const shot = shots[i];
           if (shot) shot.style.filter = blur ? `blur(${blur}px)` : 'none';
@@ -179,6 +220,7 @@
           if (pills[i]) pills[i].style.opacity = String(!gone && mid < 380 && opacity > 0.55 && blur < 2 ? 1 - mid / 480 : 0);
         });
         if (hint) hint.style.opacity = String(Math.max(0, 1 - sCurve(cam.z / 320)));
+        syncHits();
       };
 
       placeXY();
@@ -248,6 +290,8 @@
         window.ScrollTrigger?.refresh?.();
       };
       addEventListener('resize', onResize);
+      onTick = syncHits;
+      gsap.ticker.add(onTick);
     }, root);
   };
 

@@ -1584,6 +1584,24 @@ body[data-page="info"] .info-shell__hint {
   cursor: default;
   pointer-events: none;
 }
+.fx064-hits {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  transform: none;
+  transform-style: flat;
+}
+.fx064-hit {
+  position: absolute;
+  display: block;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.fx064-hit[hidden] {
+  display: none;
+}
 .fx064-hint {
   position: absolute;
   left: 50%;
@@ -1953,7 +1971,8 @@ body[data-page="info"] .info-shell__hint {
     opacity: 0.72;
   }
 
-  .fx064-card:hover img {
+  .fx064-card:hover img,
+  .fx064-card.is-hot img {
     transform: scale(1.03);
     transition: transform 1.2s var(--ease);
   }

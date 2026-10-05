@@ -31,6 +31,9 @@
   --r: 1.85rem;
   --r-lg: 2.4rem;
   --r-card: 0.85rem;
+  /* Dock / player: rounded-rect, not stadium (half-height of chrome is ~24px) */
+  --r-chrome: 1.125rem;
+  --r-chrome-in: 0.7rem;
   --r-media: clamp(2.75rem, 8vw, 6.5rem);
   /* Case pages: soft cool mist so the bottom fade can read */
   --case-surface: #eef3f7;
@@ -45,6 +48,12 @@
 
 @supports (corner-shape: squircle) {
   .sq {
+    corner-shape: squircle;
+  }
+
+  .dock-toggle,
+  .dock a,
+  .player-btn {
     corner-shape: squircle;
   }
 }

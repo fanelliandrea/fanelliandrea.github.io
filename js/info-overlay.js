@@ -1,5 +1,5 @@
 (() => {
-  const DATA_URL = "/content/info.json?v=info-portrait1";
+  const DATA_URL = "/content/info.json?v=info-sides1";
   const PATH = "/info.html";
   const ROOT_ID = "info-frost-root";
 
@@ -42,9 +42,26 @@
       </div>
     `;
     document.body.appendChild(root);
+    let ptr = null;
+    root.addEventListener("pointerdown", (e) => {
+      const t = e.target;
+      ptr = {
+        x: e.clientX,
+        y: e.clientY,
+        card: !!(t && t.closest && t.closest(".info-frost__card")),
+      };
+    });
     root.addEventListener("click", (e) => {
       const t = e.target;
-      if (t && t.closest && t.closest("[data-info-close]")) closeInfo();
+      if (!t || !t.closest) return;
+      if (t.closest("[data-info-close]")) {
+        closeInfo();
+        return;
+      }
+      if (t.closest(".info-frost__card")) return;
+      if (ptr && ptr.card) return;
+      if (ptr && Math.hypot(e.clientX - ptr.x, e.clientY - ptr.y) > 8) return;
+      closeInfo();
     });
     return root;
   }

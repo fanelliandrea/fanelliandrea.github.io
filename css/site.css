@@ -865,14 +865,12 @@ body[data-page="ideas"][data-slug] .sky {
   pointer-events: none;
 }
 
-.case-chrome__work,
+.case-chrome__back,
 .case-chrome__top {
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.35rem;
-  padding: 0 0.95rem;
   border: 1px solid rgba(26, 34, 44, 0.08);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.72);
@@ -888,8 +886,20 @@ body[data-page="ideas"][data-slug] .sky {
   cursor: pointer;
 }
 
+.case-chrome__back {
+  width: 2.45rem;
+  height: 2.45rem;
+  padding: 0;
+}
+
+.case-chrome__back svg {
+  display: block;
+}
+
 .case-chrome__top {
   margin-left: auto;
+  min-height: 2.35rem;
+  padding: 0 0.95rem;
 }
 
 .case-chrome__top[hidden] {
@@ -985,7 +995,7 @@ body[data-page="ideas"][data-slug] .sky {
 @media (hover: hover) and (pointer: fine) {
   .case-eyebrow a:hover,
   .case-cta a:hover,
-  .case-chrome__work:hover,
+  .case-chrome__back:hover,
   .case-chrome__top:hover,
   .case-pager__all:hover,
   .case-pager__link:hover {

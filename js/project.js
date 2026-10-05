@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-nav1";
+  const BOOT = "af-project-back1";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>
@@ -113,8 +113,12 @@
   };
 
   const chromeHtml = () => `<nav class="case-chrome" aria-label="Case">
-      <a class="case-chrome__work" href="/work.html">Work</a>
-      <button type="button" class="case-chrome__top" data-case-top hidden>Top</button>
+      <a class="case-chrome__back" href="/work.html" aria-label="Back to Work">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+          <path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button type="button" class="case-chrome__top" data-case-top hidden aria-label="Back to top">Top</button>
     </nav>
     <div class="case-scroll-veil" data-case-veil aria-hidden="true"></div>`;
 
@@ -132,7 +136,6 @@
     return `
       ${chromeHtml()}
       <section class="case-intro">
-        <p class="case-eyebrow"><a href="/work.html">Work</a></p>
         <h1>${esc(project.title)}</h1>
         <p class="case-meta">${esc(
           [project.client, project.role, project.yearLabel || project.year]

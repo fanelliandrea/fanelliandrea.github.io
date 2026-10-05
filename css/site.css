@@ -1096,8 +1096,9 @@ body[data-page="work"][data-slug] .case-scroll-veil {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body[data-page="work"][data-slug] .case-scroll-veil i {
-    display: none;
+  body[data-page="work"][data-slug] .case-scroll-veil {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }
 

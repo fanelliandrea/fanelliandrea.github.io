@@ -1,17 +1,55 @@
 #!/usr/bin/env python3
-"""Static server on 127.0.0.1:43123 with no-store for HTML/JS/CSS/JSON."""
+"""Dual-stack static server on 127.0.0.1 and ::1 port 43123."""
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 import os
+import socket
+import threading
 
-ROOT = Path(__file__).resolve().parents[1]
-PORT = 43123
+DESKTOP_ROOT = Path('/Users/andreafanelli/Desktop/Website')
+MIRROR_ROOT = Path.home() / 'Library/Application Support/com.fanelli.website/www'
+PORT = int(os.environ.get('SITE_PORT', '43123'))
 NO_STORE = {'.html', '.js', '.css', '.json'}
-WORK_QS = 'v=fx064-lock5'
+
+
+def readable_root(path):
+    try:
+        with open(path / 'index.html', 'rb') as fh:
+            fh.read(1)
+        return True
+    except OSError:
+        return False
+
+
+def pick_root():
+    env = os.environ.get('SITE_ROOT')
+    candidates = []
+    if env:
+        candidates.append(Path(env))
+    candidates.extend([DESKTOP_ROOT, MIRROR_ROOT])
+    seen = set()
+    for candidate in candidates:
+        resolved = candidate.resolve() if candidate.exists() else candidate
+        key = str(resolved)
+        if key in seen:
+            continue
+        seen.add(key)
+        if readable_root(resolved):
+            return resolved
+    raise SystemExit('no readable site root')
+
+
+ROOT = pick_root()
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(ROOT), **kwargs)
+
+    def log_message(self, fmt, *args):
+        print('[%s] %s' % (self.log_date_time_string(), fmt % args), flush=True)
+
     def end_headers(self):
         path = urlparse(self.path).path
         ext = Path(path).suffix.lower()
@@ -21,36 +59,30 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header('Expires', '0')
         super().end_headers()
 
-    def _redirect_work(self):
-        parsed = urlparse(self.path)
-        path = parsed.path.rstrip('/') or '/'
-        if path == '/work':
-            self.send_response(302)
-            self.send_header('Location', f'/work.html?{WORK_QS}')
-            self.send_header('Cache-Control', 'no-store, max-age=0')
-            self.end_headers()
-            return True
-        if path == '/work.html' and parsed.query != WORK_QS:
-            self.send_response(302)
-            self.send_header('Location', f'/work.html?{WORK_QS}')
-            self.send_header('Cache-Control', 'no-store, max-age=0')
-            self.end_headers()
-            return True
-        return False
 
-    def do_GET(self):
-        if self._redirect_work():
-            return
-        return super().do_GET()
+class V4Server(ThreadingHTTPServer):
+    address_family = socket.AF_INET
+    allow_reuse_address = True
+    daemon_threads = True
 
-    def do_HEAD(self):
-        if self._redirect_work():
-            return
-        return super().do_HEAD()
+
+class V6Server(ThreadingHTTPServer):
+    address_family = socket.AF_INET6
+    allow_reuse_address = True
+    daemon_threads = True
+
+    def server_bind(self):
+        self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 1)
+        super().server_bind()
 
 
 if __name__ == '__main__':
-    os.chdir(ROOT)
-    httpd = ThreadingHTTPServer(('127.0.0.1', PORT), Handler)
-    print(f'Serving {ROOT} at http://127.0.0.1:{PORT}', flush=True)
-    httpd.serve_forever()
+    v4 = V4Server(('127.0.0.1', PORT), Handler)
+    v6 = V6Server(('::1', PORT), Handler)
+    threading.Thread(target=v6.serve_forever, name='http6', daemon=True).start()
+    print('Serving %s at http://127.0.0.1:%s and http://[::1]:%s' % (ROOT, PORT, PORT), flush=True)
+    try:
+        v4.serve_forever()
+    finally:
+        v4.shutdown()
+        v6.shutdown()

@@ -5,3 +5,5 @@ dist/
 .vercel/
 .impeccable/hook.cache.json
 .netlify/
+*.conflict.js
+internal/

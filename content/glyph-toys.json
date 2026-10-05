@@ -1,0 +1,72 @@
+{
+  "glyph-toys": {
+    "title": "Glyph Toys",
+    "layout": "neo",
+    "hero": "/assets/work/glyph-toys/jofnozJ9su29yfsUkdPGL9J2dU.gif",
+    "media": [
+      "/assets/work/glyph-toys/XOeCSOlNlHI0ZozvZlzBs9pse0.png"
+    ],
+    "lede": "For the launch of the Phone (4a) Pro, Nothing asked us to design new Glyph Toys. Some new small experiences that live on the back of the device, inside the Glyph Matrix.",
+    "intro": "In a few weeks we explored ideas, designed, prototyped and built to have them ready for the community at the keynote.",
+    "note": "Available on Nothing Playground.",
+    "type": "Product Design",
+    "when": "2026",
+    "role": [
+      "UX/UI",
+      "Interaction Design",
+      "Creative Coding"
+    ],
+    "team": [
+      "Andrea Fanelli",
+      "Emre Kayganaci",
+      "Francesco Berti"
+    ],
+    "sections": [
+      {
+        "h": "Remember to look up",
+        "paras": [
+          "We spend too much time looking down at our phones. So we built something to remind you to look up.",
+          "Star Map uses your location to render the nearest constellation directly above you, slowly turning overhead as the hours drift by, until the stars shift and a new one takes its place. Place the phone face down and the Glyph Matrix lights up with the sky. Flip it back and it's gone."
+        ],
+        "media": [
+          "/assets/work/glyph-toys/bfLryooQIwauHoo0PF8bOWwB0.png",
+          "/assets/work/glyph-toys/qmyhR14QtAuh7hNuPBkbWT1EVws.png",
+          "/assets/work/glyph-toys/lgyXZrEN1poTP75eBnwlTAWrpoY.png"
+        ]
+      },
+      {
+        "h": "The prototype is the product",
+        "paras": [
+          "To test the idea, we built a browser-based prototype simulating the Glyph Matrix at 13\u00d713 pixels. It reads your location and the current time, calculates which constellation sits directly at your zenith, and projects it onto the grid, rotating live as the Earth turns via Local Sidereal Time. 11 constellations, automatic crossfades, swipe navigation to explore the sky manually. A way to see if the sky could live on a grid of LEDs."
+        ],
+        "media": [
+          "/assets/work/glyph-toys/MWZ0A6WsXynFfIrgvzuEy1mkIoU.png",
+          "/assets/work/glyph-toys/oXnOodFeTkUSBPMFs97JeMnbMIk.png",
+          "/assets/work/glyph-toys/x7eI2pRarNeqPsZWjbyRc4VUfA.gif"
+        ]
+      },
+      {
+        "h": "The mechanics of a second",
+        "paras": [
+          "While Star Map looks outward, Micro Rotor goes in the opposite direction.",
+          "It renders an automatic watch movement on the Glyph Matrix: rotor, bridges, jewels, balance wheel and escape wheel. Everything mapped onto a 13\u00d713 LED grid, each part reduced to its minimum readable pixel form while preserving how they sit and move in relation to one another.",
+          "The rotor swings with the phone's gyroscope. Move it and it spins, set it down and it settles. A mechanical object, translated into pixels."
+        ],
+        "media": [
+          "/assets/work/glyph-toys/sxC2gp37sNtHaxFzk3gDuxSRdU.png",
+          "/assets/work/glyph-toys/QKR7Zcj3ZylANyvWM1QneOnEyKE.png",
+          "/assets/work/glyph-toys/HK1pHfBB8AYpNCaINEzGWQe2Z0.png"
+        ]
+      },
+      {
+        "h": "Proof of movement",
+        "paras": [
+          "To simulate the internal parts of a watch movement, we built a browser-based prototype of the Glyph Matrix at 13\u00d713 pixels. The gyroscope feeds gravity and inertia directly into the rotor. Tilt the phone and it swings, hold it still and it settles. Every component rendered in pixel art: bridges, jewels, balance wheel, escape wheel. Momentum-based physics, 90\u00b0 rotor snapping, a 4Hz beat holding the whole movement together."
+        ],
+        "media": [
+          "/assets/work/glyph-toys/IojXVUUJqMFJYaKsSfCVJiVUieU.png"
+        ]
+      }
+    ]
+  }
+}

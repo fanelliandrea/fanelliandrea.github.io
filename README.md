@@ -2,6 +2,8 @@
 
 Personal site of Andrea Fanelli. Static pages in a daylight sky. Home is quiet: the sky and the original bottom menu. Work, Ideas, and Info are ordinary pages with the same nav.
 
+Live: [https://fanelliandrea.github.io](https://fanelliandrea.github.io) (GitHub Pages, deploys from `main`).
+
 Palette lives in `design/tokens.css` — `#6eafd8`, field `#eaf4fb → #3d86be`, ink `#1a222c`. Not a coral/orange film look.
 
 ## Run

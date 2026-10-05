@@ -2,35 +2,48 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Outfit:wght@400;500&display=swap");
 
-:root{
-  --sky:        #6eafd8;
-  --field:      radial-gradient(ellipse 90% 80% at 50% 42%, #eaf4fb 0%, #9cc9ea 38%, #5aa0d4 72%, #3d86be 100%);
-  --tile:       #ffffff;
-  --mist:       #d7e0ea;
-  --ink:        #1a222c;
-  --mute:       #5d6874;
-  --line:       rgba(26,34,44,.1);
-  --glass:      rgba(255,255,255,.58);
-  --glass-edge: rgba(255,255,255,.45);
-  --depth:      0 18px 44px -28px rgba(40,70,110,.38);
+:root {
+  --sky: #6eafd8;
+  --field: radial-gradient(
+    ellipse 90% 80% at 50% 42%,
+    #eaf4fb 0%,
+    #9cc9ea 38%,
+    #5aa0d4 72%,
+    #3d86be 100%
+  );
+  --tile: #ffffff;
+  --mist: #d7e0ea;
+  --ink: #1a222c;
+  --mute: #5d6874;
+  --line: rgba(26, 34, 44, 0.1);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-2: rgba(255, 255, 255, 0.34);
+  --glass-edge: rgba(255, 255, 255, 0.72);
+  --depth: 0 28px 70px -32px rgba(28, 72, 118, 0.42);
+  --void: #050505;
+  --void-soft: #0c0c0c;
 
-  --sans: "Outfit","Helvetica Neue",Arial,sans-serif;
-  --script: "Caveat","Segoe Script","Apple Chancery",cursive;
+  --sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --script: "Caveat", "Segoe Script", "Apple Chancery", cursive;
 
-  --gutter: clamp(1rem,3vw,2.2rem);
+  --gutter: clamp(1rem, 3vw, 2.2rem);
   --r: 1.85rem;
-  --r-card: 1.35rem;
   --r-lg: 2.4rem;
-  --r-media: clamp(2.4rem, 7vw, 6.25rem);
-  --case-ink: var(--ink);
-  --case-mute: var(--mute);
-  --case-gutter: clamp(1.25rem, 6vw, 4.5rem);
-  --case-gap: clamp(3.5rem, 9vw, 7rem);
-  --case-surface: transparent;
-  --dur: .6s;
-  --ease: cubic-bezier(.22,1,.36,1);
+  --r-card: 0.85rem;
+  --r-media: clamp(2.75rem, 8vw, 6.5rem);
+  /* Case pages: pale azure, lighter than page sky (#6eafd8) */
+  --case-surface: #eaf4fb;
+  --case-surface-soft: #f5fafd;
+  --case-ink: #14181e;
+  --case-mute: #6a737c;
+  --case-gutter: clamp(1.25rem, 8vw, 7.5rem);
+  --case-gap: clamp(4rem, 11vw, 8.5rem);
+  --dur: 0.6s;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@supports (corner-shape: squircle){
-  .sq{ corner-shape: squircle; }
+@supports (corner-shape: squircle) {
+  .sq {
+    corner-shape: squircle;
+  }
 }

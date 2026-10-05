@@ -17,6 +17,7 @@
   const land = () => {
     const site = window.Site;
     if (!site) return;
+    const { $, $$, reduced } = site;
     document.body.classList.add('lit', 'arrived');
 
     if (reduced || !window.gsap) return;
@@ -116,6 +117,8 @@
   };
 
   addEventListener('site:stills', () => {
+    // Soften / skip tilt when Effect 064 owns the Work page
+    if (document.querySelector('[data-effect-064]')) return;
     const site = window.Site;
     stillsIn();
     if (!site?.fine || site.reduced || !window.gsap) return;

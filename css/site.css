@@ -2075,93 +2075,34 @@ body[data-page="info"] .info-shell__hint {
   }
 }
 
-/* Safari / WebKit: compact dock + player, both pinned to the bottom.
-   Fixed flex boxes with auto size fill the viewport in WebKit (width AND
-   height). A full-height player plus align-items:center parks the pill
-   mid-sky. Cap both axes to max-content and pin top:auto.
+/* Safari shrink-wrap + isolate chrome from sky/helix (no per-frame layout).
+   Pre-safari chrome was display:flex + translate on the dock. The overlay
+   that used width/height:max-content, inline-flex, transform:none, 100vw,
+   and body:has() forced intrinsic sizing and whole-tree style recalc.
 
-   Do not put `transform` on .dock / .player — it fights the sky/helix
-   compositor. Center the dock with the independent `translate` property. */
+   Dock: fit-content so WebKit does not stretch a fixed flex box to the
+   viewport width. Player: height/top auto so it cannot become a full-height
+   box (mid-sky). Lift uses sibling only — dock is appended before player. */
 
 .dock,
 .player {
-  box-sizing: border-box;
   top: auto;
-  width: -webkit-max-content;
-  width: max-content;
-  height: -webkit-max-content;
-  height: max-content;
-  max-height: -webkit-max-content;
-  max-height: max-content;
-  min-height: 0;
-  max-width: calc(100vw - 2.3rem);
-  flex-wrap: nowrap;
-  flex-direction: row;
-  display: -webkit-inline-flex;
-  display: inline-flex;
-  align-items: center;
-  align-content: center;
-  will-change: auto;
-  -webkit-transform: none;
-  transform: none;
+  height: auto;
+  contain: layout paint;
+  isolation: isolate;
 }
 
 .dock {
-  position: fixed;
-  left: 50%;
+  width: -webkit-fit-content;
+  width: fit-content;
+  max-width: calc(100% - 2.3rem);
   right: auto;
-  bottom: 1.15rem;
-  justify-content: flex-start;
-  translate: -50% 0;
-}
-
-.dock-toggle,
-.dock-links,
-.dock-links a,
-.player-body,
-.player-body > *,
-.player-btn {
-  flex: 0 0 auto;
-}
-
-.dock-links {
-  min-width: 0;
 }
 
 .player {
-  position: fixed;
   left: auto;
-  right: 1.15rem;
-  bottom: 1.15rem;
-  justify-content: flex-end;
-  translate: none;
 }
 
-/* Both open: player sits just above the dock, still in the bottom band. */
-.dock.is-open ~ .player.is-open,
-body:has(.dock.is-open) .player.is-open {
+.dock.is-open ~ .player.is-open {
   bottom: calc(1.15rem + 3.05rem);
-}
-
-@media (max-width: 860px) {
-  .dock {
-    bottom: 0.85rem;
-    translate: -50% 0;
-    -webkit-transform: none;
-    transform: none;
-  }
-
-  .player {
-    right: 0.85rem;
-    bottom: 4.15rem;
-    max-width: calc(100vw - 1.7rem);
-    translate: none;
-    -webkit-transform: none;
-    transform: none;
-  }
-
-  .dock.is-open ~ .player.is-open,
-  body:has(.dock.is-open) .player.is-open {
-    bottom: 4.15rem;
-  }
 }

@@ -1,7 +1,22 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-blur3";
+  const BOOT = "af-project-blur4";
   const rootSel = "[data-project-case]";
+
+  /* Apple-style progressive blur: soft overlapping bands, blur grows toward the fold */
+  const veilLayers = () => {
+    const n = 8;
+    return Array.from({ length: n }, (_, i) => {
+      const blur = (0.6 + i * 2.1).toFixed(1);
+      const step = 100 / n;
+      const a = Math.max(0, i * step - step * 0.55);
+      const b = i * step + step * 0.15;
+      const c = i * step + step * 0.85;
+      const d = Math.min(100, (i + 1) * step + step * 0.65);
+      const mask = `linear-gradient(to bottom,transparent ${a.toFixed(1)}%,#000 ${b.toFixed(1)}%,#000 ${c.toFixed(1)}%,transparent ${d.toFixed(1)}%)`;
+      return `<i style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask}"></i>`;
+    }).join("");
+  };
 
   const esc = (s) =>
     String(s ?? "").replace(
@@ -120,7 +135,7 @@
       </a>
       <button type="button" class="case-chrome__top" data-case-top hidden aria-label="Back to top">Top</button>
     </nav>
-    <div class="case-scroll-veil" data-case-veil aria-hidden="true"></div>`;
+    <div class="case-scroll-veil" data-case-veil aria-hidden="true">${veilLayers()}</div>`;
 
   const render = (project, register, catalog) => {
     const hero = project.hero || {};
@@ -184,18 +199,28 @@
       if (veil.parentElement !== document.body) document.body.appendChild(veil);
     }
     document.body.classList.add("arrived", "lit");
-    if (!top) return;
 
     const paint = () => {
       const y = window.scrollY || 0;
-      top.hidden = y < Math.min(420, window.innerHeight * 0.55);
+      if (top) top.hidden = y < Math.min(420, window.innerHeight * 0.55);
+      if (veil) {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const remain = max - y;
+        // Strong while there is more page below; ease out near the end
+        const t = Math.min(1, Math.max(0, remain / (window.innerHeight * 0.55)));
+        const eased = t * t * (3 - 2 * t);
+        veil.style.opacity = eased.toFixed(3);
+      }
     };
 
-    top.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    if (top) {
+      top.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
 
     window.addEventListener("scroll", paint, { passive: true });
+    window.addEventListener("resize", paint, { passive: true });
     paint();
   };
 

@@ -762,7 +762,7 @@ body[data-page="ideas"][data-slug] .sky {
   justify-content: flex-start;
   text-align: center;
   min-height: 0;
-  padding: clamp(4.5rem, 7vw, 5.25rem) 0 0.85rem;
+  padding: clamp(4.5rem, 7vw, 5.25rem) 0 clamp(2.75rem, 6vw, 4.25rem);
 }
 
 .case-eyebrow {
@@ -1009,7 +1009,7 @@ body[data-page="ideas"][data-slug] .sky {
   line-height: 1.2;
 }
 
-/* Case-detail only: one soft homogeneous blur (no stacked bands) */
+/* Case-detail only: short Apple-style progressive blur (overlapping soft bands) */
 .case-scroll-veil {
   display: none;
 }
@@ -1021,29 +1021,17 @@ body[data-page="work"][data-slug] .case-scroll-veil {
   right: 0;
   bottom: 0;
   z-index: 30;
-  height: min(48vh, 22rem);
+  height: min(20vh, 8.5rem);
   pointer-events: none;
   background: transparent;
-  -webkit-backdrop-filter: blur(22px) saturate(1.08);
-  backdrop-filter: blur(22px) saturate(1.08);
-  -webkit-mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    rgba(0, 0, 0, 0.92) 18%,
-    rgba(0, 0, 0, 0.62) 42%,
-    rgba(0, 0, 0, 0.28) 68%,
-    rgba(0, 0, 0, 0.08) 86%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    rgba(0, 0, 0, 0.92) 18%,
-    rgba(0, 0, 0, 0.62) 42%,
-    rgba(0, 0, 0, 0.28) 68%,
-    rgba(0, 0, 0, 0.08) 86%,
-    transparent 100%
-  );
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil i {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1075,13 +1063,13 @@ body[data-page="work"][data-slug] .case-scroll-veil {
   }
 
   .case-scroll-veil {
-    height: min(44vh, 18rem);
+    height: min(18vh, 7.25rem);
   }
 
   .case-intro {
     min-height: 0;
     padding-top: clamp(4.25rem, 12vw, 5rem);
-    padding-bottom: 1rem;
+    padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
   }
 
   .case-pager {
@@ -1097,8 +1085,18 @@ body[data-page="work"][data-slug] .case-scroll-veil {
 
 @media (prefers-reduced-motion: reduce) {
   body[data-page="work"][data-slug] .case-scroll-veil {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    transition: none;
+  }
+
+  body[data-page="work"][data-slug] .case-scroll-veil i:not(:last-child) {
+    display: none;
+  }
+
+  body[data-page="work"][data-slug] .case-scroll-veil i:last-child {
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%) !important;
+    mask-image: linear-gradient(to top, #000 0%, transparent 100%) !important;
   }
 }
 

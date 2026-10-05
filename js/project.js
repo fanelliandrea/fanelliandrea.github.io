@@ -1,6 +1,6 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-blur1";
+  const BOOT = "af-project-full2";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>

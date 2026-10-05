@@ -1,6 +1,6 @@
 /* Clear sky (live site) + white / grey components (s.page). */
 
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Outfit:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;500&display=swap");
 
 :root {
   --sky: #6eafd8;
@@ -24,6 +24,7 @@
   --void-soft: #0c0c0c;
 
   --sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Instrument Serif", "Times New Roman", Times, serif;
   --script: "Caveat", "Segoe Script", "Apple Chancery", cursive;
 
   --gutter: clamp(1rem, 3vw, 2.2rem);

@@ -1,7 +1,6 @@
-/* Project case pages — white field, Satoshi, medium type */
+/* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-light";
-
+  const BOOT = "af-project-nav1";
   const rootSel = "[data-project-case]";
 
   const esc = (s) =>
@@ -19,7 +18,9 @@
 
   const figure = (item) => {
     if (!item?.src) return "";
-    return `<figure class="case-media">
+    const bleed = item.layout === "full";
+    const cls = bleed ? "case-media case-media--bleed" : "case-media";
+    return `<figure class="${cls}">
       <img src="${esc(item.src)}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">
     </figure>`;
   };
@@ -53,37 +54,83 @@
     return "";
   };
 
-  const nextHtml = (slugs, catalog, register) => {
-    const links = (slugs || [])
-      .map((slug) => {
-        const p = catalog[slug];
-        const r = (register || []).find((e) => e.slug === slug);
-        if (!p && !r) return "";
-        const title = p?.title || r?.title || slug;
-        const href = p?.href || r?.href || `/work/${slug}.html`;
-        return `<a class="case-next__card" href="${esc(href)}">${esc(title)}</a>`;
-      })
-      .filter(Boolean)
-      .join("");
-    if (!links) return "";
-    return `<section class="case-next" aria-label="Next projects">
-      <h2>Next</h2>
-      <div class="case-next__row">${links}</div>
-    </section>`;
+  const sequence = (catalog, register) => {
+    const list = (register || [])
+      .filter((e) => e && e.slug && catalog[e.slug] && e.onSite !== false && e.kind !== "writing")
+      .slice();
+    list.sort(
+      (a, b) =>
+        (a.homeWork ?? 999) - (b.homeWork ?? 999) ||
+        (b.sort ?? b.year ?? 0) - (a.sort ?? a.year ?? 0)
+    );
+    const seen = new Set(list.map((e) => e.slug));
+    Object.keys(catalog).forEach((slug) => {
+      if (!seen.has(slug)) list.push({ slug, title: catalog[slug].title });
+    });
+    return list.map((e) => e.slug);
   };
 
-  const render = (project, register) => {
+  const neighbors = (slug, catalog, register) => {
+    const order = sequence(catalog, register);
+    if (!order.length) return { prev: null, next: null };
+    const i = Math.max(0, order.indexOf(slug));
+    const prevSlug = order[(i - 1 + order.length) % order.length];
+    const nextSlug = order[(i + 1) % order.length];
+    const pack = (s) =>
+      s && s !== slug
+        ? {
+            slug: s,
+            title: catalog[s]?.title || s,
+            href: catalog[s]?.href || `/work/${s}.html`,
+          }
+        : null;
+    // if only one project, no neighbors
+    if (order.length < 2) return { prev: null, next: null };
+    return { prev: pack(prevSlug), next: pack(nextSlug) };
+  };
+
+  const pagerHtml = (slug, catalog, register) => {
+    const { prev, next } = neighbors(slug, catalog, register);
+    return `<nav class="case-pager" aria-label="Projects">
+      ${
+        prev
+          ? `<a class="case-pager__link case-pager__prev" href="${esc(prev.href)}">
+          <span>Previous</span>
+          <b>${esc(prev.title)}</b>
+        </a>`
+          : `<span class="case-pager__link is-empty"></span>`
+      }
+      <a class="case-pager__all" href="/work.html">All work</a>
+      ${
+        next
+          ? `<a class="case-pager__link case-pager__next" href="${esc(next.href)}">
+          <span>Next</span>
+          <b>${esc(next.title)}</b>
+        </a>`
+          : `<span class="case-pager__link is-empty"></span>`
+      }
+    </nav>`;
+  };
+
+  const chromeHtml = () => `<nav class="case-chrome" aria-label="Case">
+      <a class="case-chrome__work" href="/work.html">Work</a>
+      <button type="button" class="case-chrome__top" data-case-top hidden>Top</button>
+    </nav>
+    <div class="case-scroll-veil" data-case-veil aria-hidden="true"></div>`;
+
+  const render = (project, register, catalog) => {
     const hero = project.hero || {};
     const cta = project.cta
       ? `<p class="case-cta"><a href="${esc(project.cta.href)}" rel="noopener" target="_blank">${esc(project.cta.label)}</a></p>`
       : "";
     const heroFig = hero.src
-      ? `<figure class="case-hero">
+      ? `<figure class="case-hero case-media--bleed">
         <img src="${esc(hero.src)}" alt="${esc(hero.alt || project.title)}" fetchpriority="high">
       </figure>`
       : "";
 
     return `
+      ${chromeHtml()}
       <section class="case-intro">
         <p class="case-eyebrow"><a href="/work.html">Work</a></p>
         <h1>${esc(project.title)}</h1>
@@ -103,7 +150,7 @@
       </div>
 
       ${credits(project.details)}
-      ${nextHtml(project.next, window.__AF_PROJECTS__ || {}, register)}
+      ${pagerHtml(project.slug, catalog, register)}
     `;
   };
 
@@ -119,6 +166,25 @@
         .catch(() => ({}));
     }
     return catalogPromise;
+  };
+
+  const bindChrome = (root) => {
+    const top = root.querySelector("[data-case-top]");
+    const veil = root.querySelector("[data-case-veil]");
+    if (!top && !veil) return;
+
+    const paint = () => {
+      const y = window.scrollY || 0;
+      if (top) top.hidden = y < Math.min(520, window.innerHeight * 0.7);
+      if (veil) veil.classList.toggle("is-gone", y > 48);
+    };
+
+    top?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", paint, { passive: true });
+    paint();
   };
 
   const mount = async () => {
@@ -146,8 +212,9 @@
     root.dataset.boot = BOOT;
     root.dataset.slug = slug;
     root.removeAttribute("aria-busy");
-    root.innerHTML = render(project, register);
+    root.innerHTML = render(project, register, catalog);
     document.title = `${project.title} — Andrea Fanelli`;
+    bindChrome(root);
   };
 
   addEventListener("DOMContentLoaded", mount);

@@ -689,8 +689,8 @@ body[data-page="ideas"][data-slug] .sky {
   z-index: 2;
   color: var(--case-ink);
   background: var(--case-surface);
-  /* Extra bottom room so the always-on fold fade never covers the pager */
-  padding: 0 0 calc(clamp(5rem, 12vw, 8rem) + min(26vh, 11rem));
+  /* Extra bottom room so the fold blur never covers the pager */
+  padding: 0 0 calc(clamp(5rem, 12vw, 8rem) + min(20vh, 8.5rem));
   text-align: left;
   font-family: "Satoshi", var(--sans);
   font-weight: 400;
@@ -1009,7 +1009,7 @@ body[data-page="ideas"][data-slug] .sky {
   line-height: 1.2;
 }
 
-/* Case-detail only: short Apple-style progressive blur (overlapping soft bands) */
+/* Case-detail only: dreamy edge/corner progressive blur (never on Work/Ideas/Home) */
 .case-scroll-veil {
   display: none;
 }
@@ -1017,21 +1017,26 @@ body[data-page="ideas"][data-slug] .sky {
 body[data-page="work"][data-slug] .case-scroll-veil {
   display: block;
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 30;
-  height: min(20vh, 8.5rem);
   pointer-events: none;
   background: transparent;
-  opacity: 1;
-  transition: opacity 0.35s ease;
 }
 
 body[data-page="work"][data-slug] .case-scroll-veil i {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
   pointer-events: none;
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil .case-dream__edge {
+  inset: 0;
+}
+
+body[data-page="work"][data-slug] .case-scroll-veil .case-dream__fold {
+  bottom: 0;
+  top: auto;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1062,10 +1067,6 @@ body[data-page="work"][data-slug] .case-scroll-veil i {
     min-height: 100%;
   }
 
-  .case-scroll-veil {
-    height: min(18vh, 7.25rem);
-  }
-
   .case-intro {
     min-height: 0;
     padding-top: clamp(4.25rem, 12vw, 5rem);
@@ -1084,19 +1085,14 @@ body[data-page="work"][data-slug] .case-scroll-veil i {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body[data-page="work"][data-slug] .case-scroll-veil {
-    transition: none;
-  }
-
-  body[data-page="work"][data-slug] .case-scroll-veil i:not(:last-child) {
+  body[data-page="work"][data-slug] .case-scroll-veil .case-dream__edge:not(:nth-child(3)),
+  body[data-page="work"][data-slug] .case-scroll-veil .case-dream__fold:not(:last-child) {
     display: none;
   }
 
-  body[data-page="work"][data-slug] .case-scroll-veil i:last-child {
-    -webkit-backdrop-filter: blur(10px) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%) !important;
-    mask-image: linear-gradient(to top, #000 0%, transparent 100%) !important;
+  body[data-page="work"][data-slug] .case-scroll-veil .case-dream__edge:nth-child(3) {
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
   }
 }
 

@@ -1,21 +1,35 @@
 /* Project case pages — white field, serif title, bleed stills, quiet nav */
 (() => {
-  const BOOT = "af-project-blur4";
+  const BOOT = "af-project-dream1";
   const rootSel = "[data-project-case]";
 
-  /* Apple-style progressive blur: soft overlapping bands, blur grows toward the fold */
+  /* Dreamy Apple-style edge/corner blur — crisp center, soft periphery + gentle fold */
   const veilLayers = () => {
-    const n = 8;
-    return Array.from({ length: n }, (_, i) => {
-      const blur = (0.6 + i * 2.1).toFixed(1);
-      const step = 100 / n;
-      const a = Math.max(0, i * step - step * 0.55);
-      const b = i * step + step * 0.15;
-      const c = i * step + step * 0.85;
-      const d = Math.min(100, (i + 1) * step + step * 0.65);
-      const mask = `linear-gradient(to bottom,transparent ${a.toFixed(1)}%,#000 ${b.toFixed(1)}%,#000 ${c.toFixed(1)}%,transparent ${d.toFixed(1)}%)`;
-      return `<i style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask}"></i>`;
-    }).join("");
+    const edge = [
+      { blur: 1.25, clear: 54, mid: 78 },
+      { blur: 3.5, clear: 60, mid: 84 },
+      { blur: 8, clear: 66, mid: 90 },
+      { blur: 14, clear: 72, mid: 95 },
+      { blur: 22, clear: 78, mid: 98 },
+    ]
+      .map(({ blur, clear, mid }) => {
+        // Ellipse sits a touch high so the bottom edge feels dreamier
+        const mask = `radial-gradient(ellipse 86% 80% at 50% 38%, transparent ${clear}%, rgba(0,0,0,0.4) ${mid}%, #000 100%)`;
+        return `<i class="case-dream__edge" style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask}"></i>`;
+      })
+      .join("");
+
+    const fold = [0, 1, 2, 3, 4]
+      .map((i) => {
+        const blur = (1.2 + i * 3.2).toFixed(1);
+        const a = Math.max(0, 42 + i * 9);
+        const b = Math.min(100, 68 + i * 7);
+        const mask = `linear-gradient(to top, #000 0%, rgba(0,0,0,0.75) ${(10 + i * 3).toFixed(1)}%, transparent ${b.toFixed(1)}%)`;
+        return `<i class="case-dream__fold" style="-webkit-backdrop-filter:blur(${blur}px);backdrop-filter:blur(${blur}px);-webkit-mask-image:${mask};mask-image:${mask};height:${(38 + i * 8).toFixed(1)}%"></i>`;
+      })
+      .join("");
+
+    return edge + fold;
   };
 
   const esc = (s) =>
@@ -192,25 +206,16 @@
 
   const bindChrome = (root) => {
     const top = root.querySelector("[data-case-top]");
-    // Host veil on body so it stacks under dock/player (not trapped in .case)
-    let veil = root.querySelector("[data-case-veil]") || document.querySelector("[data-case-veil]");
-    if (veil) {
-      veil.hidden = false;
-      if (veil.parentElement !== document.body) document.body.appendChild(veil);
-    }
+    // Keep veil inside .case so chrome stays above the dream frame; dock/player sit above .case
+    const veil = root.querySelector("[data-case-veil]");
+    if (veil) veil.hidden = false;
+    // Strip any leftover body-hosted veil from older builds / SPA hops
+    document.querySelectorAll("body > [data-case-veil]").forEach((el) => el.remove());
     document.body.classList.add("arrived", "lit");
 
     const paint = () => {
       const y = window.scrollY || 0;
       if (top) top.hidden = y < Math.min(420, window.innerHeight * 0.55);
-      if (veil) {
-        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-        const remain = max - y;
-        // Strong while there is more page below; ease out near the end
-        const t = Math.min(1, Math.max(0, remain / (window.innerHeight * 0.55)));
-        const eased = t * t * (3 - 2 * t);
-        veil.style.opacity = eased.toFixed(3);
-      }
     };
 
     if (top) {
@@ -220,7 +225,6 @@
     }
 
     window.addEventListener("scroll", paint, { passive: true });
-    window.addEventListener("resize", paint, { passive: true });
     paint();
   };
 

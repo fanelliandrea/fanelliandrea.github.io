@@ -249,6 +249,13 @@
           e.preventDefault();
           return;
         }
+        const active = modIndex(target);
+        /* Second click on the focused card opens the article */
+        if (i === active && item.href) {
+          e.preventDefault();
+          location.href = item.href;
+          return;
+        }
         lockNav();
         target = nearestTarget(i);
         updateFocus(i);

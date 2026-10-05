@@ -1,0 +1,1265 @@
+{
+  "_note": "Ideas articles copied from live Framer (www.fanelliandrea.com/ideas/*). Same case schema as projects.json.",
+  "articles": {
+    "the-golden-age-of-audio": {
+      "slug": "the-golden-age-of-audio",
+      "title": "The Golden Age of Audio",
+      "year": 2024,
+      "yearLabel": "22 January, 2025",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/the-golden-age-of-audio.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/kmrrWHZYoKU2vX5ZRxn5R4w6twQ.jpg",
+        "alt": "The Golden Age of Audio"
+      },
+      "lead": [
+        "I made a presentation about audio and music, capturing my thoughts, ideas and signals in slides. It was originally supposed to be an essay, but I believe that words can communicate best when combined with images."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "22 January, 2025",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "Audio is becoming the most intimate format we engage with, evolving from mere listening to fostering connection, interaction, and shared experiences."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/wOjfn3M4Ms1sJgw0yTvQo6MOlc.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "label": "View the presentation",
+        "href": "https://www.figma.com/deck/o8tFNtGrTzcfmdP4UMTxmG/The-Golden-Age-of-Audio?node-id=79-108&t=cSDiqIUOsFqZNb5q-1"
+      }
+    },
+    "fashion-tech": {
+      "slug": "fashion-tech",
+      "title": "The marriage between fashion and technology",
+      "year": 2024,
+      "yearLabel": "30 October, 2024",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/fashion-tech.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/qf2WnlmxirFM67z0zzgOb7qTxY.png",
+        "alt": "The marriage between fashion and technology"
+      },
+      "lead": [
+        "Our lifestyle comes down to our relationship with products. The objects we own and the clothes we wear can say a lot about us. Soon this distinction will become increasingly subtle.",
+        "Clothing will become the interface. We spend so much time in our clothes all our life long. Fashion is the most intimate relationship we have with an object.",
+        "Mobile technology entered our pockets, staying with us at all times. Now that it’s wearable it will be closer and closer to our bodies, removing that level of disconnection that a phone or watch possesses. It's inevitable not to think about its relationship with fashion and how the two disciplines can influence each other."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "30 October, 2024",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "What we buy and wear is who we are",
+          "body": [
+            "Whether we want it or not, we are status-seeking individuals and often we don't even notice it. The actions we do every day are a way of signaling something about ourselves. We want to be recognized and recognize people who are like us in order to feel part of something.",
+            "So when we wear a luxury accessory or use an expensive tech product we are implicitly communicating something to others. A premium phone has essentially the same functionalities as one with a lower price tag. The difference lies in the perception and care the brand has put into crafting this product.",
+            "Fashion has always been a way to communicate status, but it also plays a key role in communicating the inner self. Clothes, besides being an extension of our skin, are an extension of our personality. Even technology is a way to express your own style. The products you own tell as much about you as the clothes you wear.",
+            "This is technology as style and as a form of self-expression (\"Friend\" concept by Modem, 2024)"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/ZLj7lgKCrhqqiNYLJa5LZtiC64.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Technology should imitate fashion",
+          "body": [
+            "Among the AI gadgets released this year, there isn’t one that is positioned as a fashion item. The expectations of these products have been disappointing for the public. Maybe they would have had a different effect if they had given these products a personality, making them more appealing to the audience. Many wearables I’ve seen don’t have one and adding color is not enough; it’s style that is lacking.",
+            "Humane made a good move by unveiling their product during a Coperni show in Paris but then they stopped there. Users are designing concepts that can solve the wearability problem, creating purpose-built garments.",
+            "Coperni is a brand that has distinguished itself for making technology-infused fashion. They use a retro-futuristic approach and tech is in the way they approach color or style. You can tell the founders are devotees of Steve Jobs' brand (the Swipe Bag is inspired by the act of swiping on the iPhone)",
+            "Not to forget Prada who collaborated in the past with LG to make the first smartphone (released a few months before the iPhone) or even the wearable belt with American Express to pay NFC with your wrist."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/mhZ21JtGRPon76uCNTaMLlsSqAY.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/wcbCCkzXi8ef6PcmOLp96KEscZU.webp",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Personalization = Wear something that represents you",
+          "body": [
+            "This merge will pass through accessories first. If you look at the Apple Watch it sits right at the intersection between luxury, fashion and tech, or at least that is the initial vision Jony Ive wanted for the product (now it's more something related to sports).",
+            "When it comes to wearable accessories we don’t want all the same things. Everybody wants something different. This explains why you can customize it with different bands to better express your personality.",
+            "Designing a tech accessory that goes on your wrist or in your ears is not easy, you are going to compete with products that occupy that space and are usually from luxury brands. So it’s necessary for it to become an object of desire and to be aesthetically pleasing. If not, the user will think, “this doesn't belong on my skin.”",
+            "Customization is a way to add personal value to an object and make it more our own. Designing our personality and not just expressing it."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/TqS2lCGKbH8ORXIvXrIoWRWBs2E.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Form follows feeling",
+          "body": [
+            "If technology becomes invisible in the future, detaching our dependence on screens, this fusion of garment and tech could be a way to bring us back in touch with our senses.",
+            "In the end, it all comes down to the way we experience things. The source of everything lies in our senses. Products and clothes are instruments through which we can deliver emotions.",
+            "The key is to design for feelings and sensations that these future products can give. The goal is to achieve a deeper connection with the world around us, and design should help people become more aware of their own existence.",
+            "Networked Intimacy research paper by Modem (Image by Maxime le Grelle)"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/hgzL68y1caTWqbQr4VBzFEI.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    },
+    "the-process-is-the-product": {
+      "slug": "the-process-is-the-product",
+      "title": "The Process Is the Product",
+      "year": 2025,
+      "yearLabel": "18 September, 2024",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/the-process-is-the-product.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/0l4s0BG1CWAQf4fEtHPE2ymfjmw.webp",
+        "alt": "The Process Is the Product"
+      },
+      "lead": [
+        "The real value of creativity doesn't lie in the final product, but more in the journey to get there. By documenting and sharing the behind-the-scenes, complete with iterations, mistakes and insights, we reveal the authenticity of our work. In a world obsessed with perfection, embracing and showing imperfections becomes a powerful act of transparency and connection."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "18 September, 2024",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "Process vs Product",
+          "body": [
+            "I believe that the process is what gives value to the product. It’s not that one is more important than the other, in fact they are equally as valuable.",
+            "As a creative you often find yourself obsessed with the practice. To me it’s about writing to test and explore the ideas before shaping them. I also wrote about how (great) design starts with language."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Show the work in progress",
+          "body": [
+            "Transparency is a fundamental principle related to creation because process makes thinking visible. Writing, documenting work in progress, and decoding yourself are ways to show what you think and how you see the world.",
+            "In order to be credible, you must be authentic and true. What better way to be that than through your work in progress. Every time I’m sharing something new, I also choose to share the behind the scenes, what people often don’t see and are curious about. This means sharing errors, iterations, sources of inspiration and so on.",
+            "Being transparent means being honest, authentic and showing imperfections. Both individuals and organizations can benefit by being open and transparent on their process. The benefit of being small is that you can be very open and show the process. It can be way harder for bigger established brands.",
+            "This doesn't mean that big brands can't share their process with the people. Think of the book “Something's Off” about the collab between Virgil Abloh and Nike, where it shows them using WhatsApp during the creative process. Also, I was very surprised when I found out that Matthieu Blazy, creative director of Bottega Veneta, made free fanzines to tell the creative secrets behind his collections.",
+            "This idea of transparency can be difficult to embrace as we tend to show the best of ourselves, especially online. But perfectionism doesn't exist; it's just a myth. Perfectionism doesn't advance anything, so don't get stuck by it. The only way is to embrace imperfections, share them transparently and make refinements through iterations and feedback.",
+            "BIG is proud to show the process to its clients. They show all the iterations conducting to the final work"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/T4Um0wzDkiznMw24dq6k9IolRkE.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/XPDFqSWr0t4Zf94HBUvjg5dMo.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Who is truly original?",
+          "body": [
+            "It’s ok to reference. Believing in original ideas that come from nothing is overrated because everything is connected. Creativity is more about discovering than conceiving. Everything is inspired by and built on the work of others, often even unconsciously. There are many ideas out there and you can only see them if you are curious.",
+            "Art wasn’t built around the idea of ownership, it was more like “learn by reproduction”. Now, many disciplines that are daughters of art, such as fashion, design and architecture, tend to keep their own ideas in check, hiding them from others and punishing those that are not 100% original.",
+            "I think the only way to progress is to build on the ideas of others. Appropriate to learn and move things forward. This does not mean stealing without adding anything, your point of view is always required and you must refer to sources."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/uuwAlFf9FYOAxLnaebfVUzC68.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Failure = Progress",
+          "body": [
+            "It’s ok also to make mistakes, they are part of the formula. They are important because without them there wouldn’t be progress. You have to face a certain amount of failure in order to innovate or progress with your work. Showing those mistakes in the process is what makes the work real and authentic.",
+            "Mistakes allowed James Dyson to progress so that he made his cyclonic vacuum after 5125 handmade prototypes. If you are trying to do something new, to go down a road that someone has not yet traveled, you have to accept that you may encounter failure.",
+            "Sometimes to make creative decisions you need to trust and follow your gut instinct. Intuition is something really powerful, like a human machine learning algorithm. This creative confidence that spills over into design comes from past mistakes and experiences."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/s2GuZkEAmswU6mMW8AIQYwLql14.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "You can copy the product but you cannot copy the way of working",
+          "body": [
+            "Process is at the core of creation. Understanding the process means owning the result. To create original products you need to control the whole process, not only the design but also the building and selling part.",
+            "When we look at a finished product, we need to see not just the design of the object but also the process that enabled that result. Knowing your practice and your process ultimately leads to knowing what you make.",
+            "There are many companies that try to copy products, and this is a strategy that can work in the short term. To thrive in the long run you need to know your process intimately. It consists of many elements including methodologies, inspirations, conversations that cannot be replicated unless you have the same people on the team. Like MSCHF which is unpredictable and includes anyone in their creative process, even their lawyers and manufacturers who will influence the end result.",
+            "“Unconventional processes, unpredictable results.” - Massimo Osti"
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Creative process in the age of machine intelligence",
+          "body": [
+            "Now with AI we see the outcome right away, even if we are at the start of the process and that changes several things.",
+            "So we get fixated with the end result and are forced to think about it, even before we’ve started. Even so, these tools give us a lot of opportunity to iterate so that we don't get fixated with the first options.",
+            "If language is the genesis of the design process, in this case it serves to get a hyper realistic and finalized result of an image from right away. The more input we give, the more precise responses we get.",
+            "The essence of the creative process is exploration, we often don’t know what we are going to get and that’s what makes products even more interesting. Our design decisions are often driven by intuition. This gut feeling is not something you can reproduce and make fast with a machine."
+          ],
+          "media": []
+        }
+      ]
+    },
+    "taste-is-the-only-skill-to-learn": {
+      "slug": "taste-is-the-only-skill-to-learn",
+      "title": "Taste is the only skill to learn",
+      "year": 2024,
+      "yearLabel": "Jan 23, 2024",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/taste-is-the-only-skill-to-learn.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/5sst8f9pG2nhXD6p9Yxrfg.jpg",
+        "alt": "Taste is the only skill to learn"
+      },
+      "lead": [
+        "Taste is not innate. It grows with the mistakes you make — and it is the one creative skill AI does not replace."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Jan 23, 2024",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "What is taste?",
+          "body": [
+            "The concept of taste is something that defines us as human beings and has been explored by many philosophers over time. They define it as the ability to identify the aesthetic quality of an object.",
+            "We could argue that taste is something subjective, and in part it is. But as Paul Graham says, it’s not a matter of personal preference because if it were, we would be all right.",
+            "When we design something we realize that our taste is related to our skills. The idea of what we want to bring into the world and what we actually accomplish often don’t match. If we are not fully satisfied with our work, it means that our skills don’t just match our taste.",
+            "Or, as Ira Glass said, “your taste is why your work disappoints you”."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Taste vs Skill",
+          "body": [
+            "If taste means knowing what looks good, skill is essential to reach that level and requires practice.",
+            "Taste is often perceived as something abstract and indefinite. Skill instead as something more concrete and practical.This is in the common conception, but in reality it is not so.",
+            "What sets artists apart and gets them noticed is the ability to express their own taste. Therefore, knowing what you like is as important as knowing what you do not like.",
+            "Rick Rubin, founder of Def Jam and author of The Creative Act, has built his career on his own taste. As he states in an interview, \"I have no technical ability. And I know nothing about music.\" The producer says he can barely play a few instruments, but says artists come to him because of \"the confidence I have in my taste and my ability to express what I feel.\" In fact, he has a highly developed sense of taste and is able to communicate it in concrete ways to world-class artists who rely on him to complete their albums."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/szW57JuLqpizdrCGZr9U6L3ySk.webp",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Taste is the only valuable skill to learn",
+          "body": [
+            "If I had to choose one skill for the future working in the creative field, that would be taste. Taste is the one valuable skill to learn.",
+            "It was said that artificial intelligence would come first to replace manual jobs. Apparently it took the creative sector first. The spread of AI in the tools we use has been a great benefit but also a great change. We can now create many things in a short time, and often the quality of the results is not what we want."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/rvEj4jNxEjk8MaFpnE5otlVwwKc.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "From creation to curation",
+          "body": [
+            "The presence of AI created a shift from a dynamic of creation to something closer to curating. Soon the creative direction of a project will be more important than the craft itself. At that point, the machines will be just as good at meeting our results, and it will be important to give the project a clear direction.",
+            "Curation doesn’t have to be something bad. A24 has built its film company on the concept of curation. However, there are companies that have different ideas about this: on the one hand, Spotify promotes algorithms for its playlists, while Apple Music believes that human taste plays a key role in music curation."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Growing your taste",
+          "body": [
+            "Taste is not something innate, but more something that can grow.",
+            "Steve Jobs believed that one's taste is the result of the mistakes he made and thus a mix of his past experiences. \"Things get more refined as you make mistakes. I've had a chance to make a lot of mistakes. Your aesthetics get better as you make mistakes.\" This philosophy can be found in Apple products that have won the hearts of billions of people and remain timeless years later.",
+            "Evolving one's taste means evolving as a creative. It means going beyond one's abilities and trying to do better and better. Not being satisfied with one's creation is an opportunity to grow and do something better next time."
+          ],
+          "media": []
+        }
+      ]
+    },
+    "urban-undergrounds": {
+      "slug": "urban-undergrounds",
+      "title": "How to design underground utopias?",
+      "year": 2023,
+      "yearLabel": "Nov 27, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/urban-undergrounds.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/L95Dx4kot4Eqiusjp95UoSfEihg.png",
+        "alt": "How to design underground utopias?"
+      },
+      "lead": [
+        "The design of urban underground space has become an increasingly urgent system design challenge in recent years. Many factors, including increasing urban density, the growth of metropolises, skyrocketing land prices, the need for greater urban resilience against extreme climates, and increasing service needs have encouraged the use and development of underground space."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Nov 27, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "This article is written jointly with Giorgio Orsucci and in collaboration with Studio Redesigned."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "The main problems",
+          "body": [
+            "Urbanisation and urban densifications are well-known modern trends, with an estimated 60% of the global population living in metropolises by 2030, up from 37% in 1973. By the same year, 43 megacities are expected to host over 10 million people. This adds new pressure on urban planning, creating the necessity and the economic incentives for a more efficient use of urban space.",
+            "With more pressure on city centers, the underground has come to represent a strategic space for adding additional depths to cities.",
+            "In most cities, the underground is not an entirely virgin space.",
+            "The shallow subsurface already hosts a great deal of systems: electricity, gas, water, wastewater, and Internet, all share the shallow subsurface in their way to our homes. Over the decades, these utilities have been sedimenting over each other in a disorganised fashion, leading to a complex bundle of cables and pipes, nicknamed “spaghetti problem” by some urbanists. In this context, maintenance and renovation are a nightmare. Open-cut trenches are required whenever a pipeline needs to be checked, repaired or renewed — accidental strikes on underground pipes and cables are estimated to cost £1.2 billion a year in the UK alone.",
+            "Deeper down in larger cities, transport infrastructures and underground public spaces have created complex mazes of tunnels and passages, leading in some cases to networks of hundreds of kilometers — like in the example of the Path in Toronto.",
+            "In the process of giving the subsurface a larger, systemic role, we are faced with the unique opportunity to rethink and simplify current infrastructures, harmonise utilities, and improve and safeguard maintenance work.",
+            "Meanwhile, climate change is adding environmental challenges to urban spaces. Extreme heat is one challenge. By 2050, an estimated 1.6 billion people in 970 cities may face average summer temperature highs above 35°C, with heatwaves impacting 6x more people than today. Productivity loss due to heatwaves could reach 2 trillion € globally by 2030. In addition, flooding has caused global losses of about 300 billion US$ in the period between 2018 and 2022, together with tragic personal damage and human loss.",
+            "While not necessarily tackling the source problem, underground solutions have the potential to increase urban resilience, by means of heat-proof pathways, flood water solutions, and more."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/8fLTUF00bIq5JH97pbc6OfdwyM.jpg",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/O81lGtuJwUM7j8XxzagxLjJg.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The result: an increased focus on the underground",
+          "body": [
+            "The mentioned trends concur to explain the increased focus that urban designers are dedicating to the subsurface. A number of underground mega-projects are currently planned or constructed worldwide, while consortiums and research programs are being built to analyse and design holistic solutions for the underground world.",
+            "Underground mega-projects span from electricity tunnels — like the London Power Tunnels, a 2-billion-£ 64-km tunnel carrying high-voltage electricity under the city of London, or the Singapore Power Grid tunnels —, to wastewater tunnels — like the Emisor tunnels in Ciudad de Mexico, or the Stormwater Management And Road Tunnel (SMART in short, and rightly so) in Kuala Lumpur.",
+            "While representing substantial urban advancements and technological achievements, these mega-projects fail to display a systemic vision for urban subsurfaces. Even though many cities have greenlighted large underground projects, in most cases the subsurface is only marginally mentioned in their urban planning strategy (such as the London Plan), hence lacking comprehensive policies regarding the use of underground spaces.",
+            "The lack of a cohesive, ambitious, systemic vision for the future of underground urbanism is a large problem, and one of a certain urgency. The urgency originates from the fact that underground infrastructures are sticky, rigid to undo. The way we design and build the first underground infrastructures will have a crucial role in defining the paradigms for underground urbanism, similarly to how the first black lines on a white canvas largely define and influence the final drawing.",
+            "These decades are therefore of central importance for underground urbanism. We are facing the immense risk of building in the subsurface in a disorganized manner, missing out on the opportunity to harmonize the subsurface, create economies of scale, and achieve underground utopias.",
+            "An important source of misalignment in the creation of underground paradigms originates from the fragmentation of authorities. With a few notable exceptions, underground mega-projects tend to be initiated by individual organizations - be they the energy grid company, the wastewater company, or governmental bodies for national infrastructures. As a consequence, multiple tunnels are bored into the depth of cities, each usually solving one single problem, disregarding potential benefits of a larger, comprehensive design."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/JqwBOTk6NOqwrbPXRrD6LG6ags.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/BmLFp9Y3PL2EVNERahh3RxfM.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "A systemic approach to underground urbanism",
+          "body": [
+            "We believe there is a significant gap between the enormous potential for designing visionary, future-proof utopias, on one side, and the institutional and methodological inadequacy of economic systems and governmental bodies in delivering such visionary paradigms, on the other. Capturing and planning for the long-term interests of multiple stakeholders can largely benefit from a holistic approach that goes beyond individual projects or networks.",
+            "An urgent, collective, multidimensional design of paradigms for the future of subsurface urbanism could include the following elements:",
+            "A broad, multi-stakeholder participation: This means involving a diverse range of actors, such as urban planners, architects, environmentalists, engineers, and civil servants, to ensure a holistic perspective that considers the various aspects of subsurface development.",
+            "A spirit of collective collaboration: Among the many stakeholders to be involved are the citizens, who must have a say in the discourse around urban subsurfaces, to balance the colonization process that replicates what happens above ground.",
+            "Enhanced collaboration across private and public: A sense of collective collaboration, fostering partnerships and cooperation among various stakeholders. Private sector entities bring innovation, investment, and technological expertise, while public entities contribute with regulatory frameworks, public infrastructure, and a commitment to community welfare.",
+            "Considering the impending challenges mentioned above, there is a need for urgent action, to design superior infrastructures and underground paradigms for the cities of the future. It is essential to unite all stakeholders under a shared vision, in order to acquire a deep understanding of the challenges to be addressed and the needs of users, and to design together visionary, long-term visions on the types of underground paradigms we desire. Central to this approach is the search for innovative, forward-looking solutions that are able to push the boundaries of conventional problem solving. This commitment to innovation is critical in developing sustainable and adaptive solutions that meet the needs of cities in the long-term.",
+            "We are building a design research project around the future of underground urbanism. If this problem is relevant to you, come design the future of underground spaces.",
+            "We are looking for public entities, universities, consortiums, and private organisations driven by a common vision: to co-create and co-design the paradigms and ideas that will transform the way we inhabit the underground."
+          ],
+          "media": []
+        }
+      ]
+    },
+    "great-design-language": {
+      "slug": "great-design-language",
+      "title": "Great design starts with language",
+      "year": 2023,
+      "yearLabel": "Nov 20, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/great-design-language.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/NQ2hlSeCo8lt3QpAvlCuQLdXs.png",
+        "alt": "Great design starts with language"
+      },
+      "lead": [
+        "Words influence the initial problem framing, the definition of principles that will guide the design, the creative process and even the final result."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Nov 20, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "Last week I wrote about how we’re moving from apps to experiences. The role of designers will no longer be to design interfaces for a specific use case, but rather a holistic approach to experience, designing scenarios for user actions and intentions.",
+            "Who better to describe a scenario than a designer? In her article, Susan Stuart illustrates the similarities of the interaction designer's role with that of the writer.",
+            "“A core skill of the interaction designer is imagining users (characters), motivations, actions, reactions, obstacles, successes, and a complete set of ‘what if’ scenarios. These are the skills of a writer — all kinds of writers, but particularly fiction, screenwriting, and technical writing.”"
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Writing is just thinking",
+          "body": [
+            "In school we are taught that if you write you have to be inclined and you have to write for the sake of it, so maybe one day you become a writer.",
+            "Actually, writing is another word for thinking.",
+            "“Whether you like it or not, you are a writer. Every day, your success at work is in part determined by how well you can communicate your thoughts through email, reports, instant message, and perhaps even blog posts, articles, or books.” - Amantha Imber, HBR",
+            "Writing for me also means refining the ideas that are stuck in my head. It helps me to think more clearly. Then sharing and spreading them with the world.",
+            "Writing is designing with words, and those words will eventually shape reality."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/5UeREeiYUtnHR27ihOkU3YJn3Y.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Writing to understand problems",
+          "body": [
+            "A key part of the design process is understanding the problem. To fully understand and define a problem, even before finding a solution, you need to be able to describe it in words. It is a way to initially frame the problem and discard ideas that are out of reach.",
+            "Jony Ive, former Chief Design Officer at Apple, talks about writing as an essential tool to frame the thought process \"Language is so powerful,\" he said. \"If [I say] I'm going to design a chair, think how dangerous that is. Because you've just said chair, you've just said no to a thousand ideas.”"
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "The biography of an idea",
+          "body": [
+            "Jony also talks about the concept of writing \"the biography of an idea.\" Since his college days, he has been obsessed with how we think and how to give shape to a thought. By writing down all the details of an idea (even the input from which he got it), he ensures that he will have similar ideas in the future, because the creative process is so unpredictable and there will be days when we run out of ideas.",
+            "When designing, writing should be first and form second.",
+            "He writes a lot because he realized that it is possible to describe an object only to a small extent by drawing it. To better convey the essence of a product, it is necessary to describe its attributes as well, and this is done by writing."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/VVG9np4Eo1hikKvp0FOS6Ddtw.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "An idea is not a product",
+          "body": [
+            "Ideas are born fragile and grow through conversations and feedback from other humans. After the conversation, if the idea has potential, there is the writing.",
+            "Probably the secret behind Apple's most iconic products (such as the iPod, iPhone, iPad, and perhaps even the Apple Watch) is that they have created a space for fragile ideas to grow. A space in which to conceive and promote these ideas, because they are all born fragile and that is their nature.",
+            "“An idea is not a mockupA mockup is not a prototypeA prototype is not a programA program is not a productA product is not a businessAnd a business is not profits”- source",
+            "The difference between an idea and a product is that in between you solved the problem. Execution is what defines how the problem can be solved and writing can be part of this process."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/cSOH6M1TIxZ7TxnLsT9zeFaqKec.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The power of principles",
+          "body": [
+            "Writing down design principles is useful for designing products. Principles are values that act as a north star in the design process. They are a point of reference that drives actions and decisions of the product team.",
+            "Product principles are what defines the core DNA of a product. Just think about the iconic design principles of Dieter Rams that inspired thousands of creative minds.",
+            "Great design should start with words, not images.",
+            "Although it is useful to explore possible alternatives, it is necessary first to understand the problem. And today more than ever it is tempting to be tempted by the tools we use and start designing directly from there, without first defining the boundaries within which to design."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Designers should write, not code",
+          "body": [
+            "There has always been a debate about whether designers should learn to code or not. Today there are more and more no-code or low-code tools that remedy this gap and enable product designers to be the next builders. Less is said, however, about the opportunity to write.",
+            "Writing affects not only the design process, but also the end result. Although interfaces in the future will not be text-based only, to date users still rely on copywriting to interact with apps and websites. Moreover, knowing how to write well is an advantage for communicating with machines during design, but also for showing your ideas to stakeholders.",
+            "Good writing is good design because, in the end, words make up a large part of the final user interface and are as important as the rest of the visual outputs."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/WIGc07b8d0p2cbKQAkuGxPfwY.gif",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    },
+    "apps-are-evolving-into-experiences": {
+      "slug": "apps-are-evolving-into-experiences",
+      "title": "Apps are evolving into Experiences",
+      "year": 2023,
+      "yearLabel": "15 November, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/apps-are-evolving-into-experiences.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/ZqIrvwNUijxlsFQyy6JjyqyiGg.png",
+        "alt": "Apps are evolving into Experiences"
+      },
+      "lead": [
+        "Recently I wrote a piece about the future of technology and interfaces, a topic I care deeply about. I feel that there is still a lot to write on it, so I decided to explore it further."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "15 November, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": null,
+          "body": [
+            "The arrival of the iPhone in 2007 and the app store in 2008 provided a fertile place for a lot of startups born during that period to grow. These ventures that provided digital services found their place in the app economy and they certainly owe it to Apple. So Uber, Airbnb, and Spotify designed mobile interfaces for people to enjoy their services directly on their smartphones.",
+            "This brings us to the core concept of this article, which is the following:",
+            "“Apps are an interface to enjoy services.”",
+            "In general, the process looks something like this:",
+            "1. we need a service",
+            "2. we visit the app store to download the app",
+            "3. we engage with the service",
+            "4. then we drop the app",
+            "The evolution of software is changing the way we interact with computing. Smartphones are already proof of that. We now have access to personal computing everywhere by bringing these devices in our pockets. Steve Jobs introduced the idea of computer as a bicycle for the mind but now it seems more like a self-driving car. Soon we’re going to have wearable devices enabled by AI like Humane, a moonshot idea of solving our addiction to smartphones. In the next years we are going to see more and more devices like this and whether it is visible or invisible, we need to design better interfaces to deal with the next computing experience."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/gXc1mWzWL8eS8qq7FJVA0nv2Z8g.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Apps as views",
+          "body": [
+            "OpenAI recently introduced the concept of GPTs, custom versions of ChatGPT that act like agents to fulfill specific tasks. These GPTs will be built by developers and the community, and there will be a chance to earn money based on how many people use it. Does it remind you of anything?",
+            "AI is being productized and this could set the basis for the future of app stores.",
+            "Introducing GPTs by OpenAI",
+            "Also, the presentation of the Humane AI Pin, one of the first AI-powered consumer products, showed that they created a set of experiences that live in the cloud with no app store. The company designed these interactions based around a few key use cases allowing future users to enjoy them through a monthly subscription.",
+            "These hints suggest that the future of apps is evolving toward experiences. This doesn't mean that app stores will disappear and become obsolete, but it is likely to change the way these AI-based experiences will be distributed."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/eeFYLGAf6yAScgkUJ0r9PLfVbdM.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "From static to dynamic interfaces",
+          "body": [
+            "The current state of application-based computing concerns button design and content insertion within breakpoints. There will be a shift toward more task-based computing, with tailored interfaces for users based on the scenario. These dynamic interfaces will be designed through AI and will be informed by human feedback, changing based on users and their intents."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/Vuhs0FMhJ8yGd658TLInxShXU.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Personalized experiences on personal devices",
+          "body": [
+            "Today we live our experiences through digital services, and apps are an interface for these services. When we need to listen to music, we download Spotify or when we want to meditate, we use Headspace. Not too far, we will have highly personalized experiences to enjoy services and they will be enabled by our personal AI devices, which know us better than anyone else.",
+            "Personalization will be a core feature; we are seeing this with Arc for example, the browser that introduced the Boost feature to fully customize one's experience on websites.",
+            "To ensure further personalization we need data collected through customer segmentation, so privacy remains an important issue. The structure of the interfaces will remain more or less the same, but the content will change to benefit the user experience.",
+            "In a future not to distant from today, we will be able to access these personalized workflows with natural language through voice-first interactions or typing."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/oKv2vy0BJqszLWl8fsvoiPUiADM.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Multidevice interactions are going to compose experiences",
+          "body": [
+            "If the future is ambient computing we won’t see anymore flat design. Instead more colored, textured and dimensional interfaces and also the use of sounds and lights through the experiences.",
+            "More devices means that the experience could happen through different touchpoints so the interactions can't be all the same. When there is the need for visible interfaces, AI can contribute providing us with dynamic interfaces."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Design for intentions and actions",
+          "body": [
+            "The role of designers won’t be anymore about designing in detail for a specific use case but more identifying common patterns to compose experiences for the user. It will be more about flows and less about buttons, an holistic approach to reimagine how people act in the world.",
+            "Software has always been a bridge between people and their intentions. AI may simplify the need to design complex interfaces, allowing us to focus on the core jobs-to-be-done of users, such as booking a flight, planning a trip or ordering dinner. This will mean to design for intentions and actions instead of apps and websites.",
+            "AI and the future of design, Figma Config 2023",
+            "Introducing GPTs by OpenAI",
+            "Personalize your internet experience with Arc Boost",
+            "The Humane Experience by Humane",
+            "Thanks for reading Innovation Avenue, your gateway to groundbreaking ideas and emerging trends. Subscribe to stay ahead of the innovation curve!"
+          ],
+          "media": []
+        }
+      ]
+    },
+    "a-future-with-invisible-technology": {
+      "slug": "a-future-with-invisible-technology",
+      "title": "A future with invisible technology",
+      "year": 2023,
+      "yearLabel": "9 October, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/a-future-with-invisible-technology.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/bzxnfua0JckYl58qvcjEwyiMY40.webp",
+        "alt": "A future with invisible technology"
+      },
+      "lead": [
+        "Presence without chrome — technology that stays out of the way so people can stay present."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "9 October, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "Should the future look like the future?",
+          "body": [
+            "If we look at the present, there isn’t always what we expected 20 years ago. The things that have changed the world are often unexpected. Peter Thiel once said, \"We wanted flying cars, instead we got 140 characters.\" I agree but what we want for the future is not always the best choice.",
+            "If we talk, for example, about the future of interfaces, there are some things I’d like to avoid. Often, we’re shown by Hollywood movies a future with a lot of holographic interfaces that are too annoying and complicated. I don’t want to live in a future like that."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Keep the simple simple",
+          "body": [
+            "Interacting with a computer should be as simple as interacting with people. I hope to live in a future with less screens, where technology is invisible. In his essay, The Computer for the 21st Century, Mark Weiser said “The most profound technologies are those that disappear”. Invisible interfaces means that technology would be still present in our lives without being an obstacle, a friction in our tasks. The movie Her is a good blueprint for this scenario and how devices can support us. The alternative is an overstimulated scenario like now where it’s hard to focus and accomplish things, like the present.",
+            "Interacting with technology in the movie “Her”"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/7s28E3OGFgojRejHQ1RrNy2XJPg.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Can we build a world in which people are present while still using technology?",
+          "body": [
+            "Series like Black Mirror already showcased dystopian futures, warning us from the possible dangers of technology. Screens are our gateway to the digital world. It is often said that we are addicted to devices. More than anything else, we depend on the content within them, and social media are often polarizing. They create FOMO and divide people. Also, screens are cold and with their flat interfaces end up isolating us."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Bringing people back together",
+          "body": [
+            "All these screens being bidimensional create barriers through people. If the present already looks like people are glued to their screens, in the future we should use technology to bring people back together. Technology should bring us closer, even if we are thousands of km away from each other. In some ways we have already achieved this. Just think of phone calls, texting, video calls. All examples of how technology can be a connector, a bridge between people.",
+            "Mark Zuckerberg interviewed in the metaverse"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/l3O1opOpv31vV5CUL98tUL8dZA.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "AR/VR < IRL",
+          "body": [
+            "In a recent episode of Lex Fridman's podcast, he interviewed Mark Zuckerberg who was thousands of miles away. The 2 seemed to be in the same room thanks to Meta's VR.",
+            "Technology offers immense possibilities. On one hand you are giving people who live in remote places the opportunity to attend events, concerts, exhibitions. At the same time, however, this could bring people who live in big cities to isolate themselves in real life."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Voice First",
+          "body": [
+            "We started by interacting with the machines and speaking their own language. Progress has brought us more and more intuitive and natural interfaces. As development progressed, we found ourselves using text to talk with AI. The conversations we have with humans, however, are simple, without need for prompt engineering, and soon we will get to that. This doesn’t mean that interfaces will be invisible and that interactions will be all by voice. It's voice first, not voice only but certainly natural language interfaces will be part of our daily lives. We still need other types of interactions that are faster than voice, in case of emergency. If you play video games or drive a race car on a track, you need a quick way to take action."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Don’t forget the gestures",
+          "body": [
+            "The gestures are also no less. Apple has shown with the Vision Pro that we are capable of reinventing new gestures that go beyond the current ones. Jef Raskin, who worked on the first Macintosh, wrote a very interesting book in 2000 entitled \"The Humane Interface: New Directions for Designing Interactive Systems.\" Although the book is more than 20 years old, it remains very timely and presents a set of timeless principles for designing interfaces of the future."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/OuvOlQRICWkwTtLOPo5kazg88.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Brain, the ultimate interface",
+          "body": [
+            "To deal with the possibility of being overtaken by machines in time, some companies are focusing on BCI (Brain Computer Interface). Like Neuralink, doing everything they can, to make a future where our brains are directly connected with external technology. This is to augment human capabilities, restore lost functions, or unlock new possibilities (such as telepathy). Even if it isn’t all fun and games as it is shown."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Multimodal + Multidimensional",
+          "body": [
+            "To break down the barriers mentioned above, we need multimodal interactions and multidimensional interfaces. Multimodality in interactions, means having multiple options to choose from such as voice, gestures, and eye gaze. An holistic view that integrates multiple parts of the system. Multidimensionality in interfaces, meaning breaking down the barriers of flat design. Building interfaces that integrate into the space around us without being intrusive. Some of the elements of the puzzle are already here. If we take the hardware of the apple watch and airpods and integrate it with AI models (text, image and audio) we can achieve a screenless, seamless and sensing device. This may lead, for example, to earphones that translate languages in real time, and there are companies already working on this.",
+            "Humane's product demo, on the TED stage"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/zLna78s0Bc3DHB1Paw8xFv6VOA.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The rise of AI devices",
+          "body": [
+            "A decade ago, software was eating the world. Now software is the main character. Does this mean that hardware will become insignificant? No, we just need to design new products that allow us to blend in with technology. Hardware companies will need to support new devices that incorporate AI.",
+            "The future will be plural. Whether it's co-pilots or concierges, we need new products to replace dependence on screens. Humane is the first company that comes to mind when I think of this. Founded by two former Apple employees, the startup has been working in stealth mode for the past 6 years and raised Series C funding totaling $230 million. Until recently we had to rely on their patents to get some spoilers of the design. A few days ago, they unveiled their first device during a fashion show in Paris. It’s called the Humane AI Pin and should be out by the end of the year. It comes also with a frontal camera, reminding me of the movie Her, when the character tucks his phone into his shirt pocket so the AI can “see.”",
+            "There is an ongoing race in Silicon Valley to develop the next such devices, and in recent weeks, 2 more have been unveiled. They are very similar and both designed as necklace devices. The first is called Tab and is the product of young developer Avi Schiffmann. The second, on the other hand, is the Pendant, from the venture-backed startup Rewind. Both leverage artificial intelligence to collect data from daily conversations and synthesize them, with some differences.",
+            "As of now, AI can see, hear, and speak, and this opens up endless possibilities. Like Meta x Rayban's smart glasses that will be able to tell you what's in front of you by looking through the camera. Not to mention that concerts filmed through these glasses will finally substitute the raised arms of phone videos.",
+            "Multimodal AI wearable devices can be used also to control other devices, capture new media formats and interact with the world around it through voice commands. These kinds of wearable will allow us to “integrate AI into daily life” .",
+            "The other side of the coin is that these devices will continuously record through the camera or microphone. Companies will collect a huge amount of multimedia data (video, audio, biometric data) and other types (such as financial transactions). This data will end up in a cloud platform and can be retrieved at any time by asking the AI co-pilot who lives in the hardware.",
+            "Does this sound dystopian? Nothing new because we have the same experience with smartphones now.",
+            "A space with more voice-controlled technology doesn’t necessarily mean there will be fewer interfaces. At the same time the experience is gonna shift from screens to sound and lights and multimodality. It will be interesting to see the evolution and the responsibilities that will emerge: copywriters will become conversational designers and maybe light & sound designers are going to become the new UX designers.",
+            "The Humane Interface, Jef Raskin bookWhy the Movie \"Her\" is a Good Example of Design Fiction?One of Humane's last patentsHumane’s TED talkThe last interface paper by Brian Roemmele"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/gueBFi5N21r9h4SioaRa9CzhoQ.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    },
+    "how-to-design-better-cities": {
+      "slug": "how-to-design-better-cities",
+      "title": "How to design better cities?",
+      "year": 2023,
+      "yearLabel": "Oct 2, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/how-to-design-better-cities.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/GpoD5wfwzvYGoXpk3PTfQi41tyM.png",
+        "alt": "How to design better cities?"
+      },
+      "lead": [
+        "By designing them for its users, who are the people. It takes space to do that, but in the end it has a big impact on their daily lives. Multimodal cities give people the power and options to decide how to get around. Access to services depends on density and proximity, and doing so results in compact, walkable cities with human-scale neighborhoods. By bringing people together, you get a side effect: better communities."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Oct 2, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "There are better options to choose from",
+          "body": [
+            "After coming back to Copenhagen this summer, I felt completely in love with the city. I knew there was something different that made it so special. I spent 5 days walking around and biking without any problems. This is because it is a city designed for the people.",
+            "I was born and raised in Rome, which is really beautiful but also difficult to navigate. Most people here move by car or scooter, and this creates significant traffic. When the municipality announced to close the center to cars, many people protested and reasonably so. You cannot take away access without first having working transportation and space for sustainable alternatives.",
+            "Our streets have an enormous impact on our lives: How are they designed and for whom? I let my curiosity prevail and I went exploring the principles that guide good design."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "What makes a good city",
+          "body": [
+            "Let's start with the basic concepts. A city is made up of neighborhoods, blocks, streets and so on. A great city is made first and foremost for people. We like to meet other people, exchange ideas or just enjoy our time there and relax. We want places where we can live well and move around easily, where children can explore without danger and the elderly can grow old together with the community. But also, cities where crossing the street is safe and there is no risk of being run over."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/aqLS7YPlKKobOr5dkZmg3aAt9E.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Understanding the problem closely",
+          "body": [
+            "I have always been very fascinated by the concept of smart cities. I thought those would be the cities of the future. Fortunately, I was very wrong. We don't need cities with fancy sensors, we need a place where people can walk or take public transportation to everything. A place where having a car is an inconvenient option.",
+            "“An Advanced City Is One Where the Rich Take Public Transport” - Enrique Peñalosa",
+            "When I moved to Milan, I made the huge mistake of taking my car with me. I learned the mistake the hard way, getting dozens of tickets and wasting hours looking for parking. I later found out that there was no free parking inside the city, and there was a reason for that. If you incentivize car use with free parking, you take away space from people. Even so, there is no space left for all 700,000 cars in the city, so many people park on the sidewalks, blocking the way for people in wheelchairs. I therefore assumed that the city was taking these measures to depend less on cars and rely more on other means of transportation."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "A glimpse into the past",
+          "body": [
+            "If we look back to the past, cities were designed according to different perspectives and priorities. Cities in history were designed with a strong emphasis on walkability and accessibility.",
+            "In ancient Rome, the center of activity was the Forum, where people gathered for all kinds of events, from business to social activities. In ancient Greece, too, the Agora space served a similar function, encouraging interaction among citizens and fostering a sense of community and cultural exchange.",
+            "Then in the Renaissance, European cities underwent a redesign characterized by human-scale urban design principles. In this historical period, narrow streets and a focus on urban beauty became established, emphasizing the link between the environment and the human experience. Mixed land use also took hold, with residential, commercial and cultural activities in the same neighborhoods.",
+            "So far so good, the shift happened in the 20th century with the arrival of cars and the expansion of urban centers. This change has had profound implications in our present."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/2WM0aLVrS18FWzQhWGWI7vhM4I.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Let's take back our spaces",
+          "body": [
+            "We have been told that owning a car means freedom. Being able to go wherever you want, whenever you want. Actually, car dependence is the opposite of freedom. It takes away our ability to choose better options by leaving us trapped, not just in traffic. It is also very expensive, as are the roads, consumes time and space, leaving us mentally drained.",
+            "We live in a car-dependent society. We don't have to eliminate cars, only eliminate our dependence on them. Spending an hour stuck in traffic or looking for a parking space is not normal. These hours pile up and become weeks of our lives that are gone forever and no one will give back.",
+            "It’s not a car problem, but a space problem. Adding another lane will not solve the traffic problem, and neither will Elon Musk's tunnels. You may be thinking that self-driving cars will come to save us, but these will be temporary solutions that won't improve the situation. We already have vehicles that take us everywhere, look like living rooms, and drive themselves. Spoiler: they are called trains.",
+            "Imagine if all the lanes now dedicated to cars were used to create gathering places, where we could create new memories. We want to take back our space in cities, and there’s a name for that: it’s called street reclamation. In the streets, people should be protagonists and cars just guests.",
+            "“If you design a city for cars, it fails for everyone, including drivers. If you design a multimodal city, it works better for everyone, including drivers.” – Brent Toderian"
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "We can learn from Europe",
+          "body": [
+            "There is already a lot going on in European cities and they can be and they can be an inspiration to everyone else.",
+            "Barcelona made the concept of superillas (superblocks) the foundation to design a healthy city. Each superblock frees up more than 70% of the area previously occupied by cars, reducing noise, improving air quality, and providing the public space needed to install picnic tables, playgrounds, and trees. The city launched pilot projects in 6 neighborhoods with appropriate intervals to better refine the co-design process with citizens. Now that the concept has been validated, other cities are following the example.",
+            "Paris went quickly from being an automotive city to being a bike friendly one. This is mainly thanks to Mayor Anne Hidalgo and her big bang of proximity. Under her guidance, they installed several bike lanes, green areas and recreational spaces. What happens if you create bike infrastructure for people? Unexpectedly, they use them. If you create better conditions for cyclists, you get more cyclists. In fact, today there are about 1 million people on a daily basis biking through the city.",
+            "London is always one of the first, when it’s about time spent in traffic. So the city has set up the Mini Hollands program for people who live outside the city and reach the center by car. Following the Dutch model, it has transformed the city's suburbs through bicycle lanes, traffic calming measures, redesigned city centers, bicycle hubs, and a range of behavior change measures.",
+            "Milan, as I mentioned earlier, is in step with other European cities. In fact, 750 kilometers of bike lanes are scheduled to be built around the metropolitan city by 2035. This will have 1/3 of the cost of rebuilding the Chicago highway interchange. At the time of writing, it has been five years since the launch of Piazze Aperte (Open Squares), a program for enhancing public space. This tactical urban planning approach, thanks to its designers and the help of citizens, is changing the city, for the better.",
+            "These are examples of cities where cars have always been in control. It would have been too easy to cite Dutch cities. If you think that everyone in Amsterdam is a cyclist, you are wrong. There are many people going out by bike, but only because it is the most convenient way to get around. Even Dutch cities have not always been like this. It took people protesting in the streets to get them back."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/3Vp9nWLf7tJRNvkMathajPWUDM.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/bcHlxaZZsTNvZYHEuHDVgjN6Wo.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Access = Density + Proximity",
+          "body": [
+            "Great ideas spread quickly, often too quickly to become marketing slogans. This happened with Carlos Moreno's 15-Minute City concept, now abused by architects and urban developers. The model follows the vision of a decentralized urban area where all necessities are within a 15-minute walk or bike ride from home. While Barcelona and Paris are trying to apply this model to their cities, Sweden is pushing this idea to the limit with the hyperlocal 1 min city model."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "The power of proximity",
+          "body": [
+            "However, the idea has not been fully understood, receiving much criticism and being targeted by conspiracy theories. I don't think the model is applicable to everyone, but perhaps working remotely can help. I support the idea of creating compact, walkable cities with human-scale neighborhoods. When everything is close, there is no need for speed. Instead of taking the car to get groceries on the weekend, people can stop for groceries while walking home from work."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "Order + Variety",
+          "body": [
+            "Having orderly cities is nice, but when they are too orderly they become boring. If you look at the most livable cities, you won't find ones that are orderly and full of skyscrapers, but rather the opposite. We need to leave room for diversity. I am not just talking about what buildings offer, but also what residents have to offer in terms of cultures and backgrounds. Density does not mean having huge skyscrapers, but maybe mixed-use buildings where there are public services but also restaurants and places to live. Proximity means having high urban vitality. If you bring people together, you get better communities."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/j5qoyHCcowYVmGt5vGcT2Kx9EgE.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    },
+    "product-as-a-service": {
+      "slug": "product-as-a-service",
+      "title": "From Ownership to Usership: Product as a Service (PaaS)",
+      "year": 2023,
+      "yearLabel": "7 September, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/product-as-a-service.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/07N3XjwGsQQmDwu7eIk3iJd2T4.jpg",
+        "alt": "From Ownership to Usership: Product as a Service (PaaS)"
+      },
+      "lead": [
+        "Last month I lived in Denmark and I couldn’t make it without my bike. I shouldn’t say “my”, because it wasn’t actually mine. I rented from Swapfiets, a startup from Amsterdam, but even so, I really loved the experience.",
+        "This was only possible thanks to PaaS, an emerging business model that benefits people, companies and Earth."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "7 September, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "The era of Everything-as-a-Service",
+          "body": [
+            "We are going through an era in which the concept of ownership is undergoing a profound transformation. An era in which the idea of \"access,\" comes before the idea of \"having.\" Think that Philips is providing light as a service to the Schiphol Airport in Amsterdam.",
+            "This paradigm shift that is reshaping not only the way companies operate, but also the way consumers engage with products and services. At the heart of this transformation is Product as a Service (PaaS), an innovative business model that is redefining the relationship between consumer and business."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "What is Product as a Service (PaaS)?",
+          "body": [
+            "PaaS (not to be confused with Platform as a Service) is a business model and concept of offering a product to customers in the form of a service or subscription, rather than as a traditional one-time purchase."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/T7qwo1CqHbgVHyAOL2r5VqCdgI.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "From Ownership to Usership",
+          "body": [
+            "Even if the PaaS model may seem like a recent innovation, the concept of pay-per-use has older origins. Consider the Roman public baths, where citizens paid an entrance fee for access to bathing facilities, saunas, and exercise areas. In a similar way, libraries have also offered an alternative to book ownership, allowing users to borrow and return books.",
+            "Credit: Midjourney",
+            "In contemporary times, the Product-as-a-Service model has become very popular, with many companies seeking to emulate the successful SaaS business model and its recurring subscription revenue stream. In the automotive industry, for example, it has gone from being offered as an add-on to maintenance services at the time of purchase to becoming the core of its business models.",
+            "Companies such as Lynk & Co, a joint venture between Geely and Volvo, have embraced PaaS to address the problem of underused cars while boosting profit margins. This shift is not exclusive to Lynk & Co; also Volvo and Polestar, owned by the same Chinese holding company, have also followed the example. The results speak for themselves: in 2022 Lynk & Co's membership base grew from 60,000 to more than 170,000, highlighting the effectiveness of this approach."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/9PPo19DfE6YtFZLet3eTJVMJLs.png",
+              "alt": "",
+              "layout": "squircle"
+            },
+            {
+              "src": "https://framerusercontent.com/images/zoUpXTjyLr6oUYwO7myZ39wzVkA.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Sustainability and Circular Economy",
+          "body": [
+            "One of the most interesting aspects of this model is certainly its alignment with sustainability and circular economy principles.",
+            "In the traditional model, products are typically wasted at the end of their use. In contrast, PaaS promotes a more conscious approach in which products are designed to be reused, repaired, recycled, redistributed, and refurbished.",
+            "This change results in extending the product life cycle, cutting out the waste step. This not only reduces the environmental footprint associated with producing new products, but is also a way to conserve valuable resources.",
+            "While previously the only transaction was due to one-time payment, now you have recurring revenues that come from multiple steps in the journey, linked to services around the product.",
+            "This aligns profit motivations with sustainability goals, a win-win scenario for both companies and the environment."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "A new value proposition",
+          "body": [
+            "User experience takes center stage, redefining the value proposition for consumers. This innovative model has a number of compelling benefits that meet the evolving needs and preferences of users.",
+            "Among the main ones is to solve the need for experience. Cost of ownership played a key role but now, users are moving toward the subscription model. In return, they receive the appeal of something deeper: a transformative experience.",
+            "Thus, users gain access to the latest technology, attractive and affordable subscription prices, and unparalleled flexibility. In addition to these pragmatic benefits, it is often provided a personalized experience tailored to one’s needs.",
+            "The appeal of experience > ownership is reshaping consumer behavior. As individuals increasingly prioritize access, personalization, and seamless interactions, PaaS emerges as the driving force behind this change.",
+            "The life cycle extends with Product-as-a-Service"
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/BFUGVPpM8NJdLRAU4HDtcZazoSo.png",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Benefits for the companies",
+          "body": [
+            "The benefits of this model are not limited to the consumer experience; it can also benefit the companies that adopt it:",
+            "Predictable and recurring revenues: the main reason this model is chosen results in consistent revenue streams, less revenue volatility, which leads companies to be profitable",
+            "Enhanced customer relationships: ongoing engagement through subscriptions fosters stronger, longer-lasting bonds with customers. Brands become an integral part of customers' lives, rather than one-time transactions.",
+            "Sustainability: encourages longevity and reuse of products, reducing waste. In the fight against climate change, it is definitely a more useful approach than greenwashing.",
+            "Improved sales funnel: shifts the focus from one-time sales to continuous engagement. This means more effective sales funnels geared toward retention and referral rather than acquisition.",
+            "End-to-end customization and personalization: from product features to subscription plans, companies can fine-tune their offerings to meet the unique needs of each customer, further increasing customer loyalty and satisfaction.",
+            "As we navigate the changing landscape of business models, it’s clear that Product as a Service is not just a passing trend, but a transformative force. To succeed in this dynamic environment, companies must consider a few key strategies.",
+            "First, adaptability is key. Keep an eye on consumer preferences and market trends.",
+            "Second, dive into circular economy. Embracing sustainability is not just a marketing ploy-it is a fundamental change that resonates with conscious consumers.",
+            "Third, leverage technology to offer users seamless personalization and experiences.",
+            "Finally, embrace user-centricity. PaaS is about delivering exceptional user experiences. Listen to their feedback, iterate your offerings and make them an integral part of your product journey."
+          ],
+          "media": []
+        }
+      ]
+    },
+    "movie-her-design-fiction": {
+      "slug": "movie-her-design-fiction",
+      "title": "Why the Movie \"Her\" is a Good Example of Design Fiction?",
+      "year": 2023,
+      "yearLabel": "Feb 21, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/movie-her-design-fiction.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/2ZJvWKMTBQivoVMZBvYFezDHGg.webp",
+        "alt": "Why the Movie \"Her\" is a Good Example of Design Fiction?"
+      },
+      "lead": [
+        "The movie \"Her\" is a great example of design fiction that explores a possible future where artificial intelligence is integrated into everyday life. Even after 10 years, the movie's vision of the future is still relevant and thought-provoking. From Theo's job and workplace to the life-centric Operating System with a personality, the movie's design elements present a vision of a future where technology is more human-like and seamlessly integrated into our daily lives."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Feb 21, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "Theo's Job and Workplace",
+          "body": [
+            "The movie starts with Theodore Twombly, played by Joaquin Phoenix, who works as a writer for a company that provides customers with personalized letters. His job requires him to write intimate letters that express emotions and sentiments for people who are unable to do so themselves. Theo's workplace is designed to be an environment that fosters creativity and productivity, with open floor plans and natural light. It also suggests that workplaces in the future could be more centered around human well-being, which is a refreshing and desirable vision for the future."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/BuSlg2vkDJ41bFojRYNZm0TjuDQ.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Human to Machine Interaction",
+          "body": [
+            "In the movie, we see that human-to-machine interaction has become more seamless and natural. The way Theodore interacts with the artificial intelligence in the video game he plays is effortless, and the AI's responses are human-like. He speaks to the machine as if it were a person, and the machine responds accordingly. This element of the movie suggests that in the future, machines will be designed to respond to us more like humans, enhancing our experience of technology. This raises questions about the nature of our relationship with machines and whether it is ethical or desirable to make them more human-like."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/OpFXZO0IQJHjkkMOCq6cL3SDSG0.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Theo's Phone that Doesn't Look Like a Smartphone",
+          "body": [
+            "One of the most striking design elements of \"Her\" is Theodore's phone, which doesn't look like a smartphone, but more like a cigarette case. The phone is small, sleek, and unobtrusive, and the screen is hidden away when not in use. It has a small screen and a simple interface that responds to voice commands. The way it is designed is also an example of how technology can blend into our lives, rather than dominating them. It presents a vision of a future where technology is less obtrusive, less distracting, and more focused on enhancing our lives."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/N4gD2EYEYWDGscc1k0nQJpZ0ug.webp",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "A Life-Centric Operating System with Personality",
+          "body": [
+            "The central element of the movie is the operating system (OS) that Theodore installs on his phone, which has a personality and a voice. The OS, named Samantha, is designed to be life-centric, to evolve over time, learning from the user, and becoming a reflection of them. It isn't only a tool but a companion with a personality, a friend, and a lover. Theo's interaction with the it is natural and effortless, and it responds to him in human-like ways, creating an illusion of a real relationship."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/CdHG7mwpeAAXDWQ0x5msRIS7qHY.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "Los Angeles in 2050",
+          "body": [
+            "The movie's setting is Los Angeles in the near future, where the city's architecture is a blend of modernism and organic forms. The design is clean and minimalistic, with muted colors and natural materials. The city's public spaces are designed to be intimate and comfortable, with small parks and seating areas. The cityscape of the future in the movie was filmed in Shanghai, which creates a futuristic and otherworldly feel. This design element suggests that the cities of the future will be more integrated with nature and have a focus on creating comfortable and welcoming public spaces."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "The Director Being Helped by Design Studios and Architecture Firms",
+          "body": [
+            "Spike Jonze, the director of \"Her,\" collaborated with a team of designers, architects, and futurists to bring the movie's vision of the future to life. Jonze worked with several design studios and architecture firms to create the sets, the technology, and the clothes used in the film. The teams worked closely to create a cohesive vision of the future that was both believable and visually stunning. The design of the OS, the phone, and the office spaces, among other elements, were all created in collaboration with experts in various fields. This design element of \"Her\" highlights the importance of collaboration and interdisciplinary work in creating visions of the future. It also demonstrates how design can be used to create a believable, immersive, and aesthetically pleasing world, even when it is set in the future."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/eFdSgA43qk66wMMiP8jafLlJo.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The Use of UI Comparing to Other Hollywood Movies",
+          "body": [
+            "When it comes to portraying the future in movies, Hollywood has a tendency to rely on the most fantastical and futuristic visions of technology. However, in \"Her,\" the use of user interface (UI) design is refreshingly realistic. The UI design is a subtle evolution of what we have now, with muted colors and simple, easy-to-use interfaces. Unlike many other futuristic movies that portray holograms and 3D interfaces, \"Her\" presents a more realistic, believable vision of the future. This design choice helps to create a more immersive and believable world, one that we can see ourselves living in.",
+            "The movie presents a vision of a world where technology is intuitive, seamless, and natural, and where artificial intelligence has evolved beyond simple tools and become an integral part of our lives. Through its use of UI, architecture, and user experience, \"Her\" offers a glimpse into a possible future that still resonates today. The movie's relevance is a testament to the creative approach of design fiction, which allows designers and creatives to use their imaginations to create a more desirable future. Overall, after 10 years, \"Her\" still remains an excellent example of design fiction and a reminder that the future is ours to imagine and create."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/ppqelvPcmfMU3VnufxxIEmZhk.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    },
+    "turn-left": {
+      "slug": "turn-left",
+      "title": "What if it was forbidden to turn left?",
+      "year": 2023,
+      "yearLabel": "Feb 6, 2023",
+      "client": "Notes",
+      "role": "Journal",
+      "href": "/ideas/turn-left.html",
+      "hero": {
+        "src": "https://framerusercontent.com/images/FkO1TsPehIzYECCb16ruG7xa2p8.jpg",
+        "alt": "What if it was forbidden to turn left?"
+      },
+      "lead": [
+        "Urban design plays a crucial role in shaping the liveability of cities. With increasing population density and traffic congestion, cities are facing major mobility challenges that can lead to traffic accidents, increased pollution and a general reduction in the quality of life for residents. One potential solution to this problem is the ban on left turns."
+      ],
+      "details": {
+        "Type": "Writing",
+        "When": "Feb 6, 2023",
+        "Author": "Andrea Fanelli"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "title": "Is it really a problem to turn left?",
+          "body": [
+            "Left turns are a common cause of traffic accidents, as they require drivers to cross multiple lanes of traffic and often result in collisions. In many cities, up to 40% of traffic accidents involve left turns. By banning left turns, cities can help to reduce the number of traffic accidents and improve road safety for all road users."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/l5puDQ02MVFRrACLD2FBV3NDEiw.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "A way to improve traffic flow (UPS)",
+          "body": [
+            "Reducing left-turns improves traffic flow, reduces travel times, and leads to cleaner cities. UPS's change in delivery routes, reducing left-turns, saves fuel and reduces carbon emissions, increasing package delivery. This modest change saves 40 million liters of fuel, reduces 20,000 tons of carbon emissions and allows for the delivery of 350,000 additional packages annually."
+          ],
+          "media": []
+        },
+        {
+          "type": "section",
+          "title": "The alternatives? Design safer intersections",
+          "body": [
+            "To address this problem, the San Francisco Municipal Transportation Agency (SFMTA) has launched the Safer Intersections Project to address issues of traffic safety and intersection design. The project involves testing innovative approaches to intersection design and a public education campaign funded by a $2 million grant. The goal of this campaign is to reduce unsafe driving practices. This initiative is part of the city's Vision Zero plan, which aims to eliminate all traffic fatalities."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/iJKirqWSHjPYAPYtZO25Z7wEdk.jpeg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "title": "The consequences are good for cities and the environment",
+          "body": [
+            "In addition to these benefits, a ban on left turns can also encourage more sustainable forms of transportation, such as walking, cycling, and public transportation. By reducing the number of cars on the road, cities can create more space for these alternative modes of transportation, making it easier and safer for people to choose them over driving.",
+            "Implementing a ban on left turns in cities has benefits in reducing traffic accidents, improving traffic flow, and reducing air pollution. However, there are challenges in implementation such as potential negative impact on local businesses and the need for re-education of drivers. Despite these challenges, the benefits make a ban on left turns a worthy consideration for cities."
+          ],
+          "media": [
+            {
+              "src": "https://framerusercontent.com/images/m0yIiMQySJTL6CkMPKM1KBYUp90.jpg",
+              "alt": "",
+              "layout": "squircle"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

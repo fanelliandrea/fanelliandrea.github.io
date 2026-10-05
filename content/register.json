@@ -177,11 +177,11 @@
       "status": "published",
       "onSite": true,
       "homeIdea": 1,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/kmrrWHZYoKU2vX5ZRxn5R4w6twQ.jpg"
       ],
-      "href": null
+      "href": "/ideas/the-golden-age-of-audio.html"
     },
     {
       "slug": "fashion-tech",
@@ -192,11 +192,11 @@
       "status": "published",
       "onSite": true,
       "homeIdea": 2,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/qf2WnlmxirFM67z0zzgOb7qTxY.png"
       ],
-      "href": null
+      "href": "/ideas/fashion-tech.html"
     },
     {
       "slug": "the-process-is-the-product",
@@ -207,11 +207,11 @@
       "status": "published",
       "onSite": true,
       "homeIdea": 3,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/0l4s0BG1CWAQf4fEtHPE2ymfjmw.webp"
       ],
-      "href": null
+      "href": "/ideas/the-process-is-the-product.html"
     },
     {
       "slug": "taste-is-the-only-skill-to-learn",
@@ -237,11 +237,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/L95Dx4kot4Eqiusjp95UoSfEihg.png"
       ],
-      "href": null
+      "href": "/ideas/urban-undergrounds.html"
     },
     {
       "slug": "great-design-language",
@@ -251,11 +251,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/NQ2hlSeCo8lt3QpAvlCuQLdXs.png"
       ],
-      "href": null
+      "href": "/ideas/great-design-language.html"
     },
     {
       "slug": "apps-are-evolving-into-experiences",
@@ -265,11 +265,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/ZqIrvwNUijxlsFQyy6JjyqyiGg.png"
       ],
-      "href": null
+      "href": "/ideas/apps-are-evolving-into-experiences.html"
     },
     {
       "slug": "a-future-with-invisible-technology",
@@ -279,11 +279,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/bzxnfua0JckYl58qvcjEwyiMY40.webp"
       ],
-      "href": null
+      "href": "/ideas/a-future-with-invisible-technology.html"
     },
     {
       "slug": "how-to-design-better-cities",
@@ -293,11 +293,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/GpoD5wfwzvYGoXpk3PTfQi41tyM.png"
       ],
-      "href": null
+      "href": "/ideas/how-to-design-better-cities.html"
     },
     {
       "slug": "product-as-a-service",
@@ -307,11 +307,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/07N3XjwGsQQmDwu7eIk3iJd2T4.jpg"
       ],
-      "href": null
+      "href": "/ideas/product-as-a-service.html"
     },
     {
       "slug": "movie-her-design-fiction",
@@ -321,11 +321,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/2ZJvWKMTBQivoVMZBvYFezDHGg.webp"
       ],
-      "href": null
+      "href": "/ideas/movie-her-design-fiction.html"
     },
     {
       "slug": "turn-left",
@@ -335,11 +335,11 @@
       "kind": "writing",
       "status": "published",
       "onSite": true,
-      "verified": false,
+      "verified": true,
       "media": [
         "https://framerusercontent.com/images/FkO1TsPehIzYECCb16ruG7xa2p8.jpg"
       ],
-      "href": null
+      "href": "/ideas/turn-left.html"
     },
     {
       "slug": "muse",

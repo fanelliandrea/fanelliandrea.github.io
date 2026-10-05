@@ -1,7 +1,7 @@
-/* Project case pages — white field, serif title, bleed stills, quiet nav */
+/* Case pages — Work projects + Ideas articles share the same layout/UI */
 (() => {
-  const BOOT = "af-project-sans1";
-  const rootSel = "[data-project-case]";
+  const BOOT = "af-case-ideas1";
+  const rootSel = "[data-project-case], [data-article-case]";
 
   /* Dreamy edge blur — short rim + fold only, center stays crisp */
   const veilLayers = () => {
@@ -102,9 +102,7 @@
     if (block.type === "media") return figure(block);
     if (block.type === "section") {
       const media = (block.media || []).map(figure).join("");
-      const title = block.title
-        ? `<h2>${esc(block.title)}</h2>`
-        : "";
+      const title = block.title ? `<h2>${esc(block.title)}</h2>` : "";
       const prose = paras(block.body);
       if (!title && !prose && !media) return "";
       return `<section class="case-section">
@@ -118,15 +116,59 @@
     return "";
   };
 
-  const sequence = (catalog, register) => {
+  const modeOf = () => {
+    const page = document.body?.dataset?.page;
+    if (page === "ideas") {
+      return {
+        kind: "ideas",
+        indexHref: "/ideas.html",
+        indexLabel: "All ideas",
+        backLabel: "Back to Ideas",
+        pagerLabel: "Ideas",
+        pathPrefix: "/ideas/",
+        notFound: "Article not found.",
+        catalogUrl: "/content/articles.json",
+        catalogKey: "articles",
+        globalKey: "__AF_ARTICLES__",
+        writing: true,
+      };
+    }
+    return {
+      kind: "work",
+      indexHref: "/work.html",
+      indexLabel: "All work",
+      backLabel: "Back to Work",
+      pagerLabel: "Projects",
+      pathPrefix: "/work/",
+      notFound: "Project not found.",
+      catalogUrl: "/content/projects.json",
+      catalogKey: "projects",
+      globalKey: "__AF_PROJECTS__",
+      writing: false,
+    };
+  };
+
+  const sequence = (catalog, register, mode) => {
     const list = (register || [])
-      .filter((e) => e && e.slug && catalog[e.slug] && e.onSite !== false && e.kind !== "writing")
+      .filter((e) => {
+        if (!e || !e.slug || !catalog[e.slug] || e.onSite === false) return false;
+        if (mode.writing) return e.kind === "writing";
+        return e.kind !== "writing";
+      })
       .slice();
-    list.sort(
-      (a, b) =>
+    list.sort((a, b) => {
+      if (mode.writing) {
+        return (
+          (a.homeIdea ?? 999) - (b.homeIdea ?? 999) ||
+          (b.year ?? 0) - (a.year ?? 0) ||
+          String(a.title || "").localeCompare(String(b.title || ""))
+        );
+      }
+      return (
         (a.homeWork ?? 999) - (b.homeWork ?? 999) ||
         (b.sort ?? b.year ?? 0) - (a.sort ?? a.year ?? 0)
-    );
+      );
+    });
     const seen = new Set(list.map((e) => e.slug));
     Object.keys(catalog).forEach((slug) => {
       if (!seen.has(slug)) list.push({ slug, title: catalog[slug].title });
@@ -134,8 +176,8 @@
     return list.map((e) => e.slug);
   };
 
-  const neighbors = (slug, catalog, register) => {
-    const order = sequence(catalog, register);
+  const neighbors = (slug, catalog, register, mode) => {
+    const order = sequence(catalog, register, mode);
     if (!order.length) return { prev: null, next: null };
     const i = Math.max(0, order.indexOf(slug));
     const prevSlug = order[(i - 1 + order.length) % order.length];
@@ -145,17 +187,16 @@
         ? {
             slug: s,
             title: catalog[s]?.title || s,
-            href: catalog[s]?.href || `/work/${s}.html`,
+            href: catalog[s]?.href || `${mode.pathPrefix}${s}.html`,
           }
         : null;
-    // if only one project, no neighbors
     if (order.length < 2) return { prev: null, next: null };
     return { prev: pack(prevSlug), next: pack(nextSlug) };
   };
 
-  const pagerHtml = (slug, catalog, register) => {
-    const { prev, next } = neighbors(slug, catalog, register);
-    return `<nav class="case-pager" aria-label="Projects">
+  const pagerHtml = (slug, catalog, register, mode) => {
+    const { prev, next } = neighbors(slug, catalog, register, mode);
+    return `<nav class="case-pager" aria-label="${esc(mode.pagerLabel)}">
       ${
         prev
           ? `<a class="case-pager__link case-pager__prev" href="${esc(prev.href)}">
@@ -164,7 +205,7 @@
         </a>`
           : `<span class="case-pager__link is-empty"></span>`
       }
-      <a class="case-pager__all" href="/work.html">All work</a>
+      <a class="case-pager__all" href="${esc(mode.indexHref)}">${esc(mode.indexLabel)}</a>
       ${
         next
           ? `<a class="case-pager__link case-pager__next" href="${esc(next.href)}">
@@ -176,8 +217,8 @@
     </nav>`;
   };
 
-  const chromeHtml = () => `<nav class="case-chrome" aria-label="Case">
-      <a class="case-chrome__back" href="/work.html" aria-label="Back to Work">
+  const chromeHtml = (mode) => `<nav class="case-chrome" aria-label="Case">
+      <a class="case-chrome__back" href="${esc(mode.indexHref)}" aria-label="${esc(mode.backLabel)}">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
           <path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -186,7 +227,7 @@
     </nav>
     <div class="case-scroll-veil" data-case-veil aria-hidden="true">${veilLayers()}</div>`;
 
-  const render = (project, register, catalog) => {
+  const render = (project, register, catalog, mode) => {
     const hero = project.hero || {};
     const cta = project.cta
       ? `<p class="case-cta"><a href="${esc(project.cta.href)}" rel="noopener" target="_blank">${esc(project.cta.label)}</a></p>`
@@ -198,7 +239,7 @@
       : "";
 
     return `
-      ${chromeHtml()}
+      ${chromeHtml(mode)}
       <section class="case-intro">
         <h1>${esc(project.title)}</h1>
         <p class="case-meta">${esc(
@@ -217,22 +258,23 @@
       </div>
 
       ${credits(project.details)}
-      ${pagerHtml(project.slug, catalog, register)}
+      ${pagerHtml(project.slug, catalog, register, mode)}
     `;
   };
 
-  let catalogPromise;
-  const loadCatalog = () => {
-    if (!catalogPromise) {
-      catalogPromise = fetch("/content/projects.json")
+  const catalogPromises = {};
+  const loadCatalog = (mode) => {
+    if (!catalogPromises[mode.kind]) {
+      catalogPromises[mode.kind] = fetch(mode.catalogUrl)
         .then((r) => r.json())
         .then((d) => {
-          window.__AF_PROJECTS__ = d.projects || {};
-          return window.__AF_PROJECTS__;
+          const catalog = d[mode.catalogKey] || {};
+          window[mode.globalKey] = catalog;
+          return catalog;
         })
         .catch(() => ({}));
     }
-    return catalogPromise;
+    return catalogPromises[mode.kind];
   };
 
   const killVeil = () => {
@@ -264,23 +306,31 @@
   };
 
   const mount = async () => {
-    const root = document.querySelector(rootSel);
+    const mode = modeOf();
+    const root = document.querySelector(
+      mode.kind === "ideas" ? "[data-article-case]" : "[data-project-case]"
+    );
+    const slugAttr =
+      mode.kind === "ideas" ? "data-article-case" : "data-project-case";
     const onCase =
-      document.body.dataset.page === "work" &&
-      (document.body.dataset.slug || root?.getAttribute("data-project-case"));
-    if (!onCase || !root) {
-      killVeil();
+      (document.body.dataset.page === mode.kind ||
+        (mode.kind === "work" && document.body.dataset.page === "work")) &&
+      (document.body.dataset.slug || root?.getAttribute(slugAttr));
+    if (!onCase || !root || !document.body.dataset.slug) {
+      // Gallery / playlist pages must not keep a leftover veil
+      if (!document.body.dataset.slug) killVeil();
       return;
     }
-    const slug = root.getAttribute("data-project-case") || document.body.dataset.slug;
+    const slug = root.getAttribute(slugAttr) || document.body.dataset.slug;
     if (!slug) {
       killVeil();
       return;
     }
-    if (root.dataset.boot === BOOT && root.dataset.slug === slug && root.childElementCount) return;
+    if (root.dataset.boot === BOOT && root.dataset.slug === slug && root.childElementCount)
+      return;
 
     const [catalog, register] = await Promise.all([
-      loadCatalog(),
+      loadCatalog(mode),
       (window.Site?.data ||
         fetch("/content/register.json")
           .then((r) => r.json())
@@ -290,14 +340,16 @@
 
     const project = catalog[slug];
     if (!project) {
-      root.innerHTML = `<section class="case-intro"><p class="case-prose">Project not found.</p></section>`;
+      root.innerHTML = `<section class="case-intro"><p class="case-prose">${esc(
+        mode.notFound
+      )}</p></section>`;
       return;
     }
 
     root.dataset.boot = BOOT;
     root.dataset.slug = slug;
     root.removeAttribute("aria-busy");
-    root.innerHTML = render(project, register, catalog);
+    root.innerHTML = render(project, register, catalog, mode);
     document.title = `${project.title} — Andrea Fanelli`;
     bindChrome(root);
   };
